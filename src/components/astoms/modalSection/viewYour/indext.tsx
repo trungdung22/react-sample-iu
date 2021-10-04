@@ -13,8 +13,8 @@ const ViewYour: React.FC<Props> = ({dataSendViewYour}) => {
   ]
   const countWinningTicket = () => {
     let result = 0;
-    dataSendViewYour.your_ticket.your_tickets.forEach((el: []) => {
-      if (parseInt(el.join('')) === parseInt(dataSendViewYour.your_ticket.winning_ticket.join(''))){
+    dataSendViewYour.your_ticket.player_tickets.roll_nums.forEach((el: []) => {
+      if (parseInt(el.join('')) === parseInt(dataSendViewYour.your_ticket.roll_nums.join(''))){
         result++;
       }
       
@@ -48,7 +48,7 @@ const ViewYour: React.FC<Props> = ({dataSendViewYour}) => {
               <span><img src="./assets/lottery/ticket_def.svg" alt="Total tickets" /></span>
               <span>Total tickets</span>
             </p>
-            {dataSendViewYour.your_ticket.your_tickets.length}
+            {dataSendViewYour.your_ticket.player_tickets.length}
           </li>
           <li>
             <p>
@@ -77,7 +77,7 @@ const ViewYour: React.FC<Props> = ({dataSendViewYour}) => {
           ))
         }
         { 
-          dataSendViewYour.your_ticket.your_tickets.map((el: [], index: number) => (
+          dataSendViewYour.your_ticket.player_tickets.roll_nums.map((el: [], index: number) => (
             <dl key={index}>
               <dt>#{index < 9 ? `00${index + 1}` : `0${index + 1}`}</dt>
               <dd>

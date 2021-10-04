@@ -18,6 +18,7 @@ const All: React.FC<Props> = ({dataSendToAll, dataGiveAll}) => {
     return time < 10 ?  '0' + time : time;
   }
   const handleViewTicket = (event: React.MouseEvent) => {
+    debugger
     if(dataSendToAll.your_tickets.length > 0) {
       dataGiveAll({
         your_ticket: dataSendToAll,
@@ -27,6 +28,7 @@ const All: React.FC<Props> = ({dataSendToAll, dataGiveAll}) => {
   }
   
   useEffect(()=>{
+    debugger
     setData({
       id: dataSendToAll !== 0 ? dataSendToAll.id - 1 : dataTest.round_history.length - 1,
       info: JSON.parse(JSON.stringify(dataTest.round_history))
@@ -97,7 +99,7 @@ const All: React.FC<Props> = ({dataSendToAll, dataGiveAll}) => {
             <div className="yourticket">
               <p>Your Ticket</p>
               <div>
-                <p>You have <span >{dataSendToAll.your_tickets.length} ticket</span> to enter this party.</p>
+                <p>You have <span >{dataSendToAll.player_tickets.length} ticket</span> to enter this party.</p>
                 <p onClick={handleViewTicket}>View your tickets</p>
               </div>
             </div>

@@ -100,6 +100,7 @@ const Lottery: React.FC = () => {
     })
   }
   const dataGiveFromFinished = (getDataFinished: any) => {
+    debugger
     setDataModal({
       data: {
         ...dataModal.data,

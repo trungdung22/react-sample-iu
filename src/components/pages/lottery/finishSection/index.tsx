@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import All from './all';
 import Jackpots from './jackpots';
 import Yours from './yours';
+import Detail from './detail';
 import useStyles from './styles';
 type Props = {
   dataGiveFromFinished: (getDataFinished: any) => void
@@ -20,17 +21,22 @@ const FinishedSection: React.FC<Props> = ({dataGiveFromFinished}) => {
   }
   
   const dataGiveFromYours = (getDataFromYours: any) => {
+    debugger
     setDataYours(getDataFromYours)
     setDataBackYour(false)
   }
+
   const dataGiveAll = (getDataAll: any) => {
+    debugger
     if (getDataAll.back_your) {
       setDataBackYour(getDataAll.back_your);
     } else {
       dataGiveFromFinished(getDataAll);
     }
   }
+
   const handerRenderComponent = (item: string) => {
+    debugger
     switch (component) {
       case 'jackpots':
         return (<Jackpots></Jackpots>);
@@ -74,7 +80,7 @@ const FinishedSection: React.FC<Props> = ({dataGiveFromFinished}) => {
             handleSetComponent('yours')
           }}>Yours</li>
         </ul>
-        {dataYours !== 0 && dataBackYour == false ? (<All dataSendToAll={dataYours} dataGiveAll={dataGiveAll}></All>) : (handerRenderComponent('all'))}
+        {dataYours !== 0 && dataBackYour == false ? (<Detail dataSendToDetail={dataYours} dataGiveDetail={dataGiveAll}></Detail>) : (handerRenderComponent('all'))}
         
         {/* {dataBackYour ? (<Yours dataGiveFromYours={dataGiveFromYours}></Yours>) : (handerRenderComponent('all'))} */}
       </div>

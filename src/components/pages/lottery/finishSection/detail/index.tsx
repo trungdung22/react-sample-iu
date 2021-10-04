@@ -6,7 +6,7 @@ type Props = {
   dataGiveDetail: (getDataDetail: any) => void
 }
 const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
-  
+  console.log(dataSendToDetail);
   const [slide, setSlide] = useState(true);
   const [data, setData] = useState({
     id: 0,
@@ -19,7 +19,7 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
   }
   const handleViewTicket = (event: React.MouseEvent) => {
     debugger
-    if(dataSendToDetail.your_tickets.length > 0) {
+    if(dataSendToDetail.player_tickets.length > 0) {
       dataGiveDetail({
         your_ticket: dataSendToDetail,
         view_your: true,
@@ -27,13 +27,6 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
     }
   }
   
-  useEffect(()=>{
-    debugger
-    setData({
-      id: 0,
-      info: JSON.parse(JSON.stringify(dataTest.round_history))
-    });
-  }, []);
   return (
     <div className={`${classes.root}`}>
       <div className={`${classes.header}`}>
@@ -56,19 +49,19 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
         </div>
         <p className={`${classes.infoRound}`}>
             <span>{`#${data.id}`}</span>
-            {`${monthName[new Date(data['info'][0]['date']).getMonth()]}
-            ${new Date(data['info'][0]['date']).getDate()}, 
-            ${new Date(data['info'][0]['date']).getFullYear()}, 
-            ${formatTime(new Date(data['info'][0]['date']).getHours())}:${formatTime(new Date(data['info'][0]['date']).getMinutes())} 
-            ${(new Date(data['info'][0]['date']).getHours()) >= 12 ? 'PM' : 'AM' }`}
+            {`${monthName[new Date(dataSendToDetail.createdAt).getMonth()]}
+            ${new Date(dataSendToDetail.createdAt).getDate()}, 
+            ${new Date(dataSendToDetail.createdAt).getFullYear()}, 
+            ${formatTime(new Date(dataSendToDetail.createdAt).getHours())}:${formatTime(new Date(dataSendToDetail.createdAt).getMinutes())} 
+            ${(new Date(dataSendToDetail.createdAt).getHours()) >= 12 ? 'PM' : 'AM' }`}
         </p>
       </div>
       <div className={`${classes.body}`}>
         <div className="content">
           <p className="text">Winning Number</p>
-          {data['info'].length > 0 ? (
+          {dataSendToDetail.roll_nums.length > 0 ? (
             <ul className="number">
-              {[...data['info'][data.id]['winning_ticket']].map((element, index) => (<li key={index}>{element < 10 ? `0${element}` : element}</li>))}
+              {dataSendToDetail.roll_nums.map((element, index) => (<li key={index}>{element < 10 ? `0${element}` : element}</li>))}
             </ul>
           ) : ''}
           
@@ -85,7 +78,7 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
           <div className={`${classes.infoPrize}`}>
             <div className="prizeTop">
               <p className="text">Prize pot</p>
-              <p className="total">{`~$${data['info'][0]['prize']}`}</p>
+              <p className="total">{`~$${dataSendToDetail.total}`}</p>
               <p className="unit">190 SOL</p>
             </div>
             <ul className="prizeMatch">

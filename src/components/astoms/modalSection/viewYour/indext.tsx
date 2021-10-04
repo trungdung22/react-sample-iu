@@ -7,13 +7,14 @@ const ViewYour: React.FC<Props> = ({dataSendViewYour}) => {
   const classes = useStyles();
   const nftsTicket = [
     [21, 13, 18],
-    [21, 13, 18, 33],
-    [21, 13, 18, 33, 44,],
-    [21, 13, 18, 33, 44, 21]
+    [21, 13, 18, 33]
   ]
   const countWinningTicket = () => {
     let result = 0;
-    dataSendViewYour.your_ticket.player_tickets.roll_nums.forEach((el: []) => {
+    debugger
+    const roll_nums = dataSendViewYour.your_ticket.player_tickets.map(item => item.roll_nums);
+    roll_nums.forEach((el: []) => {
+      debugger
       if (parseInt(el.join('')) === parseInt(dataSendViewYour.your_ticket.roll_nums.join(''))){
         result++;
       }
@@ -21,13 +22,34 @@ const ViewYour: React.FC<Props> = ({dataSendViewYour}) => {
     })
     return result;
   }
+
+  const handleRenderRoundItems = () => {
+    const roll_nums = dataSendViewYour.your_ticket.player_tickets.map(item => item.roll_nums);
+    return (
+      roll_nums.map((el: [], index: number) => (
+        <dl key={index}>
+          <dt>#{index < 9 ? `00${index + 1}` : `0${index + 1}`}</dt>
+          <dd>
+            <ul>
+              {
+                el.map((item, index) => (
+                  <li key={index}>{item < 10 ? `0${item}` : item}</li>
+                ))
+              }
+            </ul>
+          </dd>
+        </dl>
+      ))
+    )
+  }
+
   return (
     <>
       <div className={`${classes.winingNumber}`}>
         <p>Winning Number</p>
         <ul>
           { 
-            dataSendViewYour.your_ticket.winning_ticket.map((el: number, index: number) => (
+            dataSendViewYour.your_ticket.roll_nums.map((el: number, index: number) => (
               <li key={index}>{el < 10 ? `0${el}` : el}</li>
             ))
           }
@@ -59,6 +81,7 @@ const ViewYour: React.FC<Props> = ({dataSendViewYour}) => {
           </li>
         </ul>
       </div>
+
       <div className={`${classes.listTickets}`}>
         { 
           nftsTicket.map((el, index) => (
@@ -76,22 +99,7 @@ const ViewYour: React.FC<Props> = ({dataSendViewYour}) => {
             </dl>
           ))
         }
-        { 
-          dataSendViewYour.your_ticket.player_tickets.roll_nums.map((el: [], index: number) => (
-            <dl key={index}>
-              <dt>#{index < 9 ? `00${index + 1}` : `0${index + 1}`}</dt>
-              <dd>
-                <ul>
-                  {
-                    el.map((item, index) => (
-                      <li key={index}>{item < 10 ? `0${item}` : item}</li>
-                    ))
-                  }
-                </ul>
-              </dd>
-            </dl>
-          ))
-        }
+        {handleRenderRoundItems()}
       </div>
     </>
   )

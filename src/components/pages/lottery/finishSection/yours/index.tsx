@@ -9,9 +9,8 @@ const Yours: React.FC<Props> = ({dataGiveFromYours}) => {
   const [data, setData] = useState([]);
   
   useEffect(()=>{
-    fetch('http://localhost:8080/api/game-history/EZo1wyASRTfaynCrLmn7h9bygT1NQpNPsKcCJzZs6bYk')
+    fetch('http://localhost:8080/api/game-history/2Ci4PkD2vqD9erSVBJTc1YgCjMx8xKzFMe7F8TvK3BQ3')
     .then(async response => {
-      debugger
       const data = await response.json();
 
       // check for error response
@@ -46,6 +45,7 @@ const Yours: React.FC<Props> = ({dataGiveFromYours}) => {
       </li>
     )
   }
+  
   return (
     <div className={`${classes.root}`}>
       <div className={`${classes.header}`}>

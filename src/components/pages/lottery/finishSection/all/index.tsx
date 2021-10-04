@@ -28,7 +28,6 @@ const All: React.FC<Props> = ({dataSendToAll, dataGiveAll}) => {
   }
   
   useEffect(()=>{
-    debugger
     setData({
       id: dataSendToAll !== 0 ? dataSendToAll.id - 1 : dataTest.round_history.length - 1,
       info: JSON.parse(JSON.stringify(dataTest.round_history))

@@ -36,7 +36,7 @@ export const getGameBoardInfo = async() => {
             'Content-Type': 'application/json',
         }
     };
-    const response = await fetch(`${HOST}/api/game-info`, requestOptions);
+    const response = await fetch(`${HOST}/api/info`, requestOptions);
     const data = await response.json();
     return data; 
 }

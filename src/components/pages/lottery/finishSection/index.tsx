@@ -36,12 +36,13 @@ const FinishedSection: React.FC<Props> = ({dataGiveFromFinished}) => {
   }
 
   const handerRenderComponent = (item: string) => {
-    debugger
     switch (component) {
       case 'jackpots':
         return (<Jackpots></Jackpots>);
       case 'yours':
         return (<Yours dataGiveFromYours={dataGiveFromYours}></Yours>);
+      case 'detail': 
+        return (<Detail dataSendToDetail={dataYours} dataGiveDetail={dataGiveAll}></Detail>);
       default:
         return (<All dataSendToAll={0} dataGiveAll={dataGiveAll}></All>)
     }
@@ -80,7 +81,7 @@ const FinishedSection: React.FC<Props> = ({dataGiveFromFinished}) => {
             handleSetComponent('yours')
           }}>Yours</li>
         </ul>
-        {dataYours !== 0 && dataBackYour == false ? (<Detail dataSendToDetail={dataYours} dataGiveDetail={dataGiveAll}></Detail>) : (handerRenderComponent('all'))}
+        {dataYours !== 0 && dataBackYour == false ? (<Detail dataSendToDetail={dataYours} dataGiveDetail={dataGiveAll}></Detail>) : (handerRenderComponent('detail'))}
         
         {/* {dataBackYour ? (<Yours dataGiveFromYours={dataGiveFromYours}></Yours>) : (handerRenderComponent('all'))} */}
       </div>

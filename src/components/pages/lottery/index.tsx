@@ -128,13 +128,13 @@ const Lottery: React.FC = () => {
     setDataModal({
       data: getDataModalTolottery,
     })
-    debugger
     if(getDataModalTolottery.flag_submit && getDataModalTolottery.your_ticket.length > 0) {
       console.log("prepare to submit ticket");
       buyBulkTicket(partyData.data.programId, getDataModalTolottery.your_ticket, 
         playerData.data.privateKey, playerData.data.lamportUnit, partyData.data.gamePubkey, partyData.data.ownerPubkey)
         .then(async results => {
-            //buyBulkTicket(partyData.data.programId, playerData.data.pubKey, results);
+            debugger
+            insertBulkTicket(partyData.data.programId, playerData.data.pubKey, results);
         }).catch( error => alert(error));
     }
   }

@@ -49,7 +49,6 @@ export const buyBulkTicket = async (programIdStr, ticketSetNumbers, privateKeyBy
     const privateKeyDecoded = privateKeyByteArray.split(',').map(s => parseInt(s));
     const playerAccount = new Account(privateKeyDecoded);
     const rentAmount = await connection.getMinimumBalanceForRentExemption(TICKET_ACCOUNT_DATA_LAYOUT.span, 'singleGossip');
-    let transactionArr = []; 
     let ticketKeyArr = [];
     let ticketAccounts = [playerAccount];
     const transaction = new Transaction();

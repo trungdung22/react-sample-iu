@@ -20,6 +20,8 @@
  const GAME_ACCOUNT_DATA_LAYOUT = BufferLayout.struct([
    BufferLayout.u8("status"),
    BufferLayout.u8("reward_type"),
+   BufferLayout.u8("game_no"),
+   uint64("total_pool"),
    uint64("match_pool3"),
    BufferLayout.u8("match_pool3_count"),
    uint64("match_pool4"),
@@ -30,7 +32,8 @@
    BufferLayout.u8("match_pool6_count"),
    uint64("burn_pool"),
    publicKey("owner_pubkey"),
-   uint64("duration"),
+   uint64("created_time"),
+   uint64("closed_time"),
    BufferLayout.u8("num_one"),
    BufferLayout.u8("num_two"),
    BufferLayout.u8("num_three"),
@@ -49,11 +52,14 @@
    BufferLayout.u8("num_three"),
    BufferLayout.u8("num_four"),
    BufferLayout.u8("num_five"),
-   BufferLayout.u8("num_six"),
+   BufferLayout.u8("num_six")
  ]);
  
  
  function deserializeGame(accountInfo) {
+   if (accountInfo.data.length === 0){
+     return {};
+   }
    const game = GAME_ACCOUNT_DATA_LAYOUT.decode(accountInfo.data);
  
    const gameStates = [
@@ -70,13 +76,17 @@
      'Match4',
      'Match5',
      'Match6',
+     'NoMatch'
    ];
  
    return {
      status: gameStates[game.status],
      reward_type: gameRewards[game.reward_type],
+     game_no: new BN(game.game_no, 1, "le").toNumber(),
+     total_pool: new BN(game.PublicKey, 8, "le").toNumber(),
      owner_pubkey: new PublicKey(game.owner_pubkey).toBase58(),
-     duration: new BN(game.duration, 10, "le").toNumber(),
+     created_time: new BN(game.duration, 8, "le").toNumber(),
+     closed_time: new BN(game.duration, 8, "le").toNumber(),
      num_one: new BN(game.num_one, 1, "le").toNumber(),
      num_two: new BN(game.num_two, 1, "le").toNumber(),
      num_three: new BN(game.num_three, 1, "le").toNumber(),
@@ -97,6 +107,9 @@
  
  
  function deserializeTicket(accountInfo) {
+   if (accountInfo.data.length === 0){
+     return {};
+   }
    const ticket = TICKET_ACCOUNT_DATA_LAYOUT.decode(accountInfo.data);
  
    const ticketStates = [
@@ -112,6 +125,7 @@
      'Match4',
      'Match5',
      'Match6',
+     'NoMatch'
    ];
  
    return {

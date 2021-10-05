@@ -41,7 +41,7 @@ export const insertBulkTicket = async (programId, playerPubkey, tickets) => {
         })
         
     };
-    const response = await fetch(`${HOST}/api/insert-bulk`, requestOptions);
+    const response = await fetch(`${HOST}/api/ticket/insert-bulk`, requestOptions);
     return response;
 }
 
@@ -58,7 +58,7 @@ export const getGameBoardInfo = async () => {
 }
 
 export const connectPlayerAccount = async () => {
-    const playerPrivateKey = "235,125,243,193,96,192,125,224,193,232,217,231,94,199,33,213,131,223,8,36,190,147,5,132,184,8,16,60,217,44,131,85,201,142,139,249,109,4,142,110,243,21,53,102,254,53,77,99,152,252,214,56,120,34,139,111,199,230,205,236,156,109,177,161"
+    const playerPrivateKey = "216,13,81,214,163,57,189,23,162,68,225,126,69,177,228,11,32,225,197,239,244,31,45,197,223,159,69,171,224,163,251,40,17,219,128,52,170,252,166,80,143,176,250,255,57,115,193,182,214,81,97,220,123,48,39,128,254,62,60,186,17,133,76,48"
     const {
         publicKey,
         balance

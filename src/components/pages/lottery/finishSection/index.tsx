@@ -5,9 +5,10 @@ import Yours from './yours';
 import Detail from './detail';
 import useStyles from './styles';
 type Props = {
+  playerData: any
   dataGiveFromFinished: (getDataFinished: any) => void
 }
-const FinishedSection: React.FC<Props> = ({dataGiveFromFinished}) => {
+const FinishedSection: React.FC<Props> = ({playerData, dataGiveFromFinished}) => {
   const [component, setComponent] = useState('all');
   const [dataBackYour, setDataBackYour] = useState(false);
   const [dataYours, setDataYours] = useState(0);
@@ -40,7 +41,7 @@ const FinishedSection: React.FC<Props> = ({dataGiveFromFinished}) => {
       case 'jackpots':
         return (<Jackpots></Jackpots>);
       case 'yours':
-        return (<Yours dataGiveFromYours={dataGiveFromYours}></Yours>);
+        return (<Yours playerData={playerData} dataGiveFromYours={dataGiveFromYours}></Yours>);
       case 'detail': 
         return (<Detail dataSendToDetail={dataYours} dataGiveDetail={dataGiveAll}></Detail>);
       default:

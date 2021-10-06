@@ -39,7 +39,7 @@ const Home: React.FC = () => {
   const [playerData, setPlayerData] = useState({
     data: {
       lamportUnit: 0,
-      pubKey: '',
+      publicKey: '',
       balanceUSDT: 0,
       balanceSOL: 0,
     }
@@ -60,7 +60,7 @@ const Home: React.FC = () => {
       setPlayerData({
         data: {
           lamportUnit: item.lamportUnit,
-          pubKey: getDataWallet.publicKey,
+          publicKey: getDataWallet.publicKey,
           balanceUSDT: item.balanceUSDT,
           balanceSOL: item.balanceSOL,
         }

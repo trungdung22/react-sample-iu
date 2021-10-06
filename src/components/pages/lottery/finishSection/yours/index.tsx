@@ -3,26 +3,28 @@ import useStyles from './styles';
 import { HOST_NAME } from 'data/constants';
 import { dataTest } from 'data/db';
 type Props = {
+  playerData: any,
   dataGiveFromYours: (getDataFromYours: any) => void,
 }
-const Yours: React.FC<Props> = ({dataGiveFromYours}) => {
+const Yours: React.FC<Props> = ({playerData, dataGiveFromYours}) => {
   const classes = useStyles();
   const [data, setData] = useState([]);
   
   useEffect(()=>{
-    fetch(`${HOST_NAME}/api/game-history/2Ci4PkD2vqD9erSVBJTc1YgCjMx8xKzFMe7F8TvK3BQ3`)
-    .then(async response => {
-      const data = await response.json();
-
-      // check for error response
-      if (!response.ok) {
-          // get error message from body or default to response statusText
-          const error = (data && data.message) || response.statusText;
-          return Promise.reject(error);
-      }
-
-      setData(data.results)
-  })
+    debugger
+    if (playerData.publicKey !== undefined && playerData.publicKey !== '') {
+      fetch(`${HOST_NAME}/api/game-history/${playerData.publicKey}`)
+      .then(async response => {
+        const data = await response.json();
+        // check for error response
+        if (!response.ok) {
+            // get error message from body or default to response statusText
+            const error = (data && data.message) || response.statusText;
+            return Promise.reject(error);
+        }
+        setData(data.results);
+    })
+    }
   }, [])
   
 

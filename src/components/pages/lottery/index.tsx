@@ -37,7 +37,8 @@ const Lottery: React.FC = () => {
 
   const [playerData, setPlayerData] = useState({
     data: {
-      pubKey: '',
+      is_connect: false,
+      publicKey: '',
       lamportUnit: 0,
       balanceUSDT: 0,
       balanceSOL: 0,
@@ -114,14 +115,17 @@ const Lottery: React.FC = () => {
 
   const dataGiveFromWallet = (getDataWallet: any) => {
     debugger
-    fetchPlayerAccount(getDataWallet.publicKey).then(item => setPlayerData({
-      data: {
-        lamportUnit: item.lamportUnit,
-        pubKey: getDataWallet.publicKey,
-        balanceUSDT: item.balanceUSDT,
-        balanceSOL: item.balanceSOL,
-      }
-    }));
+    if (getDataWallet.is_connect) {
+      fetchPlayerAccount(getDataWallet.publicKey).then(item => setPlayerData({
+        data: {
+          is_connect: true,
+          lamportUnit: item.lamportUnit,
+          publicKey: getDataWallet.publicKey,
+          balanceUSDT: item.balanceUSDT,
+          balanceSOL: item.balanceSOL,
+        }
+      }));
+    } 
   }
 
   const dataGiveFromModal = (getDataModalTolottery: any) => {
@@ -156,7 +160,7 @@ const Lottery: React.FC = () => {
               },
             }
           });
-          insertBulkTicket(partyData.data.programId, playerData.data.pubKey, results);
+          insertBulkTicket(partyData.data.programId, playerData.data.publicKey, results);
         }).catch(error => alert(error));
     }
   }
@@ -169,7 +173,7 @@ const Lottery: React.FC = () => {
       <div className={`${classes.root}`}>
         <PartySection partyData={partyData.data} sendDataPartyToLottery={sendDataPartyToLottery}></PartySection>
         <NextSection sendDataNextToLottery={sendDataNextToLottery}></NextSection>
-        <FinishedSection dataGiveFromFinished={dataGiveFromFinished}></FinishedSection>
+        <FinishedSection playerData={playerData.data} dataGiveFromFinished={dataGiveFromFinished}></FinishedSection>
         <GetSection></GetSection>
         <ModalContent dataModal={dataModal.data} playerData={playerData.data}
           dataGiveFromModal={dataGiveFromModal} dataGiveFromWallet={dataGiveFromWallet}></ModalContent>

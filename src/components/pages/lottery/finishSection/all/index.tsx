@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useStyles from './styles';
+import { HOST_NAME } from 'data/constants';
 import { dataTest } from 'data/db';
 type Props = {
   dataSendToAll: any,
@@ -29,7 +30,7 @@ const All: React.FC<Props> = ({ dataSendToAll, dataGiveAll }) => {
 
   useEffect(() => {
     debugger
-    fetch('api/game-history-all')
+    fetch(`${HOST_NAME}/api/game-history-all`)
       .then(async response => {
         const data = await response.json();
 

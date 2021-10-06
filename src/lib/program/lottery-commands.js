@@ -54,7 +54,7 @@ export const buyBulkTicket = async (programIdStr, ticketSetNumbers, buyLamports,
     const rentAmount = await connection.getMinimumBalanceForRentExemption(TICKET_ACCOUNT_DATA_LAYOUT.span, 'singleGossip');
     let ticketKeyArr = [];
     let ticketAccounts = [];
-    const transaction = new Transaction();
+    let trasactionIxs = []
     debugger
     for(let i=0; i < ticketSetNumbers.length; i++) {
 
@@ -80,13 +80,13 @@ export const buyBulkTicket = async (programIdStr, ticketSetNumbers, buyLamports,
             data: ProgramCommand.buyTicket(buyLamports, ticketSetNumbers[i])
         });
         
-        transaction.add(ticketAccountTx);
-        transaction.add(buyIx); 
+        trasactionIxs.push(ticketAccountTx);
+        trasactionIxs.push(buyIx); 
         ticketKeyArr.push(ticketAccount.publicKey.toBase58());
         ticketAccounts.push(ticketAccount);
     }
 
-    await sendTxUsingExternalSignature([transaction], null, ticketKeyArr, playerWallet);
+    await sendTxUsingExternalSignature(connection, trasactionIxs, null, ticketAccounts, playerWallet);
     return ticketKeyArr;
 }
 

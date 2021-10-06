@@ -1,25 +1,27 @@
-import { Account, Transaction, TransactionInstruction } from "@solana/web3.js";
+import { Account, Transaction, TransactionInstruction, Connection } from "@solana/web3.js";
 import Wallet from "@project-serum/sol-wallet-adapter";
-import { getConnection, COMMITMENT, CLUSTERS } from "./connection";
+import {COMMITMENT, CLUSTERS } from "./connection";
 
 const PROVIDER_URL = "https://www.sollet.io";
 let wallet = new Wallet(PROVIDER_URL, CLUSTERS.DEVNET);
-const connection = getConnection(CLUSTERS.DEVNET);
 
 export const sendTxUsingExternalSignature = async (
+  connection: Connection,
   instructions: TransactionInstruction[],
   feePayer: Account | null,
   signersExceptWallet: Account[],
   wallet: Wallet
 ) => {
   let tx = new Transaction().add(...instructions);
+  debugger
   tx.setSigners(
     ...(feePayer
       ? [(feePayer as Account).publicKey, wallet.publicKey]
       : [wallet.publicKey]),
     ...signersExceptWallet.map(s => s.publicKey)
   );
-  tx.recentBlockhash = (await connection.getRecentBlockhash("max")).blockhash;
+  let { blockhash } = await connection.getRecentBlockhash();
+  tx.recentBlockhash = blockhash;
   signersExceptWallet.forEach(acc => {
     tx.partialSign(acc);
   });

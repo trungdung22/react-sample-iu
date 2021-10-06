@@ -61,7 +61,8 @@ export const fetchPlayerAccount = async (publicKey) => {
         return {
             balanceUSDT: 0,
             balanceSOL: 0, 
-            lamportUnit: 0
+            lamportUnit: 0,
+            publicKey: ''
         };
     }
     const balance = await getBalance(publicKey)
@@ -71,6 +72,7 @@ export const fetchPlayerAccount = async (publicKey) => {
     return {
         balanceUSDT: balanceConvert['usdt'],
         balanceSOL: balanceConvert['sol'], 
-        lamportUnit: ticketPrice['lamports']
+        lamportUnit: ticketPrice['lamports'],
+        publicKey: publicKey
     };
 }

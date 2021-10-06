@@ -44,6 +44,7 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
     data: {
       publicKey: '',
       is_connect: false,
+      adapter_type: '',
     }
   });
 
@@ -233,7 +234,8 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
     setDataWalletSendLottery({
         data: {
           is_connect: data.is_connect, 
-          publicKey: data.publicKey
+          publicKey: data.publicKey,
+          adapter_type: data.adapter_type
         }
       }
     )

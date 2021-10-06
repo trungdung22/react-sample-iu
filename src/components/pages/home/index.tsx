@@ -39,6 +39,7 @@ const Home: React.FC = () => {
   const [playerData, setPlayerData] = useState({
     data: {
       lamportUnit: 0,
+      adapter_type: '',
       publicKey: '',
       balanceUSDT: 0,
       balanceSOL: 0,
@@ -55,17 +56,19 @@ const Home: React.FC = () => {
   }
 
   const dataGiveFromWallet = (getDataWallet: any) => {
-    debugger
-    fetchPlayerAccount(getDataWallet.publicKey).then(item => {
-      setPlayerData({
-        data: {
-          lamportUnit: item.lamportUnit,
-          publicKey: getDataWallet.publicKey,
-          balanceUSDT: item.balanceUSDT,
-          balanceSOL: item.balanceSOL,
-        }
-      })
-    });
+    if (getDataWallet.publicKey !== undefined && getDataWallet.publicKey === '') {
+      fetchPlayerAccount(getDataWallet.publicKey).then(item => {
+        setPlayerData({
+          data: {
+            adapter_type: getDataWallet.adapter_type,
+            lamportUnit: item.lamportUnit,
+            publicKey: getDataWallet.publicKey,
+            balanceUSDT: item.balanceUSDT,
+            balanceSOL: item.balanceSOL,
+          }
+        })
+      });
+    }
   }
 
   return (

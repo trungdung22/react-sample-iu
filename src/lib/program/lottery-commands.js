@@ -45,12 +45,12 @@ export const buyTicket = async(programIdString, betLamports, ticketNumbers, lott
     return ticketAccount.publicKey.toBase58();
 }
 
-export const buyBulkTicket = async (programIdStr, ticketSetNumbers, buyLamports, gamePubkeyStr, gameOwnerPubkeyStr) => {
+export const buyBulkTicket = async (programIdStr, ticketSetNumbers, buyLamports, gamePubkeyStr, gameOwnerPubkeyStr, adapter_type) => {
     const programId = new PublicKey(programIdStr);
     const gamePubkey = new PublicKey(gamePubkeyStr);
     const gameOwnerPubkey = new PublicKey(gameOwnerPubkeyStr);
     debugger
-    const playerWallet = await UseWallet();
+    const playerWallet = await UseWallet(adapter_type);
     const rentAmount = await connection.getMinimumBalanceForRentExemption(TICKET_ACCOUNT_DATA_LAYOUT.span, 'singleGossip');
     let ticketKeyArr = [];
     let ticketAccounts = [];

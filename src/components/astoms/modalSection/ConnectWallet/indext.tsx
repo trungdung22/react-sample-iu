@@ -11,15 +11,6 @@ declare global {
   }
 }
 
-async function connectPhantomWallet() {
-  debugger
-  await window.solana.connect();
-  await window.solana.on("connect", (publicKey: any) => {
-    console.log("connected!" + publicKey)
-    return publicKey;
-  });
-}
-
 const ConnectWallet: React.FC<Props> = ({ dataGiveWallet }) => {
   const classes = useStyles();
   const [data, setData] = useState({
@@ -28,17 +19,16 @@ const ConnectWallet: React.FC<Props> = ({ dataGiveWallet }) => {
 
   const connectPhantomWalletInternal = () => {
     debugger
-    connectPhantomWallet().then(response => {
+    UseWallet("phantom").then(response => {
       console.log(response);
-      dataGiveWallet({ publicKey: response, is_connect: true });
+      dataGiveWallet({ publicKey: response.publicKey.toBase58(), is_connect: true, adapter_type: "phantom"});
     })
   }
 
   const connectSollet = () => {
-    
-    UseWallet().then(wallet => {
+    UseWallet("sollet").then(wallet => {
       debugger
-      dataGiveWallet({ publicKey: wallet.publicKey.toBase58(), is_connect: true });
+      dataGiveWallet({ publicKey: wallet.publicKey.toBase58(), is_connect: true, adapter_type: "sollet" });
     })
   }
 

@@ -1,16 +1,23 @@
 import { Account, Transaction, TransactionInstruction, Connection } from "@solana/web3.js";
 import Wallet from "@project-serum/sol-wallet-adapter";
+import {
+  BaseMessageSignerWalletAdapter,
+  WalletAdapterNetwork,
+} from '@solana/wallet-adapter-base';
 import {COMMITMENT, CLUSTERS } from "./connection";
+import { SolletWalletAdapter } from "lib/wallets/sollet";
+import { PhantomWalletAdapter } from "lib/wallets/phantom";
 
+const WALLET_LIST = ["sollet", "phantom"];
 const PROVIDER_URL = "https://www.sollet.io";
-let wallet = new Wallet(PROVIDER_URL, CLUSTERS.DEVNET);
+//let wallet = new Wallet(PROVIDER_URL, CLUSTERS.DEVNET);
 
 export const sendTxUsingExternalSignature = async (
   connection: Connection,
   instructions: TransactionInstruction[],
   feePayer: Account | null,
   signersExceptWallet: Account[],
-  wallet: Wallet
+  wallet: BaseMessageSignerWalletAdapter
 ) => {
   let tx = new Transaction().add(...instructions);
   debugger
@@ -33,15 +40,31 @@ export const sendTxUsingExternalSignature = async (
   return connection.confirmTransaction(txid, COMMITMENT);
 };
 
+let sollet = new SolletWalletAdapter({provider: PROVIDER_URL, network: WalletAdapterNetwork.Devnet});
+let phantom = new PhantomWalletAdapter();
+
 const connectToSolletWallet = () => {
-  if (!wallet.connected) {
-    return wallet.connect() as Promise<void>;
+  if (!sollet.connected) {
+    return sollet.connect() as Promise<void>;
   } else {
     return Promise.resolve();
   }
 };
 
-export const UseWallet = async (): Promise<Wallet> => {
-  await connectToSolletWallet();
-  return wallet;
+const connectToPhantomWallet = () => {
+  if (!phantom.connected) {
+    return phantom.connect() as Promise<void>;
+  } else {
+    return Promise.resolve();
+  }
+};
+
+export const UseWallet = async (adapterType: string): Promise<BaseMessageSignerWalletAdapter> => {
+  if (adapterType === "sollet"){
+    await connectToSolletWallet();
+    return sollet;
+  } else {
+    await connectToPhantomWallet();
+    return phantom;
+  }
 };

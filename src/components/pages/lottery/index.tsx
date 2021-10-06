@@ -38,6 +38,7 @@ const Lottery: React.FC = () => {
   const [playerData, setPlayerData] = useState({
     data: {
       is_connect: false,
+      adapter_type: '',
       publicKey: '',
       lamportUnit: 0,
       balanceUSDT: 0,
@@ -118,6 +119,7 @@ const Lottery: React.FC = () => {
     if (getDataWallet.is_connect) {
       fetchPlayerAccount(getDataWallet.publicKey).then(item => setPlayerData({
         data: {
+          adapter_type: getDataWallet.adapter_type,
           is_connect: true,
           lamportUnit: item.lamportUnit,
           publicKey: getDataWallet.publicKey,
@@ -139,7 +141,8 @@ const Lottery: React.FC = () => {
         getDataModalTolottery.your_ticket,
         playerData.data.lamportUnit,
         partyData.data.gamePubkey,
-        partyData.data.ownerPubkey)
+        partyData.data.ownerPubkey,
+        playerData.data.adapter_type)
         .then(async results => {
           setDataModal({
             data: {

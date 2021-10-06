@@ -14,9 +14,10 @@ type Props = {
   dataModal: any,
   playerData: any,
   dataGiveFromModal: (getDataModalTolottery: any) => void,
+  dataGiveFromWallet: (getDataWalletTolottery: any) => void,
 }
 
-const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal}) => {
+const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal, dataGiveFromWallet}) => {
   const classes = useStyles();
   const [dataSendLottery, setDataSendLottery] = useState({
     data: {
@@ -36,6 +37,13 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
       },
       view_your: false,
       your_ticket: [],
+    }
+  });
+
+  const [dataWalletSendLottery, setDataWalletSendLottery] = useState({
+    data: {
+      publicKey: '',
+      is_connect: false,
     }
   });
 
@@ -220,25 +228,11 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
     })
   }
 
-  const dataGiveWallet = (isconnect: boolean) => {
-    setDataSendLottery({
+  const dataGiveWallet = (data: any) => {
+    setDataWalletSendLottery({
         data: {
-          is_connect: isconnect,
-          show: false,
-          first: false,
-          second: false,
-          third: false,
-          four: false,
-          five: false,
-          submit: false,
-          flag_submit: false,
-          view_ticket: false,
-          next_round: {
-            next_id: -1,
-            your_ticket: []
-          },
-          view_your: false,
-          your_ticket: [],
+          is_connect: data.is_connect, 
+          publicKey: data.publicKey
         }
       }
     )
@@ -248,6 +242,10 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
     dataGiveFromModal(dataSendLottery.data);
   }, [dataSendLottery])
   
+  useEffect(() => {
+    dataGiveFromWallet(dataWalletSendLottery.data);
+  }, [dataWalletSendLottery])
+
   return (
     <>
       {dataModal.show && !dataModal.submit ? (

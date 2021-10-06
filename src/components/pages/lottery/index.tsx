@@ -9,7 +9,7 @@ import { isConnect } from 'data/db';
 import Star from 'components/astoms/star';
 import Header from 'components/astoms/header';
 import Footer from 'components/astoms/footer';
-import { getGameBoardInfo, connectPlayerAccount, insertBulkTicket} from 'lib/utilities/utils';
+import { getGameBoardInfo, fetchPlayerAccount, insertBulkTicket} from 'lib/utilities/utils';
 import { buyBulkTicket } from 'lib/program/lottery-commands';
 
 
@@ -37,7 +37,6 @@ const Lottery: React.FC = () => {
 
   const [playerData, setPlayerData] = useState({
     data: {
-      privateKey: '',
       pubKey: '',
       lamportUnit: 0, 
       balanceUSDT: 0, 
@@ -56,18 +55,6 @@ const Lottery: React.FC = () => {
       gameRollNums: [],
     }
   });
-
-  useEffect(()=> {
-    connectPlayerAccount().then(item => setPlayerData({
-      data: {
-        lamportUnit: item.lamportUnit,
-        privateKey: item.privateKey,
-        pubKey: item.publicKey,
-        balanceUSDT: item.balanceUSDT,
-        balanceSOL: item.balanceSOL,
-      }
-    }));
-  }, [])
 
   useEffect(()=>{
     getGameBoardInfo().then(item => setPartyData({
@@ -115,6 +102,7 @@ const Lottery: React.FC = () => {
       }
     })
   }
+
   const dataGiveFromHeader = (getDataHeader: any) => {
     setDataModal({
       data: {
@@ -122,6 +110,18 @@ const Lottery: React.FC = () => {
         show: true,
       }
     })
+  }
+
+  const dataGiveFromWallet = (getDataWallet: any) => {
+    debugger
+    fetchPlayerAccount(getDataWallet.publicKey).then(item => setPlayerData({
+      data: {
+        lamportUnit: item.lamportUnit,
+        pubKey: getDataWallet.publicKey,
+        balanceUSDT: item.balanceUSDT,
+        balanceSOL: item.balanceSOL,
+      }
+    }));
   }
 
   const dataGiveFromModal = (getDataModalTolottery: any) => {
@@ -168,7 +168,8 @@ const Lottery: React.FC = () => {
           <NextSection sendDataNextToLottery={sendDataNextToLottery}></NextSection>
           <FinishedSection dataGiveFromFinished={dataGiveFromFinished}></FinishedSection>
           <GetSection></GetSection>
-          <ModalContent dataModal={dataModal.data} playerData={playerData.data} dataGiveFromModal={dataGiveFromModal}></ModalContent>
+          <ModalContent dataModal={dataModal.data} playerData={playerData.data} 
+                        dataGiveFromModal={dataGiveFromModal} dataGiveFromWallet={dataGiveFromWallet}></ModalContent>
       </div>
       <Footer></Footer>
     </>

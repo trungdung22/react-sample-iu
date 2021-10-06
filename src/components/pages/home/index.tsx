@@ -56,14 +56,16 @@ const Home: React.FC = () => {
 
   const dataGiveFromWallet = (getDataWallet: any) => {
     debugger
-    fetchPlayerAccount(getDataWallet.publicKey).then(item => setPlayerData({
-      data: {
-        lamportUnit: item.lamportUnit,
-        pubKey: getDataWallet.publicKey,
-        balanceUSDT: item.balanceUSDT,
-        balanceSOL: item.balanceSOL,
-      }
-    }));
+    fetchPlayerAccount(getDataWallet.publicKey).then(item => {
+      setPlayerData({
+        data: {
+          lamportUnit: item.lamportUnit,
+          pubKey: getDataWallet.publicKey,
+          balanceUSDT: item.balanceUSDT,
+          balanceSOL: item.balanceSOL,
+        }
+      })
+    });
   }
 
   return (

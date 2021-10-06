@@ -21,7 +21,7 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
   const classes = useStyles();
   const [dataSendLottery, setDataSendLottery] = useState({
     data: {
-      is_connect: dataModal.is_connect,
+      is_connect: playerData.is_connect,
       show: false,
       first: false,
       second: false,

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import useStyles from './styles';
+
 type Props = {
-  dataSendViewTicket: any,
-  dataGiveWallet: any,
-  dataGiveViewTicket: (getDataViewTicket: boolean) => void,
+  dataGiveWallet: (isconnect: boolean) => void
 }
 declare global {
   interface Window {

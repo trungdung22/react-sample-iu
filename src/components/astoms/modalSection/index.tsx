@@ -243,7 +243,7 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
       }
     )
   }
-
+  
   useEffect(() => {
     dataGiveFromModal(dataSendLottery.data);
   }, [dataSendLottery])

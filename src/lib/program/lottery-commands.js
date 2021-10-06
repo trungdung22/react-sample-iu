@@ -1,7 +1,7 @@
 import * as ProgramCommand from './builder'
 import { Account, Connection, PublicKey, SystemProgram, Transaction, TransactionInstruction, sendAndConfirmTransaction } from "@solana/web3.js";
 import { TICKET_ACCOUNT_DATA_LAYOUT } from './state';
-import { sendTxUsingExternalSignature, useWallet } from './wallet-provider';
+import { sendTxUsingExternalSignature, UseWallet } from './wallet-provider';
 
 //const connection = new Connection("http://localhost:8899", 'singleGossip');
 const connection = new Connection("https://api.devnet.solana.com", 'singleGossip');
@@ -10,7 +10,7 @@ const SEED = 'milli';
 export const buyTicket = async(programIdString, betLamports, ticketNumbers, lotteryGamePubkey, lotteryOwnerPubkey) => {
     // const privateKeyDecoded = privateKeyByteArray.split(',').map(s => parseInt(s));
     //const playerAccount = new Account(privateKeyDecoded);
-    const playerWallet = await useWallet();
+    const playerWallet = await UseWallet();
     const rentAmount = await connection.getMinimumBalanceForRentExemption(TICKET_ACCOUNT_DATA_LAYOUT.span, 'singleGossip');
     const ticketAccount = new Account();
     const programId = new PublicKey(programIdString)
@@ -45,11 +45,12 @@ export const buyTicket = async(programIdString, betLamports, ticketNumbers, lott
     return ticketAccount.publicKey.toBase58();
 }
 
-export const buyBulkTicket = async (programIdStr, ticketSetNumbers, privateKeyByteArray, buyLamports, gamePubkeyStr, gameOwnerPubkeyStr) => {
+export const buyBulkTicket = async (programIdStr, ticketSetNumbers, buyLamports, gamePubkeyStr, gameOwnerPubkeyStr) => {
     const programId = new PublicKey(programIdStr);
     const gamePubkey = new PublicKey(gamePubkeyStr);
     const gameOwnerPubkey = new PublicKey(gameOwnerPubkeyStr);
-    const playerWallet = await useWallet();
+    debugger
+    const playerWallet = await UseWallet();
     const rentAmount = await connection.getMinimumBalanceForRentExemption(TICKET_ACCOUNT_DATA_LAYOUT.span, 'singleGossip');
     let ticketKeyArr = [];
     let ticketAccounts = [];
@@ -85,7 +86,7 @@ export const buyBulkTicket = async (programIdStr, ticketSetNumbers, privateKeyBy
         ticketAccounts.push(ticketAccount);
     }
 
-    await sendTxUsingExternalSignature([ix], null, ticketKeyArr, wallet);
+    await sendTxUsingExternalSignature([transaction], null, ticketKeyArr, playerWallet);
     return ticketKeyArr;
 }
 

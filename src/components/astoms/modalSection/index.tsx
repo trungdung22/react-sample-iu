@@ -229,6 +229,7 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
   }
 
   const dataGiveWallet = (data: any) => {
+    debugger
     setDataWalletSendLottery({
         data: {
           is_connect: data.is_connect, 

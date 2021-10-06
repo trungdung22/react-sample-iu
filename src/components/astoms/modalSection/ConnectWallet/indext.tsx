@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import useStyles from './styles';
-import { useWallet } from '../../../../lib/program/wallet-provider';
+import { UseWallet } from '../../../../lib/program/wallet-provider';
 type Props = {
   dataGiveWallet: (dataWallet: any) => any
 }
@@ -36,7 +36,7 @@ const ConnectWallet: React.FC<Props> = ({ dataGiveWallet }) => {
 
   const connectSollet = () => {
     
-    useWallet().then(wallet => {
+    UseWallet().then(wallet => {
       debugger
       dataGiveWallet({ publicKey: wallet.publicKey.toBase58(), is_connect: true });
     })

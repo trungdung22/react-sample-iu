@@ -2,17 +2,18 @@ import React, { useState } from 'react';
 import useStyles from './styles';
 import Title from 'components/astoms/title/DefaultTitle';
 import DefaultButon from 'components/astoms/button/DefaultButton';
-import { isConnect } from 'data/constants';
+import { IS_CONNECT } from 'data/constants';
 import Star from 'components/astoms/star';
 import Header from 'components/astoms/header';
 import Footer from 'components/astoms/footer';
 import ModalContent from 'components/astoms/modalSection';
+import { fetchPlayerAccount } from 'lib/utilities/utils';
 
 const Home: React.FC = () => {
   const classes = useStyles();
   const [dataModal, setDataModal] = useState({
     data: {
-      is_connect: isConnect,
+      is_connect: IS_CONNECT,
       show: false,
       first: false,
       second: false,
@@ -37,8 +38,9 @@ const Home: React.FC = () => {
 
   const [playerData, setPlayerData] = useState({
     data: {
-      pubKey: '', 
-      balanceUSDT: 0, 
+      lamportUnit: 0,
+      pubKey: '',
+      balanceUSDT: 0,
       balanceSOL: 0,
     }
   });
@@ -51,6 +53,19 @@ const Home: React.FC = () => {
       }
     })
   }
+
+  const dataGiveFromWallet = (getDataWallet: any) => {
+    debugger
+    fetchPlayerAccount(getDataWallet.publicKey).then(item => setPlayerData({
+      data: {
+        lamportUnit: item.lamportUnit,
+        pubKey: getDataWallet.publicKey,
+        balanceUSDT: item.balanceUSDT,
+        balanceSOL: item.balanceSOL,
+      }
+    }));
+  }
+
   return (
     <>
       <Star></Star>
@@ -62,14 +77,18 @@ const Home: React.FC = () => {
             <li><img src="assets/top/face02.png" alt="face02" /></li>
           </ul>
           <div className={`${classes.content}`}>
-            <Title text={['We start', <br/>,'the next Lottery',<br/>, 'generation']}></Title>
+            <Title text={['We start', <br />, 'the next Lottery', <br />, 'generation']}></Title>
             <p className={`${classes.text}`}>The first crosschain Lottery ever<br className="sp-768" /> powered by Solana</p>
-            <DefaultButon text={'Connect Wallet'} small="small" connect={isConnect} onClick={() => !isConnect ? setDataModal({data:{...dataModal.data, show: true}}) : ''}></DefaultButon>
+            <DefaultButon text={'Connect Wallet'} small="small" connect={IS_CONNECT} onClick={() => !IS_CONNECT ? setDataModal({ data: { ...dataModal.data, show: true } }) : ''}></DefaultButon>
           </div>
         </div>
       </div>
       <Footer></Footer>
-      <ModalContent dataModal={dataModal.data} dataGiveFromModal={dataGiveFromModal} playerData={playerData}></ModalContent>
+      <ModalContent dataModal={dataModal.data}
+        dataGiveFromModal={dataGiveFromModal}
+        playerData={playerData}
+        dataGiveFromWallet={dataGiveFromWallet}>
+      </ModalContent>
     </>
   )
 }

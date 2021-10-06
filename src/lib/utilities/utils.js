@@ -1,6 +1,6 @@
 
-import { connectAccount } from "lib/program/lottery-commands";
-import { isConnect, HOST_NAME } from 'data/constants';
+import { getBalance } from "lib/program/lottery-commands";
+import { IS_CONNECT, HOST_NAME } from 'data/constants';
 
 export const convertLamport = async (lamports) => {
     const requestOptions = {
@@ -57,6 +57,13 @@ export const getGameBoardInfo = async () => {
 }
 
 export const fetchPlayerAccount = async (publicKey) => {
+    if (publicKey === undefined || publicKey === '') {
+        return {
+            balanceUSDT: 0,
+            balanceSOL: 0, 
+            lamportUnit: 0
+        };
+    }
     const balance = await getBalance(publicKey)
 
     const balanceConvert = await convertLamport(balance);

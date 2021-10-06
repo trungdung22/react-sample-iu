@@ -9,7 +9,7 @@ import { isConnect } from 'data/db';
 import Star from 'components/astoms/star';
 import Header from 'components/astoms/header';
 import Footer from 'components/astoms/footer';
-import { getGameBoardInfo, fetchPlayerAccount, insertBulkTicket} from 'lib/utilities/utils';
+import { getGameBoardInfo, fetchPlayerAccount, insertBulkTicket } from 'lib/utilities/utils';
 import { buyBulkTicket } from 'lib/program/lottery-commands';
 
 
@@ -38,8 +38,8 @@ const Lottery: React.FC = () => {
   const [playerData, setPlayerData] = useState({
     data: {
       pubKey: '',
-      lamportUnit: 0, 
-      balanceUSDT: 0, 
+      lamportUnit: 0,
+      balanceUSDT: 0,
       balanceSOL: 0,
     }
   });
@@ -56,19 +56,19 @@ const Lottery: React.FC = () => {
     }
   });
 
-  useEffect(()=>{
+  useEffect(() => {
     getGameBoardInfo().then(item => setPartyData({
       data: {
         ...partyData.data,
         programId: item.programId,
-        ownerPubkey: item.ownerPubkey, 
-        gameStatus: item.gameStatus, 
-        gamePubkey: item.gamePubkey, 
-        gameBalanceSol: item.gameBalanceSOL, 
-        gameBalanceUSDT: item.gameBalanceUSDT, 
+        ownerPubkey: item.ownerPubkey,
+        gameStatus: item.gameStatus,
+        gamePubkey: item.gamePubkey,
+        gameBalanceSol: item.gameBalanceSOL,
+        gameBalanceUSDT: item.gameBalanceUSDT,
         gameRollNums: item.gameRollNums
       }
-   }));
+    }));
   }, [])
 
   const sendDataPartyToLottery = (getDataPartyTolottery: boolean) => {
@@ -129,10 +129,13 @@ const Lottery: React.FC = () => {
     setDataModal({
       data: getDataModalTolottery,
     })
-    if(getDataModalTolottery.flag_submit && getDataModalTolottery.your_ticket.length > 0) {
+    if (getDataModalTolottery.flag_submit && getDataModalTolottery.your_ticket.length > 0) {
       console.log("prepare to submit ticket");
-      buyBulkTicket(partyData.data.programId, getDataModalTolottery.your_ticket, 
-        playerData.data.privateKey, playerData.data.lamportUnit, partyData.data.gamePubkey, partyData.data.ownerPubkey)
+      buyBulkTicket(partyData.data.programId,
+        getDataModalTolottery.your_ticket,
+        playerData.data.lamportUnit,
+        partyData.data.gamePubkey,
+        partyData.data.ownerPubkey)
         .then(async results => {
           setDataModal({
             data: {
@@ -154,26 +157,26 @@ const Lottery: React.FC = () => {
             }
           });
           insertBulkTicket(partyData.data.programId, playerData.data.pubKey, results);
-        }).catch( error => alert(error));
+        }).catch(error => alert(error));
     }
   }
-  
+
 
   return (
     <>
       <Star></Star>
       <Header dataGiveFromHeader={dataGiveFromHeader}></Header>
       <div className={`${classes.root}`}>
-          <PartySection partyData={partyData.data} sendDataPartyToLottery={sendDataPartyToLottery}></PartySection>
-          <NextSection sendDataNextToLottery={sendDataNextToLottery}></NextSection>
-          <FinishedSection dataGiveFromFinished={dataGiveFromFinished}></FinishedSection>
-          <GetSection></GetSection>
-          <ModalContent dataModal={dataModal.data} playerData={playerData.data} 
-                        dataGiveFromModal={dataGiveFromModal} dataGiveFromWallet={dataGiveFromWallet}></ModalContent>
+        <PartySection partyData={partyData.data} sendDataPartyToLottery={sendDataPartyToLottery}></PartySection>
+        <NextSection sendDataNextToLottery={sendDataNextToLottery}></NextSection>
+        <FinishedSection dataGiveFromFinished={dataGiveFromFinished}></FinishedSection>
+        <GetSection></GetSection>
+        <ModalContent dataModal={dataModal.data} playerData={playerData.data}
+          dataGiveFromModal={dataGiveFromModal} dataGiveFromWallet={dataGiveFromWallet}></ModalContent>
       </div>
       <Footer></Footer>
     </>
-    
+
   )
 }
 

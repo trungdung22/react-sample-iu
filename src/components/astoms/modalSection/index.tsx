@@ -130,7 +130,7 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
         flag_submit: flag_submit,
         view_ticket: false,
         view_your: false,
-        your_ticket: [],
+        your_ticket: getDataThird.tickets,
       }
     })
     

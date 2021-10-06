@@ -29,7 +29,7 @@ const All: React.FC<Props> = ({ dataSendToAll, dataGiveAll }) => {
 
   useEffect(() => {
     debugger
-    fetch('http://localhost:8080/api/game-history-all')
+    fetch('api/game-history-all')
       .then(async response => {
         const data = await response.json();
 
@@ -113,27 +113,27 @@ const All: React.FC<Props> = ({ dataSendToAll, dataGiveAll }) => {
                   <li>
                     <span>Match  3</span>
                     <span>{data['info'][data.id]['match_pool3_sol']} SOL</span>
-                    <span>806 Winners</span>
+                    <span>{data['info'][data.id]['match_pool3_count']} Winners</span>
                   </li>
                   <li>
                     <span>Match  4</span>
                     <span>{data['info'][data.id]['match_pool4_sol']} SOL</span>
-                    <span>806 Winners</span>
+                    <span>{data['info'][data.id]['match_pool4_count']} Winners</span>
                   </li>
                   <li>
                     <span>Match  5</span>
                     <span>{data['info'][data.id]['match_pool5_sol']} SOL</span>
-                    <span>806 Winners</span>
+                    <span>{data['info'][data.id]['match_pool5_count']} Winners</span>
                   </li>
                   <li>
                     <span>Match  6</span>
                     <span>{data['info'][data.id]['match_pool6_sol']} SOL</span>
-                    <span>806 Winners</span>
+                    <span>{data['info'][data.id]['match_pool6_count']} Winners</span>
                   </li>
                   <li>
                     <span>Burn</span>
                     <span>{data['info'][data.id]['burn_pool_sol']} SOL</span>
-                    <span>806 Winners</span>
+                    <span>'</span>
                   </li>
                 </ul>
                 <p className="totalMatch">Total players this round: <span>9786</span></p>

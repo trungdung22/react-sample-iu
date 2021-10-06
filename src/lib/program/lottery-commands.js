@@ -2,7 +2,8 @@ import * as ProgramCommand from './builder'
 import { Account, Connection, PublicKey, SystemProgram, Transaction, TransactionInstruction, sendAndConfirmTransaction } from "@solana/web3.js";
 import { TICKET_ACCOUNT_DATA_LAYOUT } from './state';
 
-const connection = new Connection("http://localhost:8899", 'singleGossip');
+//const connection = new Connection("http://localhost:8899", 'singleGossip');
+const connection = new Connection("https://api.devnet.solana.com", 'singleGossip');
 const SEED = 'milli'; 
 
 export const buyTicket = async(programIdString, betLamports, ticketNumbers, privateKeyByteArray, lotteryGamePubkey, lotteryOwnerPubkey) => {

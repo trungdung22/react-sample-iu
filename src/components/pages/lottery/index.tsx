@@ -125,6 +125,7 @@ const Lottery: React.FC = () => {
   }
 
   const dataGiveFromModal = (getDataModalTolottery: any) => {
+    debugger
     setDataModal({
       data: getDataModalTolottery,
     })
@@ -133,8 +134,26 @@ const Lottery: React.FC = () => {
       buyBulkTicket(partyData.data.programId, getDataModalTolottery.your_ticket, 
         playerData.data.privateKey, playerData.data.lamportUnit, partyData.data.gamePubkey, partyData.data.ownerPubkey)
         .then(async results => {
-            debugger
-            insertBulkTicket(partyData.data.programId, playerData.data.pubKey, results);
+          setDataModal({
+            data: {
+              is_connect: isConnect,
+              show: false,
+              first: false,
+              second: false,
+              third: false,
+              four: false,
+              view_ticket: false,
+              view_your: false,
+              submit: false,
+              flag_submit: false,
+              your_ticket: [],
+              next_round: {
+                next_id: -1,
+                your_ticket: []
+              },
+            }
+          });
+          insertBulkTicket(partyData.data.programId, playerData.data.pubKey, results);
         }).catch( error => alert(error));
     }
   }

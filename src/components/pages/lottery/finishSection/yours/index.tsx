@@ -9,7 +9,7 @@ const Yours: React.FC<Props> = ({dataGiveFromYours}) => {
   const [data, setData] = useState([]);
   
   useEffect(()=>{
-    fetch('http://localhost:8080/api/game-history/2Ci4PkD2vqD9erSVBJTc1YgCjMx8xKzFMe7F8TvK3BQ3')
+    fetch('api/game-history/2Ci4PkD2vqD9erSVBJTc1YgCjMx8xKzFMe7F8TvK3BQ3')
     .then(async response => {
       const data = await response.json();
 
@@ -26,14 +26,13 @@ const Yours: React.FC<Props> = ({dataGiveFromYours}) => {
   
 
   const handleRenderRoundItems = (el: any) => {
-    debugger
     const date = new Date(el.createdAt);
     const formatTime = (time: number) => {
       return time < 10 ?  '0' + time : time;
     }
     return (
       <li key={el.id} onClick={() => dataGiveFromYours(el)}>
-        <p>1</p>
+        <p>{el.game_no}</p>
         <p>
           <span>{`${formatTime(date.getDate())} thg ${date.getMonth()}, ${date.getFullYear()}`}</span>
           <span>{`${formatTime(date.getHours())}:${formatTime(date.getMinutes())}`}</span>

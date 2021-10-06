@@ -40,11 +40,13 @@ const First: React.FC<Props> = ({playerData, dataGiveFirst}) => {
       })
     }
   };
+  
   const handleSendData = () => {
     if (data.data.ticketCount > 0) {
       dataGiveFirst(data.data)
     }
   }
+
   return (
     <>
       <div className={`${classes.body}`}>
@@ -68,7 +70,7 @@ const First: React.FC<Props> = ({playerData, dataGiveFirst}) => {
             <p>~{data.data.unit}</p>
           </div>
         </div>
-        <p className={`${classes.insuff}`}>Insufficient SOL balance</p>
+        {playerData.balanceSOL < data.data.price ? (<p className={`${classes.insuff}`}>Insufficient SOL balance</p>) : ''}
         <p className={`${classes.balance}`}>SOL Balance: {playerData.balanceSOL}</p>
       </div>
       <p className={`${classes.lineGray}`}><span></span></p>

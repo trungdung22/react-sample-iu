@@ -6,8 +6,6 @@ type Props = {
 const ViewYour: React.FC<Props> = ({dataSendViewYour}) => {
   const classes = useStyles();
   const nftsTicket = [
-    [21, 13, 18],
-    [21, 13, 18, 33]
   ]
   const countWinningTicket = () => {
     let result = 0;

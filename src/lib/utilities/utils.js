@@ -1,7 +1,6 @@
 
 import { connectAccount } from "lib/program/lottery-commands";
-
-const HOST = "http://localhost:8080"
+import { isConnect, HOST_NAME } from 'data/constants';
 
 export const convertLamport = async (lamports) => {
     const requestOptions = {
@@ -10,7 +9,7 @@ export const convertLamport = async (lamports) => {
             'Content-Type': 'application/json',
         }
     };
-    const response = await fetch(`api/rate-converter?lamports=${lamports}`, requestOptions);
+    const response = await fetch(`${HOST_NAME}/api/rate-converter?lamports=${lamports}`, requestOptions);
     const data = await response.json();
     return { usdt: data["usdt"], sol: data["sol"] };
 }
@@ -22,7 +21,7 @@ export const priceTicket = async () => {
             'Content-Type': 'application/json',
         }
     };
-    const response = await fetch(`/api/price-per-ticket`, requestOptions);
+    const response = await fetch(`${HOST_NAME}/api/price-per-ticket`, requestOptions);
     const data = await response.json();
     return { lamports: data["lamports"], usdt: data["usdt"], sol: data["sol"] };
 }
@@ -41,7 +40,7 @@ export const insertBulkTicket = async (programId, playerPubkey, tickets) => {
         })
         
     };
-    const response = await fetch(`/api/ticket/insert-bulk`, requestOptions);
+    const response = await fetch(`${HOST_NAME}/api/ticket/insert-bulk`, requestOptions);
     return response;
 }
 
@@ -52,7 +51,7 @@ export const getGameBoardInfo = async () => {
             'Content-Type': 'application/json',
         }
     };
-    const response = await fetch(`/api/game-info`, requestOptions);
+    const response = await fetch(`${HOST_NAME}/api/game-info`, requestOptions);
     const data = await response.json();
     return data;
 }

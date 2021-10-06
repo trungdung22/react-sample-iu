@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useStyles from './styles';
+import { HOST_NAME } from 'data/constants';
 import { dataTest } from 'data/db';
 type Props = {
   dataGiveFromYours: (getDataFromYours: any) => void,
@@ -9,7 +10,7 @@ const Yours: React.FC<Props> = ({dataGiveFromYours}) => {
   const [data, setData] = useState([]);
   
   useEffect(()=>{
-    fetch('api/game-history/2Ci4PkD2vqD9erSVBJTc1YgCjMx8xKzFMe7F8TvK3BQ3')
+    fetch(`${HOST_NAME}/api/game-history/2Ci4PkD2vqD9erSVBJTc1YgCjMx8xKzFMe7F8TvK3BQ3`)
     .then(async response => {
       const data = await response.json();
 

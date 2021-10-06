@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import useStyles from './styles';
 import Title from 'components/astoms/title/DefaultTitle';
 import DefaultButon from 'components/astoms/button/DefaultButton';
-import { isConnect } from 'data/db';
+import { isConnect } from 'data/constants';
 import Star from 'components/astoms/star';
 import Header from 'components/astoms/header';
 import Footer from 'components/astoms/footer';
 import ModalContent from 'components/astoms/modalSection';
+
 const Home: React.FC = () => {
   const classes = useStyles();
   const [dataModal, setDataModal] = useState({

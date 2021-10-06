@@ -220,6 +220,30 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
     })
   }
 
+  const dataGiveWallet = (isconnect: boolean) => {
+    setDataSendLottery({
+        data: {
+          is_connect: isconnect,
+          show: false,
+          first: false,
+          second: false,
+          third: false,
+          four: false,
+          five: false,
+          submit: false,
+          flag_submit: false,
+          view_ticket: false,
+          next_round: {
+            next_id: -1,
+            your_ticket: []
+          },
+          view_your: false,
+          your_ticket: [],
+        }
+      }
+    )
+  }
+
   useEffect(() => {
     dataGiveFromModal(dataSendLottery.data);
   }, [dataSendLottery])
@@ -384,7 +408,7 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
             {dataModal.five && dataModal.is_connect ? (<Five dataGiveFive={dataGiveFive} dataSendFive={dataTicketModal}></Five>) : ''}
             {dataModal.view_ticket && dataModal.is_connect ? (<ViewTicket dataGiveViewTicket={dataGiveViewTicket} dataSendViewTicket={dataModal}></ViewTicket>) : ''}
             {dataModal.view_your && dataModal.is_connect ? (<ViewYour dataSendViewYour={dataModal}></ViewYour>) : ''}
-            {!dataModal.is_connect ? (<ConnectWallet></ConnectWallet>) : ''}
+            {!dataModal.is_connect ? (<ConnectWallet dataGiveWallet={dataGiveWallet}></ConnectWallet>) : ''}
           </div>
         </div>
       ) : (

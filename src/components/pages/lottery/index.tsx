@@ -11,7 +11,7 @@ import Header from 'components/astoms/header';
 import Footer from 'components/astoms/footer';
 import { getGameBoardInfo, fetchPlayerAccount, insertBulkTicket } from 'lib/utilities/utils';
 import { buyBulkTicket } from 'lib/program/lottery-commands';
-
+import { HOST_NAME } from 'data/constants';
 
 const Lottery: React.FC = () => {
   const classes = useStyles();
@@ -46,6 +46,16 @@ const Lottery: React.FC = () => {
     }
   });
 
+  const [nextPartyData, setNextPartyData] = useState({
+    data: {
+      view_ticket: false,
+      get_ticket: false,
+      next_id: 0,
+      created_time: new Date(),
+      your_tickets: [],
+    }
+  })
+
   const [partyData, setPartyData] = useState({
     data: {
       programId: '',
@@ -57,6 +67,35 @@ const Lottery: React.FC = () => {
       gameRollNums: [],
     }
   });
+
+  useEffect(() => {
+    debugger
+    fetch(`${HOST_NAME}/api/next-game-info/${playerData.data.publicKey}`)
+      .then(async response => {
+        debugger
+        const response_data = await response.json();
+
+        // check for error response
+        if (!response.ok) {
+          // get error message from body or default to response statusText
+          const error = (response_data && response_data.message) || response.statusText;
+          return Promise.reject(error);
+        }
+        const round_no = response_data.result.round_no; 
+        const your_tickets = response_data.result.your_tickets;
+        const created_time = new Date(response_data.result.created_time);
+        debugger
+        setNextPartyData({
+          data: {
+            view_ticket: nextPartyData.data.view_ticket,
+            get_ticket: nextPartyData.data.get_ticket,
+            next_id: round_no,
+            created_time: created_time,
+            your_tickets: your_tickets
+          }
+        });
+      })
+  }, [playerData.data]);
 
   useEffect(() => {
     getGameBoardInfo().then(item => setPartyData({
@@ -181,7 +220,7 @@ const Lottery: React.FC = () => {
       <Header playerData={playerData} dataGiveFromHeader={dataGiveFromHeader}></Header>
       <div className={`${classes.root}`}>
         <PartySection partyData={partyData.data} sendDataPartyToLottery={sendDataPartyToLottery}></PartySection>
-        <NextSection playerData={playerData} sendDataNextToLottery={sendDataNextToLottery}></NextSection>
+        <NextSection playerData={nextPartyData.data} sendDataNextToLottery={sendDataNextToLottery}></NextSection>
         <FinishedSection playerData={playerData.data} dataGiveFromFinished={dataGiveFromFinished}></FinishedSection>
         <GetSection></GetSection>
         <ModalContent dataModal={dataModal.data} playerData={playerData.data}

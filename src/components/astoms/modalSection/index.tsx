@@ -365,13 +365,13 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
               {dataModal.view_ticket && playerData.is_connect ? (
                 <p className="title">
                   Round
-                  <span>#15</span>
+                  <span>#{dataModal.next_round.next_id}</span>
                 </p>
               ) : ''}
               {dataModal.view_your && playerData.is_connect ? (
                 <p className="title">
                   Round
-                  <span>#15</span>
+                  <span>#{dataModal.next_round.next_id}</span>
                 </p>
               ) : ''}
               {!playerData.is_connect ? (

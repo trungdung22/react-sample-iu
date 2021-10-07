@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useStyles from './styles';
 import { HOST_NAME } from 'data/constants';
-import { dataTest } from 'data/db';
 type Props = {
   dataSendToAll: any,
   dataGiveAll: (getDataAll: any) => void

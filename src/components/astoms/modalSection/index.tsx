@@ -54,7 +54,6 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
   })
 
   const dataGiveFirst = (getDataFirst: any) => {
-    debugger
     setDataSendLottery({
       data: {
         next_round: {
@@ -87,7 +86,6 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
     })
   }
   const dataGiveSecond = (getDataSecond: any) => {
-    debugger
     setDataSendLottery({
       data: {
         next_round: {
@@ -120,7 +118,6 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
     })
   }
   const dataGiveThird = (getDataThird: any) => {
-    debugger
     let flag_submit = getDataThird.five; 
     setDataSendLottery({
       data: {
@@ -152,7 +149,6 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
     })
   }
   const dataGiveFour = (getDataFour: any) => {
-    debugger
     setDataSendLottery({
       data: {
         next_round: {
@@ -183,7 +179,6 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
   }
   
   const dataGiveFive = (getDataFive: any) => {
-    debugger
     setDataSendLottery({
       data: {
         next_round: {
@@ -206,7 +201,6 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
     })
   }
   const dataGiveViewTicket = (getDataViewTicket: boolean) => {
-    debugger
     setDataSendLottery({
       data: {
         next_round: {

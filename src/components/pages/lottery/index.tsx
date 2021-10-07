@@ -127,6 +127,12 @@ const Lottery: React.FC = () => {
           balanceSOL: item.balanceSOL,
         }
       }));
+      setDataModal({
+        data: {
+          ...dataModal.data,
+          show: false,
+        }
+      })
     } 
   }
 
@@ -164,7 +170,7 @@ const Lottery: React.FC = () => {
             }
           });
           insertBulkTicket(partyData.data.programId, playerData.data.publicKey, results);
-        }).catch(error => alert(error));
+        }).catch(error => console.log(error));
     }
   }
 
@@ -172,10 +178,10 @@ const Lottery: React.FC = () => {
   return (
     <>
       <Star></Star>
-      <Header dataGiveFromHeader={dataGiveFromHeader}></Header>
+      <Header playerData={playerData} dataGiveFromHeader={dataGiveFromHeader}></Header>
       <div className={`${classes.root}`}>
         <PartySection partyData={partyData.data} sendDataPartyToLottery={sendDataPartyToLottery}></PartySection>
-        <NextSection sendDataNextToLottery={sendDataNextToLottery}></NextSection>
+        <NextSection playerData={playerData} sendDataNextToLottery={sendDataNextToLottery}></NextSection>
         <FinishedSection playerData={playerData.data} dataGiveFromFinished={dataGiveFromFinished}></FinishedSection>
         <GetSection></GetSection>
         <ModalContent dataModal={dataModal.data} playerData={playerData.data}

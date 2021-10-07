@@ -7,6 +7,7 @@ import {
 import {COMMITMENT, CLUSTERS } from "./connection";
 import { SolletWalletAdapter } from "lib/wallets/sollet";
 import { PhantomWalletAdapter } from "lib/wallets/phantom";
+import { Coin98WalletAdapter } from "lib/wallets/coin98";
 
 const WALLET_LIST = ["sollet", "phantom"];
 const PROVIDER_URL = "https://www.sollet.io";
@@ -42,6 +43,7 @@ export const sendTxUsingExternalSignature = async (
 
 let sollet = new SolletWalletAdapter({provider: PROVIDER_URL, network: WalletAdapterNetwork.Devnet});
 let phantom = new PhantomWalletAdapter();
+let coin98 = new Coin98WalletAdapter();
 
 const connectToSolletWallet = () => {
   if (!sollet.connected) {
@@ -59,10 +61,21 @@ const connectToPhantomWallet = () => {
   }
 };
 
+const connectToCoin98Wallet = () => {
+  if (!coin98.connected) {
+    return coin98.connect() as Promise<void>;
+  } else {
+    return Promise.resolve();
+  }
+};
+
 export const UseWallet = async (adapterType: string): Promise<BaseMessageSignerWalletAdapter> => {
   if (adapterType === "sollet"){
     await connectToSolletWallet();
     return sollet;
+  } else if (adapterType ==="coin98") {
+    await connectToCoin98Wallet(); 
+    return coin98;
   } else {
     await connectToPhantomWallet();
     return phantom;

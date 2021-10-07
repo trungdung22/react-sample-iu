@@ -38,6 +38,7 @@ const Home: React.FC = () => {
 
   const [playerData, setPlayerData] = useState({
     data: {
+      is_connect : false,
       lamportUnit: 0,
       adapter_type: '',
       publicKey: '',
@@ -47,22 +48,21 @@ const Home: React.FC = () => {
   });
 
   const dataGiveFromHeader = (getDataHeader: any) => {
+    debugger
     setDataModal({
       data: {
         ...dataModal.data,
         show: true,
       }
     })
-  }
-
-  const dataGiveFromWallet = (getDataWallet: any) => {
-    if (getDataWallet.publicKey !== undefined && getDataWallet.publicKey === '') {
-      fetchPlayerAccount(getDataWallet.publicKey).then(item => {
+    if (getDataHeader.getDataHeader !== undefined && getDataHeader.publicKey !== '') {
+      fetchPlayerAccount(getDataHeader.publicKey).then(item => {
         setPlayerData({
           data: {
-            adapter_type: getDataWallet.adapter_type,
+            is_connect: getDataHeader.is_connect,
+            adapter_type: getDataHeader.adapter_type,
             lamportUnit: item.lamportUnit,
-            publicKey: getDataWallet.publicKey,
+            publicKey: getDataHeader.publicKey,
             balanceUSDT: item.balanceUSDT,
             balanceSOL: item.balanceSOL,
           }
@@ -71,10 +71,34 @@ const Home: React.FC = () => {
     }
   }
 
+  const dataGiveFromWallet = (getDataWallet: any) => {
+    debugger
+    if (getDataWallet.publicKey !== undefined && getDataWallet.publicKey !== '') {
+      fetchPlayerAccount(getDataWallet.publicKey).then(item => {
+        setPlayerData({
+          data: {
+            is_connect: getDataWallet.is_connect,
+            adapter_type: getDataWallet.adapter_type,
+            lamportUnit: item.lamportUnit,
+            publicKey: getDataWallet.publicKey,
+            balanceUSDT: item.balanceUSDT,
+            balanceSOL: item.balanceSOL,
+          }
+        })
+      });
+      setDataModal({
+        data: {
+          ...dataModal.data,
+          show: false,
+        }
+      })
+    }
+  }
+
   return (
     <>
       <Star></Star>
-      <Header dataGiveFromHeader={dataGiveFromHeader}></Header>
+      <Header playerData={playerData.data} dataGiveFromHeader={dataGiveFromHeader}></Header>
       <div className={`${classes.root}`}>
         <div className={`${classes.container}`}>
           <ul className={`${classes.face}`}>
@@ -84,7 +108,7 @@ const Home: React.FC = () => {
           <div className={`${classes.content}`}>
             <Title text={['We start', <br />, 'the next Lottery', <br />, 'generation']}></Title>
             <p className={`${classes.text}`}>The first crosschain Lottery ever<br className="sp-768" /> powered by Solana</p>
-            <DefaultButon text={'Connect Wallet'} small="small" connect={IS_CONNECT} onClick={() => !IS_CONNECT ? setDataModal({ data: { ...dataModal.data, show: true } }) : ''}></DefaultButon>
+            <DefaultButon text={'Connect Wallet'} small="small" connect={playerData.data.is_connect} onClick={() => !playerData.data.is_connect ? setDataModal({ data: { ...dataModal.data, show: true } }) : ''}></DefaultButon>
           </div>
         </div>
       </div>

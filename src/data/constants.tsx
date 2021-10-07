@@ -1,2 +1,2 @@
 export const IS_CONNECT = false;
-export const HOST_NAME = "http://localhost"
+export const HOST_NAME = ""

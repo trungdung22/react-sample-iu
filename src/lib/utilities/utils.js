@@ -1,7 +1,6 @@
 
-import { connectAccount } from "lib/program/lottery-commands";
-
-const HOST = "http://localhost:8080"
+import { getBalance } from "lib/program/lottery-commands";
+import { IS_CONNECT, HOST_NAME } from 'data/constants';
 
 export const convertLamport = async (lamports) => {
     const requestOptions = {
@@ -10,7 +9,7 @@ export const convertLamport = async (lamports) => {
             'Content-Type': 'application/json',
         }
     };
-    const response = await fetch(`api/rate-converter?lamports=${lamports}`, requestOptions);
+    const response = await fetch(`${HOST_NAME}/api/rate-converter?lamports=${lamports}`, requestOptions);
     const data = await response.json();
     return { usdt: data["usdt"], sol: data["sol"] };
 }
@@ -22,7 +21,7 @@ export const priceTicket = async () => {
             'Content-Type': 'application/json',
         }
     };
-    const response = await fetch(`/api/price-per-ticket`, requestOptions);
+    const response = await fetch(`${HOST_NAME}/api/price-per-ticket`, requestOptions);
     const data = await response.json();
     return { lamports: data["lamports"], usdt: data["usdt"], sol: data["sol"] };
 }
@@ -41,7 +40,7 @@ export const insertBulkTicket = async (programId, playerPubkey, tickets) => {
         })
         
     };
-    const response = await fetch(`/api/ticket/insert-bulk`, requestOptions);
+    const response = await fetch(`${HOST_NAME}/api/ticket/insert-bulk`, requestOptions);
     return response;
 }
 
@@ -52,24 +51,28 @@ export const getGameBoardInfo = async () => {
             'Content-Type': 'application/json',
         }
     };
-    const response = await fetch(`/api/game-info`, requestOptions);
+    const response = await fetch(`${HOST_NAME}/api/game-info`, requestOptions);
     const data = await response.json();
     return data;
 }
 
-export const connectPlayerAccount = async () => {
-    const playerPrivateKey = "216,13,81,214,163,57,189,23,162,68,225,126,69,177,228,11,32,225,197,239,244,31,45,197,223,159,69,171,224,163,251,40,17,219,128,52,170,252,166,80,143,176,250,255,57,115,193,182,214,81,97,220,123,48,39,128,254,62,60,186,17,133,76,48"
-    const {
-        publicKey,
-        balance
-    } = await connectAccount(playerPrivateKey)
+export const fetchPlayerAccount = async (publicKey) => {
+    if (publicKey === undefined || publicKey === '') {
+        return {
+            balanceUSDT: 0,
+            balanceSOL: 0, 
+            lamportUnit: 0,
+            publicKey: ''
+        };
+    }
+    const balance = await getBalance(publicKey)
 
     const balanceConvert = await convertLamport(balance);
     const ticketPrice = await priceTicket()
     return {
-        privateKey: playerPrivateKey, publicKey: publicKey,
         balanceUSDT: balanceConvert['usdt'],
         balanceSOL: balanceConvert['sol'], 
-        lamportUnit: ticketPrice['lamports']
+        lamportUnit: ticketPrice['lamports'],
+        publicKey: publicKey
     };
 }

@@ -28,11 +28,13 @@ const Second: React.FC<Props> = ({dataGiveSecond, dataSendSecond, playerData}) =
     })
   }
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    debugger
+    const total = event.target.value !== '' ? data.data.unit * parseFloat(event.target.value) : 0;
     setData({
       data: {
         ...data.data,
         ticketCount: event.target.value !== '' ? parseInt(event.target.value) : 0,
-        price: event.target.value !== '' ? data.data.unit * parseInt(event.target.value) : 0,
+        price: total,
         tickets: event.target.value !== '' ? Array(parseInt(event.target.value)).fill(0).map(() => Array(6).fill(0).map(() => Math.floor(Math.random() * 45) + 1)) : [Array()]
       }
     })
@@ -92,7 +94,7 @@ const Second: React.FC<Props> = ({dataGiveSecond, dataSendSecond, playerData}) =
       <div className={`${classes.footer}`}>
           <div className={`${classes.totalPay}`}>
             <p className="text">You pay</p>
-            <p className="price">~ {data.data.price.toFixed(2)} SOL</p>
+            <p className="price">~ {data.data.price.toFixed(4)} SOL</p>
           </div>
           <ul className={`${classes.listButton}`}>
             <li onClick={handleComfirm}>Buy instantly</li>

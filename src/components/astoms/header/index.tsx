@@ -6,11 +6,19 @@ import { isConnect } from 'data/db';
 import { Link } from 'react-router-dom';
 
 type Props = {
+  playerData: any,
   dataGiveFromHeader: (dataGiveFromHeader: any) => void,
 }
-const Header: React.FC<Props> = ({dataGiveFromHeader}) => {
+const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
   const classes = useStyles();
   const history = useHistory();
+  const [dataWalletSendLottery, setDataWalletSendLottery] = useState({
+    data: {
+      publicKey: '',
+      is_connect: false,
+      adapter_type: '',
+    }
+  });
   const [offset, setOffset] = useState(false);
   let curScroll = 0;
   useEffect(() => {
@@ -23,6 +31,23 @@ const Header: React.FC<Props> = ({dataGiveFromHeader}) => {
       }
     }
   }, []);
+
+  useEffect(() => {
+    dataGiveFromHeader(dataWalletSendLottery.data);
+  }, [dataWalletSendLottery])
+
+  const dataGiveWallet = (data: any) => {
+    debugger
+    setDataWalletSendLottery({
+        data: {
+          is_connect: data.is_connect, 
+          publicKey: data.publicKey,
+          adapter_type: data.adapter_type
+        }
+      }
+    )
+  }
+
   return (
     <header className={`${classes.root} ${offset ? 'active' : ''}`}>
       <div className={`${classes.container}`}>
@@ -33,7 +58,7 @@ const Header: React.FC<Props> = ({dataGiveFromHeader}) => {
             <li><Link to="/">Millipad</Link></li>
             <li><Link to="/">NFT Tickets</Link></li>
           </ul>
-          <DefaultButon text="Connect Wallet" connect={isConnect} onClick={() => !isConnect ? dataGiveFromHeader(true) : ''}></DefaultButon>
+          <DefaultButon text="Connect Wallet" connect={playerData.is_connect} onClick={() => !isConnect ? dataGiveFromHeader(true) : ''}></DefaultButon>
         </div>
       </div>
     </header>

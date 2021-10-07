@@ -14,13 +14,14 @@ type Props = {
   dataModal: any,
   playerData: any,
   dataGiveFromModal: (getDataModalTolottery: any) => void,
+  dataGiveFromWallet: (getDataWalletTolottery: any) => void,
 }
 
-const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal}) => {
+const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal, dataGiveFromWallet}) => {
   const classes = useStyles();
   const [dataSendLottery, setDataSendLottery] = useState({
     data: {
-      is_connect: dataModal.is_connect,
+      is_connect: playerData.is_connect,
       show: false,
       first: false,
       second: false,
@@ -39,13 +40,20 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
     }
   });
 
+  const [dataWalletSendLottery, setDataWalletSendLottery] = useState({
+    data: {
+      publicKey: '',
+      is_connect: false,
+      adapter_type: '',
+    }
+  });
+
   const [dataTicketModal, setDataTicketModal] = useState({
     data: {
     }
   })
 
   const dataGiveFirst = (getDataFirst: any) => {
-    debugger
     setDataSendLottery({
       data: {
         next_round: {
@@ -78,7 +86,6 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
     })
   }
   const dataGiveSecond = (getDataSecond: any) => {
-    debugger
     setDataSendLottery({
       data: {
         next_round: {
@@ -111,7 +118,6 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
     })
   }
   const dataGiveThird = (getDataThird: any) => {
-    debugger
     let flag_submit = getDataThird.five; 
     setDataSendLottery({
       data: {
@@ -143,7 +149,6 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
     })
   }
   const dataGiveFour = (getDataFour: any) => {
-    debugger
     setDataSendLottery({
       data: {
         next_round: {
@@ -174,7 +179,6 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
   }
   
   const dataGiveFive = (getDataFive: any) => {
-    debugger
     setDataSendLottery({
       data: {
         next_round: {
@@ -197,7 +201,6 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
     })
   }
   const dataGiveViewTicket = (getDataViewTicket: boolean) => {
-    debugger
     setDataSendLottery({
       data: {
         next_round: {
@@ -220,10 +223,26 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
     })
   }
 
+  const dataGiveWallet = (data: any) => {
+    debugger
+    setDataWalletSendLottery({
+        data: {
+          is_connect: data.is_connect, 
+          publicKey: data.publicKey,
+          adapter_type: data.adapter_type
+        }
+      }
+    )
+  }
+  
   useEffect(() => {
     dataGiveFromModal(dataSendLottery.data);
   }, [dataSendLottery])
   
+  useEffect(() => {
+    dataGiveFromWallet(dataWalletSendLottery.data);
+  }, [dataWalletSendLottery])
+
   return (
     <>
       {dataModal.show && !dataModal.submit ? (
@@ -247,10 +266,10 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
             your_ticket: [],
           })}></div>
           <div className={`${classes.content}`}>
-            <div className={`${classes.header} ${(dataModal.view_ticket || dataModal.view_your) && dataModal.is_connect ? 'hasID' : ''}`}>
-              {dataModal.first && dataModal.is_connect ? (<p className="title">Buy Tickets</p>) : ''}
-              {dataModal.second && dataModal.is_connect ? (<p className="title">Buy Tickets</p>) : ''}
-              {dataModal.third && dataModal.is_connect ? (
+            <div className={`${classes.header} ${(dataModal.view_ticket || dataModal.view_your) && playerData.is_connect ? 'hasID' : ''}`}>
+              {dataModal.first && playerData.is_connect ? (<p className="title">Buy Tickets</p>) : ''}
+              {dataModal.second && playerData.is_connect ? (<p className="title">Buy Tickets</p>) : ''}
+              {dataModal.third && playerData.is_connect ? (
                 <p className="title">
                   <span 
                     onClick={() => setDataSendLottery({
@@ -281,7 +300,7 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
                   Edit numbers
                 </p>
               ) : ''}
-              {dataModal.four && dataModal.is_connect ? (
+              {dataModal.four && playerData.is_connect ? (
                 <p className="title">
                   <span 
                     onClick={() => setDataSendLottery({
@@ -290,7 +309,7 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
                           next_id: -1,
                           your_ticket: []
                         },
-                        is_connect: dataModal.is_connect,
+                        is_connect: playerData.is_connect,
                         show: true,
                         first: false,
                         second: false,
@@ -312,7 +331,7 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
                   Edit numbers
                 </p>
               ) : ''}
-              {dataModal.five && dataModal.is_connect ? (
+              {dataModal.five && playerData.is_connect ? (
                 <p className="title">
                   <span 
                     onClick={() => setDataSendLottery({
@@ -321,7 +340,7 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
                           next_id: -1,
                           your_ticket: []
                         },
-                        is_connect: dataModal.is_connect,
+                        is_connect: playerData.is_connect,
                         show: true,
                         first: false,
                         second: true,
@@ -343,19 +362,19 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
                   Edit numbers
                 </p>
               ) : ''}
-              {dataModal.view_ticket && dataModal.is_connect ? (
+              {dataModal.view_ticket && playerData.is_connect ? (
                 <p className="title">
                   Round
-                  <span>#15</span>
+                  <span>#{dataModal.next_round.next_id}</span>
                 </p>
               ) : ''}
-              {dataModal.view_your && dataModal.is_connect ? (
+              {dataModal.view_your && playerData.is_connect ? (
                 <p className="title">
                   Round
-                  <span>#15</span>
+                  <span>#{dataModal.next_round.next_id}</span>
                 </p>
               ) : ''}
-              {!dataModal.is_connect ? (
+              {!playerData.is_connect ? (
                 <p className="title">Connect Wallet</p>
               ) : ''}
               <p className="close" onClick={() => dataGiveFromModal({
@@ -377,14 +396,14 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
                 your_ticket: [],
               })}><img src="assets/common/icon_close.svg" alt="close"/></p>
             </div>
-            {dataModal.first && dataModal.is_connect ? (<First dataGiveFirst={dataGiveFirst} playerData={playerData}></First>) : ''}
-            {dataModal.second && dataModal.is_connect ? (<Second dataGiveSecond={dataGiveSecond} dataSendSecond={dataTicketModal} playerData={playerData}></Second>) : ''}
-            {dataModal.third && dataModal.is_connect ? (<Third dataGiveThird={dataGiveThird} dataSendThird={dataTicketModal}></Third>) : ''}
-            {dataModal.four && dataModal.is_connect ? (<Four dataGiveFour={dataGiveFour} dataSendFour={dataTicketModal}></Four>) : ''}
-            {dataModal.five && dataModal.is_connect ? (<Five dataGiveFive={dataGiveFive} dataSendFive={dataTicketModal}></Five>) : ''}
-            {dataModal.view_ticket && dataModal.is_connect ? (<ViewTicket dataGiveViewTicket={dataGiveViewTicket} dataSendViewTicket={dataModal}></ViewTicket>) : ''}
-            {dataModal.view_your && dataModal.is_connect ? (<ViewYour dataSendViewYour={dataModal}></ViewYour>) : ''}
-            {!dataModal.is_connect ? (<ConnectWallet></ConnectWallet>) : ''}
+            {dataModal.first && playerData.is_connect ? (<First dataGiveFirst={dataGiveFirst} playerData={playerData}></First>) : ''}
+            {dataModal.second && playerData.is_connect ? (<Second dataGiveSecond={dataGiveSecond} dataSendSecond={dataTicketModal} playerData={playerData}></Second>) : ''}
+            {dataModal.third && playerData.is_connect ? (<Third dataGiveThird={dataGiveThird} dataSendThird={dataTicketModal}></Third>) : ''}
+            {dataModal.four && playerData.is_connect ? (<Four dataGiveFour={dataGiveFour} dataSendFour={dataTicketModal}></Four>) : ''}
+            {dataModal.five && playerData.is_connect ? (<Five dataGiveFive={dataGiveFive} dataSendFive={dataTicketModal}></Five>) : ''}
+            {dataModal.view_ticket && playerData.is_connect ? (<ViewTicket dataGiveViewTicket={dataGiveViewTicket} dataSendViewTicket={dataModal}></ViewTicket>) : ''}
+            {dataModal.view_your && playerData.is_connect ? (<ViewYour dataSendViewYour={dataModal}></ViewYour>) : ''}
+            {!playerData.is_connect ? (<ConnectWallet dataGiveWallet={dataGiveWallet}></ConnectWallet>) : ''}
           </div>
         </div>
       ) : (
@@ -400,7 +419,7 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
               submit: false,
               flag_submit: false,
               view_ticket: false,
-              is_connect: dataModal.is_connect,
+              is_connect: playerData.is_connect,
               next_round: {
                 next_id: -1,
                 your_ticket: []
@@ -419,7 +438,7 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
                 submit: false,
                 flag_submit: false,
                 view_ticket: false,
-                is_connect: dataModal.is_connect,
+                is_connect: playerData.is_connect,
                 next_round: {
                   next_id: -1,
                   your_ticket: []

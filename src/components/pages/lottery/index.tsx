@@ -9,9 +9,9 @@ import { isConnect } from 'data/db';
 import Star from 'components/astoms/star';
 import Header from 'components/astoms/header';
 import Footer from 'components/astoms/footer';
-import { getGameBoardInfo, connectPlayerAccount, insertBulkTicket} from 'lib/utilities/utils';
+import { getGameBoardInfo, fetchPlayerAccount, insertBulkTicket } from 'lib/utilities/utils';
 import { buyBulkTicket } from 'lib/program/lottery-commands';
-
+import { HOST_NAME } from 'data/constants';
 
 const Lottery: React.FC = () => {
   const classes = useStyles();
@@ -37,13 +37,24 @@ const Lottery: React.FC = () => {
 
   const [playerData, setPlayerData] = useState({
     data: {
-      privateKey: '',
-      pubKey: '',
-      lamportUnit: 0, 
-      balanceUSDT: 0, 
+      is_connect: false,
+      adapter_type: '',
+      publicKey: '',
+      lamportUnit: 0,
+      balanceUSDT: 0,
       balanceSOL: 0,
     }
   });
+
+  const [nextPartyData, setNextPartyData] = useState({
+    data: {
+      view_ticket: false,
+      get_ticket: false,
+      next_id: 0,
+      created_time: new Date(),
+      your_tickets: [],
+    }
+  })
 
   const [partyData, setPartyData] = useState({
     data: {
@@ -57,31 +68,48 @@ const Lottery: React.FC = () => {
     }
   });
 
-  useEffect(()=> {
-    connectPlayerAccount().then(item => setPlayerData({
-      data: {
-        lamportUnit: item.lamportUnit,
-        privateKey: item.privateKey,
-        pubKey: item.publicKey,
-        balanceUSDT: item.balanceUSDT,
-        balanceSOL: item.balanceSOL,
-      }
-    }));
-  }, [])
+  useEffect(() => {
+    debugger
+    fetch(`${HOST_NAME}/api/next-game-info/${playerData.data.publicKey}`)
+      .then(async response => {
+        debugger
+        const response_data = await response.json();
 
-  useEffect(()=>{
+        // check for error response
+        if (!response.ok) {
+          // get error message from body or default to response statusText
+          const error = (response_data && response_data.message) || response.statusText;
+          return Promise.reject(error);
+        }
+        const round_no = response_data.result.round_no; 
+        const your_tickets = response_data.result.your_tickets;
+        const created_time = new Date(response_data.result.created_time);
+        debugger
+        setNextPartyData({
+          data: {
+            view_ticket: nextPartyData.data.view_ticket,
+            get_ticket: nextPartyData.data.get_ticket,
+            next_id: round_no,
+            created_time: created_time,
+            your_tickets: your_tickets
+          }
+        });
+      })
+  }, [playerData.data]);
+
+  useEffect(() => {
     getGameBoardInfo().then(item => setPartyData({
       data: {
         ...partyData.data,
         programId: item.programId,
-        ownerPubkey: item.ownerPubkey, 
-        gameStatus: item.gameStatus, 
-        gamePubkey: item.gamePubkey, 
-        gameBalanceSol: item.gameBalanceSOL, 
-        gameBalanceUSDT: item.gameBalanceUSDT, 
+        ownerPubkey: item.ownerPubkey,
+        gameStatus: item.gameStatus,
+        gamePubkey: item.gamePubkey,
+        gameBalanceSol: item.gameBalanceSOL,
+        gameBalanceUSDT: item.gameBalanceUSDT,
         gameRollNums: item.gameRollNums
       }
-   }));
+    }));
   }, [])
 
   const sendDataPartyToLottery = (getDataPartyTolottery: boolean) => {
@@ -115,6 +143,7 @@ const Lottery: React.FC = () => {
       }
     })
   }
+
   const dataGiveFromHeader = (getDataHeader: any) => {
     setDataModal({
       data: {
@@ -124,15 +153,41 @@ const Lottery: React.FC = () => {
     })
   }
 
+  const dataGiveFromWallet = (getDataWallet: any) => {
+    debugger
+    if (getDataWallet.is_connect) {
+      fetchPlayerAccount(getDataWallet.publicKey).then(item => setPlayerData({
+        data: {
+          adapter_type: getDataWallet.adapter_type,
+          is_connect: true,
+          lamportUnit: item.lamportUnit,
+          publicKey: getDataWallet.publicKey,
+          balanceUSDT: item.balanceUSDT,
+          balanceSOL: item.balanceSOL,
+        }
+      }));
+      setDataModal({
+        data: {
+          ...dataModal.data,
+          show: false,
+        }
+      })
+    } 
+  }
+
   const dataGiveFromModal = (getDataModalTolottery: any) => {
     debugger
     setDataModal({
       data: getDataModalTolottery,
     })
-    if(getDataModalTolottery.flag_submit && getDataModalTolottery.your_ticket.length > 0) {
+    if (getDataModalTolottery.flag_submit && getDataModalTolottery.your_ticket.length > 0) {
       console.log("prepare to submit ticket");
-      buyBulkTicket(partyData.data.programId, getDataModalTolottery.your_ticket, 
-        playerData.data.privateKey, playerData.data.lamportUnit, partyData.data.gamePubkey, partyData.data.ownerPubkey)
+      buyBulkTicket(partyData.data.programId,
+        getDataModalTolottery.your_ticket,
+        playerData.data.lamportUnit,
+        partyData.data.gamePubkey,
+        partyData.data.ownerPubkey,
+        playerData.data.adapter_type)
         .then(async results => {
           setDataModal({
             data: {
@@ -153,26 +208,27 @@ const Lottery: React.FC = () => {
               },
             }
           });
-          insertBulkTicket(partyData.data.programId, playerData.data.pubKey, results);
-        }).catch( error => alert(error));
+          insertBulkTicket(partyData.data.programId, playerData.data.publicKey, results);
+        }).catch(error => console.log(error));
     }
   }
-  
+
 
   return (
     <>
       <Star></Star>
-      <Header dataGiveFromHeader={dataGiveFromHeader}></Header>
+      <Header playerData={playerData} dataGiveFromHeader={dataGiveFromHeader}></Header>
       <div className={`${classes.root}`}>
-          <PartySection partyData={partyData.data} sendDataPartyToLottery={sendDataPartyToLottery}></PartySection>
-          <NextSection sendDataNextToLottery={sendDataNextToLottery}></NextSection>
-          <FinishedSection dataGiveFromFinished={dataGiveFromFinished}></FinishedSection>
-          <GetSection></GetSection>
-          <ModalContent dataModal={dataModal.data} playerData={playerData.data} dataGiveFromModal={dataGiveFromModal}></ModalContent>
+        <PartySection partyData={partyData.data} sendDataPartyToLottery={sendDataPartyToLottery}></PartySection>
+        <NextSection playerData={nextPartyData.data} sendDataNextToLottery={sendDataNextToLottery}></NextSection>
+        <FinishedSection playerData={playerData.data} dataGiveFromFinished={dataGiveFromFinished}></FinishedSection>
+        <GetSection></GetSection>
+        <ModalContent dataModal={dataModal.data} playerData={playerData.data}
+          dataGiveFromModal={dataGiveFromModal} dataGiveFromWallet={dataGiveFromWallet}></ModalContent>
       </div>
       <Footer></Footer>
     </>
-    
+
   )
 }
 

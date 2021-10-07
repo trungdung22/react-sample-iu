@@ -1,4 +1,5 @@
-export const isConnect = true;
+export const isConnect = false;
+export const HOST_NAME = "http://localhost"
 export const dataTest = {
   "round_history": [
     {

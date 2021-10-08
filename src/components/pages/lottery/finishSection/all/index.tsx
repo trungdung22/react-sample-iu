@@ -133,7 +133,7 @@ const All: React.FC<Props> = ({ dataSendToAll, dataGiveAll }) => {
                   <li>
                     <span>Burn</span>
                     <span>{data['info'][data.id]['burn_pool_sol']} SOL</span>
-                    <span>'</span>
+                    <span><br/></span>
                   </li>
                 </ul>
                 <p className="totalMatch">Total players this round: <span>9786</span></p>

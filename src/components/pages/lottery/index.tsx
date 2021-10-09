@@ -197,13 +197,34 @@ const Lottery: React.FC = () => {
           balanceSOL: item.balanceSOL,
         }
       }));
-      setDataModal({
-        data: {
-          ...dataModal.data,
-          show: false,
-        }
-      })
+      resetModalData();
     } 
+  }
+
+  const resetModalData = () => {
+    setDataModal({
+      data: {
+        is_connect: dataModal.data.is_connect,
+        show: false,
+        first: false,
+        second: false,
+        third: false,
+        four: false,
+        view_ticket: false,
+        view_your: false,
+        submit: false,
+        flag_submit: false,
+        your_ticket: [],
+        history_round: {
+          id: -1, 
+          your_ticket: []
+        },
+        next_round: {
+          next_id: -1,
+          your_ticket: []
+        },
+      }
+    })
   }
 
   const dataGiveFromModal = (getDataModalTolottery: any) => {
@@ -218,36 +239,40 @@ const Lottery: React.FC = () => {
         partyData.data.ownerPubkey,
         playerData.data.adapter_type)
         .then(async results => {
+          resetModalData();
+          try {
+            await insertBulkTicket(partyData.data.programId, playerData.data.publicKey, results);
+            
+            setDataModal({
+              data: {
+                ...dataModal.data,
+                show: true,
+                flag_submit: true, 
+                submit: true
+              }
+            })
+          } catch (error) {
+            setDataModal({
+              data: {
+                ...dataModal.data,
+                show: true,
+                submit: true,
+                flag_submit: false
+              }
+            })
+          }
+          
+        }).catch(error => {
+          debugger
+          resetModalData();
           setDataModal({
             data: {
-              is_connect: isConnect,
-              show: false,
-              first: false,
-              second: false,
-              third: false,
-              four: false,
-              view_ticket: false,
-              view_your: false,
-              submit: false,
-              flag_submit: false,
-              your_ticket: [],
-              history_round: {
-                id: -1, 
-                your_ticket: []
-              },
-              next_round: {
-                next_id: -1,
-                your_ticket: []
-              },
+              ...dataModal.data,
+              show: true,
+              submit: true,
+              flag_submit: false
             }
-          });
-          insertBulkTicket(partyData.data.programId, playerData.data.publicKey, results);
-          
-
-          <ViewSubmit dataSendViewSubmit={true}></ViewSubmit>
-
-        }).catch(error => {
-          <ViewSubmit dataSendViewSubmit={false}></ViewSubmit>
+          })
           console.log(error)
         });
     }

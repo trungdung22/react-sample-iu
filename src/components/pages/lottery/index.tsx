@@ -68,8 +68,7 @@ const Lottery: React.FC = () => {
     }
   });
 
-  useEffect(() => {
-    debugger
+  const fetchNextGame = () => {
     fetch(`${HOST_NAME}/api/next-game-info/${playerData.data.publicKey}`)
       .then(async response => {
         debugger
@@ -95,6 +94,14 @@ const Lottery: React.FC = () => {
           }
         });
       })
+  }
+
+  useEffect(() => {
+    fetchNextGame()
+  }, []);
+
+  useEffect(() => {
+    fetchNextGame()
   }, [playerData.data]);
 
   useEffect(() => {

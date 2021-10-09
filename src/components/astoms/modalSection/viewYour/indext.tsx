@@ -9,14 +9,12 @@ const ViewYour: React.FC<Props> = ({dataSendViewYour}) => {
   ]
   const countWinningTicket = () => {
     let result = 0;
-    debugger
-    const roll_nums = dataSendViewYour.your_ticket.player_tickets.map(item => item.roll_nums);
-    roll_nums.forEach((el: []) => {
-      debugger
-      if (parseInt(el.join('')) === parseInt(dataSendViewYour.your_ticket.roll_nums.join(''))){
+    const winningType = ['Match3', 'Match4', 'Match5', 'Match6']
+    const roll_nums = dataSendViewYour.your_ticket.player_tickets.map(item => item.reward_type);
+    roll_nums.forEach((el: string) => {
+      if (el in winningType){
         result++;
       }
-      
     })
     return result;
   }

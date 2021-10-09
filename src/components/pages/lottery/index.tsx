@@ -28,6 +28,10 @@ const Lottery: React.FC = () => {
       submit: false,
       flag_submit: false,
       your_ticket: [],
+      history_round: {
+        id: -1, 
+        your_ticket: []
+      },
       next_round: {
         next_id: -1,
         your_ticket: []
@@ -52,6 +56,7 @@ const Lottery: React.FC = () => {
       get_ticket: false,
       next_id: 0,
       created_time: new Date(),
+      closed_time : new Date(),
       your_tickets: [],
     }
   })
@@ -71,7 +76,6 @@ const Lottery: React.FC = () => {
   const fetchNextGame = () => {
     fetch(`${HOST_NAME}/api/next-game-info/${playerData.data.publicKey}`)
       .then(async response => {
-        debugger
         const response_data = await response.json();
 
         // check for error response
@@ -83,13 +87,14 @@ const Lottery: React.FC = () => {
         const round_no = response_data.result.round_no; 
         const your_tickets = response_data.result.your_tickets;
         const created_time = new Date(response_data.result.created_time);
-        debugger
+        const closed_time = new Date(created_time.getTime() + 24 * 60 * 60 * 1000);
         setNextPartyData({
           data: {
             view_ticket: nextPartyData.data.view_ticket,
             get_ticket: nextPartyData.data.get_ticket,
             next_id: round_no,
             created_time: created_time,
+            closed_time: closed_time,
             your_tickets: your_tickets
           }
         });
@@ -140,7 +145,6 @@ const Lottery: React.FC = () => {
     })
   }
   const dataGiveFromFinished = (getDataFinished: any) => {
-    debugger
     setDataModal({
       data: {
         ...dataModal.data,
@@ -158,6 +162,20 @@ const Lottery: React.FC = () => {
         show: true,
       }
     })
+    if (getDataHeader.getDataHeader !== undefined && getDataHeader.publicKey !== '') {
+      fetchPlayerAccount(getDataHeader.publicKey).then(item => {
+        setPlayerData({
+          data: {
+            is_connect: getDataHeader.is_connect,
+            adapter_type: getDataHeader.adapter_type,
+            lamportUnit: item.lamportUnit,
+            publicKey: getDataHeader.publicKey,
+            balanceUSDT: item.balanceUSDT,
+            balanceSOL: item.balanceSOL,
+          }
+        })
+      });
+    }
   }
 
   const dataGiveFromWallet = (getDataWallet: any) => {
@@ -183,12 +201,10 @@ const Lottery: React.FC = () => {
   }
 
   const dataGiveFromModal = (getDataModalTolottery: any) => {
-    debugger
     setDataModal({
       data: getDataModalTolottery,
     })
     if (getDataModalTolottery.flag_submit && getDataModalTolottery.your_ticket.length > 0) {
-      console.log("prepare to submit ticket");
       buyBulkTicket(partyData.data.programId,
         getDataModalTolottery.your_ticket,
         playerData.data.lamportUnit,
@@ -209,6 +225,10 @@ const Lottery: React.FC = () => {
               submit: false,
               flag_submit: false,
               your_ticket: [],
+              history_round: {
+                id: -1, 
+                your_ticket: []
+              },
               next_round: {
                 next_id: -1,
                 your_ticket: []

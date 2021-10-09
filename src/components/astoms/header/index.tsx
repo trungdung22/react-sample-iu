@@ -37,7 +37,6 @@ const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
   }, [dataWalletSendLottery])
 
   const dataGiveWallet = (data: any) => {
-    debugger
     setDataWalletSendLottery({
         data: {
           is_connect: data.is_connect, 

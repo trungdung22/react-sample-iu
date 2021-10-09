@@ -22,13 +22,11 @@ const FinishedSection: React.FC<Props> = ({playerData, dataGiveFromFinished}) =>
   }
   
   const dataGiveFromYours = (getDataFromYours: any) => {
-    debugger
     setDataYours(getDataFromYours)
     setDataBackYour(false)
   }
 
   const dataGiveAll = (getDataAll: any) => {
-    debugger
     if (getDataAll.back_your) {
       setDataBackYour(getDataAll.back_your);
     } else {

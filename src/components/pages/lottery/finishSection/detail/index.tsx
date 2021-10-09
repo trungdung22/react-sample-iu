@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useStyles from './styles';
 import { dataTest } from 'data/db';
+import {prettyPrintTime, numberWithCommas} from '../../../../../lib/utilities/format'
 type Props = {
     dataSendToDetail: any,
   dataGiveDetail: (getDataDetail: any) => void
@@ -45,11 +46,7 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
         </div>
         <p className={`${classes.infoRound}`}>
             <span>{`#${data.id}`}</span>
-            {`${monthName[new Date(dataSendToDetail.createdAt).getMonth()]}
-            ${new Date(dataSendToDetail.createdAt).getDate()}, 
-            ${new Date(dataSendToDetail.createdAt).getFullYear()}, 
-            ${formatTime(new Date(dataSendToDetail.createdAt).getHours())}:${formatTime(new Date(dataSendToDetail.createdAt).getMinutes())} 
-            ${(new Date(dataSendToDetail.createdAt).getHours()) >= 12 ? 'PM' : 'AM' }`}
+            {prettyPrintTime(new Date(dataSendToDetail.createdAt))}
         </p>
       </div>
       <div className={`${classes.body}`}>
@@ -74,7 +71,7 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
           <div className={`${classes.infoPrize}`}>
             <div className="prizeTop">
               <p className="text">Prize pot</p>
-              <p className="total">{`~$${dataSendToDetail.total_pool_usdt}`}</p>
+              <p className="total">{`~$${numberWithCommas(dataSendToDetail.total_pool_usdt)}`}</p>
               <p className="unit">${dataSendToDetail.total_pool_sol} SOL</p>
             </div>
             <ul className="prizeMatch">
@@ -104,7 +101,7 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
                 <span><br/></span>
               </li>
             </ul>
-            <p className="totalMatch">Total players this round: <span>9786</span></p>
+            <p className="totalMatch">Total players this round: <span>{dataSendToDetail.total_player}</span></p>
           </div>
         </div>
       </div>

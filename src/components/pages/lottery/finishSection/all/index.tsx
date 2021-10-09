@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import useStyles from './styles';
 import { HOST_NAME } from 'data/constants';
+import { numberWithCommas} from '../../../../../lib/utilities/format';
+
 type Props = {
   dataSendToAll: any,
   dataGiveAll: (getDataAll: any) => void
@@ -18,7 +20,6 @@ const All: React.FC<Props> = ({ dataSendToAll, dataGiveAll }) => {
     return time < 10 ? '0' + time : time;
   }
   const handleViewTicket = (event: React.MouseEvent) => {
-    debugger
     if (dataSendToAll.your_tickets.length > 0) {
       dataGiveAll({
         your_ticket: dataSendToAll,
@@ -28,7 +29,6 @@ const All: React.FC<Props> = ({ dataSendToAll, dataGiveAll }) => {
   }
 
   useEffect(() => {
-    debugger
     fetch(`${HOST_NAME}/api/game-history-all`)
       .then(async response => {
         const data = await response.json();
@@ -39,7 +39,6 @@ const All: React.FC<Props> = ({ dataSendToAll, dataGiveAll }) => {
           const error = (data && data.message) || response.statusText;
           return Promise.reject(error);
         }
-        debugger
         setData({
           id: 0,
           info: JSON.parse(JSON.stringify(data.results))
@@ -106,7 +105,7 @@ const All: React.FC<Props> = ({ dataSendToAll, dataGiveAll }) => {
                 <div className="prizeTop">
 
                   <p className="text">Prize pot</p>
-                  <p className="total">{`~$${data['info'][data.id]['total_pool_usdt']}`}</p>
+                  <p className="total">{`~$${numberWithCommas(data['info'][data.id]['total_pool_usdt'])}`}</p>
                   < p className="unit">{data['info'][data.id]['total_pool_sol']} SOL</p>
                 </div>
                 <ul className="prizeMatch">
@@ -136,7 +135,7 @@ const All: React.FC<Props> = ({ dataSendToAll, dataGiveAll }) => {
                     <span><br/></span>
                   </li>
                 </ul>
-                <p className="totalMatch">Total players this round: <span>9786</span></p>
+                <p className="totalMatch">Total players this round: <span>{data['info'][data.id]['total_player']}</span></p>
               </div>
             ) : ''}
 

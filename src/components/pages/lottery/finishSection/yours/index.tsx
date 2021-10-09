@@ -11,7 +11,6 @@ const Yours: React.FC<Props> = ({playerData, dataGiveFromYours}) => {
   const [data, setData] = useState([]);
   
   useEffect(()=>{
-    debugger
     if (playerData.publicKey !== undefined && playerData.publicKey !== '') {
       fetch(`${HOST_NAME}/api/game-history/${playerData.publicKey}`)
       .then(async response => {
@@ -37,7 +36,7 @@ const Yours: React.FC<Props> = ({playerData, dataGiveFromYours}) => {
       <li key={el.id} onClick={() => dataGiveFromYours(el)}>
         <p>{el.game_no}</p>
         <p>
-          <span>{`${formatTime(date.getDate())} thg ${date.getMonth()}, ${date.getFullYear()}`}</span>
+          <span>{`${formatTime(date.getDate())} thg ${date.getMonth() + 1}, ${date.getFullYear()}`}</span>
           <span>{`${formatTime(date.getHours())}:${formatTime(date.getMinutes())}`}</span>
         </p>
         <p>

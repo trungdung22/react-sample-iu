@@ -30,7 +30,6 @@ const First: React.FC<Props> = ({playerData, dataGiveFirst}) => {
 
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (parseInt(event.target.value) > 0) {
-      debugger
       const price = event.target.value !== '' ? data.data.unit * parseInt(event.target.value) : 0;
       setData({
         data: {
@@ -79,7 +78,7 @@ const First: React.FC<Props> = ({playerData, dataGiveFirst}) => {
       <div className={`${classes.footer}`}>
           <div className={`${classes.totalPay}`}>
             <p className="text">You pay</p>
-            <p className="price">~{data.data.price.toFixed(4)} SOL</p>
+            <p className="price">~{data.data.price.toFixed(3)} SOL</p>
           </div>
           <ul className={`${classes.listButton}`}>
             <li onClick={handleSendData}>Approve</li>

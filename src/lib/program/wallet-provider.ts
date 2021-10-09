@@ -21,7 +21,6 @@ export const sendTxUsingExternalSignature = async (
   wallet: BaseMessageSignerWalletAdapter
 ) => {
   let tx = new Transaction().add(...instructions);
-  debugger
   tx.setSigners(
     ...(feePayer
       ? [(feePayer as Account).publicKey, wallet.publicKey]

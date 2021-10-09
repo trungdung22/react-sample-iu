@@ -49,13 +49,11 @@ export const buyBulkTicket = async (programIdStr, ticketSetNumbers, buyLamports,
     const programId = new PublicKey(programIdStr);
     const gamePubkey = new PublicKey(gamePubkeyStr);
     const gameOwnerPubkey = new PublicKey(gameOwnerPubkeyStr);
-    debugger
     const playerWallet = await UseWallet(adapter_type);
     const rentAmount = await connection.getMinimumBalanceForRentExemption(TICKET_ACCOUNT_DATA_LAYOUT.span, 'singleGossip');
     let ticketKeyArr = [];
     let ticketAccounts = [];
     let trasactionIxs = []
-    debugger
     for(let i=0; i < ticketSetNumbers.length; i++) {
 
         const ticketAccount = new Account();

@@ -12,6 +12,7 @@ import Footer from 'components/astoms/footer';
 import { getGameBoardInfo, fetchPlayerAccount, insertBulkTicket } from 'lib/utilities/utils';
 import { buyBulkTicket } from 'lib/program/lottery-commands';
 import { HOST_NAME } from 'data/constants';
+import ViewSubmit from 'components/astoms/modalSection/ViewSubmit';
 
 const Lottery: React.FC = () => {
   const classes = useStyles();
@@ -236,7 +237,14 @@ const Lottery: React.FC = () => {
             }
           });
           insertBulkTicket(partyData.data.programId, playerData.data.publicKey, results);
-        }).catch(error => console.log(error));
+          
+
+          <ViewSubmit dataSendViewSubmit={true}></ViewSubmit>
+
+        }).catch(error => {
+          <ViewSubmit dataSendViewSubmit={false}></ViewSubmit>
+          console.log(error)
+        });
     }
   }
 

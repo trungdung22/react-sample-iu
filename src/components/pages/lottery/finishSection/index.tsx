@@ -27,6 +27,7 @@ const FinishedSection: React.FC<Props> = ({playerData, dataGiveFromFinished}) =>
   }
 
   const dataGiveAll = (getDataAll: any) => {
+    debugger
     if (getDataAll.back_your) {
       setDataBackYour(getDataAll.back_your);
     } else {

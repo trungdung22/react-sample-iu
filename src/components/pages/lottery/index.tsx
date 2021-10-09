@@ -145,12 +145,17 @@ const Lottery: React.FC = () => {
     })
   }
   const dataGiveFromFinished = (getDataFinished: any) => {
+    debugger
     setDataModal({
       data: {
         ...dataModal.data,
         show: true,
         view_your: getDataFinished.view_your,
         your_ticket: getDataFinished.your_ticket,
+        history_round: {
+          id: getDataFinished.game_no, 
+          your_ticket: getDataFinished.your_ticket
+        }
       }
     })
   }

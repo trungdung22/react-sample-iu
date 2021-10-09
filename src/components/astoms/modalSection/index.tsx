@@ -371,7 +371,7 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
               {dataModal.view_your && playerData.is_connect ? (
                 <p className="title">
                   Round
-                  <span>#{dataModal.next_round.next_id}</span>
+                  <span>#{dataModal.your_ticket.game_no}</span>
                 </p>
               ) : ''}
               {!playerData.is_connect ? (

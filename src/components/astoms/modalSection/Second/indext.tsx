@@ -21,14 +21,16 @@ const Second: React.FC<Props> = ({dataGiveSecond, dataSendSecond, playerData}) =
     setData({
       data: {
         ...data.data,
-        tickets: Array(99).fill(0).map(() => Array(6).fill(0).map(() => Math.floor(Math.random() * 45) + 1)),
-        ticketCount: 99,
-        price: data.data.unit * 99,
+        tickets: Array(6).fill(0).map(() => Array(6).fill(0).map(() => Math.floor(Math.random() * 45) + 1)),
+        ticketCount: 6,
+        price: data.data.unit * 6,
       }
     })
   }
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    debugger
+    if (parseInt(event.target.value) > 6) {
+      event.target.value = "6";
+    }
     const total = event.target.value !== '' ? data.data.unit * parseFloat(event.target.value) : 0;
     setData({
       data: {
@@ -71,7 +73,8 @@ const Second: React.FC<Props> = ({dataGiveSecond, dataSendSecond, playerData}) =
         <div className={`${classes.inputNumber}`}>
           <input
             placeholder="0"
-            maxLength={2}
+            maxLength={1}
+            min="1" max="6"
             value={data.data.ticketCount}
             onKeyPress={(event) => {
               if (!/[0-9]/.test(event.key)) {

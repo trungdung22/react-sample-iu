@@ -29,6 +29,9 @@ const First: React.FC<Props> = ({playerData, dataGiveFirst}) => {
   }, [])
 
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (parseInt(event.target.value) > 6) {
+      event.target.value = "6";
+    }
     if (parseInt(event.target.value) > 0) {
       const price = event.target.value !== '' ? data.data.unit * parseInt(event.target.value) : 0;
       setData({
@@ -58,7 +61,8 @@ const First: React.FC<Props> = ({playerData, dataGiveFirst}) => {
         <div className={`${classes.inputNumber}`}>
           <input
             placeholder="0"
-            maxLength={2}
+            maxLength={1}
+            min="1" max="6"
             onKeyPress={(event) => {
               if (!/[0-9]/.test(event.key)) {
                 event.preventDefault();

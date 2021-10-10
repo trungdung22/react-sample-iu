@@ -251,6 +251,7 @@ const Lottery: React.FC = () => {
                 submit: true
               }
             })
+            fetchNextGame();
           } catch (error) {
             setDataModal({
               data: {
@@ -282,7 +283,7 @@ const Lottery: React.FC = () => {
   return (
     <>
       <Star></Star>
-      <Header playerData={playerData} dataGiveFromHeader={dataGiveFromHeader}></Header>
+      <Header playerData={playerData.data} dataGiveFromHeader={dataGiveFromHeader}></Header>
       <div className={`${classes.root}`}>
         <PartySection partyData={partyData.data} sendDataPartyToLottery={sendDataPartyToLottery}></PartySection>
         <NextSection playerData={nextPartyData.data} sendDataNextToLottery={sendDataNextToLottery}></NextSection>

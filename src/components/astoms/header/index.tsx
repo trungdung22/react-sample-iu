@@ -57,7 +57,7 @@ const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
             <li><Link to="/">Millipad</Link></li>
             <li><Link to="/">NFT Tickets</Link></li>
           </ul>
-          <DefaultButon text="Connect Wallet" connect={playerData.is_connect} onClick={() => !isConnect ? dataGiveFromHeader(true) : ''}></DefaultButon>
+          <DefaultButon text="Connect Wallet" connect={playerData.is_connect} onClick={() => !playerData.is_connect ? dataGiveFromHeader(true) : ''}></DefaultButon>
         </div>
       </div>
     </header>

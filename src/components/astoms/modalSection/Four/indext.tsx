@@ -36,11 +36,12 @@ const Four: React.FC<Props> = ({dataSendFour, dataGiveFour}) => {
     let cloneNumberChange = data.data.ticketChanges.numberChange;
     if(event.currentTarget.childNodes[0].textContent !== null) {
       const index = dataChoose.idx > 4 ? 0 : dataChoose.idx + 1;
+      const currIndex = dataChoose.idx > 4 ? 0 : dataChoose.idx;
       setDataChoose({
         value: parseInt(event.currentTarget.childNodes[0].textContent),
         idx: index,
       })
-      cloneNumberChange[index] = parseInt(event.currentTarget.childNodes[0].textContent);
+      cloneNumberChange[currIndex] = parseInt(event.currentTarget.childNodes[0].textContent);
       setData({
         data: {
           ...data.data,

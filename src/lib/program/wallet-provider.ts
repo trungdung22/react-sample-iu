@@ -11,27 +11,36 @@ import { Coin98WalletAdapter } from "lib/wallets/coin98";
 
 const WALLET_LIST = ["sollet", "phantom"];
 const PROVIDER_URL = "https://www.sollet.io";
-//let wallet = new Wallet(PROVIDER_URL, CLUSTERS.DEVNET);
+
 
 export const sendTxUsingExternalSignature = async (
   connection: Connection,
   instructions: TransactionInstruction[],
   feePayer: Account | null,
-  signersExceptWallet: Account[],
+  signersExceptWallet: Account[] | null,
   wallet: BaseMessageSignerWalletAdapter
 ) => {
   let tx = new Transaction().add(...instructions);
-  tx.setSigners(
-    ...(feePayer
-      ? [(feePayer as Account).publicKey, wallet.publicKey]
-      : [wallet.publicKey]),
-    ...signersExceptWallet.map(s => s.publicKey)
-  );
   let { blockhash } = await connection.getRecentBlockhash();
   tx.recentBlockhash = blockhash;
-  signersExceptWallet.forEach(acc => {
-    tx.partialSign(acc);
-  });
+
+  if (signersExceptWallet !== null) {
+    tx.setSigners(
+      ...(feePayer
+        ? [(feePayer as Account).publicKey, wallet.publicKey]
+        : [wallet.publicKey]),
+      ...signersExceptWallet.map(s => s.publicKey)
+    );
+    signersExceptWallet.forEach(acc => {
+      tx.partialSign(acc);
+    });
+  } else {
+    tx.setSigners(
+      ...(feePayer
+        ? [(feePayer as Account).publicKey, wallet.publicKey]
+        : [wallet.publicKey])
+    );
+  }
   let signed = await wallet.signTransaction(tx);
   let txid = await connection.sendRawTransaction(signed.serialize(), {
     skipPreflight: false,
@@ -44,39 +53,54 @@ let sollet = new SolletWalletAdapter({provider: PROVIDER_URL, network: WalletAda
 let phantom = new PhantomWalletAdapter();
 let coin98 = new Coin98WalletAdapter();
 
-const connectToSolletWallet = () => {
-  if (!sollet.connected) {
-    return sollet.connect() as Promise<void>;
+// const connectToSolletWallet = () => {
+//   if (!sollet.connected) {
+//     return sollet.connect() as Promise<void>;
+//   } else {
+//     return Promise.resolve();
+//   }
+// };
+
+// const connectToPhantomWallet = () => {
+//   if (!phantom.connected) {
+//     return phantom.connect() as Promise<void>;
+//   } else {
+//     return Promise.resolve();
+//   }
+// };
+
+// const connectToCoin98Wallet = () => {
+//   if (!coin98.connected) {
+//     return coin98.connect() as Promise<void>;
+//   } else {
+//     return Promise.resolve();
+//   }
+// };
+
+// export const UseWallet = async (adapterType: string): Promise<BaseMessageSignerWalletAdapter> => {
+//   if (adapterType === "sollet"){
+//     await connectToSolletWallet();
+//     return sollet;
+//   } else if (adapterType ==="coin98") {
+//     await connectToCoin98Wallet(); 
+//     return coin98;
+//   } else {
+//     await connectToPhantomWallet();
+//     return phantom;
+//   }
+// };
+
+let wallet = new Wallet(PROVIDER_URL, CLUSTERS.DEVNET);
+
+const connectToWallet = () => {
+  if (!wallet.connected) {
+    return wallet.connect() as Promise<void>;
   } else {
     return Promise.resolve();
   }
 };
 
-const connectToPhantomWallet = () => {
-  if (!phantom.connected) {
-    return phantom.connect() as Promise<void>;
-  } else {
-    return Promise.resolve();
-  }
-};
-
-const connectToCoin98Wallet = () => {
-  if (!coin98.connected) {
-    return coin98.connect() as Promise<void>;
-  } else {
-    return Promise.resolve();
-  }
-};
-
-export const UseWallet = async (adapterType: string): Promise<BaseMessageSignerWalletAdapter> => {
-  if (adapterType === "sollet"){
-    await connectToSolletWallet();
-    return sollet;
-  } else if (adapterType ==="coin98") {
-    await connectToCoin98Wallet(); 
-    return coin98;
-  } else {
-    await connectToPhantomWallet();
-    return phantom;
-  }
+export const UseWallet = async (adapterType: string): Promise<Wallet> => {
+  await connectToWallet();
+  return wallet;
 };

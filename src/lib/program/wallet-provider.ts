@@ -53,54 +53,54 @@ let sollet = new SolletWalletAdapter({provider: PROVIDER_URL, network: WalletAda
 let phantom = new PhantomWalletAdapter();
 let coin98 = new Coin98WalletAdapter();
 
-// const connectToSolletWallet = () => {
-//   if (!sollet.connected) {
-//     return sollet.connect() as Promise<void>;
-//   } else {
-//     return Promise.resolve();
-//   }
-// };
-
-// const connectToPhantomWallet = () => {
-//   if (!phantom.connected) {
-//     return phantom.connect() as Promise<void>;
-//   } else {
-//     return Promise.resolve();
-//   }
-// };
-
-// const connectToCoin98Wallet = () => {
-//   if (!coin98.connected) {
-//     return coin98.connect() as Promise<void>;
-//   } else {
-//     return Promise.resolve();
-//   }
-// };
-
-// export const UseWallet = async (adapterType: string): Promise<BaseMessageSignerWalletAdapter> => {
-//   if (adapterType === "sollet"){
-//     await connectToSolletWallet();
-//     return sollet;
-//   } else if (adapterType ==="coin98") {
-//     await connectToCoin98Wallet(); 
-//     return coin98;
-//   } else {
-//     await connectToPhantomWallet();
-//     return phantom;
-//   }
-// };
-
-let wallet = new Wallet(PROVIDER_URL, CLUSTERS.DEVNET);
-
-const connectToWallet = () => {
-  if (!wallet.connected) {
-    return wallet.connect() as Promise<void>;
+const connectToSolletWallet = () => {
+  if (!sollet.connected) {
+    return sollet.connect() as Promise<void>;
   } else {
     return Promise.resolve();
   }
 };
 
-export const UseWallet = async (adapterType: string): Promise<Wallet> => {
-  await connectToWallet();
-  return wallet;
+const connectToPhantomWallet = () => {
+  if (!phantom.connected) {
+    return phantom.connect() as Promise<void>;
+  } else {
+    return Promise.resolve();
+  }
 };
+
+const connectToCoin98Wallet = () => {
+  if (!coin98.connected) {
+    return coin98.connect() as Promise<void>;
+  } else {
+    return Promise.resolve();
+  }
+};
+
+export const UseWallet = async (adapterType: string): Promise<BaseMessageSignerWalletAdapter> => {
+  if (adapterType === "sollet"){
+    await connectToSolletWallet();
+    return sollet;
+  } else if (adapterType ==="coin98") {
+    await connectToCoin98Wallet(); 
+    return coin98;
+  } else {
+    await connectToPhantomWallet();
+    return phantom;
+  }
+};
+
+// let wallet = new Wallet(PROVIDER_URL, CLUSTERS.DEVNET);
+
+// const connectToWallet = () => {
+//   if (!wallet.connected) {
+//     return wallet.connect() as Promise<void>;
+//   } else {
+//     return Promise.resolve();
+//   }
+// };
+
+// export const UseWallet = async (adapterType: string): Promise<Wallet> => {
+//   await connectToWallet();
+//   return wallet;
+// };

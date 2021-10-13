@@ -76,7 +76,7 @@ const First: React.FC<Props> = ({playerData, dataGiveFirst}) => {
           </div>
         </div>
         {playerData.balanceSOL < data.data.price ? (<p className={`${classes.insuff}`}>Insufficient SOL balance</p>) : ''}
-        <p className={`${classes.balance}`}>SOL Balance: {playerData.balanceSOL}</p>
+        <p className={`${classes.balance}`}>SOL Balance: {playerData.balanceSOL.toFixed(6)}</p>
       </div>
       <p className={`${classes.lineGray}`}><span></span></p>
       <div className={`${classes.footer}`}>

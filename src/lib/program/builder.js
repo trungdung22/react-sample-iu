@@ -9,9 +9,8 @@ const Command = {
   ClaimReward: 5,
 };
 
-export function buyTicket(betLamports, ticketNumbers) {
+export function buyTicket(ticketNumbers) {
   const data = Buffer.from(Uint8Array.of(Command.BuyTicket,
-    ...new BN(betLamports).toArray("le", 8),
     ...new BN(ticketNumbers[0]).toArray("le", 1),
     ...new BN(ticketNumbers[1]).toArray("le", 1),
     ...new BN(ticketNumbers[2]).toArray("le", 1),

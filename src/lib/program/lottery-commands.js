@@ -7,7 +7,7 @@ import { sendTxUsingExternalSignature, UseWallet } from './wallet-provider';
 const connection = new Connection("https://api.devnet.solana.com", 'singleGossip');
 const SEED = 'milli'; 
 
-export const buyTicket = async(programIdString, betLamports, ticketNumbers, lotteryGamePubkey, lotteryOwnerPubkey) => {
+export const buyTicket = async(programIdString, ticketNumbers, lotteryGamePubkey, lotteryOwnerPubkey) => {
     // const privateKeyDecoded = privateKeyByteArray.split(',').map(s => parseInt(s));
     //const playerAccount = new Account(privateKeyDecoded);
     const playerWallet = await UseWallet();
@@ -32,7 +32,7 @@ export const buyTicket = async(programIdString, betLamports, ticketNumbers, lott
             { pubkey: lotteryOwnerPubkey, isSigner: false, isWritable: true },
             { pubkey: SystemProgram.programId, isSigner: false, isWritable: true}
         ], 
-        data: ProgramCommand.buyTicket(betLamports, ticketNumbers)
+        data: ProgramCommand.buyTicket(ticketNumbers)
     });
 
     const transaction = new Transaction().add(ticketAccountTx, buyIx);
@@ -45,7 +45,7 @@ export const buyTicket = async(programIdString, betLamports, ticketNumbers, lott
     return ticketAccount.publicKey.toBase58();
 }
 
-export const buyBulkTicket = async (programIdStr, ticketSetNumbers, buyLamports, gamePubkeyStr, gameOwnerPubkeyStr, adapter_type) => {
+export const buyBulkTicket = async (programIdStr, ticketSetNumbers, gamePubkeyStr, gameOwnerPubkeyStr, adapter_type) => {
     const programId = new PublicKey(programIdStr);
     const gamePubkey = new PublicKey(gamePubkeyStr);
     const gameOwnerPubkey = new PublicKey(gameOwnerPubkeyStr);
@@ -76,7 +76,7 @@ export const buyBulkTicket = async (programIdStr, ticketSetNumbers, buyLamports,
                 { pubkey: gameOwnerPubkey, isSigner: false, isWritable: true },
                 { pubkey: SystemProgram.programId, isSigner: false, isWritable: true}
             ], 
-            data: ProgramCommand.buyTicket(buyLamports, ticketSetNumbers[i])
+            data: ProgramCommand.buyTicket(ticketSetNumbers[i])
         });
         
         createAccountIxArr.push(ticketAccountTx);

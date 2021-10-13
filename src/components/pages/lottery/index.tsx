@@ -234,7 +234,6 @@ const Lottery: React.FC = () => {
     if (getDataModalTolottery.flag_submit && getDataModalTolottery.your_ticket.length > 0) {
       buyBulkTicket(partyData.data.programId,
         getDataModalTolottery.your_ticket,
-        playerData.data.lamportUnit,
         partyData.data.gamePubkey,
         partyData.data.ownerPubkey,
         playerData.data.adapter_type)

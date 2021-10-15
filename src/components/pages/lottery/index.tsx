@@ -88,7 +88,7 @@ const Lottery: React.FC = () => {
         const round_no = response_data.result.round_no; 
         const your_tickets = response_data.result.your_tickets;
         const created_time = new Date(response_data.result.created_time);
-        const closed_time = new Date(created_time.getTime() + 24 * 60 * 60 * 1000);
+        const closed_time = new Date(created_time.getTime() + 23.5 * 60 * 60 * 1000);
         setNextPartyData({
           data: {
             view_ticket: nextPartyData.data.view_ticket,

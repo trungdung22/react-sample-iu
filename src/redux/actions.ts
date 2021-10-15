@@ -1,0 +1,1 @@
+export const connectWalletAction = () => ({type: 'connect-wallet'});

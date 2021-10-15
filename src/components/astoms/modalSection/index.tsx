@@ -9,6 +9,7 @@ import ViewTicket from './viewTicket/indext';
 import ConnectWallet from './ConnectWallet/indext';
 import ViewYour from './viewYour/indext';
 import ViewSubmit from './ViewSubmit';
+import { ConnectedProps } from 'react-redux';
 
 type Props = {
   dataModal: any,

@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import useStyles from './styles';
 import { UseWallet } from '../../../../lib/program/wallet-provider';
-import ModalContent from '..';
+import {connect, useDispatch, useSelector} from 'react-redux';
+import { connectWalletAction } from 'redux/actions';
+import { walletModel } from 'redux/walletModel';
+import { InitialState, RootDispatcher } from 'redux/reducers/rootReducer';
 
 type Props = {
   dataGiveWallet: (dataWallet: any) => any
@@ -13,7 +16,26 @@ declare global {
   }
 }
 
+interface StateProps {
+  is_connect: string, 
+  publicKey: string,
+  adapter_type: string
+}
+
+
 const ConnectWallet: React.FC<Props> = ({ dataGiveWallet }) => {
+
+
+  // const {is_connect, publicKey, adapter_type} = useSelector<InitialState, StateProps>((state: InitialState) => {
+  //   return {
+  //     is_connect: state.is_connect,
+  //     publicKey: state.publicKey,
+  //     adapter_type: state.adapter_type
+  //   }
+  // });
+  
+  // const dispatch = useDispatch();
+  // const rootDispatcher = new RootDispatcher(dispatch);
 
   const classes = useStyles();
   // const [data, setData] = useState({
@@ -24,6 +46,9 @@ const ConnectWallet: React.FC<Props> = ({ dataGiveWallet }) => {
     UseWallet("phantom").then(response => {
       console.log(response);
       dataGiveWallet({ publicKey: response.publicKey.toBase58(), is_connect: true, adapter_type: "phantom" });
+      //rootDispatcher.updateConnectionStatus("true");
+      //rootDispatcher.updateConnectionPublicKey(response.publicKey.toBase58());
+      //rootDispatcher.updateConnectionAdapterType("phantom");
     }).catch(error => console.log(error));
   }
 
@@ -37,6 +62,9 @@ const ConnectWallet: React.FC<Props> = ({ dataGiveWallet }) => {
   const connectSollet = () => {
     UseWallet("sollet").then(wallet => {
       dataGiveWallet({ publicKey: wallet.publicKey.toBase58(), is_connect: true, adapter_type: "sollet" });
+      //rootDispatcher.updateConnectionStatus("true");
+      //rootDispatcher.updateConnectionPublicKey(wallet.publicKey.toBase58());
+      //rootDispatcher.updateConnectionAdapterType("sollet");
     }).catch(error => console.log(error));
   }
 

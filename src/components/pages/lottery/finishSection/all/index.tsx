@@ -111,27 +111,27 @@ const All: React.FC<Props> = ({ dataSendToAll, dataGiveAll }) => {
                 <ul className="prizeMatch">
                   <li>
                     <span>Match  3</span>
-                    <span>{data['info'][data.id]['total_pool_sol']/100*8} SOL</span>
+                    <span>{Number(data['info'][data.id]['total_pool_sol']/100*8).toFixed(2)} SOL</span>
                     <span>{data['info'][data.id]['match_pool3_count']} Winners</span>
                   </li>
                   <li>
                     <span>Match  4</span>
-                    <span>{data['info'][data.id]['total_pool_sol']/100*12} SOL</span>
+                    <span>{Number(data['info'][data.id]['total_pool_sol']/100*12).toFixed(2)} SOL</span>
                     <span>{data['info'][data.id]['match_pool4_count']} Winners</span>
                   </li>
                   <li>
                     <span>Match  5</span>
-                    <span>{data['info'][data.id]['total_pool_sol']/100*16} SOL</span>
+                    <span>{Number(data['info'][data.id]['total_pool_sol']/100*16).toFixed(2)} SOL</span>
                     <span>{data['info'][data.id]['match_pool5_count']} Winners</span>
                   </li>
                   <li>
                     <span>Match  6</span>
-                    <span>{data['info'][data.id]['total_pool_sol']/100*40} SOL</span>
+                    <span>{Number(data['info'][data.id]['total_pool_sol']/100*40).toFixed(2)} SOL</span>
                     <span>{data['info'][data.id]['match_pool6_count']} Winners</span>
                   </li>
                   <li>
                     <span>Burn</span>
-                    <span>{data['info'][data.id]['total_pool_sol']/100*24} SOL</span>
+                    <span>{Number(data['info'][data.id]['total_pool_sol']/100*24).toFixed(2)} SOL</span>
                     <span><br/></span>
                   </li>
                 </ul>

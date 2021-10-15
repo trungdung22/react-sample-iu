@@ -2,28 +2,49 @@ import React, { useEffect, useState } from 'react';
 import useStyles from './styles';
 import { HOST_NAME } from 'data/constants';
 import { dataTest } from 'data/db';
+import { InfiniteScroll } from 'react-simple-infinite-scroll'
+import { debug } from 'console';
+
 type Props = {
   playerData: any,
   dataGiveFromYours: (getDataFromYours: any) => void,
 }
 const Yours: React.FC<Props> = ({playerData, dataGiveFromYours}) => {
   const classes = useStyles();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({
+    items: [],
+    isLoading: true,
+    currGameNo: 0, 
+    loadAll: false
+  });
   
-  useEffect(()=>{
+  const [error, setError] = useState('');
+
+  const loadMore = () => {
     if (playerData.publicKey !== undefined && playerData.publicKey !== '') {
-      fetch(`${HOST_NAME}/api/game-history/${playerData.publicKey}`)
-      .then(async response => {
-        const data = await response.json();
-        // check for error response
-        if (!response.ok) {
-            // get error message from body or default to response statusText
-            const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
-        }
-        setData(data.results);
-    })
+      setData({ ...data, isLoading: true});
+      fetch(`${HOST_NAME}/api/game-history/${playerData.publicKey}?currGameNo=${data.currGameNo}`)
+        .then(res => res.json())
+        .then(
+          res => {
+            debugger
+            setData({
+              items: [...data.items, ...res.results], 
+              currGameNo: res.currGameNo,
+              isLoading: false,
+              loadAll: res.results.length > 0 ? false : true 
+            })
+          },
+          error => {
+            setError(error.toString());
+            setData({ ...data, isLoading: false});
+          }
+      )
     }
+  }
+
+  useEffect(()=>{
+    loadMore();
   }, [])
   
 
@@ -59,7 +80,17 @@ const Yours: React.FC<Props> = ({playerData, dataGiveFromYours}) => {
           <li>Your<br className="sp-768"/> tickets</li>
         </ul>
         <ul className="listRound">
-          {data.map((el) => (handleRenderRoundItems(el)))}
+          <InfiniteScroll
+            throttle={100}
+            threshold={30}
+            isLoading={data.isLoading}
+            hasMore={!data.loadAll}
+            onLoadMore={loadMore}
+          >
+            {data.items.length > 0
+              ? data.items.map(item => (handleRenderRoundItems(item)))
+              : null}
+          </InfiniteScroll>
         </ul>
       </div>
     </div>

@@ -23,7 +23,8 @@
     "react-scripts": "^4.0.3",
     "redux": "^4.1.1",
     "redux-thunk": "^2.3.0",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "react-simple-infinite-scroll": "0.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

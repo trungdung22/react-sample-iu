@@ -1,3 +1,4 @@
+import { priceTicket } from 'lib/utilities/utils';
 import React, { useEffect, useState } from 'react';
 import useStyles from './styles';
 type Props = {
@@ -6,17 +7,38 @@ type Props = {
   playerData: any
 }
 const Second: React.FC<Props> = ({dataGiveSecond, dataSendSecond, playerData}) => {
-  const classes = useStyles();
+
   const [data, setData] = useState({
     data: {
-      ticketCount: dataSendSecond.data.ticketCount,
-      price: dataSendSecond.data.price,
-      unit: dataSendSecond.data.unit,
-      tickets: dataSendSecond.data.tickets,
+      ticketCount: 0,
+      price: 0,
+      unit: 0.3,
+      tickets: [Array()],
       third: false,
       five: false,
     }
   });
+
+  useEffect(()=>{
+    priceTicket().then(item => setData({
+       data: {
+         ...data.data,
+         unit: item.sol
+       }
+    }));
+   }, [])
+
+  const classes = useStyles();
+  // const [data, setData] = useState({
+  //   data: {
+  //     ticketCount: data.data.ticketCount,
+  //     price: data.data.price,
+  //     unit: data.data.unit,
+  //     tickets: data.data.tickets,
+  //     third: false,
+  //     five: false,
+  //   }
+  // });
   const handleInputMax = (event: React.MouseEvent) => {
     setData({
       data: {
@@ -57,6 +79,7 @@ const Second: React.FC<Props> = ({dataGiveSecond, dataSendSecond, playerData}) =
       }
     })
   }
+
   useEffect(() => {
     if(data.data.ticketCount > 0 && (data.data.third || data.data.five)) {
       dataGiveSecond(data.data);
@@ -72,15 +95,10 @@ const Second: React.FC<Props> = ({dataGiveSecond, dataSendSecond, playerData}) =
         </div>
         <div className={`${classes.inputNumber}`}>
           <input
-            placeholder="0"
-            maxLength={1}
+            autoFocus
+            maxLength={2}
             min="1" max="6"
             value={data.data.ticketCount}
-            onKeyPress={(event) => {
-              if (!/[0-9]/.test(event.key)) {
-                event.preventDefault();
-              }
-            }}
             onChange={handleChangeInput}
           />
           <div className={`${classes.payunit}`}>
@@ -97,7 +115,7 @@ const Second: React.FC<Props> = ({dataGiveSecond, dataSendSecond, playerData}) =
       <div className={`${classes.footer}`}>
           <div className={`${classes.totalPay}`}>
             <p className="text">You pay</p>
-            <p className="price">~ {data.data.price.toFixed(3)} SOL</p>
+            <p className="price">~ {data.data.price.toFixed(4)} SOL</p>
           </div>
           <ul className={`${classes.listButton}`}>
             <li onClick={handleComfirm}>Buy instantly</li>

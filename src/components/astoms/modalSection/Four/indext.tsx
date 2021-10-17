@@ -32,11 +32,19 @@ const Four: React.FC<Props> = ({dataSendFour, dataGiveFour}) => {
     }
   }
 
+  const handleCheck = (val) => {
+    console.log("check:", data.data.ticketChanges.numberChange);
+    console.log("value:",val);
+    console.log("checked:", data.data.ticketChanges.numberChange.includes(val));
+    return data.data.ticketChanges.numberChange.includes(val);
+}
+
+
   const handleOnClickChooseNumber = (event: React.MouseEvent) => {
     let cloneNumberChange = data.data.ticketChanges.numberChange;
     if(event.currentTarget.childNodes[0].textContent !== null) {
-      const index = dataChoose.idx > 4 ? 0 : dataChoose.idx + 1;
-      const currIndex = dataChoose.idx > 4 ? 0 : dataChoose.idx;
+      const index = dataChoose.idx > 5 ? 0 : dataChoose.idx + 1;
+      const currIndex = dataChoose.idx > 5 ? 0 : dataChoose.idx;
       setDataChoose({
         value: parseInt(event.currentTarget.childNodes[0].textContent),
         idx: index,
@@ -71,14 +79,15 @@ const Four: React.FC<Props> = ({dataSendFour, dataGiveFour}) => {
       dataGiveFour(data.data);
     }
   }, [data])
+
   
   return (
     <>
       <div className={`${classes.body}`}>
         <ul className={`${classes.chooseNumber} test`}>
           {
-            Array(45).fill(0).map((el, index) => (
-              <li key={index} className={`${index + 1 == dataChoose.value ? 'active' : ''}`} onClick={handleOnClickChooseNumber}>{index < 9 ? `0${index + 1}` : index + 1}</li>
+            Array(45).fill(1).map((el, index) => (
+              <li key={index} className={`${index + 1 == dataChoose.value ? 'active' : ''}`} onClick={handleOnClickChooseNumber}>{!handleCheck(index+1)?(index < 9 ? `0${index+1}` : index+1): '_'}</li>
             ))
           }
         </ul>

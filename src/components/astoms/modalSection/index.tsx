@@ -350,7 +350,7 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
               ) : ''}
               <p className="close" onClick={() => handleClosedModal()}><img src="assets/common/icon_close.svg" alt="close"/></p>
             </div>
-            {dataModal.first && playerData.is_connect ? (<First dataGiveFirst={dataGiveFirst} playerData={playerData}></First>) : ''}
+            {dataModal.first && playerData.is_connect ? (<Second dataGiveSecond={dataGiveSecond} dataSendSecond={dataTicketModal} playerData={playerData}></Second>) : ''}
             {dataModal.second && playerData.is_connect ? (<Second dataGiveSecond={dataGiveSecond} dataSendSecond={dataTicketModal} playerData={playerData}></Second>) : ''}
             {dataModal.third && playerData.is_connect ? (<Third dataGiveThird={dataGiveThird} dataSendThird={dataTicketModal}></Third>) : ''}
             {dataModal.four && playerData.is_connect ? (<Four dataGiveFour={dataGiveFour} dataSendFour={dataTicketModal}></Four>) : ''}

@@ -1,0 +1,17 @@
+.fill-white:hover path {
+  fill: #fff;
+}
+
+.animation-pend {
+  animation: pend 3s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes pend {
+  0% {
+    transform: translateX(15px) rotate(2deg);
+  }
+
+  100% {
+    transform: translateX(-15px) rotate(-2deg)
+  }
+}

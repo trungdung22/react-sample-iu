@@ -131,6 +131,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         display: 'block',
         textAlign: 'center',
         paddingBottom: '0.25rem',
+        '& svg': {
+          margin: '0 auto',
+        }
       },
     }
   },

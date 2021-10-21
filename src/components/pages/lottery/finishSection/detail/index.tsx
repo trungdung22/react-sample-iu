@@ -19,7 +19,6 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
     return time < 10 ?  '0' + time : time;
   }
   const handleViewTicket = (event: React.MouseEvent) => {
-    debugger
     if(dataSendToDetail.player_tickets.length > 0) {
       dataGiveDetail({
         your_ticket: dataSendToDetail,

@@ -56,7 +56,7 @@ const First: React.FC<Props> = ({playerData, dataGiveFirst}) => {
       <div className={`${classes.body}`}>
         <div className={`${classes.buy}`}>
           <p className="title">Buy</p>
-          <p className="icon">Tickets<span><img src="assets/common/icon_ticket_modal.svg" alt="ticket"/></span></p>
+          <p className="icon">Tickets<span><img src="/assets/common/icon_ticket_modal.svg" alt="ticket"/></span></p>
         </div>
         <div className={`${classes.inputNumber}`}>
           <input

@@ -2,6 +2,7 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "main": "tailwind.config.js",
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@project-serum/sol-wallet-adapter": "0.2.5",
@@ -16,22 +17,28 @@
     "bn.js": "^5.1.3",
     "buffer-layout": "^1.2.2",
     "html-react-parser": "1.4.0",
+    "nodemon": "^2.0.14",
+    "postcss-import": "^14.0.2",
     "react": "^17.0.2",
+    "react-content-loader": "^6.0.3",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.5",
     "react-router-dom": "^5.3.0",
     "react-scripts": "^4.0.3",
+    "react-simple-infinite-scroll": "0.0.1",
     "redux": "^4.1.1",
     "redux-thunk": "^2.3.0",
-    "web-vitals": "^1.0.1",
-    "react-simple-infinite-scroll": "0.0.1"
+    "web-vitals": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "CI=false && react-scripts build",
     "build-windown": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "postcss src/assets/css/main.scss -o src/assets/css/styles.css",
+    "watch:dev": "nodemon -x npm run dev -w tailwind.config.js -w src/assets/css/main.scss -w src/assets/css/utilities.scss",
+    "prod": "cross-env NODE_ENV=production postcss src/assets/css/main.scss -o src/assets/css/styles.css"
   },
   "eslintConfig": {
     "extends": [
@@ -58,8 +65,12 @@
     "@types/react-router-dom": "^5.3.0",
     "@types/redux": "^3.6.0",
     "@types/redux-thunk": "^2.1.0",
+    "autoprefixer": "^10.3.7",
+    "postcss": "^8.3.10",
+    "postcss-cli": "^9.0.1",
     "react-slidedown": "^2.4.5",
     "styled-components": "^3.0.2",
+    "tailwindcss": "^2.2.17",
     "typescript": "^4.4.3"
   }
 }

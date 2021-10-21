@@ -31,7 +31,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
           cursor: 'pointer',
           transition: 'all 0.2s ease',
           '&:hover': {
-            opacity: 0.6
+            opacity: 6,
+            textDecoration: 'underline'
           }
         }
       },
@@ -222,6 +223,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
           cursor: 'pointer',
           fontWeight: 700,
           color: '#17F0FF',
+          '&:hover': {
+            textDecoration: 'underline'
+          }
         },
         // '@media screen and (max-width: 1640px)': {
         //   '& p:first-child': {

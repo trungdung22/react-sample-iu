@@ -101,7 +101,7 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
                 <span><br/></span>
               </li>
             </ul>
-            <p className="totalMatch">Total players this round: <span>{dataSendToDetail.total_player}</span></p>
+            <p className="totalMatch">Total players this round: <span>{dataSendToDetail.total_pool_sol}</span></p>
           </div>
         </div>
       </div>

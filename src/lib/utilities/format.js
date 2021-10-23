@@ -11,7 +11,6 @@ export const prettyPrintTime = (time) => {
      ${time.getFullYear()}, 
      ${formatTime(time.getUTCHours())}:${formatTime(time.getUTCMinutes())} 
      ${time.getUTCHours() >= 12 ? 'PM UTC' : 'AM UTC'}`;
-     console.log(time);
      return display;
 }
 

@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         fontSize: 24,
         fontFamily: '\'Lexend\', sans-serif',
         color: '#FFE0FD',
-        marginTop: '1rem',
+        marginTop: '1rem'
       },
       // '@media screen and (max-width: 1640px)': {
       //   fontSize: '7.5vw',
@@ -156,6 +156,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         '& span': {
           fontWeight: 700,
           cursor: 'pointer',
+          '&:hover': {
+            textDecoration: 'underline'
+          }
         }
       },
       '@media screen and (max-width: 768px)': {

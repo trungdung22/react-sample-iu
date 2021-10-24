@@ -30,10 +30,65 @@ const All: React.FC<Props> = ({ dataSendToAll, dataGiveAll }) => {
     }
   }
 
+  // This object is used to test Match results below
+  // const dataS = {
+  //   "_id": "6171500ae9b59ad5b38f7f57",
+  //   "status": "Completed",
+  //   "game_no": 24,
+  //   "total_pool": 51717680426,
+  //   "owner_pubkey": "545r1f24HobBVA9WkVVtUToeH58BAcjUtFo6K9DfArRc",
+  //   "game_pubkey": "HmxdbmR8byGaLqKD2YUtSZhtNhFryDNKnTC27PnAwZH4",
+  //   "duration": 86400000,
+  //   "roll_nums": [
+  //       27,
+  //       8,
+  //       33,
+  //       31,
+  //       10,
+  //       36
+  //   ],
+  //   "num_one": 27,
+  //   "num_two": 8,
+  //   "num_three": 33,
+  //   "num_four": 31,
+  //   "num_five": 10,
+  //   "num_six": 36,
+  //   "createdAt": "2021-10-21T11:33:30.294Z",
+  //   "updatedAt": "2021-10-22T11:01:25.403Z",
+  //   "__v": 0,
+  //   "burn_pool": 0,
+  //   "match_pool3": 1,
+  //   "match_pool3_count": 0,
+  //   "match_pool4": 0,
+  //   "match_pool4_count": 0,
+  //   "match_pool5": 0,
+  //   "match_pool5_count": 0,
+  //   "match_pool6": 0,
+  //   "match_pool6_count": 0,
+  //   "reward_type": "Uninitialized",
+  //   "closed_date": "2021-10-22T11:01:24.381Z",
+  //   "total_player": 0,
+  //   "total_pool_usdt": "1.013e+4",
+  //   "total_pool_sol": "51.72",
+  //   "match_pool3_usdt": "0.000",
+  //   "match_pool3_sol": "0.000",
+  //   "match_pool4_usdt": "0.000",
+  //   "match_pool4_sol": "0.000",
+  //   "match_pool5_usdt": "0.000",
+  //   "match_pool5_sol": "0.000",
+  //   "match_pool6_usdt": "0.000",
+  //   "match_pool6_sol": "0.000",
+  //   "burn_pool_usdt": "0.000",
+  //   "burn_pool_sol": "0.000",
+  //   "id": "6171500ae9b59ad5b38f7f57"
+  // }
+
   useEffect(() => {
     fetch(`${HOST_NAME}/api/game-history-all`)
       .then(async response => {
         const data = await response.json();
+        //data.results[0] = dataS;
+        //console.log("data:",data);
 
         // check for error response
         if (!response.ok) {

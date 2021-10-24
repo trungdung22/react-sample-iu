@@ -7,10 +7,10 @@ export const numberWithCommas = (x) => {
 
 export const prettyPrintTime = (time) => {
     const display = 
-    `${monthName[time.getMonth()]} ${time.getDate()}, 
+    `${monthName[time.getUTCMonth()]} ${time.getUTCDate()}, 
      ${time.getFullYear()}, 
-     ${formatTime(time.getHours())}:${formatTime(time.getMinutes())} 
-     ${time.getHours() >= 12 ? 'PM' : 'AM'}`;
+     ${formatTime(time.getUTCHours())}:${formatTime(time.getUTCMinutes())} 
+     ${time.getUTCHours() >= 12 ? 'PM UTC' : 'AM UTC'}`;
      return display;
 }
 

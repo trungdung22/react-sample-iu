@@ -29,6 +29,10 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         '& span': {
           fontSize: 24,
           lineHeight: '5rem',
+          '&:last-child': {
+            lineHeight: '1rem',
+            marginBottom: '3rem',
+          }
         },
       }
     },

@@ -17,7 +17,12 @@ const PartySection: React.FC<Props> = ({partyData, sendDataPartyToLottery}) => {
       <div className={`${classes.container}`}>
         {
           Math.round(partyData.gameBalanceUSDT) !== 0 ? (
-            <h3><span>Pump the party</span>${numberWithCommas(Math.round(partyData.gameBalanceUSDT))}<span>~{parseFloat(partyData.gameBalanceSol).toFixed(2)} SOL</span></h3>
+            <h3>
+              <span>Pump the party</span>
+              ${numberWithCommas(Math.round(partyData.gameBalanceUSDT))}
+              <span>~{parseFloat(partyData.gameBalanceSol).toFixed(2)} SOL</span>
+              <span>(+ 500,000 MILLI)</span>
+            </h3>
           ) : (
             <h3>
               <span>Pump the party</span>

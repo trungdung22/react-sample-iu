@@ -28,10 +28,65 @@ const All: React.FC<Props> = ({ dataSendToAll, dataGiveAll }) => {
     }
   }
 
+  // This object is used to test Match results below
+  // const dataS = {
+  //   "_id": "6171500ae9b59ad5b38f7f57",
+  //   "status": "Completed",
+  //   "game_no": 24,
+  //   "total_pool": 51717680426,
+  //   "owner_pubkey": "545r1f24HobBVA9WkVVtUToeH58BAcjUtFo6K9DfArRc",
+  //   "game_pubkey": "HmxdbmR8byGaLqKD2YUtSZhtNhFryDNKnTC27PnAwZH4",
+  //   "duration": 86400000,
+  //   "roll_nums": [
+  //       27,
+  //       8,
+  //       33,
+  //       31,
+  //       10,
+  //       36
+  //   ],
+  //   "num_one": 27,
+  //   "num_two": 8,
+  //   "num_three": 33,
+  //   "num_four": 31,
+  //   "num_five": 10,
+  //   "num_six": 36,
+  //   "createdAt": "2021-10-21T11:33:30.294Z",
+  //   "updatedAt": "2021-10-22T11:01:25.403Z",
+  //   "__v": 0,
+  //   "burn_pool": 0,
+  //   "match_pool3": 1,
+  //   "match_pool3_count": 0,
+  //   "match_pool4": 0,
+  //   "match_pool4_count": 0,
+  //   "match_pool5": 0,
+  //   "match_pool5_count": 0,
+  //   "match_pool6": 0,
+  //   "match_pool6_count": 0,
+  //   "reward_type": "Uninitialized",
+  //   "closed_date": "2021-10-22T11:01:24.381Z",
+  //   "total_player": 0,
+  //   "total_pool_usdt": "1.013e+4",
+  //   "total_pool_sol": "51.72",
+  //   "match_pool3_usdt": "0.000",
+  //   "match_pool3_sol": "0.000",
+  //   "match_pool4_usdt": "0.000",
+  //   "match_pool4_sol": "0.000",
+  //   "match_pool5_usdt": "0.000",
+  //   "match_pool5_sol": "0.000",
+  //   "match_pool6_usdt": "0.000",
+  //   "match_pool6_sol": "0.000",
+  //   "burn_pool_usdt": "0.000",
+  //   "burn_pool_sol": "0.000",
+  //   "id": "6171500ae9b59ad5b38f7f57"
+  // }
+
   useEffect(() => {
     fetch(`${HOST_NAME}/api/game-history-all`)
       .then(async response => {
         const data = await response.json();
+        //data.results[0] = dataS;
+        //console.log("data:",data);
 
         // check for error response
         if (!response.ok) {
@@ -108,33 +163,96 @@ const All: React.FC<Props> = ({ dataSendToAll, dataGiveAll }) => {
                   <p className="total">{`~$${numberWithCommas(data['info'][data.id]['total_pool_usdt'])}`}</p>
                   < p className="unit">{data['info'][data.id]['total_pool_sol']} SOL</p>
                 </div>
-                <ul className="prizeMatch">
-                  <li>
-                    <span>Match  3</span>
-                    <span>{Number(data['info'][data.id]['total_pool_sol']/100*8).toFixed(2)} SOL</span>
-                    <span>{data['info'][data.id]['match_pool3_count']} Winners</span>
-                  </li>
-                  <li>
-                    <span>Match  4</span>
-                    <span>{Number(data['info'][data.id]['total_pool_sol']/100*12).toFixed(2)} SOL</span>
-                    <span>{data['info'][data.id]['match_pool4_count']} Winners</span>
-                  </li>
-                  <li>
-                    <span>Match  5</span>
-                    <span>{Number(data['info'][data.id]['total_pool_sol']/100*16).toFixed(2)} SOL</span>
-                    <span>{data['info'][data.id]['match_pool5_count']} Winners</span>
-                  </li>
-                  <li>
-                    <span>Match  6</span>
-                    <span>{Number(data['info'][data.id]['total_pool_sol']/100*40).toFixed(2)} SOL</span>
-                    <span>{data['info'][data.id]['match_pool6_count']} Winners</span>
-                  </li>
-                  <li>
-                    <span>Burn</span>
-                    <span>{Number(data['info'][data.id]['total_pool_sol']/100*24).toFixed(2)} SOL</span>
-                    <span><br/></span>
-                  </li>
-                </ul>
+                {data['info'][data.id]['match_pool6'] > 0 ? (
+                                  <ul className="prizeMatch">
+                                  <li>
+                                    <span>Match  3</span>
+                                    <span>{Number(data['info'][data.id]['total_pool_sol']/100*8).toFixed(2)} SOL(8%)</span>
+                                    <span>{data['info'][data.id]['match_pool3_count']} Winners</span>
+                                  </li>
+                                  <li>
+                                    <span>Match  4</span>
+                                    <span>{Number(data['info'][data.id]['total_pool_sol']/100*12).toFixed(2)} SOL(12%)</span>
+                                    <span>{data['info'][data.id]['match_pool4_count']} Winners</span>
+                                  </li>
+                                  <li>
+                                    <span>Match  5</span>
+                                    <span>{Number(data['info'][data.id]['total_pool_sol']/100*16).toFixed(2)} SOL(16%)</span>
+                                    <span>{data['info'][data.id]['match_pool5_count']} Winners</span>
+                                  </li>
+                                  <li>
+                                    <span>Match  6</span>
+                                    <span>{Number(data['info'][data.id]['total_pool_sol']/100*40).toFixed(2)} SOL(40%)</span>
+                                    <span>{data['info'][data.id]['match_pool6_count']} Winners</span>
+                                  </li>
+                                  <li>
+                                    <span>Burn</span>
+                                    <span>{Number(data['info'][data.id]['total_pool_sol']/100*24).toFixed(2)} SOL(24%)</span>
+                                    <span><br/></span>
+                                  </li>
+                                </ul>
+                ):''}
+
+                {data['info'][data.id]['match_pool6'] == 0 && data['info'][data.id]['match_pool5'] > 0 ? (
+                                  <ul className="prizeMatch">
+                                  <li>
+                                    <span>Match  3</span>
+                                    <span>{Number(data['info'][data.id]['total_pool_sol']/100*4).toFixed(2)} SOL(4%)</span>
+                                    <span>{data['info'][data.id]['match_pool3_count']} Winners</span>
+                                  </li>
+                                  <li>
+                                    <span>Match  4</span>
+                                    <span>{Number(data['info'][data.id]['total_pool_sol']/100*7).toFixed(2)} SOL(7%)</span>
+                                    <span>{data['info'][data.id]['match_pool4_count']} Winners</span>
+                                  </li>
+                                  <li>
+                                    <span>Match  5</span>
+                                    <span>{Number(data['info'][data.id]['total_pool_sol']/100*10).toFixed(2)} SOL(10%)</span>
+                                    <span>{data['info'][data.id]['match_pool5_count']} Winners</span>
+                                  </li>
+                                  <li>
+                                    <span>Burn</span>
+                                    <span>{Number(data['info'][data.id]['total_pool_sol']/100*4).toFixed(2)} SOL(4%)</span>
+                                    <span><br/></span>
+                                  </li>
+                                </ul>
+                ):''}
+
+                {data['info'][data.id]['match_pool6'] == 0 && data['info'][data.id]['match_pool5'] == 0  && data['info'][data.id]['match_pool4'] > 0? (
+                                  <ul className="prizeMatch">
+                                  <li>
+                                    <span>Match  3</span>
+                                    <span>{Number(data['info'][data.id]['total_pool_sol']/100*4).toFixed(2)} SOL(4%)</span>
+                                    <span>{data['info'][data.id]['match_pool3_count']} Winners</span>
+                                  </li>
+                                  <li>
+                                    <span>Match  4</span>
+                                    <span>{Number(data['info'][data.id]['total_pool_sol']/100*7).toFixed(2)} SOL(7%)</span>
+                                    <span>{data['info'][data.id]['match_pool4_count']} Winners</span>
+                                  </li>
+                                  <li>
+                                    <span>Burn</span>
+                                    <span>{Number(data['info'][data.id]['total_pool_sol']/100*2).toFixed(2)} SOL(2%)</span>
+                                    <span><br/></span>
+                                  </li>
+                                </ul>
+                ):''}
+
+                {data['info'][data.id]['match_pool6'] == 0 && data['info'][data.id]['match_pool5'] == 0  && data['info'][data.id]['match_pool4'] == 0 && data['info'][data.id]['match_pool3'] > 0? (
+                                  <ul className="prizeMatch">
+                                  <li>
+                                    <span>Match  3</span>
+                                    <span>{Number(data['info'][data.id]['total_pool_sol']/100*4).toFixed(2)} SOL(4%)</span>
+                                    <span>{data['info'][data.id]['match_pool3_count']} Winners</span>
+                                  </li>
+                                  <li>
+                                    <span>Burn</span>
+                                    <span>0 SOL(0%)</span>
+                                    <span><br/></span>
+                                  </li>
+                                </ul>
+                ):''}
+
                 <p className="totalMatch">Total players this round: <span>{data['info'][data.id]['total_pool_sol']}</span></p>
               </div>
             ) : ''}

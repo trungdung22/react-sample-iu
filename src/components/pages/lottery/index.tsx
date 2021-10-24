@@ -146,7 +146,7 @@ const Lottery: React.FC = () => {
     })
   }
   const dataGiveFromFinished = (getDataFinished: any) => {
-    debugger
+    
     setDataModal({
       data: {
         ...dataModal.data,
@@ -185,7 +185,7 @@ const Lottery: React.FC = () => {
   }
 
   const dataGiveFromWallet = (getDataWallet: any) => {
-    debugger
+    
     if (getDataWallet.is_connect) {
       fetchPlayerAccount(getDataWallet.publicKey).then(item => setPlayerData({
         data: {
@@ -263,7 +263,7 @@ const Lottery: React.FC = () => {
           }
           
         }).catch(error => {
-          debugger
+          
           resetModalData();
           setDataModal({
             data: {

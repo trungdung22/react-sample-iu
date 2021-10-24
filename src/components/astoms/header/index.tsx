@@ -2,16 +2,22 @@ import React, { useEffect, useState } from 'react';
 import useStyles from './styles';
 import DefaultButon from '../button/DefaultButton';
 import { useHistory } from "react-router-dom";
-import { isConnect } from 'data/db';
+import { IS_CONNECT } from 'data/constants';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router';
 
 type Props = {
   playerData: any,
   dataGiveFromHeader: (dataGiveFromHeader: any) => void,
 }
+type urlParams = {
+  nameProject: string,
+};
 const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
   const classes = useStyles();
   const history = useHistory();
+  const {nameProject} = useParams<urlParams>();
+  const [location, setLocation] = useState(typeof nameProject !== 'undefined' ? '/millipad' : history.location.pathname);
   const [dataWalletSendLottery, setDataWalletSendLottery] = useState({
     data: {
       publicKey: '',
@@ -50,14 +56,14 @@ const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
   return (
     <header className={`${classes.root} ${offset ? 'active' : ''}`}>
       <div className={`${classes.container}`}>
-        <Link to="/" className={`${classes.headerLeft}`}><img src="assets/common/logo.png" alt="Millionsy" /><span>Millionsy</span></Link>
+        <Link to="/" className={`${classes.headerLeft}`}><img src="/assets/common/logo.png" alt="Millionsy" /><span>Millionsy</span></Link>
         <div className={`${classes.headerRight}`}>
           <ul>
-            <li><Link to="/lottery" className={history.location.pathname === '/lottery' ? 'active ': '' }>Lottery</Link></li>
-            <li><Link to="/">Millipad</Link></li>
-            <li><Link to="/">NFT Tickets</Link></li>
+            <li><Link to="/lottery" className={location === '/lottery' ? 'active ': '' }>Lottery</Link></li>
+            <li><Link to="/millipad" className={location === '/millipad' ? 'active ': ''}>Millipad</Link></li>
+            <li><Link to="/tickets" className={location === '/tickets' ? 'active ': ''}>NFT Tickets</Link></li>
           </ul>
-          <DefaultButon text="Connect Wallet" connect={playerData.is_connect} onClick={() => !playerData.is_connect ? dataGiveFromHeader(true) : ''}></DefaultButon>
+          <DefaultButon text="Connect Wallet" connect={IS_CONNECT} onClick={() => !IS_CONNECT ? dataGiveFromHeader(true) : ''}></DefaultButon>
         </div>
       </div>
     </header>

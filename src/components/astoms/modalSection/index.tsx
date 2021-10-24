@@ -225,7 +225,6 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
   }
 
   const dataGiveWallet = (data: any) => {
-    debugger
     setDataWalletSendLottery({
         data: {
           is_connect: data.is_connect, 
@@ -348,7 +347,7 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
               {!playerData.is_connect ? (
                 <p className="title">Connect Wallet</p>
               ) : ''}
-              <p className="close" onClick={() => handleClosedModal()}><img src="assets/common/icon_close.svg" alt="close"/></p>
+              <p className="close" onClick={() => handleClosedModal()}><img src="/assets/common/icon_close.svg" alt="close"/></p>
             </div>
             {dataModal.first && playerData.is_connect ? (<Second dataGiveSecond={dataGiveSecond} dataSendSecond={dataTicketModal} playerData={playerData}></Second>) : ''}
             {dataModal.second && playerData.is_connect ? (<Second dataGiveSecond={dataGiveSecond} dataSendSecond={dataTicketModal} playerData={playerData}></Second>) : ''}

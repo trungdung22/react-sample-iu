@@ -56,21 +56,21 @@ const ViewYour: React.FC<Props> = ({dataSendViewYour}) => {
         <ul>
           <li>
             <p>
-              <span><img src="./assets/lottery/ticket_nfts.svg" alt="NFTS Tickets" /></span>
+              <span><img src="/assets/lottery/ticket_nfts.svg" alt="NFTS Tickets" /></span>
               <span>NFTS Tickets</span>
             </p>
             {nftsTicket.length}
           </li>
           <li>
             <p>
-              <span><img src="./assets/lottery/ticket_def.svg" alt="Total tickets" /></span>
+              <span><img src="/assets/lottery/ticket_def.svg" alt="Total tickets" /></span>
               <span>Total tickets</span>
             </p>
             {dataSendViewYour.your_ticket.player_tickets.length}
           </li>
           <li>
             <p>
-              <span><img src="./assets/lottery/icon_star.svg" alt="Winning tickets" /></span>
+              <span><img src="/assets/lottery/icon_star.svg" alt="Winning tickets" /></span>
               <span>Winning tickets</span>
             </p>
             {(<>{countWinningTicket()}</>)}

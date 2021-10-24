@@ -3,6 +3,7 @@ import useStyles from './styles';
 import { HOST_NAME } from 'data/constants';
 import Parser from 'html-react-parser';
 import {prettyPrintTime} from '../../../../lib/utilities/format';
+import ContentLoader from 'react-content-loader';
 
 type Props = {
   playerData: any,
@@ -10,26 +11,26 @@ type Props = {
 }
 const NextSection: React.FC<Props> = ({playerData, sendDataNextToLottery}) => {
   const classes = useStyles();
-  const [timer, setTimer] = useState("12<sup>h</sup> 12<sup>m</sup>");
+  const [timer, setTimer] = useState('');
 
   useEffect(() => {
     const countDownDate = playerData.closed_time.getTime();
     const timerId = setInterval(function() {
 
       // Get today's date and time
-      var now = new Date().getTime();
+      const now = new Date().getTime();
     
       // Find the distance between now and the count down date
-      var distance = countDownDate - now;
+      const distance = countDownDate - now;
     
       // Time calculations for days, hours, minutes and seconds
-      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
     
       // Display the result in the element with id="demo"
-      var timerData = ""
+      let timerData = ""
 
       if (days > 0) {
         timerData = days + "<sup>d</sup> " + hours + "<sup>h</sup> " + minutes + "<sup>m</sup> " + seconds + "<sup>s</sup> ";
@@ -76,22 +77,53 @@ const NextSection: React.FC<Props> = ({playerData, sendDataNextToLottery}) => {
   return (
     <div className={`${classes.root}`}>
       <div className={`${classes.container}`}>
-        <h3>{Parser(timer)}<span>till the party</span></h3>
+        <h3>
+          {
+            timer == '' ? (
+              <ContentLoader
+                viewBox="0 0 700 55"
+                backgroundColor="#fff"
+                foregroundColor="#dcdcdc"
+              >
+                <rect x="140" y="0" rx="4" ry="4" width="420" height="55" />
+              </ContentLoader>
+            ) : Parser(timer)
+          }
+        <span>till the party</span></h3>
+        
         <div className={`${classes.content}`}>
-          <div className={`${classes.header}`}>
-            <p className="title">Next Party</p>
-            <p className={`${classes.infoRound}`}>
-              <span>#{playerData.next_id}</span>
-              {prettyPrintTime(playerData.closed_time)}
-            </p>
-          </div>
-          <div className={`${classes.footer}`}>
-            <div className="yourticket">
-              <p>Your Ticket</p>
-              <p>You have <span onClick={handleViewTicket}>{playerData.your_tickets.length} ticket</span> to enter this party.</p>
-            </div>
-            <p className="getticket" onClick={handleGetTicket}>Get it now {`>`}</p>
-          </div>
+          {
+            playerData.next_id > 0 ? (
+              <>
+                <div className={`${classes.header}`}>
+                  <p className="title">Next Party</p>
+                  <p className={`${classes.infoRound}`}>
+                    <span>#{playerData.next_id}</span>
+                    {prettyPrintTime(playerData.closed_time)}
+                  </p>
+                </div>
+                <div className={`${classes.footer}`}>
+                  <div className="yourticket">
+                    <p>Your Ticket</p>
+                    <p>You have <span onClick={handleViewTicket}>{playerData.your_tickets.length} ticket</span> to enter this party.</p>
+                  </div>
+                  <p className="getticket" onClick={handleGetTicket}>Get it now {`>`}</p>
+                </div>
+              </>
+            ) : (
+              <ContentLoader
+                viewBox="0 0 700 270"
+                backgroundColor="#fff"
+                foregroundColor="#dcdcdc"
+              >
+                <rect x="32" y="32" rx="4" ry="4" width="120" height="15" />
+                <rect x="32" y="64" rx="4" ry="4" width="636" height="50" />
+                <rect x="32" y="180" rx="4" ry="4" width="120" height="15" />
+                <rect x="32" y="220" rx="4" ry="4" width="300" height="15" />
+                <rect x="468" y="180" rx="8" ry="8" width="200" height="60" />
+              </ContentLoader>
+            )
+          }
         </div>
       </div>
     </div>

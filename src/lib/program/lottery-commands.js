@@ -4,7 +4,8 @@ import { TICKET_ACCOUNT_DATA_LAYOUT } from './state';
 import { sendTxUsingExternalSignature, UseWallet } from './wallet-provider';
 
 //const connection = new Connection("http://localhost:8899", 'singleGossip');
-const connection = new Connection("https://api.devnet.solana.com", 'singleGossip');
+//const connection = new Connection("https://api.devnet.solana.com", 'singleGossip');
+const connection = new Connection("https://api.mainnet-beta.solana.com", 'singleGossip');
 const SEED = 'milli'; 
 
 export const buyTicket = async(programIdString, ticketNumbers, lotteryGamePubkey, lotteryOwnerPubkey) => {

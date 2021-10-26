@@ -77,7 +77,12 @@ const Lottery: React.FC = () => {
   });
 
   const fetchNextGame = () => {
-    fetch(`${HOST_NAME}/api/next-game-info/${playerData.data.publicKey}`)
+    fetch(`${HOST_NAME}/api/next-game-info/${playerData.data.publicKey}`, {
+      headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+       }
+    })
       .then(async response => {
         const response_data = await response.json();
 

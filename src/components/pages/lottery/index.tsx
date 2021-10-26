@@ -40,6 +40,8 @@ const Lottery: React.FC = () => {
     }
   });
 
+  
+
   const [playerData, setPlayerData] = useState({
     data: {
       is_connect: false,

@@ -15,11 +15,11 @@ const Footer: React.FC = () => {
       title: 'Platform',
       link: [
         {
-          path: '/',
+          path: 'https://forms.gle/ERJc45o4btDsoerT6',
           text: 'Apply for IDO'
         },
         {
-          path: 'https://docs.millionsy.io/lottery/how-to-buy-a-ticket-from-a-very-first-step',
+          path: 'https://docs.millionsy.io/lottery/how-to-play',
           text: 'How to buy ticket'
         },
         {
@@ -48,15 +48,15 @@ const Footer: React.FC = () => {
           text: 'Token contract'
         },
         {
-          path: 'asbsd',
+          path: 'https://docs.millionsy.io/milli',
           text: 'Tokenomics'
         },
         {
-          path: 'asbsd',
+          path: '/',
           text: 'View on Coingecko'
         },
         {
-          path: 'asbsd',
+          path: '/',
           text: 'View on CoinMarketCap'
         },
       ]

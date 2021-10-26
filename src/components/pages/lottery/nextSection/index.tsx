@@ -14,6 +14,7 @@ const NextSection: React.FC<Props> = ({playerData, sendDataNextToLottery}) => {
   const [timer, setTimer] = useState('');
 
   useEffect(() => {
+    
     const countDownDate = playerData.closed_time.getTime();
     const timerId = setInterval(function() {
 
@@ -74,6 +75,8 @@ const NextSection: React.FC<Props> = ({playerData, sendDataNextToLottery}) => {
     })
   }
 
+  const monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
   return (
     <div className={`${classes.root}`}>
       <div className={`${classes.container}`}>
@@ -99,7 +102,11 @@ const NextSection: React.FC<Props> = ({playerData, sendDataNextToLottery}) => {
                   <p className="title">Next Party</p>
                   <p className={`${classes.infoRound}`}>
                     <span>#{playerData.next_id}</span>
-                    {prettyPrintTime(playerData.closed_time)}
+                    {
+                      `${monthName[playerData.closed_time.getUTCMonth()]} ${playerData.closed_time.getUTCDate()}, 
+                      ${playerData.closed_time.getFullYear()}, 
+                      11:00 AM UTC`
+                    }
                   </p>
                 </div>
                 <div className={`${classes.footer}`}>

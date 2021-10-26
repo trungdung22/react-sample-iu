@@ -60,8 +60,8 @@ const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
         <div className={`${classes.headerRight}`}>
           <ul>
             <li><Link to="/lottery" className={location === '/lottery' ? 'active ': '' }>Lottery</Link></li>
-            <li><Link to="/millipad" className={location === '/millipad' ? 'active ': ''}>Millipad</Link></li>
-            <li><Link to="/tickets" className={location === '/tickets' ? 'active ': ''}>NFT Tickets</Link></li>
+            <li><Link to="/" className={location === '/millipad' ? 'active ': ''}>Millipad</Link></li>
+            <li><Link to="/" className={location === '/tickets' ? 'active ': ''}>NFT Tickets</Link></li>
           </ul>
           <DefaultButon text="Connect Wallet" connect={IS_CONNECT} onClick={() => !IS_CONNECT ? dataGiveFromHeader(true) : ''}></DefaultButon>
         </div>

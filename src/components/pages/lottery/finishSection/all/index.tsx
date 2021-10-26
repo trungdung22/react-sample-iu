@@ -84,7 +84,12 @@ const All: React.FC<Props> = ({ dataSendToAll, dataGiveAll }) => {
   // }
 
   useEffect(() => {
-    fetch(`${HOST_NAME}/api/game-history-all`)
+    fetch(`${HOST_NAME}/api/game-history-all`, {
+      headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
       .then(async response => {
         const data = await response.json();
         //data.results[0] = dataS;

@@ -81,7 +81,7 @@ const Lottery: React.FC = () => {
       headers : { 
         'Content-Type': 'application/json',
         'Accept': 'application/json'
-       }
+      }
     })
       .then(async response => {
         const response_data = await response.json();
@@ -95,7 +95,9 @@ const Lottery: React.FC = () => {
         const round_no = response_data.result.round_no; 
         const your_tickets = response_data.result.your_tickets;
         const created_time = new Date(response_data.result.created_time);
-        const closed_time = new Date(created_time.getTime() + 23.5 * 60 * 60 * 1000);
+        const closed_time = new Date(created_time.getTime() + 23.5 * 60 * 60 * 1000 - 2.5 * 60 * 1000);
+        console.log(closed_time);
+        
         setNextPartyData({
           data: {
             view_ticket: nextPartyData.data.view_ticket,

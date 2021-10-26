@@ -26,7 +26,7 @@ const Jackpots: React.FC = () => {
             </li>
           </ul>
         </div>
-        <p className={`${classes.infoRound}`}><span>#0</span>Otc 18, 2021, 11:00 AM</p>
+        <p className={`${classes.infoRound}`}><span>#0</span>Otc 26, 2021, 11:00 AM</p>
       </div>
       <div className={`${classes.body}`}>
         <div className={`${classes.infoPrize}`}>

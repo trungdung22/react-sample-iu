@@ -24,7 +24,12 @@ const Yours: React.FC<Props> = ({playerData, dataGiveFromYours}) => {
   const loadMore = () => {
     if (playerData.publicKey !== undefined && playerData.publicKey !== '') {
       setData({ ...data, isLoading: true});
-      fetch(`${HOST_NAME}/api/game-history/${playerData.publicKey}?currGameNo=${data.currGameNo}`)
+      fetch(`${HOST_NAME}/api/game-history/${playerData.publicKey}?currGameNo=${data.currGameNo}`, {
+        headers : { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      })
         .then(res => res.json())
         .then(
           res => {

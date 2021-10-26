@@ -21,6 +21,12 @@ const routes: Routes[] = [
     LoadComponent: lazy(() => import('components/pages/lottery')),
     exact: true,
   },
+  {
+    title: 'Whitepaper',
+    path: '/whitepaper',
+    LoadComponent: lazy(() => import('components/pages/whitepaper')),
+    exact: true,
+  },
   // {
   //   title: 'Millipad',
   //   path: '/millipad',

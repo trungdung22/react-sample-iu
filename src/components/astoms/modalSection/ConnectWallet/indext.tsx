@@ -67,6 +67,7 @@ const ConnectWallet: React.FC<Props> = ({ dataGiveWallet }) => {
       //rootDispatcher.updateConnectionAdapterType("sollet");
     }).catch(error => console.log(error));
   }
+  
 
   return (
     <>

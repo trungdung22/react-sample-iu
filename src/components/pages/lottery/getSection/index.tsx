@@ -44,7 +44,7 @@ const GetSection: React.FC = () => {
           <span className={`${classes.title}`}>{el.title}</span>
           <span className={`${classes.content}`}>{el.content}</span>
           <a href={el.link} target="_blank">
-            <svg width="25" height="12" viewBox="0 0 25 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg className='mx-auto' width="25" height="12" viewBox="0 0 25 12" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M1 5.25C0.585786 5.25 0.25 5.58579 0.25 6C0.25 6.41421 0.585786 6.75 1 6.75L1 5.25ZM24.5303 6.53033C24.8232 6.23743 24.8232 5.76256 24.5303 5.46967L19.7574 0.696698C19.4645 0.403804 18.9896 0.403804 18.6967 0.696698C18.4038 0.989591 18.4038 1.46446 18.6967 1.75736L22.9393 6L18.6967 10.2426C18.4038 10.5355 18.4038 11.0104 18.6967 11.3033C18.9896 11.5962 19.4645 11.5962 19.7574 11.3033L24.5303 6.53033ZM1 6.75L24 6.75L24 5.25L1 5.25L1 6.75Z" fill="white"/>
             </svg>
           </a>

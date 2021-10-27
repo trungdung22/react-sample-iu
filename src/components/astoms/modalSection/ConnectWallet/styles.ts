@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         '& span': {
           display: 'inline-flex',
           marginRight: '0.75rem',
+          maxWidth: 40,
         }
       },
       '&:last-child': {

@@ -3,10 +3,10 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core';
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
     background: '#071526',
-    padding: '5.25rem 0 8rem',
+    padding: '5.25rem 0 0',
     borderTop: '1px solid #0B7880',
     '@media screen and (max-width: 1640px)': {
-      padding: '5.25rem 3% 8rem',
+      padding: '5.25rem 3% 0',
     },
     '@media screen and (max-width: 768px)': {
       padding: '3em 3% 7rem',

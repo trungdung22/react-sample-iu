@@ -5,6 +5,8 @@ import { useHistory } from "react-router-dom";
 import { IS_CONNECT } from 'data/constants';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router';
+import { UseWallet } from 'lib/program/wallet-provider';
+import { SolletWalletAdapter } from "lib/wallets/sollet";
 
 type Props = {
   playerData: any,
@@ -52,6 +54,11 @@ const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
       }
     )
   }
+  
+  if (playerData.is_connect) {
+    window.sessionStorage.setItem('data_connect', 'true')
+  }
+  
 
   return (
     <header className={`${classes.root} ${offset ? 'active' : ''}`}>
@@ -63,7 +70,7 @@ const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
             <li><Link to="/" className={location === '/millipad' ? 'active ': ''}>Millipad</Link></li>
             <li><Link to="/" className={location === '/tickets' ? 'active ': ''}>NFT Tickets</Link></li>
           </ul>
-          <DefaultButon text="Connect Wallet" connect={IS_CONNECT} onClick={() => !IS_CONNECT ? dataGiveFromHeader(true) : ''}></DefaultButon>
+          <DefaultButon text="Connect Wallet" connect={playerData.is_connect} onClick={() => !playerData.is_connect ? dataGiveFromHeader(true) : ''}></DefaultButon>
         </div>
       </div>
     </header>

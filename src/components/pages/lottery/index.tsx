@@ -96,7 +96,6 @@ const Lottery: React.FC = () => {
         const your_tickets = response_data.result.your_tickets;
         const created_time = new Date(response_data.result.created_time);
         const closed_time = new Date(created_time.getTime() + 23.5 * 60 * 60 * 1000 - 2.5 * 60 * 1000);
-        console.log(closed_time);
         
         setNextPartyData({
           data: {
@@ -120,6 +119,22 @@ const Lottery: React.FC = () => {
   }, [playerData.data]);
 
   useEffect(() => {
+
+    if (window.sessionStorage.getItem("data_connect") === "true") {
+      setDataModal({
+        data: {
+          ...dataModal.data,
+          is_connect: true,
+        }
+      }) 
+  
+      setPlayerData({
+        data: {
+          ...playerData.data, 
+          is_connect: true
+        }
+      })
+    }
     getGameBoardInfo().then(item => setPartyData({
       data: {
         ...partyData.data,

@@ -46,6 +46,7 @@ const ConnectWallet: React.FC<Props> = ({ dataGiveWallet }) => {
     UseWallet("phantom").then(response => {
       console.log(response);
       dataGiveWallet({ publicKey: response.publicKey.toBase58(), is_connect: true, adapter_type: "phantom" });
+      window.sessionStorage.setItem('data_connect', 'true')
       //rootDispatcher.updateConnectionStatus("true");
       //rootDispatcher.updateConnectionPublicKey(response.publicKey.toBase58());
       //rootDispatcher.updateConnectionAdapterType("phantom");
@@ -62,6 +63,7 @@ const ConnectWallet: React.FC<Props> = ({ dataGiveWallet }) => {
   const connectSollet = () => {
     UseWallet("sollet").then(wallet => {
       dataGiveWallet({ publicKey: wallet.publicKey.toBase58(), is_connect: true, adapter_type: "sollet" });
+      window.sessionStorage.setItem('data_connect', 'true')
       //rootDispatcher.updateConnectionStatus("true");
       //rootDispatcher.updateConnectionPublicKey(wallet.publicKey.toBase58());
       //rootDispatcher.updateConnectionAdapterType("sollet");

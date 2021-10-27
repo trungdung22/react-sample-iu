@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useStyles from './styles';
 import Title from 'components/astoms/title/DefaultTitle';
 import DefaultButon from 'components/astoms/button/DefaultButton';
@@ -40,6 +40,26 @@ const Home: React.FC = () => {
       },
     }
   });
+
+  useEffect(() => {
+
+    if (window.sessionStorage.getItem("data_connect") === "true") {
+      setDataModal({
+        data: {
+          ...dataModal.data,
+          is_connect: true,
+        }
+      }) 
+  
+      setPlayerData({
+        data: {
+          ...playerData.data, 
+          is_connect: true
+        }
+      })
+    }
+  }, [])
+
   const dataGiveFromModal = (getDataModalTolottery: any) => {
     setDataModal({
       data: getDataModalTolottery,

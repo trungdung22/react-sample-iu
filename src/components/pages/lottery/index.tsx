@@ -119,6 +119,22 @@ const Lottery: React.FC = () => {
   }, [playerData.data]);
 
   useEffect(() => {
+
+    if (window.sessionStorage.getItem("data_connect") === "true") {
+      setDataModal({
+        data: {
+          ...dataModal.data,
+          is_connect: true,
+        }
+      }) 
+  
+      setPlayerData({
+        data: {
+          ...playerData.data, 
+          is_connect: true
+        }
+      })
+    }
     getGameBoardInfo().then(item => setPartyData({
       data: {
         ...partyData.data,

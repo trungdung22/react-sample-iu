@@ -35,7 +35,7 @@ const Jackpots: React.FC = () => {
           <p className="unit">0 SOL</p>
         </div>
       </div>
-      <p className={`${classes.footer}`}>11111111111111111111111111111111</p>
+      <p className={`${classes.footer}`}>Win a jackpot and get in this board</p>
     </div>
   )
 }

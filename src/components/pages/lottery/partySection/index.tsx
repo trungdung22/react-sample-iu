@@ -10,8 +10,6 @@ type Props = {
 
 const PartySection: React.FC<Props> = ({partyData, sendDataPartyToLottery}) => {
   const classes = useStyles();
-  
-
   return (
     <div className={`${classes.root}`}>
       <div className={`${classes.container}`}>

@@ -4,7 +4,7 @@ import {
   BaseMessageSignerWalletAdapter,
   WalletAdapterNetwork,
 } from '@solana/wallet-adapter-base';
-import {COMMITMENT, CLUSTERS } from "./connection";
+import { COMMITMENT, CLUSTERS } from "./connection";
 import { SolletWalletAdapter } from "lib/wallets/sollet";
 import { PhantomWalletAdapter } from "lib/wallets/phantom";
 import { Coin98WalletAdapter } from "lib/wallets/coin98";
@@ -49,11 +49,12 @@ export const sendTxUsingExternalSignature = async (
   return connection.confirmTransaction(txid, COMMITMENT);
 };
 
-let sollet = new SolletWalletAdapter({provider: PROVIDER_URL, network: WalletAdapterNetwork.Devnet});
+let sollet = new SolletWalletAdapter({ provider: PROVIDER_URL, network: WalletAdapterNetwork.Devnet });
 let phantom = new PhantomWalletAdapter();
 let coin98 = new Coin98WalletAdapter();
 
 const connectToSolletWallet = () => {
+
   if (!sollet.connected) {
     return sollet.connect() as Promise<void>;
   } else {
@@ -78,11 +79,11 @@ const connectToCoin98Wallet = () => {
 };
 
 export const UseWallet = async (adapterType: string): Promise<BaseMessageSignerWalletAdapter> => {
-  if (adapterType === "sollet"){
+  if (adapterType === "sollet") {
     await connectToSolletWallet();
     return sollet;
-  } else if (adapterType ==="coin98") {
-    await connectToCoin98Wallet(); 
+  } else if (adapterType === "coin98") {
+    await connectToCoin98Wallet();
     return coin98;
   } else {
     await connectToPhantomWallet();

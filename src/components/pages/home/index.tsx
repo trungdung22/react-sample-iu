@@ -10,10 +10,20 @@ import ModalContent from 'components/astoms/modalSection';
 import { fetchPlayerAccount } from 'lib/utilities/utils';
 
 const Home: React.FC = () => {
+  const [playerData, setPlayerData] = useState({
+    data: {
+      is_connect : false,
+      lamportUnit: 0,
+      adapter_type: '',
+      publicKey: '',
+      balanceUSDT: 0,
+      balanceSOL: 0,
+    }
+  });
   const classes = useStyles();
   const [dataModal, setDataModal] = useState({
     data: {
-      is_connect: IS_CONNECT,
+      is_connect: playerData.data.is_connect,
       show: false,
       first: false,
       second: false,
@@ -36,16 +46,7 @@ const Home: React.FC = () => {
     })
   }
 
-  const [playerData, setPlayerData] = useState({
-    data: {
-      is_connect : false,
-      lamportUnit: 0,
-      adapter_type: '',
-      publicKey: '',
-      balanceUSDT: 0,
-      balanceSOL: 0,
-    }
-  });
+  
 
   const dataGiveFromHeader = (getDataHeader: any) => {
     setDataModal({

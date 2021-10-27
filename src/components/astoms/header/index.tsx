@@ -63,14 +63,14 @@ const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
   return (
     <header className={`${classes.root} ${offset ? 'active' : ''}`}>
       <div className={`${classes.container}`}>
-        <a href="/" className={`${classes.headerLeft}`}><img src="/assets/common/logo.png" alt="Millionsy" /><span>Millionsy</span></a>
+        <Link to="/" className={`${classes.headerLeft}`}><img src="/assets/common/logo.png" alt="Millionsy" /><span>Millionsy</span></Link>
         <div className={`${classes.headerRight}`}>
           <ul>
-            <li><a href="/lottery" className={location === '/lottery' ? 'active ': '' }>Lottery</a></li>
-            <li><a href="/" className={location === '/millipad' ? 'active ': ''}>Millipad</a></li>
-            <li><a href="/" className={location === '/tickets' ? 'active ': ''}>NFT Tickets</a></li>
+            <li><Link to="/lottery" className={location === '/lottery' ? 'active ': '' }>Lottery</Link></li>
+            <li><Link to="/" className={location === '/millipad' ? 'active ': ''}>Millipad</Link></li>
+            <li><Link to="/" className={location === '/tickets' ? 'active ': ''}>NFT Tickets</Link></li>
           </ul>
-          <DefaultButon text="Connect Wallet" connect={Boolean(window.sessionStorage.getItem('data_connect'))} onClick={() => !Boolean(window.sessionStorage.getItem('data_connect')) ? dataGiveFromHeader(true) : ''}></DefaultButon>
+          <DefaultButon text="Connect Wallet" connect={playerData.is_connect} onClick={() => !playerData.is_connect ? dataGiveFromHeader(true) : ''}></DefaultButon>
         </div>
       </div>
     </header>

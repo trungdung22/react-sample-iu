@@ -10,11 +10,20 @@ import ModalContent from 'components/astoms/modalSection';
 import { fetchPlayerAccount } from 'lib/utilities/utils';
 
 const Home: React.FC = () => {
-  
+  const [playerData, setPlayerData] = useState({
+    data: {
+      is_connect : false,
+      lamportUnit: 0,
+      adapter_type: '',
+      publicKey: '',
+      balanceUSDT: 0,
+      balanceSOL: 0,
+    }
+  });
   const classes = useStyles();
   const [dataModal, setDataModal] = useState({
     data: {
-      is_connect: Boolean(window.sessionStorage.getItem('data_connect')),
+      is_connect: playerData.data.is_connect,
       show: false,
       first: false,
       second: false,
@@ -37,16 +46,7 @@ const Home: React.FC = () => {
     })
   }
 
-  const [playerData, setPlayerData] = useState({
-    data: {
-      is_connect : false,
-      lamportUnit: 0,
-      adapter_type: '',
-      publicKey: '',
-      balanceUSDT: 0,
-      balanceSOL: 0,
-    }
-  });
+  
 
   const dataGiveFromHeader = (getDataHeader: any) => {
     setDataModal({
@@ -107,7 +107,7 @@ const Home: React.FC = () => {
           <div className={`${classes.content}`}>
             <Title text={['We start', <br />, 'the next Lottery', <br />, 'generation']}></Title>
             <p className={`${classes.text}`}>The first crosschain Lottery ever<br className="sp-768" /> powered by Solana</p>
-            <DefaultButon text={'Connect Wallet'} small="small" connect={Boolean(window.sessionStorage.getItem('data_connect'))} onClick={() => !Boolean(window.sessionStorage.getItem('data_connect')) ? setDataModal({ data: { ...dataModal.data, show: true } }) : ''}></DefaultButon>
+            <DefaultButon text={'Connect Wallet'} small="small" connect={playerData.data.is_connect} onClick={() => !playerData.data.is_connect ? setDataModal({ data: { ...dataModal.data, show: true } }) : ''}></DefaultButon>
           </div>
         </div>
       </div>

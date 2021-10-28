@@ -32,7 +32,7 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
       <div className={`${classes.header}`}>
         <div className="top">
           <p className="title">
-          <span onClick={() => dataGiveDetail({
+            <span className='inline-block' onClick={() => dataGiveDetail({
                   back_your: true,
                 })}
               >
@@ -108,9 +108,11 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
         {slide ? (
           <>
             Detail
-            <svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 6L0.535899 -6.52533e-07L7.4641 -4.68497e-08L4 6Z" fill="#17F0FF"/>
-            </svg>
+            <span>
+              <svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 6L0.535899 -6.52533e-07L7.4641 -4.68497e-08L4 6Z" fill="#17F0FF"/>
+              </svg>
+            </span>
           </>
         ) :
           <>

@@ -2,10 +2,11 @@ import * as ProgramCommand from './builder'
 import { Account, Connection, PublicKey, SystemProgram, Transaction, TransactionInstruction, sendAndConfirmTransaction } from "@solana/web3.js";
 import { TICKET_ACCOUNT_DATA_LAYOUT } from './state';
 import { sendTxUsingExternalSignature, UseWallet } from './wallet-provider';
+import { CONNECTION_ULR } from './config'; 
 
 //const connection = new Connection("http://localhost:8899", 'singleGossip');
 //const connection = new Connection("https://api.devnet.solana.com", 'singleGossip');
-const connection = new Connection("https://api.mainnet-beta.solana.com", 'singleGossip');
+const connection = new Connection(CONNECTION_ULR, 'singleGossip');
 const SEED = 'milli'; 
 
 export const buyTicket = async(programIdString, ticketNumbers, lotteryGamePubkey, lotteryOwnerPubkey) => {

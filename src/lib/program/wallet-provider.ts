@@ -8,6 +8,7 @@ import { COMMITMENT, CLUSTERS } from "./connection";
 import { SolletWalletAdapter } from "lib/wallets/sollet";
 import { PhantomWalletAdapter } from "lib/wallets/phantom";
 import { Coin98WalletAdapter } from "lib/wallets/coin98";
+import { SOLLET_ADAPTER_NETWORD } from './config'; 
 
 const WALLET_LIST = ["sollet", "phantom"];
 const PROVIDER_URL = "https://www.sollet.io";

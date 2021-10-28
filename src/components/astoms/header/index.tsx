@@ -54,11 +54,6 @@ const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
       }
     )
   }
-  
-  if (playerData.is_connect) {
-    window.sessionStorage.setItem('data_connect', 'true')
-  }
-  
 
   return (
     <header className={`${classes.root} ${offset ? 'active' : ''}`}>

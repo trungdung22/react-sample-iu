@@ -2,6 +2,10 @@
 const monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 export const numberWithCommas = (x) => {
+    if (typeof x === 'string') {
+        var convert_val = Number(x);
+        return convert_val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 

@@ -305,6 +305,7 @@ const Lottery: React.FC = () => {
         });
     }
   }
+  
 
 
   return (

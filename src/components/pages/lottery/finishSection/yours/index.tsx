@@ -76,7 +76,7 @@ const Yours: React.FC<Props> = ({playerData, dataGiveFromYours}) => {
   return (
     <div className={`${classes.root}`}>
       {
-        true ? (
+        data.items.length > 0 ? (
           <>
             <div className={`${classes.header}`}>
               <p className="title">Round</p>

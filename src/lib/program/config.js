@@ -5,7 +5,7 @@ import {
 
 var connection_url = ""; 
 var adapter_type;
-if (ENV === "mainet") {
+if (ENV === "mainnet") {
     connection_url = "https://api.mainnet-beta.solana.com";
     adapter_type = WalletAdapterNetwork.Mainnet;
 } else {

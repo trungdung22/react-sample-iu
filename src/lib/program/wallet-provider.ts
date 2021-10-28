@@ -50,7 +50,7 @@ export const sendTxUsingExternalSignature = async (
   return connection.confirmTransaction(txid, COMMITMENT);
 };
 
-let sollet = new SolletWalletAdapter({ provider: PROVIDER_URL, network: WalletAdapterNetwork.Mainnet });
+let sollet = new SolletWalletAdapter({ provider: PROVIDER_URL, network: SOLLET_ADAPTER_NETWORD});
 let phantom = new PhantomWalletAdapter();
 let coin98 = new Coin98WalletAdapter();
 

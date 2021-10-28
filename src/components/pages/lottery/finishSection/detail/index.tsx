@@ -76,27 +76,27 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
             <ul className="prizeMatch">
               <li>
                 <span>Match  3</span>
-                <span>{dataSendToDetail.match_pool3_sol} SOL</span>
+                <span>{(Number(dataSendToDetail.total_pool_sol)/100*8).toFixed(2)} SOL</span>
                 <span>{dataSendToDetail.match_pool3_count} Winners</span>
               </li>
               <li>
                 <span>Match  4</span>
-                <span>{dataSendToDetail.match_pool4_sol} SOL</span>
+                <span>{(Number(dataSendToDetail.total_pool_sol)/100*12).toFixed(2)} SOL</span>
                 <span>{dataSendToDetail.match_pool4_count} Winners</span>
               </li>
               <li>
                 <span>Match  5</span>
-                <span>{dataSendToDetail.match_pool5_sol} SOL</span>
+                <span>{(Number(dataSendToDetail.total_pool_sol)/100*16).toFixed(2)} SOL</span>
                 <span>{dataSendToDetail.match_pool5_count} Winners</span>
               </li>
               <li>
                 <span>Match  6</span>
-                <span>{dataSendToDetail.match_pool6_sol} SOL</span>
+                <span>{(Number(dataSendToDetail.total_pool_sol)/100*40).toFixed(2)} SOL</span>
                 <span>{dataSendToDetail.match_pool6_count} Winners</span>
               </li>
               <li>
                 <span>Burn</span>
-                <span>{dataSendToDetail.burn_pool_sol} SOL</span>
+                <span>{(Number(dataSendToDetail.total_pool_sol)/100*24).toFixed(2)} SOL</span>
                 <span><br/></span>
               </li>
             </ul>

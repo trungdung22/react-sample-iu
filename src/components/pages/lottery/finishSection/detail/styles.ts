@@ -432,7 +432,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         lineHeight: '1.5rem',
         fontSize: 14,
         '& span': {
-          display: 'block',
+          display: 'inline-block',
           fontSize: 18,
         }
       },

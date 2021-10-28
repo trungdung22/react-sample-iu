@@ -39,16 +39,25 @@ const Second: React.FC<Props> = ({dataGiveSecond, dataSendSecond, playerData}) =
   //     five: false,
   //   }
   // });
+  const handleRandomTicket = () => {
+    const result = [];
+    while(result.length < 6){
+      const numberRandom = Math.floor(Math.random() * 45) + 1;
+      if(result.indexOf(numberRandom) === -1) result.push(numberRandom);
+    }
+    return result;
+  }
   const handleInputMax = (event: React.MouseEvent) => {
     setData({
       data: {
         ...data.data,
-        tickets: Array(5).fill(0).map(() => Array(6).fill(0).map(() => Math.floor(Math.random() * 45) + 1)),
+        tickets: Array(5).fill(0).map(() => handleRandomTicket()),
         ticketCount: 5,
         price: data.data.unit * 5,
       }
     })
   }
+  
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (parseInt(event.target.value) > 5) {
       event.target.value = "5";
@@ -59,7 +68,7 @@ const Second: React.FC<Props> = ({dataGiveSecond, dataSendSecond, playerData}) =
         ...data.data,
         ticketCount: event.target.value !== '' ? parseInt(event.target.value) : 0,
         price: total,
-        tickets: event.target.value !== '' ? Array(parseInt(event.target.value)).fill(0).map(() => Array(6).fill(0).map(() => Math.floor(Math.random() * 45) + 1)) : [Array()]
+        tickets: event.target.value !== '' ? Array(parseInt(event.target.value)).fill(0).map(() => handleRandomTicket()) : [Array()]
       }
     })
   };
@@ -103,7 +112,7 @@ const Second: React.FC<Props> = ({dataGiveSecond, dataSendSecond, playerData}) =
           />
           <div className={`${classes.payunit}`}>
             <p className="name">SOL</p>
-            <p>~{data.data.unit}</p>
+            <p>~{data.data.price === 0 ? 0 : data.data.price.toFixed(8)}</p>
           </div>
         </div>
         <p className={`${classes.balance}`}>SOL Balance: {playerData.balanceSOL}</p>
@@ -115,7 +124,7 @@ const Second: React.FC<Props> = ({dataGiveSecond, dataSendSecond, playerData}) =
       <div className={`${classes.footer}`}>
           <div className={`${classes.totalPay}`}>
             <p className="text">You pay</p>
-            <p className="price">~ {data.data.price.toFixed(4)} SOL</p>
+            <p className="price">~ {data.data.price === 0 ? 0 : data.data.price.toFixed(8)} SOL</p>
           </div>
           <ul className={`${classes.listButton}`}>
             <li onClick={handleComfirm}>Buy instantly</li>

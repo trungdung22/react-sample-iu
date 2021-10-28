@@ -18,11 +18,19 @@ const Third: React.FC<Props> = ({dataSendThird, dataGiveThird}) => {
       }
     }
   });
+  const handleRandomTicket = () => {
+    const result = [];
+    while(result.length < 6){
+      const numberRandom = Math.floor(Math.random() * 45) + 1;
+      if(result.indexOf(numberRandom) === -1) result.push(numberRandom);
+    }
+    return result;
+  }
   const handleRandomTickets = (event: React.MouseEvent) => {
     setData({
       data: {
         ...data.data,
-        tickets: Array(dataSendThird.data.ticketCount).fill(0).map(() => Array(6).fill(0).map(() => Math.floor(Math.random() * 45) + 1))
+        tickets: Array(dataSendThird.data.ticketCount).fill(0).map(() => handleRandomTicket())
       }
     })
   }
@@ -73,7 +81,7 @@ const Third: React.FC<Props> = ({dataSendThird, dataGiveThird}) => {
       <div className={`${classes.body}`}>
         <div className={`${classes.buy}`}>
           <p className="title">Total cost</p>
-          <p className="icon">~ {dataSendThird.data.price.toFixed(2)} SOL</p>
+          <p className="icon">~ {dataSendThird.data.price.toFixed(8)} SOL</p>
         </div>
         <p className={`${classes.description}`}>Number are randomized, with no duplicates among your tickets. Tap a number to edit it.<br />Available digits: 01-45.</p>
         <ul className={`${classes.listButton}`}>

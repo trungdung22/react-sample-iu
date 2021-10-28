@@ -287,6 +287,8 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
     dataGiveFromWallet(dataWalletSendLottery.data);
   }, [dataWalletSendLottery])
 
+  
+
   return (
     <>
       {dataModal.show && !dataModal.submit ? (

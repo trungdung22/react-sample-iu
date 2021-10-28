@@ -43,15 +43,15 @@ const Second: React.FC<Props> = ({dataGiveSecond, dataSendSecond, playerData}) =
     setData({
       data: {
         ...data.data,
-        tickets: Array(6).fill(0).map(() => Array(6).fill(0).map(() => Math.floor(Math.random() * 45) + 1)),
-        ticketCount: 6,
-        price: data.data.unit * 6,
+        tickets: Array(5).fill(0).map(() => Array(6).fill(0).map(() => Math.floor(Math.random() * 45) + 1)),
+        ticketCount: 5,
+        price: data.data.unit * 5,
       }
     })
   }
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (parseInt(event.target.value) > 6) {
-      event.target.value = "6";
+    if (parseInt(event.target.value) > 5) {
+      event.target.value = "5";
     }
     const total = event.target.value !== '' ? data.data.unit * parseFloat(event.target.value) : 0;
     setData({

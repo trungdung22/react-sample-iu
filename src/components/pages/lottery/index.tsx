@@ -128,12 +128,16 @@ const Lottery: React.FC = () => {
         }
       }) 
   
-      setPlayerData({
+      fetchPlayerAccount(window.sessionStorage.getItem("publicKey")).then(item => setPlayerData({
         data: {
-          ...playerData.data, 
-          is_connect: true
+          adapter_type: window.sessionStorage.getItem("adapter_type"),
+          is_connect: true,
+          lamportUnit: item.lamportUnit,
+          publicKey: window.sessionStorage.getItem("publicKey"),
+          balanceUSDT: item.balanceUSDT,
+          balanceSOL: item.balanceSOL,
         }
-      })
+      }));
     }
     getGameBoardInfo().then(item => setPartyData({
       data: {

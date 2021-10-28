@@ -42,7 +42,6 @@ const Home: React.FC = () => {
   });
 
   useEffect(() => {
-
     if (window.sessionStorage.getItem("data_connect") === "true") {
       setDataModal({
         data: {
@@ -51,12 +50,16 @@ const Home: React.FC = () => {
         }
       }) 
   
-      setPlayerData({
+      fetchPlayerAccount(window.sessionStorage.getItem("publicKey")).then(item => setPlayerData({
         data: {
-          ...playerData.data, 
-          is_connect: true
+          adapter_type: window.sessionStorage.getItem("adapter_type"),
+          is_connect: true,
+          lamportUnit: item.lamportUnit,
+          publicKey: window.sessionStorage.getItem("publicKey"),
+          balanceUSDT: item.balanceUSDT,
+          balanceSOL: item.balanceSOL,
         }
-      })
+      }));
     }
   }, [])
 

@@ -81,13 +81,14 @@ export const buyBulkTicket = async (programIdStr, ticketSetNumbers, gamePubkeySt
         });
         
         createAccountIxArr.push(ticketAccountTx);
-        ticketIxArr.push(buyIx); 
+        createAccountIxArr.push(buyIx); 
+        // ticketIxArr.push(buyIx); 
         ticketKeyArr.push(ticketAccount.publicKey.toBase58());
         ticketAccounts.push(ticketAccount);
     }
 
     await sendTxUsingExternalSignature(connection, createAccountIxArr, null, ticketAccounts, playerWallet);
-    await sendTxUsingExternalSignature(connection, ticketIxArr, null, null, playerWallet);
+    //await sendTxUsingExternalSignature(connection, ticketIxArr, null, null, playerWallet);
     return ticketKeyArr;
 }
 

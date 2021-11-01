@@ -55,6 +55,10 @@
    BufferLayout.u8("num_six")
  ]);
  
+ const MILLI_USER_ACCOUNT_DATA_LAYOUT = BufferLayout.struct([
+  publicKey("player_pubkey"),
+  uint64("lamport_amount"),
+]);
  
  function deserializeGame(accountInfo) {
    if (accountInfo.data.length === 0){
@@ -145,6 +149,7 @@
  module.exports = {
    GAME_ACCOUNT_DATA_LAYOUT, 
    TICKET_ACCOUNT_DATA_LAYOUT,
+   MILLI_USER_ACCOUNT_DATA_LAYOUT,
    deserializeGame,
    deserializeTicket
  }

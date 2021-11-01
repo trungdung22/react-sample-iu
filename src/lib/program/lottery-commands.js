@@ -1,8 +1,9 @@
 import * as ProgramCommand from './builder'
 import { Account, Connection, PublicKey, SystemProgram, Transaction, TransactionInstruction, sendAndConfirmTransaction } from "@solana/web3.js";
-import { TICKET_ACCOUNT_DATA_LAYOUT } from './state';
-import { sendTxUsingExternalSignature, UseWallet } from './wallet-provider';
+import { TICKET_ACCOUNT_DATA_LAYOUT, MILLI_USER_ACCOUNT_DATA_LAYOUT} from './state';
+import { sendTxUsingExternalSignature, UseWallet, sendTxUsingExternalSignatureV2 } from './wallet-provider';
 import { CONNECTION_ULR } from './config'; 
+import { convertUSDT } from 'lib/utilities/utils';
 
 //const connection = new Connection("http://localhost:8899", 'singleGossip');
 //const connection = new Connection("https://api.devnet.solana.com", 'singleGossip');
@@ -45,6 +46,29 @@ export const buyTicket = async(programIdString, ticketNumbers, lotteryGamePubkey
         {commitment: 'singleGossip', preflightCommitment: 'singleGossip',}
     )
     return ticketAccount.publicKey.toBase58();
+}
+
+export const buyMilliPad = async (programIdStr, milliPadPubkeyStr, milliPadOwnerPubKeyStr, adapter_type, usdt_amount) => {
+    const programId = new PublicKey(programIdStr);
+    const milliPadPubkey = new PublicKey(milliPadPubkeyStr);
+    const milliPadOwnerPubKey = new PublicKey(milliPadOwnerPubKeyStr); 
+    const convertAmount = await convertUSDT(usdt_amount); 
+    const playerWallet = await UseWallet(adapter_type);
+    let IxArr = [];
+
+    const buyIx = new TransactionInstruction({
+        programId: programId, 
+        keys: [
+            { pubkey: milliPadPubkey, isSigner: false, isWritable: false},
+            { pubkey: milliPadOwnerPubKey, isSigner: false, isWritable: true},
+            { pubkey: playerWallet.publicKey, isSigner: true, isWritable: true},
+            { pubkey: SystemProgram.programId, isSigner: false, isWritable: true}
+        ], 
+        data: ProgramCommand.buyMilliPad(convertAmount.lamports)
+    });
+    IxArr.push(buyIx);
+    await sendTxUsingExternalSignature(connection, IxArr, null, null, playerWallet);
+    return convertAmount.lamports;
 }
 
 export const buyBulkTicket = async (programIdStr, ticketSetNumbers, gamePubkeyStr, gameOwnerPubkeyStr, adapter_type) => {

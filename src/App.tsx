@@ -6,12 +6,9 @@ import routeElements from './router/routeElements';
 
 const App: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setIsLoaded(true);
-  //   }, 750)
-  // }, [])
+  
   window.onload = () => {
+    window.sessionStorage.clear();
     setTimeout(() => {
       setIsLoaded(true);
     }, 2000)

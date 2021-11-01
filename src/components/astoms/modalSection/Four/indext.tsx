@@ -33,9 +33,6 @@ const Four: React.FC<Props> = ({dataSendFour, dataGiveFour}) => {
   }
 
   const handleCheck = (val) => {
-    console.log("check:", data.data.ticketChanges.numberChange);
-    console.log("value:",val);
-    console.log("checked:", data.data.ticketChanges.numberChange.includes(val));
     return data.data.ticketChanges.numberChange.includes(val);
 }
 

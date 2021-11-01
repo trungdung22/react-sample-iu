@@ -15,10 +15,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     '&.connected': {
       color: '#fff',
       background: '#A819FA',
-      cursor: 'default',
-      '&:hover': {
-        opacity: 1,
-      },
     },
     // '@media screen and (max-width: 1640px)': {
     //   fontSize: '1em',

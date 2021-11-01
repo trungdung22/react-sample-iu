@@ -7,7 +7,6 @@ type Props = {
   dataGiveDetail: (getDataDetail: any) => void
 }
 const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
-  console.log(dataSendToDetail);
   const [slide, setSlide] = useState(true);
   const [data, setData] = useState({
     id: 0,

@@ -6,7 +6,6 @@ type Props = {
 }
 const Five: React.FC<Props> = ({dataSendFive, dataGiveFive}) => {
   const classes = useStyles();
-  console.log(dataSendFive);
   
   const [data, setData] = useState({
     data: {

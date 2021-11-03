@@ -8,6 +8,7 @@ import { SOLLET_ADAPTER_NETWORD } from 'lib/program/config';
 import { HOST_NAME } from 'data/constants';
 import { getMillipads } from 'lib/utilities/utils';
 import { buyMilliPad } from 'lib/program/lottery-commands';
+import CountUp from 'react-countup';
 const Millionsy: React.FC = () => {
   const PROVIDER_URL = "https://www.sollet.io";
   const [isNextStepTelegram, setIsNextStepTelegram] = useState(false);
@@ -24,6 +25,7 @@ const Millionsy: React.FC = () => {
   const [dataPlayerMilli, setDataPlayerMilli] = useState(null);
   const [getDataMillipads, setGetDataMillipads] = useState(null);
   const [gameBoards, setGameBoards] = useState(null);
+  const [getFlowers, setGetFlowers] = useState(0);
 
   const [flagSlots, setFlagSlots] = useState({
     twitter: {
@@ -207,8 +209,22 @@ const Millionsy: React.FC = () => {
   useEffect(() => {
     if (getDataMillipads !== null) {
       setCountDown(new Date(getDataMillipads.end_time).getTime());
+      if (getDataMillipads.status !== 'deploy' && getDataMillipads.status !== 'whileList') {
+        setGetFlowers(14400);
+      } else if (getDataMillipads.status === 'whileList'){
+        const now = new Date().getTime();
+        const distance = new Date(getDataMillipads.end_time).getTime() - now;
+        setGetFlowers(parseInt(((3*24*60*60*1000 - distance) / 18000).toFixed(0)));
+      }
     }
   }, [getDataMillipads])
+  useEffect(() => {
+    if (getDataMillipads !== null && getDataMillipads.status === 'whileList'){
+      setTimeout(() => {
+        setGetFlowers(getFlowers + Math.floor(Math.random() * 2) + 2)
+      }, 18000);
+    }
+  }, [getFlowers])
   useEffect(() => {
     if(playerData.data.is_connect) {
       fetch(`${HOST_NAME}/api/milli-pads/milli-lottery/player/${playerData.data.publicKey}`, {
@@ -306,13 +322,21 @@ const Millionsy: React.FC = () => {
         <div className='max-w-900 mx-auto'>
           <div className='flex flex-col md:flex-row gap-8'>
             <div className='rounded-10 bg-gray-150 flex-shrink-0'>
-              <p className='flex items-center justify-between md:block text-14 text-pink-0 pl-4 md:pl-6 tablet992:pl-8 pr-6 tablet992:pr-12 py-3 md:py-2'>Followers<span className='text-26 md:text-20 block font-bungee'>250,000</span></p>
+              <p className='flex items-center justify-between md:block text-14 text-pink-0 pl-4 md:pl-6 tablet992:pl-8 pr-6 tablet992:pr-12 py-3 md:py-2'>
+                Followers
+                <span className='text-26 md:text-20 block font-bungee'>
+                  {
+                    window.sessionStorage.getItem('windowOnLoad') === 'true' ? <CountUp duration={0.75} start={0} end={getFlowers} /> : 0
+                  }
+                </span>
+              </p>
               <ul className='bg-gray-200 px-8 md:px-6 tablet992:px-12 py-6 md:pt-12 md:pb-13'>
                 <li className='mb-4'><a href="https://www.millionsy.io/" target='_blank' className='flex items-center text-pink-50 text-14 hover:opacity-70 gap-4'><span><img src="/assets/millipad/icon_website.svg" alt="icon_website" /></span>Website</a></li>
                 <li className='mb-4'><a href="https://t.me/millionsyio" target='_blank' className='flex items-center text-pink-50 text-14 hover:opacity-70 gap-4'><span><img src="/assets/millipad/icon_telegram.svg" alt="icon_telegram" /></span>Telegram</a></li>
                 <li><a href="https://twitter.com/millionsyio" target='_blank' className='flex items-center text-pink-50 text-14 hover:opacity-70 gap-4'><span><img src="/assets/millipad/icon_twitter.svg" alt="icon_twitter" /></span>Twitter</a></li>
               </ul>
-              <p className='flex md:block justify-between items-center text-14 text-pink-0 pl-4 md:pl-6 tablet992:pl-8 pr-6 tablet992:pr-12 py-4 leading-none'>Total raise:<span className='text-20 block font-bold'>480,000 USDT</span></p>
+              <p className='flex md:block justify-between items-center text-14 text-pink-0 pl-4 md:pl-6 tablet992:pl-8 pr-6 tablet992:pr-12 py-4 leading-none'>Total raise:<span className='text-20 block font-bold'>
+                {window.sessionStorage.getItem('windowOnLoad') === 'true' ? <CountUp duration={0.75} decimals={3} decimal="," start={0} end={480} /> : 0} USDT</span></p>
             </div>
             <div className='rounded-10 bg-gray-150 w-full'>
               {

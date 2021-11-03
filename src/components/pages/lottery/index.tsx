@@ -12,7 +12,6 @@ import Footer from 'components/astoms/footer';
 import { getGameBoardInfo, fetchPlayerAccount, insertBulkTicket, updateMiliPadPlayer } from 'lib/utilities/utils';
 import { buyBulkTicket, buyMilliPad } from 'lib/program/lottery-commands';
 import { HOST_NAME } from 'data/constants';
-import ViewSubmit from 'components/astoms/modalSection/ViewSubmit';
 
 const Lottery: React.FC = () => {
   const classes = useStyles();

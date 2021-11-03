@@ -2,22 +2,29 @@ import Footer from 'components/astoms/footer';
 import Header from 'components/astoms/header';
 import ModalContent from 'components/astoms/modalSection';
 import React, { useEffect, useState } from 'react';
-import { fetchPlayerAccount } from 'lib/utilities/utils';
+import { fetchPlayerAccount, getGameBoardInfo, registerMilipadPlayer, updateMiliPadPlayer, updateMissionPlayer } from 'lib/utilities/utils';
 import { SolletWalletAdapter } from 'lib/wallets/sollet';
 import { SOLLET_ADAPTER_NETWORD } from 'lib/program/config'; 
 import { HOST_NAME } from 'data/constants';
+import { getMillipads } from 'lib/utilities/utils';
+import { buyMilliPad } from 'lib/program/lottery-commands';
 const Millionsy: React.FC = () => {
   const PROVIDER_URL = "https://www.sollet.io";
-  
-  const [flagStartRound, setFlagStartRound] = useState({
-    start: false,
-    whitelist: false,
-    lottery: false,
-    saleRound: false,
-    isWindSale: false,
-    distribution: false,
-  })
-  
+  const [isNextStepTelegram, setIsNextStepTelegram] = useState(false);
+  const [isNextStepTwitter, setIsNextStepTwitter] = useState(false);
+  const [isActiveSelect, setIsActiveSelect] = useState(false);
+  const [valueOption, setValueOption] = useState('');
+  const [isFinishSaleRound, setIsFinishSaleRound] = useState(false);
+  const [selectedTickets, setSelectedTickets] = useState('telegram');
+  const [showModalTicket, setShowModalTicket] = useState(false);
+  const sollet = new SolletWalletAdapter({ provider: PROVIDER_URL, network: SOLLET_ADAPTER_NETWORD});
+  const [modalDisconnect, setModalDisconnect] = useState(false);
+  const [countDown, setCountDown] = useState(Number);
+  const [windowOnLoad, setWindowOnLoad] = useState(false);
+  const [dataPlayerMilli, setDataPlayerMilli] = useState(null);
+  const [getDataMillipads, setGetDataMillipads] = useState(null);
+  const [gameBoards, setGameBoards] = useState(null);
+
   const [flagSlots, setFlagSlots] = useState({
     twitter: {
       waggle: 0,
@@ -42,7 +49,6 @@ const Millionsy: React.FC = () => {
       retweet: false,
     }
   })
-
   const [playerData, setPlayerData] = useState({
     data: {
       is_connect: false,
@@ -53,15 +59,6 @@ const Millionsy: React.FC = () => {
       balanceSOL: 0,
     }
   });
-  const [isNextStepTelegram, setIsNextStepTelegram] = useState(false);
-  const [isNextStepTwitter, setIsNextStepTwitter] = useState(false);
-
-  const [isActiveSelect, setIsActiveSelect] = useState(false);
-  const [valueOption, setValueOption] = useState('');
-  const [passSaleRound, setPassSaleRound] = useState(false);
-  const [isFinishSaleRound, setIsFinishSaleRound] = useState(false);
-  const [selectedTickets, setSelectedTickets] = useState('telegram');
-  const [showModalTicket, setShowModalTicket] = useState(false);
   const [timeCountDown, setTimeCountDown] = useState({
     days: '0',
     hours: '00',
@@ -93,8 +90,6 @@ const Millionsy: React.FC = () => {
     }
   });
 
-  
-
   const dataGiveFromModal = (getDataModalTolottery: any) => {
     setDataModal({
       data: getDataModalTolottery,
@@ -108,7 +103,6 @@ const Millionsy: React.FC = () => {
       }
     })
     if (getDataHeader !== undefined && getDataHeader.publicKey !== '') {
-      
       fetchPlayerAccount(getDataHeader.publicKey).then(item => {
         setPlayerData({
           data: {
@@ -123,8 +117,7 @@ const Millionsy: React.FC = () => {
       });
     }
   }
-  const sollet = new SolletWalletAdapter({ provider: PROVIDER_URL, network: SOLLET_ADAPTER_NETWORD});
-  const [modalDisconnect, setModalDisconnect] = useState(false);
+  
   const handleDisconnect = () => {
     setModalDisconnect(false);
     window.sessionStorage.clear();
@@ -179,7 +172,6 @@ const Millionsy: React.FC = () => {
       resetModalData();
     } 
   }
-  
 
   const resetModalData = () => {
     setDataModal({
@@ -206,115 +198,20 @@ const Millionsy: React.FC = () => {
       }
     })
   }
-  const startDate = new Date('Nov 03, 2021 18:00:00').getTime();
-  const nowDate = new Date().getTime();
-  const [countDown, setCountDown] = useState(Number);
-  const [windowOnLoad, setWindowOnLoad] = useState(false);
-  
-  const registerMilipadPlayer = async (playerPubkey, missions, code) => {
-    const requestOptions = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 
-          playerPubkey: playerPubkey, 
-          missions: missions,
-          code: code
-        })
-    };
-    const response = await fetch(`${HOST_NAME}/api/milli-pads/register`, requestOptions);
-    return response;
-  }
-  const updateMissionPlayer = async (playerPubkey, missions, code) => {
-    const requestOptions = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 
-          playerPubkey: playerPubkey, 
-          mission: missions,
-          code: code
-        })
-    };
-    const response = await fetch(`${HOST_NAME}/api/milli-pads/update-mission`, requestOptions);
-    return response;
-  }
-  const updateAmountPlayer = async (playerPubkey, amount, code) => {
-    const requestOptions = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 
-          playerPubkey: playerPubkey, 
-          amount: amount,
-          code: code
-        })
-    };
-    const response = await fetch(`${HOST_NAME}/api/milli-pads/update-amount`, requestOptions);
-    return response;
-  }
-  const [dataPlayerMilli, setDataPlayerMilli] = useState(null);
   
   useEffect(() => {
-    
-    setCountDown(startDate);
+    getGameBoardInfo().then(data => setGameBoards(data));
+    getMillipads().then(data => setGetDataMillipads(data));
     setWindowOnLoad(true);
-    if(startDate+ 3*24*60*60*1000 - nowDate > 0) {
-      setFlagStartRound({
-        start: true,
-        whitelist: false,
-        lottery: false,
-        saleRound: false,
-        isWindSale: false,
-        distribution: false,
-      })
-    } else if(startDate + 4*24*60*60*1000 - nowDate > 0) {
-      setFlagStartRound({
-        start: false,
-        whitelist: true,
-        lottery: false,
-        saleRound: false,
-        isWindSale: false,
-        distribution: false,
-      })
-    } else if(startDate + 7*24*60*60*1000 - nowDate > 0) {
-      setFlagStartRound({
-        start: false,
-        whitelist: false,
-        lottery: true,
-        saleRound: false,
-        isWindSale: false,
-        distribution: false,
-      })
-    } else if(startDate + 8*24*60*60*1000 - nowDate > 0) {
-      setFlagStartRound({
-        start: false,
-        whitelist: false,
-        lottery: false,
-        saleRound: true,
-        isWindSale: false,
-        distribution: false,
-      })
-    } else {
-      setFlagStartRound({
-        start: false,
-        whitelist: false,
-        lottery: false,
-        saleRound: false,
-        isWindSale: false,
-        distribution: true,
-      })
-      setPassSaleRound(true);
-      
-    }
-    
   }, [])
   useEffect(() => {
+    if (getDataMillipads !== null) {
+      setCountDown(new Date(getDataMillipads.end_time).getTime());
+    }
+  }, [getDataMillipads])
+  useEffect(() => {
     if(playerData.data.is_connect) {
-      fetch(`${HOST_NAME}/api/milli-pads/milli-lottery/player/${window.sessionStorage.getItem('publicKey')}`, {
+      fetch(`${HOST_NAME}/api/milli-pads/milli-lottery/player/${playerData.data.publicKey}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -325,8 +222,7 @@ const Millionsy: React.FC = () => {
             setDataPlayerMilli(data)
           })
         } else {
-          registerMilipadPlayer(window.sessionStorage.getItem('publicKey'), [], 'milli-lottery');
-          updateAmountPlayer(window.sessionStorage.getItem('publicKey'), '0', 'milli-lottery');
+          registerMilipadPlayer(playerData.data.publicKey, [], getDataMillipads !== null ? getDataMillipads.code : '');
         }
       })
     }
@@ -334,10 +230,6 @@ const Millionsy: React.FC = () => {
   useEffect(() => {
     if(dataPlayerMilli !== null) {
       const session = dataPlayerMilli.sessions.join('');
-      setFlagStartRound({
-        ...flagStartRound,
-        isWindSale: dataPlayerMilli.is_winner,
-      })
       setFlagSlots({
         twitter: {
           waggle: session.indexOf('goal1') > -1 ? 1 : 0,
@@ -362,7 +254,7 @@ const Millionsy: React.FC = () => {
           retweet: session.indexOf('goal4') > -1 ? true : false,
         }
       })
-      setIsFinishSaleRound(dataPlayerMilli.sale_amount > 0 ? true : false);
+      setIsFinishSaleRound(typeof dataPlayerMilli.sale_amount !== 'undefined' && dataPlayerMilli.sale_amount > 0 ? true : false);
     }
   }, [dataPlayerMilli])
   useEffect(() => {
@@ -373,51 +265,6 @@ const Millionsy: React.FC = () => {
         const distance = countDown - now;
         if (distance < 0) {
           clearInterval(timer);
-          if(flagStartRound.start) {
-            setFlagStartRound({
-              start: false,
-              whitelist: true,
-              lottery: false,
-              saleRound: false,
-              isWindSale: false,
-              distribution: false,
-            })
-            setCountDown(startDate + 3*24*60*60*1000);
-          }
-          if(flagStartRound.whitelist) {
-            setFlagStartRound({
-              start: false,
-              whitelist: false,
-              lottery: true,
-              saleRound: false,
-              isWindSale: false,
-              distribution: false,
-            })
-            setCountDown(startDate + 4*24*60*60*1000);
-          }
-          if(flagStartRound.lottery) {
-            setFlagStartRound({
-              start: false,
-              whitelist: false,
-              lottery: false,
-              saleRound: true,
-              isWindSale: false,
-              distribution: false,
-            })
-            setCountDown(startDate + 7*24*60*60*1000);
-          }
-          if(flagStartRound.saleRound) {
-            setFlagStartRound({
-              start: false,
-              whitelist: false,
-              lottery: false,
-              saleRound: false,
-              isWindSale: false,
-              distribution: true,
-            })
-            setCountDown(startDate + 8*24*60*60*1000);
-            setPassSaleRound(true);
-          }
         }
         if (distance > 0) {
           setTimeCountDown({
@@ -469,32 +316,38 @@ const Millionsy: React.FC = () => {
             </div>
             <div className='rounded-10 bg-gray-150 w-full'>
               {
-                playerData.data.is_connect && passSaleRound && !flagStartRound.isWindSale ? <h4 className='text-14 md:text-20 text-pink-50 font-bold py-3 px-4 md:px-6 tablet992:px-12 flex flex-col md:flex-row justify-between md:items-center'>Will start in<span className='font-bungee text-blue-0 text-27 sm:text-28'>0 <span className='text-20'>days</span> : 00<span className='text-20'>h</span> : 00<span className='text-20'>m</span> : 00<span className='text-20'>s</span></span></h4>
+                playerData.data.is_connect && dataPlayerMilli !== null && !dataPlayerMilli.is_winner && getDataMillipads !== null && getDataMillipads.status === 'distribution'
+                ? <h4 className='text-14 md:text-20 text-pink-50 font-bold py-3 px-4 md:px-6 tablet992:px-12 flex flex-col md:flex-row justify-between md:items-center'>Will start in<span className='font-bungee text-blue-0 text-27 sm:text-28'>0 <span className='text-20'>days</span> : 00<span className='text-20'>h</span> : 00<span className='text-20'>m</span> : 00<span className='text-20'>s</span></span></h4>
                 : <h4 className='text-14 md:text-20 text-pink-50 font-bold py-3 px-4 md:px-6 tablet992:px-12 flex flex-col md:flex-row justify-between md:items-center'>Will start in<span className='font-bungee text-blue-0 text-27 sm:text-28'>{timeCountDown.days} <span className='text-20'>days</span> : {timeCountDown.hours}<span className='text-20'>h</span> : {timeCountDown.minutes}<span className='text-20'>m</span> : {timeCountDown.seconds}<span className='text-20'>s</span></span></h4>
               }
               <ul className='bg-gray-300'>
-                <li className={`px-4 md:px-6 tablet992:px-12 py-3 text-12 md:text-14 text-pink-50 border-b border-gray-250 border-solid ${flagStartRound.whitelist ? 'bg-purple-100' : ''}`}><span className='text-16 font-bold block md:inline-block'>Whitelist<span className='hidden md:inline'>:</span></span> Register for the sale round and do tasks to claim slots.</li>
-                <li className={`px-4 md:px-6 tablet992:px-12 py-3 text-12 md:text-14 text-pink-50 border-b border-gray-250 border-solid ${flagStartRound.lottery ? 'bg-purple-100' : ''}`}><span className='text-16 font-bold block md:inline-block'>Lottery<span className='hidden md:inline'>:</span></span> Choosing randomly the winners among participants.</li>
+                <li className={`px-4 md:px-6 tablet992:px-12 py-3 text-12 md:text-14 text-pink-50 border-b border-gray-250 border-solid ${getDataMillipads !== null && getDataMillipads.status === 'whileList' ? 'bg-purple-100' : ''}`}><span className='text-16 font-bold block md:inline-block'>Whitelist<span className='hidden md:inline'>:</span></span> Register for the sale round and do tasks to claim slots.</li>
+                <li className={`px-4 md:px-6 tablet992:px-12 py-3 text-12 md:text-14 text-pink-50 border-b border-gray-250 border-solid ${getDataMillipads !== null && getDataMillipads.status === 'lottery' ? 'bg-purple-100' : ''}`}><span className='text-16 font-bold block md:inline-block'>Lottery<span className='hidden md:inline'>:</span></span> Choosing randomly the winners among participants.</li>
                 
                 {
                   playerData.data.is_connect ?
-                    flagStartRound.isWindSale ?
+                    dataPlayerMilli === null ?
                     <>
-                      <li className={`px-4 md:px-6 tablet992:px-12 py-3 text-12 md:text-14 text-pink-50 border-b border-gray-250 border-solid ${flagStartRound.saleRound ? 'bg-purple-100' : ''}`}><span className='text-16 font-bold block md:inline-block'>Sale round<span className='hidden md:inline'>:</span></span> Only winners can participate in this round.</li>
-                      <li className={`px-4 md:px-6 tablet992:px-12 py-3 text-12 md:text-14 text-pink-50 ${flagStartRound.distribution ? 'bg-purple-100' : ''}`}><span className='text-16 font-bold block md:inline-block'>Distribution<span className='hidden md:inline'>:</span></span> The tokens will be automatically sent to wallets.</li>
+                      <li className={`px-4 md:px-6 tablet992:px-12 py-3 text-12 md:text-14 text-pink-50 border-b border-gray-250 border-solid`}><span className='text-16 font-bold block md:inline-block'>Sale round<span className='hidden md:inline'>:</span></span> Only winners can participate in this round.</li>
+                      <li className={`px-4 md:px-6 tablet992:px-12 py-3 text-12 md:text-14 text-pink-50`}><span className='text-16 font-bold block md:inline-block'>Distribution<span className='hidden md:inline'>:</span></span> The tokens will be automatically sent to wallets.</li>
+                    </>
+                    :
+                    dataPlayerMilli.is_winner ?
+                    <>
+                      <li className={`px-4 md:px-6 tablet992:px-12 py-3 text-12 md:text-14 text-pink-50 border-b border-gray-250 border-solid ${getDataMillipads !== null && getDataMillipads.status === 'saleRound' ? 'bg-purple-100' : ''}`}><span className='text-16 font-bold block md:inline-block'>Sale round<span className='hidden md:inline'>:</span></span> Only winners can participate in this round.</li>
+                      <li className={`px-4 md:px-6 tablet992:px-12 py-3 text-12 md:text-14 text-pink-50 ${getDataMillipads !== null && getDataMillipads.status === 'distribution' ? 'bg-purple-100' : ''}`}><span className='text-16 font-bold block md:inline-block'>Distribution<span className='hidden md:inline'>:</span></span> The tokens will be automatically sent to wallets.</li>
                     </>
                     :
                     <>
-                      <li className={`px-4 md:px-6 tablet992:px-12 py-3 text-12 md:text-14 text-pink-50 border-b border-gray-250 border-solid ${passSaleRound || flagStartRound.saleRound ? 'bg-purple-100' : ''}`}><span className='text-16 font-bold block md:inline-block'>Sale round<span className='hidden md:inline'>:</span></span> Only winners can participate in this round.</li>
+                      <li className={`px-4 md:px-6 tablet992:px-12 py-3 text-12 md:text-14 text-pink-50 border-b border-gray-250 border-solid ${getDataMillipads !== null && (getDataMillipads.status === 'distribution' ||  getDataMillipads.status === 'saleRound') ? 'bg-purple-100' : ''}`}><span className='text-16 font-bold block md:inline-block'>Sale round<span className='hidden md:inline'>:</span></span> Only winners can participate in this round.</li>
                       <li className={`px-4 md:px-6 tablet992:px-12 py-3 text-12 md:text-14 text-pink-50`}><span className='text-16 font-bold block md:inline-block'>Distribution<span className='hidden md:inline'>:</span></span> The tokens will be automatically sent to wallets.</li>
                     </>
                   :
                   <>
-                    <li className={`px-4 md:px-6 tablet992:px-12 py-3 text-12 md:text-14 text-pink-50 border-b border-gray-250 border-solid ${flagStartRound.saleRound ? 'bg-purple-100' : ''}`}><span className='text-16 font-bold block md:inline-block'>Sale round<span className='hidden md:inline'>:</span></span> Only winners can participate in this round.</li>
-                    <li className={`px-4 md:px-6 tablet992:px-12 py-3 text-12 md:text-14 text-pink-50 ${flagStartRound.distribution ? 'bg-purple-100' : ''}`}><span className='text-16 font-bold block md:inline-block'>Distribution<span className='hidden md:inline'>:</span></span> The tokens will be automatically sent to wallets.</li>
+                    <li className={`px-4 md:px-6 tablet992:px-12 py-3 text-12 md:text-14 text-pink-50 border-b border-gray-250 border-solid ${getDataMillipads !== null && getDataMillipads.status === 'saleRound' ? 'bg-purple-100' : ''}`}><span className='text-16 font-bold block md:inline-block'>Sale round<span className='hidden md:inline'>:</span></span> Only winners can participate in this round.</li>
+                    <li className={`px-4 md:px-6 tablet992:px-12 py-3 text-12 md:text-14 text-pink-50 ${getDataMillipads !== null && getDataMillipads.status === 'distribution' ? 'bg-purple-100' : ''}`}><span className='text-16 font-bold block md:inline-block'>Distribution<span className='hidden md:inline'>:</span></span> The tokens will be automatically sent to wallets.</li>
                   </>
                 }
-                
               </ul>
               <div className='flex items-center justify-between px-4 md:px-6 tablet992:px-12 py-6 md:py-3'>
                 <p className='text-14 bg-gray-0 border border-solid border-pink-50 rounded-5 py-1 px-5 text-pink-50 font-bold'>Solana</p>
@@ -522,7 +375,7 @@ const Millionsy: React.FC = () => {
       {
         playerData.data.is_connect &&
         <>
-          <section className={`px-3/100 mb-9 md:mb-14 ${flagStartRound.whitelist ? 'block' : 'hidden'}`}>
+          <section className={`px-3/100 mb-9 md:mb-14 ${getDataMillipads !== null && getDataMillipads.status === 'whileList' ? 'block' : 'hidden'}`}>
             <div className='max-w-900 mx-auto bg-gray-350 rounded-15 pt-5 pb-7 md:pt-8 md:pb-12'>
               <div className='px-4 md:px-8'>
                 <h4 className='text-18 md:text-20 mb-2 md:mb-4 text-pink-0'>NFT ticket pool</h4>
@@ -574,7 +427,7 @@ const Millionsy: React.FC = () => {
               </div>
             </div>
           </section>
-          <section className={`px-3/100 mb-9 md:mb-14 ${flagStartRound.lottery ? 'block' : 'hidden'}`}>
+          <section className={`px-3/100 mb-9 md:mb-14 ${getDataMillipads !== null && getDataMillipads.status === 'lottery' ? 'block' : 'hidden'}`}>
             <div className='max-w-900 mx-auto bg-gray-150 rounded-15 py-5 md:py-8'>
               <div className='px-4 md:px-8'>
                 <h4 className='text-18 md:text-20 mb-2 md:mb-3.5 text-pink-0'>Lottery</h4>
@@ -582,115 +435,123 @@ const Millionsy: React.FC = () => {
               </div>
             </div>
           </section>
-          <section className={`${flagStartRound.saleRound || (!flagStartRound.isWindSale && passSaleRound) ? 'block' : 'hidden'}`}>
-            {
-              dataPlayerMilli !== null && !dataPlayerMilli.is_winner ?
-              <div className={`px-3/100 mb-9 md:mb-14 ${!flagStartRound.isWindSale || (!flagStartRound.isWindSale && passSaleRound) ? 'block' : 'hidden'}`}>
-                <div className='max-w-900 mx-auto bg-gray-150 rounded-15 py-5 md:py-8'>
-                  <div className='px-4 md:px-8'>
-                    <h4 className='text-18 md:text-20 mb-2 md:mb-3.5 text-pink-0'>Sale round</h4>
-                    <p className='text-pink-50 text-12 md:text-14 font-normal text-justify md:text-left'>You don’t have any winning slot in this pool. Best luck next time!</p>
-                  </div>
+          <section className={`${(getDataMillipads !== null && getDataMillipads.status === 'saleRound') || (getDataMillipads.status === 'distribution' && dataPlayerMilli !== null && !dataPlayerMilli.is_winner) ? 'block' : 'hidden'}`}>
+            <div className={`px-3/100 mb-9 md:mb-14 ${dataPlayerMilli !== null && !dataPlayerMilli.is_winner ? 'block' : 'hidden'}`}>
+              <div className='max-w-900 mx-auto bg-gray-150 rounded-15 py-5 md:py-8'>
+                <div className='px-4 md:px-8'>
+                  <h4 className='text-18 md:text-20 mb-2 md:mb-3.5 text-pink-0'>Sale round</h4>
+                  <p className='text-pink-50 text-12 md:text-14 font-normal text-justify md:text-left'>You don’t have any winning slot in this pool. Best luck next time!</p>
                 </div>
               </div>
-              :
-              <>
-              <div className={`px-3/100 mb-9 md:mb-14 ${flagStartRound.isWindSale && !isFinishSaleRound ? 'block' : 'hidden'}`}>
-                <div className='max-w-900 mx-auto bg-gray-150 rounded-15 py-5 md:py-8'>
-                  <div className='px-4 md:px-8'>
-                    <h4 className='text-18 md:text-20 mb-2 md:mb-3.5 text-pink-0'>Sale round</h4>
-                    <div className='flex flex-col md:flex-row justify-between md:items-center gap-4'>
-                      <p className='text-pink-50 text-12 md:text-14 font-normal text-justify md:text-left'>Congratulations! You have 1 winning slot. Choose the amount <br className='hidden tablet992:block' /> of USDC you want to buy the tokens.</p>
-                      <div className='flex justify-between sm:justify-start md:justify-center items-center gap-12'>
-                        <div className={`bg-gray-600 w-100 relative ${isActiveSelect ? 'rounded-tl-5 rounded-tr-5' : 'rounded-5'}`}>
-                          <p className={`absolute right-2 top-2.5 cursor-pointer transition-all ${isActiveSelect ? 'transform rotate-180' : ''}`} onClick={() => setIsActiveSelect(!isActiveSelect)}>
-                            <svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M3.86603 4.5C3.48112 5.16667 2.51887 5.16667 2.13397 4.5L0.401924 1.5C0.0170235 0.833332 0.498149 -5.6841e-07 1.26795 -5.01112e-07L4.73205 -1.9827e-07C5.50185 -1.30972e-07 5.98298 0.833333 5.59808 1.5L3.86603 4.5Z" fill="white"/>
-                            </svg>
-                          </p>
-                          <p className='px-3 text-14 font-bold py-0.5 cursor-pointer' onClick={() => setIsActiveSelect(!isActiveSelect)}>{valueOption != '' ? valueOption : (<>&nbsp;</>)}</p>
-                          <ul className={`border-t border-solid border-gray-650 absolute top-full left-0 bg-gray-600 w-full rounded-bl-5 rounded-br-5 ${isActiveSelect ? '' : 'hidden'}`}>
-                            <li className='px-3 py-0.5 text-14 font-bold hover:bg-gray-700 cursor-pointer'
-                              onClick={(event: React.MouseEvent) => {
-                                setValueOption(event.currentTarget.innerHTML);
-                                setIsActiveSelect(false);
-                              }}
-                            >200</li>
-                            <li className='px-3 py-0.5 text-14 font-bold hover:bg-gray-700 cursor-pointer'
-                              onClick={(event: React.MouseEvent) => {
-                                setValueOption(event.currentTarget.innerHTML);
-                                setIsActiveSelect(false);
-                              }}
-                            >300</li>
-                            <li className='px-3 py-0.5 text-14 font-bold hover:bg-gray-700 cursor-pointer'
-                              onClick={(event: React.MouseEvent) => {
-                                setValueOption(event.currentTarget.innerHTML);
-                                setIsActiveSelect(false);
-                              }}
-                            >400</li>
-                            <li className='px-3 py-0.5 text-14 font-bold hover:bg-gray-700 cursor-pointer'
-                              onClick={(event: React.MouseEvent) => {
-                                setValueOption(event.currentTarget.innerHTML);
-                                setIsActiveSelect(false);
-                              }}
-                            >500</li>
-                            <li className='px-3 py-0.5 text-14 font-bold hover:bg-gray-700 cursor-pointer'
-                              onClick={(event: React.MouseEvent) => {
-                                setValueOption(event.currentTarget.innerHTML);
-                                setIsActiveSelect(false);
-                              }}
-                            >600</li>
-                            <li className='px-3 py-0.5 text-14 font-bold hover:bg-gray-700 cursor-pointer'
-                              onClick={(event: React.MouseEvent) => {
-                                setValueOption(event.currentTarget.innerHTML);
-                                setIsActiveSelect(false);
-                              }}
-                            >700</li>
-                            <li className='px-3 py-0.5 text-14 font-bold hover:bg-gray-700 cursor-pointer'
-                              onClick={(event: React.MouseEvent) => {
-                                setValueOption(event.currentTarget.innerHTML);
-                                setIsActiveSelect(false);
-                              }}
-                            >800</li>
-                            <li className='px-3 py-0.5 text-14 font-bold hover:bg-gray-700 cursor-pointer'
-                              onClick={(event: React.MouseEvent) => {
-                                setValueOption(event.currentTarget.innerHTML);
-                                setIsActiveSelect(false);
-                              }}
-                            >900</li>
-                            <li className='px-3 py-0.5 text-14 font-bold hover:bg-gray-700 cursor-pointer'
-                              onClick={(event: React.MouseEvent) => {
-                                setValueOption(event.currentTarget.innerHTML);
-                                setIsActiveSelect(false);
-                              }}
-                            >1000</li>
-                          </ul>
-                        </div>
-                        <p className='text-14 md:text-16 px-10 cursor-pointer transition-all hover:opacity-70 pt-2 pb-2.5 rounded-5 font-bold bg-blue-0 text-blue-50 inline-block'
-                          onClick={() => {
-                            if (valueOption !== '') {
-                              updateAmountPlayer(window.sessionStorage.getItem('publicKey'), valueOption, 'milli-lottery');
-                              setIsFinishSaleRound(true);
-                            }
-                          }}
-                        >Purchase</p>
+            </div>
+            <div className={`px-3/100 mb-9 md:mb-14 ${dataPlayerMilli !== null && dataPlayerMilli.is_winner && !isFinishSaleRound ? 'block' : 'hidden'}`}>
+              <div className='max-w-900 mx-auto bg-gray-150 rounded-15 py-5 md:py-8'>
+                <div className='px-4 md:px-8'>
+                  <h4 className='text-18 md:text-20 mb-2 md:mb-3.5 text-pink-0'>Sale round</h4>
+                  <div className='flex flex-col md:flex-row justify-between md:items-center gap-4'>
+                    <p className='text-pink-50 text-12 md:text-14 font-normal text-justify md:text-left'>Congratulations! You have 1 winning slot. Choose the amount <br className='hidden tablet992:block' /> of USDC you want to buy the tokens.</p>
+                    <div className='flex justify-between sm:justify-start md:justify-center items-center gap-12'>
+                      <div className={`bg-gray-600 w-100 relative ${isActiveSelect ? 'rounded-tl-5 rounded-tr-5' : 'rounded-5'}`}>
+                        <p className={`absolute right-2 top-2.5 cursor-pointer transition-all ${isActiveSelect ? 'transform rotate-180' : ''}`} onClick={() => setIsActiveSelect(!isActiveSelect)}>
+                          <svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3.86603 4.5C3.48112 5.16667 2.51887 5.16667 2.13397 4.5L0.401924 1.5C0.0170235 0.833332 0.498149 -5.6841e-07 1.26795 -5.01112e-07L4.73205 -1.9827e-07C5.50185 -1.30972e-07 5.98298 0.833333 5.59808 1.5L3.86603 4.5Z" fill="white"/>
+                          </svg>
+                        </p>
+                        <p className='px-3 text-14 font-bold py-0.5 cursor-pointer' onClick={() => setIsActiveSelect(!isActiveSelect)}>{valueOption != '' ? valueOption : (<>&nbsp;</>)}</p>
+                        <ul className={`border-t border-solid border-gray-650 absolute top-full left-0 bg-gray-600 w-full rounded-bl-5 rounded-br-5 ${isActiveSelect ? '' : 'hidden'}`}>
+                          <li className='px-3 py-0.5 text-14 font-bold hover:bg-gray-700 cursor-pointer'
+                            onClick={(event: React.MouseEvent) => {
+                              setValueOption(event.currentTarget.innerHTML);
+                              setIsActiveSelect(false);
+                            }}
+                          >200</li>
+                          <li className='px-3 py-0.5 text-14 font-bold hover:bg-gray-700 cursor-pointer'
+                            onClick={(event: React.MouseEvent) => {
+                              setValueOption(event.currentTarget.innerHTML);
+                              setIsActiveSelect(false);
+                            }}
+                          >300</li>
+                          <li className='px-3 py-0.5 text-14 font-bold hover:bg-gray-700 cursor-pointer'
+                            onClick={(event: React.MouseEvent) => {
+                              setValueOption(event.currentTarget.innerHTML);
+                              setIsActiveSelect(false);
+                            }}
+                          >400</li>
+                          <li className='px-3 py-0.5 text-14 font-bold hover:bg-gray-700 cursor-pointer'
+                            onClick={(event: React.MouseEvent) => {
+                              setValueOption(event.currentTarget.innerHTML);
+                              setIsActiveSelect(false);
+                            }}
+                          >500</li>
+                          <li className='px-3 py-0.5 text-14 font-bold hover:bg-gray-700 cursor-pointer'
+                            onClick={(event: React.MouseEvent) => {
+                              setValueOption(event.currentTarget.innerHTML);
+                              setIsActiveSelect(false);
+                            }}
+                          >600</li>
+                          <li className='px-3 py-0.5 text-14 font-bold hover:bg-gray-700 cursor-pointer'
+                            onClick={(event: React.MouseEvent) => {
+                              setValueOption(event.currentTarget.innerHTML);
+                              setIsActiveSelect(false);
+                            }}
+                          >700</li>
+                          <li className='px-3 py-0.5 text-14 font-bold hover:bg-gray-700 cursor-pointer'
+                            onClick={(event: React.MouseEvent) => {
+                              setValueOption(event.currentTarget.innerHTML);
+                              setIsActiveSelect(false);
+                            }}
+                          >800</li>
+                          <li className='px-3 py-0.5 text-14 font-bold hover:bg-gray-700 cursor-pointer'
+                            onClick={(event: React.MouseEvent) => {
+                              setValueOption(event.currentTarget.innerHTML);
+                              setIsActiveSelect(false);
+                            }}
+                          >900</li>
+                          <li className='px-3 py-0.5 text-14 font-bold hover:bg-gray-700 cursor-pointer'
+                            onClick={(event: React.MouseEvent) => {
+                              setValueOption(event.currentTarget.innerHTML);
+                              setIsActiveSelect(false);
+                            }}
+                          >1000</li>
+                        </ul>
                       </div>
+                      <p className='text-14 md:text-16 px-10 cursor-pointer transition-all hover:opacity-70 pt-2 pb-2.5 rounded-5 font-bold bg-blue-0 text-blue-50 inline-block'
+                        onClick={() => {
+                          if (valueOption !== '') {
+                            buyMilliPad(
+                              gameBoards !== null ? gameBoards.programId : '',
+                              getDataMillipads !== null ? getDataMillipads.millipad_pubkey : '',
+                              getDataMillipads !== null ? getDataMillipads.owner_pubkey : '',
+                              playerData.data.adapter_type, 
+                              valueOption)
+                            .then(async results => {
+                              try {
+                                await updateMiliPadPlayer(valueOption, getDataMillipads !== null ? getDataMillipads.code : '', playerData.data.publicKey);
+                                setIsFinishSaleRound(true);
+                              } catch (error) {
+                                console.log(error);
+                              }
+                            }).catch(error => {
+                              console.log(error)
+                            })
+                          }
+                        }}
+                      >Purchase</p>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className={`px-3/100 mb-9 md:mb-14 ${flagStartRound.isWindSale && isFinishSaleRound ? 'block' : 'hidden'}`}>
-                <div className='max-w-900 mx-auto bg-gray-150 rounded-15 py-5 md:py-8'>
-                  <div className='px-4 md:px-8'>
-                    <h4 className='text-18 md:text-20 mb-2 md:mb-3.5 text-pink-0'>Sale round</h4>
-                    <p className='text-pink-50 text-12 md:text-14 font-normal text-justify md:text-left'>You purchased successfully. Please wait for the Distribution.</p>
-                  </div>
+            </div>
+            <div className={`px-3/100 mb-9 md:mb-14 ${dataPlayerMilli !== null && dataPlayerMilli.is_winner && isFinishSaleRound ? 'block' : 'hidden'}`}>
+              <div className='max-w-900 mx-auto bg-gray-150 rounded-15 py-5 md:py-8'>
+                <div className='px-4 md:px-8'>
+                  <h4 className='text-18 md:text-20 mb-2 md:mb-3.5 text-pink-0'>Sale round</h4>
+                  <p className='text-pink-50 text-12 md:text-14 font-normal text-justify md:text-left'>You purchased successfully. Please wait for the Distribution.</p>
                 </div>
               </div>
-              </>
-            }
+            </div>
           </section>
-          <section className={`px-3/100 mb-9 md:mb-14 ${flagStartRound.isWindSale && flagStartRound.distribution ? 'block' : 'hidden'}`}>
+          <section className={`px-3/100 mb-9 md:mb-14 ${getDataMillipads !== null && getDataMillipads.status === 'distribution' && dataPlayerMilli !== null && dataPlayerMilli.is_winner ? 'block' : 'hidden'}`}>
             <div className='max-w-900 mx-auto bg-gray-150 rounded-15 py-5 md:py-8'>
               <div className='px-4 md:px-8'>
                 <h4 className='text-18 md:text-20 mb-2 md:mb-3.5 text-pink-0'>Distribution</h4>
@@ -768,7 +629,7 @@ const Millionsy: React.FC = () => {
                             waggle: 1,
                           }
                         })
-                        updateMissionPlayer(window.sessionStorage.getItem('publicKey'), 'goal1', 'milli-lottery')
+                        updateMissionPlayer(playerData.data.publicKey, 'goal1', getDataMillipads !== null ? getDataMillipads.code : '')
                       }
                     }}
                   >
@@ -800,7 +661,7 @@ const Millionsy: React.FC = () => {
                             millionsy: 1,
                           }
                         })
-                        updateMissionPlayer(window.sessionStorage.getItem('publicKey'), 'goal2', 'milli-lottery')
+                        updateMissionPlayer(playerData.data.publicKey, 'goal2', getDataMillipads !== null ? getDataMillipads.code : '')
                       }
                     }}
                   >
@@ -883,7 +744,7 @@ const Millionsy: React.FC = () => {
                             waggle: 1,
                           }
                         })
-                        updateMissionPlayer(window.sessionStorage.getItem('publicKey'), 'goal3', 'milli-lottery')
+                        updateMissionPlayer(playerData.data.publicKey, 'goal3', getDataMillipads !== null ? getDataMillipads.code : '')
                       }
                     }}
                   >
@@ -915,7 +776,7 @@ const Millionsy: React.FC = () => {
                             millionsy: 1,
                           }
                         })
-                        updateMissionPlayer(window.sessionStorage.getItem('publicKey'), 'goal4', 'milli-lottery')
+                        updateMissionPlayer(playerData.data.publicKey, 'goal4', getDataMillipads !== null ? getDataMillipads.code : '')
                       }
                     }}
                   >

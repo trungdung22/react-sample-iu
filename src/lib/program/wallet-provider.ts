@@ -13,7 +13,6 @@ import { SOLLET_ADAPTER_NETWORD } from './config';
 const WALLET_LIST = ["sollet", "phantom"];
 const PROVIDER_URL = "https://www.sollet.io";
 
-
 export const sendTxUsingExternalSignature = async (
   connection: Connection,
   instructions: TransactionInstruction[],
@@ -21,6 +20,7 @@ export const sendTxUsingExternalSignature = async (
   signersExceptWallet: Account[] | null,
   wallet: BaseMessageSignerWalletAdapter
 ) => {
+  debugger
   let tx = new Transaction().add(...instructions);
   let { blockhash } = await connection.getRecentBlockhash();
   tx.recentBlockhash = blockhash;
@@ -33,6 +33,7 @@ export const sendTxUsingExternalSignature = async (
       ...signersExceptWallet.map(s => s.publicKey)
     );
     signersExceptWallet.forEach(acc => {
+      debugger
       tx.partialSign(acc);
     });
   } else {

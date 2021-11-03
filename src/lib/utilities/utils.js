@@ -11,8 +11,20 @@ export const convertLamport = async (lamports) => {
     };
     const response = await fetch(`${HOST_NAME}/api/rate-converter?lamports=${lamports}`, requestOptions);
     const data = await response.json();
-    return { usdt: data["usdt"], sol: data["sol"] };
+    return { usdt: data["usdt"], sol: data["sol"]};
 }
+
+export const convertUSDT= async (amount) => {
+    const requestOptions = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    };
+    const response = await fetch(`${HOST_NAME}/api/rate-converter-usdt?amount=${amount}`, requestOptions);
+    const data = await response.json();
+    return { lamports: data["lamports"]};
+} 
 
 export const priceTicket = async () => {
     const requestOptions = {
@@ -24,6 +36,23 @@ export const priceTicket = async () => {
     const response = await fetch(`${HOST_NAME}/api/price-per-ticket`, requestOptions);
     const data = await response.json();
     return { lamports: data["lamports"], usdt: data["usdt"], sol: data["sol"] };
+}
+
+export const updateMiliPadPlayer = async (amount, code, playerPubkey) => {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+            amount: amount, 
+            code: code,
+            playerPubkey: playerPubkey
+        })
+        
+    };
+    const response = await fetch(`${HOST_NAME}/api/milli-pads/update-amount`, requestOptions);
+    return response;
 }
 
 export const insertBulkTicket = async (programId, playerPubkey, tickets) => {

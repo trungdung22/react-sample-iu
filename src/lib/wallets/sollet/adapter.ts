@@ -17,6 +17,7 @@ import {
     WalletWindowClosedError,
 } from '@solana/wallet-adapter-base';
 import { PublicKey, Transaction } from '@solana/web3.js';
+import { debug } from 'console';
 
 interface SolletWallet {
     postMessage(...args: unknown[]): unknown;

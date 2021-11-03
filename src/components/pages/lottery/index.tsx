@@ -9,8 +9,8 @@ import { isConnect } from 'data/db';
 import Star from 'components/astoms/star';
 import Header from 'components/astoms/header';
 import Footer from 'components/astoms/footer';
-import { getGameBoardInfo, fetchPlayerAccount, insertBulkTicket } from 'lib/utilities/utils';
-import { buyBulkTicket } from 'lib/program/lottery-commands';
+import { getGameBoardInfo, fetchPlayerAccount, insertBulkTicket, updateMiliPadPlayer } from 'lib/utilities/utils';
+import { buyBulkTicket, buyMilliPad } from 'lib/program/lottery-commands';
 import { HOST_NAME } from 'data/constants';
 import ViewSubmit from 'components/astoms/modalSection/ViewSubmit';
 
@@ -255,11 +255,60 @@ const Lottery: React.FC = () => {
     })
   }
 
+  const exampleSaleMilli = () => {
+    const milliPadPubkeyStr = "4hQBNPiRg7iFTgpKT1Pv4ktzN38VEy3EK9kEANzwNSUK"; 
+    const milliPadOwnerPubKeyStr = "5x2mWRnpyJCGTkdM8nmqrcfRnAZDfsJ5nqYAevb5W7bo";
+    const code = "milli-lottery";
+    buyMilliPad(partyData.data.programId,
+      milliPadPubkeyStr,
+      milliPadOwnerPubKeyStr,
+      playerData.data.adapter_type, 
+      50)
+      .then(async results => {
+        resetModalData();
+        try {
+          await updateMiliPadPlayer(50, code, playerData.data.publicKey);
+          
+          setDataModal({
+            data: {
+              ...dataModal.data,
+              show: true,
+              flag_submit: true, 
+              submit: true
+            }
+          })
+        } catch (error) {
+          setDataModal({
+            data: {
+              ...dataModal.data,
+              show: true,
+              submit: true,
+              flag_submit: false
+            }
+          })
+        }
+        
+      }).catch(error => {
+        debugger
+        resetModalData();
+        setDataModal({
+          data: {
+            ...dataModal.data,
+            show: true,
+            submit: true,
+            flag_submit: false
+          }
+        })
+        console.log(error)
+      });
+  }
+
   const dataGiveFromModal = (getDataModalTolottery: any) => {
     setDataModal({
       data: getDataModalTolottery,
     })
     if (getDataModalTolottery.flag_submit && getDataModalTolottery.your_ticket.length > 0) {
+      //exampleSaleMilli();
       buyBulkTicket(partyData.data.programId,
         getDataModalTolottery.your_ticket,
         partyData.data.gamePubkey,

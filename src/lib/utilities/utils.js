@@ -38,6 +38,34 @@ export const priceTicket = async () => {
     return { lamports: data["lamports"], usdt: data["usdt"], sol: data["sol"] };
 }
 
+export const registerMilipadPlayer = async (playerPubkey, missions, code) => {
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          playerPubkey: playerPubkey, 
+          missions: missions,
+          code: code
+        })
+    };
+    const response = await fetch(`${HOST_NAME}/api/milli-pads/register`, requestOptions);
+    return response;
+}
+
+export const getMillipads = async () => {
+    const requestOptions = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    };
+    const response = await fetch(`${HOST_NAME}/api/milli-pads`, requestOptions);
+    const data = await response.json();
+    return data.results[0];
+}
+
 export const updateMiliPadPlayer = async (amount, code, playerPubkey) => {
     const requestOptions = {
         method: 'POST',
@@ -105,3 +133,19 @@ export const fetchPlayerAccount = async (publicKey) => {
         publicKey: publicKey
     };
 }
+
+export const updateMissionPlayer = async (playerPubkey, missions, code) => {
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          playerPubkey: playerPubkey, 
+          mission: missions,
+          code: code
+        })
+    };
+    const response = await fetch(`${HOST_NAME}/api/milli-pads/update-mission`, requestOptions);
+    return response;
+  }

@@ -124,7 +124,7 @@ const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
             <ul>
               <li><a href="/lottery" className={location === '/lottery' ? 'active ': '' }>Lottery</a></li>
               <li><a href="/millipad" className={location === '/millipad' ? 'active ': ''}>Millipad</a></li>
-              <li><a href="/tickets" className={location === '/tickets' ? 'active ': ''}>NFT Tickets</a></li>
+              <li><a href="/" className={location === '/tickets' ? 'active ': ''}>NFT Tickets</a></li>
             </ul>
             <DefaultButon text="Connect Wallet" connect={playerData.is_connect} onClick={handleClickConnect}></DefaultButon>
           </div>

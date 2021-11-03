@@ -11,6 +11,7 @@ const App: React.FC = () => {
     window.sessionStorage.clear();
     setTimeout(() => {
       setIsLoaded(true);
+      window.sessionStorage.setItem('windowOnLoad', 'true');
     }, 2000)
   }
   return (

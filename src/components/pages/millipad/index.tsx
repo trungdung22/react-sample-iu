@@ -127,20 +127,21 @@ const Millipad: React.FC = () => {
         <h3 className='text-pink-0 font-bungee uppercase text-26 md:text-48 mb-8 md:mb-12 text-center'>upcoming Pools</h3>
         <div className='max-w-1110 mx-auto'>
           <div className='flex flex-wrap justify-center gap-5 2xl:gap-12'>
-            <div className='rounded-20 overflow-hidden max-w-345 md:max-w-460 2xl:max-w-500'>
-              <Link to='/millipad/millionsy' className='block transition-all hover:opacity-70 rounded-20 overflow-hidden'>
+            <div className='rounded-20 overflow-hidden max-w-345 md:max-w-460 2xl:max-w-500 relative transition-all hover:opacity-70'>
+              <a href='/millipad/millionsy' className='block absolute top-0 left-0 w-full h-full rounded-20'></a>
+              <div className='block rounded-20 overflow-hidden'>
                 <p><img src="/assets/millipad/under_img.png" alt="millionsy" /></p>
                 <div className='bg-gray-0 p-3 md:px-6 md:py-4'>
                   <h4 className=' text-pink-0 font-bungee uppercase leading-none md:leading-normal text-30 md:mb-3'>millionsy</h4>
                   <p className='text-12 md:text-14 text-pink-50 mb-4'>The first crosschain Lottery platorm with NFT ticket</p>
-                  <p className='text-14 text-blue-0 text-right font-bold'>Coming...</p>
+                  <p className='text-14 text-blue-0 text-right font-bold'>Happenning...</p>
                   <p className='h-px mt-2 mb-3 md:my-4 bg-pink-100'></p>
                   <dl className='flex justify-between items-center'>
                     <dt className='text-pink-50 font-bold text-14 rounded-5 border inline-block py-1 px-6 border-solid'>Solana</dt>
-                    <dd className='text-blue-0 text-16 md:text-18 leading-none md:leading-normal font-bold text-right'><span className='block md:inline'>Total raise:</span> 200,000 USDT</dd>
+                    <dd className='text-blue-0 text-16 md:text-18 leading-none md:leading-normal font-bold text-right'><span className='block md:inline'>Total raise:</span> 480,000 USDT</dd>
                   </dl>
                 </div>
-              </Link>
+              </div>
             </div>
           </div>
         </div>

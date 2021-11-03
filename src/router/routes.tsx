@@ -27,18 +27,18 @@ const routes: Routes[] = [
     LoadComponent: lazy(() => import('components/pages/whitepaper')),
     exact: true,
   },
-  // {
-  //   title: 'Millipad',
-  //   path: '/millipad',
-  //   LoadComponent: lazy(() => import('components/pages/millipad')),
-  //   exact: true,
-  // },
-  // {
-  //   title: 'Millipad',
-  //   path: '/millipad/:nameProject',
-  //   LoadComponent: IS_CONNECT ? lazy(() => import('components/pages/millipad/connected')) : lazy(() => import('components/pages/millipad/unconnected')),
-  //   exact: true,
-  // },
+  {
+    title: 'Millipad',
+    path: '/millipad',
+    LoadComponent: lazy(() => import('components/pages/millipad')),
+    exact: true,
+  },
+  {
+    title: 'Millipad',
+    path: '/millipad/:nameProject',
+    LoadComponent: lazy(() => import('components/pages/millionsy')),
+    exact: true,
+  },
 ];
 
 export default routes;

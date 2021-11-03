@@ -110,7 +110,7 @@ const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
             <p className='text-20 font-bold text-blue-50 rounded-5 text-center bg-blue-0 max-w-200 py-1.5 cursor-pointer transition-all hover:opacity-70' onClick={handleDisconnect}>Disconnect</p>
             <p className='absolute top-1/2 right-0 transform -translate-y-1/2 p-4 cursor-pointer' onClick={() => setModalDisconnect(false)}>
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fillRule="evenodd" clip-rule="evenodd" d="M11.7071 1.70711C12.0976 1.31658 12.0976 0.683417 11.7071 0.292893C11.3166 -0.0976311 10.6834 -0.0976311 10.2929 0.292893L6 4.58579L1.70711 0.292894C1.31658 -0.0976301 0.683417 -0.0976301 0.292893 0.292894C-0.0976311 0.683419 -0.0976311 1.31658 0.292893 1.70711L4.58579 6L0.292893 10.2929C-0.0976311 10.6834 -0.0976311 11.3166 0.292893 11.7071C0.683417 12.0976 1.31658 12.0976 1.70711 11.7071L6 7.41421L10.2929 11.7071C10.6834 12.0976 11.3166 12.0976 11.7071 11.7071C12.0976 11.3166 12.0976 10.6834 11.7071 10.2929L7.41421 6L11.7071 1.70711Z" fill="white"/>
+                <path fillRule="evenodd" clipRule="evenodd" d="M11.7071 1.70711C12.0976 1.31658 12.0976 0.683417 11.7071 0.292893C11.3166 -0.0976311 10.6834 -0.0976311 10.2929 0.292893L6 4.58579L1.70711 0.292894C1.31658 -0.0976301 0.683417 -0.0976301 0.292893 0.292894C-0.0976311 0.683419 -0.0976311 1.31658 0.292893 1.70711L4.58579 6L0.292893 10.2929C-0.0976311 10.6834 -0.0976311 11.3166 0.292893 11.7071C0.683417 12.0976 1.31658 12.0976 1.70711 11.7071L6 7.41421L10.2929 11.7071C10.6834 12.0976 11.3166 12.0976 11.7071 11.7071C12.0976 11.3166 12.0976 10.6834 11.7071 10.2929L7.41421 6L11.7071 1.70711Z" fill="white"/>
               </svg>
             </p>
           </div>
@@ -123,8 +123,8 @@ const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
           <div className={`${classes.headerRight}`}>
             <ul>
               <li><a href="/lottery" className={location === '/lottery' ? 'active ': '' }>Lottery</a></li>
-              <li><a href="/" className={location === '/millipad' ? 'active ': ''}>Millipad</a></li>
-              <li><a href="/" className={location === '/tickets' ? 'active ': ''}>NFT Tickets</a></li>
+              <li><a href="/millipad" className={location === '/millipad' ? 'active ': ''}>Millipad</a></li>
+              <li><a href="/tickets" className={location === '/tickets' ? 'active ': ''}>NFT Tickets</a></li>
             </ul>
             <DefaultButon text="Connect Wallet" connect={playerData.is_connect} onClick={handleClickConnect}></DefaultButon>
           </div>

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useStyles from './styles';
-import { HOST_NAME } from 'data/constants';
 import Parser from 'html-react-parser';
-import {prettyPrintTime} from '../../../../lib/utilities/format';
 import ContentLoader from 'react-content-loader';
 
 type Props = {
@@ -15,9 +13,6 @@ const NextSection: React.FC<Props> = ({playerData, sendDataNextToLottery}) => {
 
   
   useEffect(() => {
-    console.log(playerData);
-    
-    
     const countDownDate = playerData.closed_time.getTime();
     const timerId = setInterval(function() {
 

@@ -13,6 +13,8 @@ const NextSection: React.FC<Props> = ({playerData, sendDataNextToLottery}) => {
 
   
   useEffect(() => {
+    console.log(playerData.closed_time);
+    
     const countDownDate = playerData.closed_time.getTime();
     const timerId = setInterval(function() {
 

@@ -5,7 +5,7 @@ import { isConnect } from 'data/db';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchPlayerAccount } from 'lib/utilities/utils';
-const Millipad: React.FC = () => {
+const MILLIGO: React.FC = () => {
   const [dataModal, setDataModal] = useState({
     data: {
       is_connect: isConnect,
@@ -118,7 +118,7 @@ const Millipad: React.FC = () => {
         <div className='max-w-1110 mx-auto'>
           <p><img src="/assets/millipad/circle_02.png" alt="circle" className='mx-auto -mt-12 sm:-mt-20 md:-mt-24 lg:-mt-32' /></p>
           <h3 className='text-26 md:text-46 2xl:text-52 text-blue-0 text-center uppercase font-bungee mt-6 md:mt-8 mb-2 2xl:mb-0'>launching game, <br className='block lg:hidden' />nfts and more</h3>
-          <p className='text-12 md:text-14 font-normal leading-6 text-center max-w-720 mx-auto mb-6 md:mb-8'>Milipad is an IDO multi-platform, rasing funds for new gaming prjects NFTs and more. With Milipad, you won't need to lock your coins for stacking, simply buy some NFT tickets or do the tasks to participate in IDO rounds for-ever!</p>
+          <p className='text-12 md:text-14 font-normal leading-6 text-center max-w-900 mx-auto mb-6 md:mb-8'>Millipad is an IDO multi-platform, raising funds for new gaming projects, NFTs and more. With Millipad, you won't need to lock your coins for stacking, simply do the tasks or buy some NFT tickets to participate in IDO rounds for-ever!</p>
           <p className='text-14 md:text-16 bg-blue-0 max-w-max mx-auto py-1 px-5 md:py-3 md:px-10 text-blue-50 rounded-5 font-bold cursor-pointer transition-all hover:opacity-70 mb-8 md:mb-12'>Buy NFTs</p>
           <p className='animation-pend'><img src="/assets/millipad/circle_02.png" alt="circle" className='mx-auto' /></p>
         </div>
@@ -128,12 +128,12 @@ const Millipad: React.FC = () => {
         <div className='max-w-1110 mx-auto'>
           <div className='flex flex-wrap justify-center gap-5 2xl:gap-12'>
             <div className='rounded-20 overflow-hidden max-w-345 md:max-w-460 2xl:max-w-500 relative transition-all hover:opacity-70'>
-              <a href='/millipad/millionsy' className='block absolute top-0 left-0 w-full h-full rounded-20'></a>
+              <a href='/MILLIGO/millionsy' className='block absolute top-0 left-0 w-full h-full rounded-20'></a>
               <div className='block rounded-20 overflow-hidden'>
                 <p><img src="/assets/millipad/under_img.png" alt="millionsy" /></p>
                 <div className='bg-gray-0 p-3 md:px-6 md:py-4'>
                   <h4 className=' text-pink-0 font-bungee uppercase leading-none md:leading-normal text-30 md:mb-3'>millionsy</h4>
-                  <p className='text-12 md:text-14 text-pink-50 mb-4'>The first crosschain Lottery platorm with NFT ticket</p>
+                  <p className='text-12 md:text-14 text-pink-50 mb-4'>The first crosschain Lottery platform with NFT tickets.</p>
                   <p className='text-14 text-blue-0 text-right font-bold'>Happenning...</p>
                   <p className='h-px mt-2 mb-3 md:my-4 bg-pink-100'></p>
                   <dl className='flex justify-between items-center'>
@@ -190,4 +190,4 @@ const Millipad: React.FC = () => {
     </>
   )
 }
-export default Millipad;
+export default MILLIGO;

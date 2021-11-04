@@ -21,7 +21,7 @@ const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
   const classes = useStyles();
   const history = useHistory();
   const {nameProject} = useParams<urlParams>();
-  const [location, setLocation] = useState(typeof nameProject !== 'undefined' ? '/MILLIGO' : history.location.pathname);
+  const [location, setLocation] = useState(typeof nameProject !== 'undefined' ? '/milligo' : history.location.pathname.toLowerCase());
   const [dataWalletSendLottery, setDataWalletSendLottery] = useState({
     data: {
       is_connect : false,
@@ -123,7 +123,7 @@ const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
           <div className={`${classes.headerRight}`}>
             <ul>
               <li><a href="/lottery" className={location === '/lottery' ? 'active ': '' }>Lottery</a></li>
-              <li><a href="/MILLIGO" className={location === '/MILLIGO' ? 'active ': ''}>MILLIGO</a></li>
+              <li><a href="/MILLIGO" className={location === '/milligo' ? 'active ': ''}>MILLIGO</a></li>
               <li><a href="/" className={location === '/tickets' ? 'active ': ''}>NFT Tickets</a></li>
             </ul>
             <DefaultButon text="Connect Wallet" connect={playerData.is_connect} onClick={handleClickConnect}></DefaultButon>

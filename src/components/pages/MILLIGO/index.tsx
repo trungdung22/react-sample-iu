@@ -118,7 +118,7 @@ const MILLIGO: React.FC = () => {
         <div className='max-w-1110 mx-auto'>
           <p><img src="/assets/millipad/circle_02.png" alt="circle" className='mx-auto -mt-12 sm:-mt-20 md:-mt-24 lg:-mt-32' /></p>
           <h3 className='text-26 md:text-46 2xl:text-52 text-blue-0 text-center uppercase font-bungee mt-6 md:mt-8 mb-2 2xl:mb-0'>launching game, <br className='block lg:hidden' />nfts and more</h3>
-          <p className='text-12 md:text-14 font-normal leading-6 text-center max-w-900 mx-auto mb-6 md:mb-8'>Millipad is an IDO multi-platform, raising funds for new gaming projects, NFTs and more. With Millipad, you won't need to lock your coins for stacking, simply do the tasks or buy some NFT tickets to participate in IDO rounds for-ever!</p>
+          <p className='text-12 md:text-14 font-normal leading-6 text-center max-w-900 mx-auto mb-6 md:mb-8'>MILLIGO is an IGO multi-platform, raising funds for new gaming projects, NFTs and more. With MILLIGO, you won't need to lock your coins for stacking, simply do the tasks or buy some NFT tickets to participate in IGO rounds for-ever!</p>
           <p className='text-14 md:text-16 bg-blue-0 max-w-max mx-auto py-1 px-5 md:py-3 md:px-10 text-blue-50 rounded-5 font-bold cursor-pointer transition-all hover:opacity-70 mb-8 md:mb-12'>Buy NFTs</p>
           <p className='animation-pend'><img src="/assets/millipad/circle_02.png" alt="circle" className='mx-auto' /></p>
         </div>

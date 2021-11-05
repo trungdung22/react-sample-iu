@@ -655,8 +655,8 @@ const Millionsy: React.FC = () => {
                     }}
                   >
                     <p className={`leading-5 ${flagOnclick.twitter.waggle ? '' : 'opacity-50'}`}>
-                      <span className='text-16 text-pink-0 font-bold'><span className='mr-2'>1.</span>Waggle Network</span>
-                      <span className='text-14 text-pink-50 block pl-6'>Millionsy</span>
+                      <span className='text-16 text-pink-0 font-bold'><span className='mr-2'>1.</span>MILLIONSY</span>
+                      <span className='text-14 text-pink-50 block pl-6'>Twitter Follow</span>
                     </p>
                     <p className='leading-4 flex items-center flex-col'>
                       <span>
@@ -669,7 +669,7 @@ const Millionsy: React.FC = () => {
                   </a>
                 </li>
                 <li>
-                  <a href='https://twitter.com/millionsyio' target='_blank' className={`flex justify-between items-center py-3.5 border-b border-solid border-gray-550 ${flagOnclick.twitter.millionsy ? '' : 'cursor-default'}`}
+                  <a href='https://twitter.com/MILLIONSYio/status/1452649686402101251?s=20' target='_blank' className={`flex justify-between items-center py-3.5 border-b border-solid border-gray-550 ${flagOnclick.twitter.millionsy ? '' : 'cursor-default'}`}
                     onClick={(event) => {
                       if(!flagOnclick.twitter.millionsy) {
                         event.preventDefault()
@@ -687,7 +687,7 @@ const Millionsy: React.FC = () => {
                     }}
                   >
                     <p className={`leading-5 ${flagOnclick.twitter.millionsy ? '' : 'opacity-50'}`}>
-                      <span className='text-16 text-pink-0 font-bold'><span className='mr-2'>2.</span>MILLIONSY</span>
+                      <span className='text-16 text-pink-0 font-bold'><span className='mr-2'>2.</span>Retweet</span>
                       <span className='text-14 text-pink-50 block pl-6'>Retweet, like and comment</span>
                     </p>
                     <p className='leading-4 flex items-center flex-col'>
@@ -752,7 +752,7 @@ const Millionsy: React.FC = () => {
             <div className='px-5 pt-1 pb-5'>
               <ul>
                 <li>
-                  <a href='https://twitter.com/millionsyio' target='_blank' className={`flex justify-between items-center py-3.5 border-b border-solid border-gray-550 ${flagOnclick.twitter.waggle ? '' : 'cursor-default'}`}
+                  <a href='https://t.me/MILLIONSYio' target='_blank' className={`flex justify-between items-center py-3.5 border-b border-solid border-gray-550 ${flagOnclick.twitter.waggle ? '' : 'cursor-default'}`}
                     onClick={(event) => {
                       if(!flagOnclick.telegram.waggle) {
                         event.preventDefault()
@@ -770,8 +770,8 @@ const Millionsy: React.FC = () => {
                     }}
                   >
                     <p className={`leading-5 ${flagOnclick.telegram.waggle ? '' : 'opacity-50'}`}>
-                      <span className='text-16 text-pink-0 font-bold'><span className='mr-2'>1.</span>Waggle Network</span>
-                      <span className='text-14 text-pink-50 block pl-6'>Millionsy</span>
+                      <span className='text-16 text-pink-0 font-bold'><span className='mr-2'>1.</span>MILLIONSY</span>
+                      <span className='text-14 text-pink-50 block pl-6'>Join group</span>
                     </p>
                     <p className='leading-4 flex items-center flex-col'>
                       <span>
@@ -784,7 +784,7 @@ const Millionsy: React.FC = () => {
                   </a>
                 </li>
                 <li>
-                  <a href='https://twitter.com/millionsyio' target='_blank' className={`flex justify-between items-center py-3.5 border-b border-solid border-gray-550 ${flagOnclick.telegram.millionsy ? '' : 'cursor-default'}`}
+                  <a href='https://t.me/MILLIONSYchannel' target='_blank' className={`flex justify-between items-center py-3.5 border-b border-solid border-gray-550 ${flagOnclick.telegram.millionsy ? '' : 'cursor-default'}`}
                     onClick={(event) => {
                       if(!flagOnclick.telegram.millionsy) {
                         event.preventDefault()
@@ -803,7 +803,7 @@ const Millionsy: React.FC = () => {
                   >
                     <p className={`leading-5 ${flagOnclick.telegram.millionsy ? '' : 'opacity-50'}`}>
                       <span className='text-16 text-pink-0 font-bold'><span className='mr-2'>2.</span>MILLIONSY</span>
-                      <span className='text-14 text-pink-50 block pl-6'>Retweet, like and comment</span>
+                      <span className='text-14 text-pink-50 block pl-6'>Join channel</span>
                     </p>
                     <p className='leading-4 flex items-center flex-col'>
                       <span>

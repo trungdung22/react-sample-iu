@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import useStyles from './styles';
 import Title from 'components/astoms/title/DefaultTitle';
 import DefaultButon from 'components/astoms/button/DefaultButton';
-import { IS_CONNECT } from 'data/constants';
 import Star from 'components/astoms/star';
 import Header from 'components/astoms/header';
 import Footer from 'components/astoms/footer';
@@ -10,9 +9,9 @@ import ModalContent from 'components/astoms/modalSection';
 import { fetchPlayerAccount } from 'lib/utilities/utils';
 import { SolletWalletAdapter } from "lib/wallets/sollet";
 import { SOLLET_ADAPTER_NETWORD } from 'lib/program/config'; 
+import { PROVIDER_URL } from 'data/constants';
 
 const Home: React.FC = () => {
-  const PROVIDER_URL = "https://www.sollet.io";
   const [playerData, setPlayerData] = useState({
     data: {
       is_connect : false,
@@ -187,8 +186,8 @@ const Home: React.FC = () => {
             <li><img src="/assets/top/face02.png" alt="face02" /></li>
           </ul>
           <div className={`${classes.content}`}>
-            <Title text={['We start', <br />, 'the next Lottery', <br />, 'generation']}></Title>
-            <p className={`${classes.text}`}>The first crosschain Lottery ever<br className="sp-768" /> powered by Solana</p>
+            <Title text={['We start', <br />, 'the next', <br />, 'generation!']}></Title>
+            <p className={`${classes.text}`}>The first Lottery and Game launching <br className="sp-768" />platform on Solana</p>
             <DefaultButon text={'Connect Wallet'} small="small" connect={playerData.data.is_connect} onClick={handleClickConnect}></DefaultButon>
           </div>
         </div>

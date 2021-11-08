@@ -146,9 +146,7 @@ const All: React.FC<Props> = ({ dataSendToAll, dataGiveAll }) => {
                 <span>{`#${data['info'][data.id]['game_no']}`}</span>
                 {`${monthName[new Date(data['info'][data.id]['createdAt']).getMonth()]} 
                 ${new Date(data['info'][data.id]['createdAt']).getDate()}, 
-                ${new Date(data['info'][data.id]['createdAt']).getFullYear()}, 
-                ${formatTime(new Date(data['info'][data.id]['createdAt']).getHours())}:${formatTime(new Date(data['info'][data.id]['createdAt']).getMinutes())} 
-                ${(new Date(data['info'][data.id]['createdAt']).getHours()) >= 12 ? 'PM' : 'AM'}`}
+                ${new Date(data['info'][data.id]['createdAt']).getFullYear()}, 11:00 AM UTC`}
               </p>
             </div>
             <div className={`${classes.body}`}>

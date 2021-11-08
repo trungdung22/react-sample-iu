@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import useStyles from './styles';
 import { UseWallet } from '../../../../lib/program/wallet-provider';
-import {connect, useDispatch, useSelector} from 'react-redux';
-import { connectWalletAction } from 'redux/actions';
-import { walletModel } from 'redux/walletModel';
-import { InitialState, RootDispatcher } from 'redux/reducers/rootReducer';
 
 type Props = {
   dataGiveWallet: (dataWallet: any) => any

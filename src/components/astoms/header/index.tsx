@@ -2,12 +2,10 @@ import React, { useEffect, useState } from 'react';
 import useStyles from './styles';
 import DefaultButon from '../button/DefaultButton';
 import { useHistory } from "react-router-dom";
-import { IS_CONNECT } from 'data/constants';
-import { Link } from 'react-router-dom';
+import { PROVIDER_URL, useWindowSize } from 'data/constants';
 import { useParams } from 'react-router';
-import { UseWallet } from 'lib/program/wallet-provider';
 import { SolletWalletAdapter } from "lib/wallets/sollet";
-import { SOLLET_ADAPTER_NETWORD } from 'lib/program/config'; 
+import { SOLLET_ADAPTER_NETWORD } from 'lib/program/config';
 
 type Props = {
   playerData: any,
@@ -17,9 +15,10 @@ type urlParams = {
   nameProject: string,
 };
 const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
-  const PROVIDER_URL = "https://www.sollet.io";
+  const [showTooltip, setShowTooltip] = useState(false);
   const classes = useStyles();
   const history = useHistory();
+  const size = useWindowSize();
   const {nameProject} = useParams<urlParams>();
   const [location, setLocation] = useState(typeof nameProject !== 'undefined' ? '/milligo' : history.location.pathname.toLowerCase());
   const [dataWalletSendLottery, setDataWalletSendLottery] = useState({
@@ -49,18 +48,6 @@ const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
   useEffect(() => {
     dataGiveFromHeader(dataWalletSendLottery.data);
   }, [dataWalletSendLottery])
-
-  const dataGiveWallet = (data: any) => {
-    setDataWalletSendLottery({
-        data: {
-          ...dataWalletSendLottery.data,
-          is_connect: data.is_connect, 
-          publicKey: data.publicKey,
-          adapter_type: data.adapter_type
-        }
-      }
-    )
-  }
   const sollet = new SolletWalletAdapter({ provider: PROVIDER_URL, network: SOLLET_ADAPTER_NETWORD});
   const handleClickConnect = () => {
     if (playerData.is_connect) {
@@ -98,8 +85,24 @@ const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
     window.sessionStorage.clear();
     sollet.disconnect() as Promise<void>;
   }
-  
 
+  // window.ontouchmove = (e) => {
+  //   if(size.width < 769 && e.target.classList[0] === 'onTooltip') {
+  //     setShowTooltip(true)
+  //   }
+  //   if(size.width < 769 && e.target.classList[0] !== 'onTooltip') {
+  //     setShowTooltip(false)
+  //   }
+  // }
+  // window.onclick = (e) => {
+  //   if(size.width < 769 && e.target.classList[0] === 'onTooltip') {
+  //     setShowTooltip(true)
+  //   }
+  //   if(size.width < 769 && e.target.classList[0] !== 'onTooltip') {
+  //     setShowTooltip(false)
+  //   }
+  // }
+  
   return (
     <>
       {
@@ -117,14 +120,32 @@ const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
         </div>
       }
       
-      <header className={`${classes.root} ${offset ? 'active' : ''}`}>
+      <header className={`${classes.root} ${offset && (size.width < 769) ? 'active' : ''}`}>
         <div className={`${classes.container}`}>
           <a href="/" className={`${classes.headerLeft}`}><img src="/assets/common/logo.png" alt="Millionsy" /><span>Millionsy</span></a>
           <div className={`${classes.headerRight}`}>
             <ul>
               <li><a href="/lottery" className={location === '/lottery' ? 'active ': '' }>Lottery</a></li>
               <li><a href="/MILLIGO" className={location === '/milligo' ? 'active ': ''}>MILLIGO</a></li>
-              <li><a href="/" className={location === '/tickets' ? 'active ': ''}>NFT Tickets</a></li>
+              <li className='onTooltip relative'
+                onMouseLeave={() => {
+                  if(size.width > 768) {
+                    setShowTooltip(false)
+                  }
+                }}
+                onMouseEnter={() => {
+                  if(size.width > 768) {
+                    setShowTooltip(true);
+                  }
+                }}
+              >
+              <a href="/" className={location === '/tickets' ? 'active ': ''} 
+                onClick={(e) => e.preventDefault()}
+              >
+                NFT Tickets
+              </a>
+                { showTooltip && <p className='absolute top-full left-1/2 transform -translate-x-1/2 translate-y-2 z-100 border border-solid border-pink-150 bg-purple-150 rounded-15 w-60 text-center py-3'>Coming real soon...</p> }
+              </li>
             </ul>
             <DefaultButon text="Connect Wallet" connect={playerData.is_connect} onClick={handleClickConnect}></DefaultButon>
           </div>

@@ -3,9 +3,11 @@ import Header from 'components/astoms/header';
 import ModalContent from 'components/astoms/modalSection';
 import { isConnect } from 'data/db';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { fetchPlayerAccount } from 'lib/utilities/utils';
+import { useWindowSize } from 'data/constants';
 const MILLIGO: React.FC = () => {
+  const size = useWindowSize();
+  const [showTooltip, setShowTooltip] = useState(false);
   const [dataModal, setDataModal] = useState({
     data: {
       is_connect: isConnect,
@@ -110,6 +112,25 @@ const MILLIGO: React.FC = () => {
       }
     })
   }
+  // window.ontouchmove = (e) => {
+  //   console.log(e.target.classList[0]);
+    
+  //   if(size.width < 769 && e.target.classList[0] === 'onTooltip') {
+  //     setShowTooltip(true)
+  //   }
+  //   if(size.width < 769 && e.target.classList[0] !== 'onTooltip') {
+  //     setShowTooltip(false)
+  //   }
+  // }
+  // window.onclick = (e) => {
+  //   if(size.width < 769 && e.target.classList[0] === 'onTooltip') {
+  //     setShowTooltip(true)
+  //   }
+  //   if(size.width < 769 && e.target.classList[0] !== 'onTooltip') {
+  //     setShowTooltip(false)
+  //   }
+  // }
+  
 
   return (
     <>
@@ -119,7 +140,21 @@ const MILLIGO: React.FC = () => {
           <p><img src="/assets/millipad/circle_02.png" alt="circle" className='mx-auto -mt-12 sm:-mt-20 md:-mt-24 lg:-mt-32' /></p>
           <h3 className='text-26 md:text-46 2xl:text-52 text-blue-0 text-center uppercase font-bungee mt-6 md:mt-8 mb-2 2xl:mb-0'>launching game, <br className='block lg:hidden' />nfts and more</h3>
           <p className='text-12 md:text-14 font-normal leading-6 text-center max-w-900 mx-auto mb-6 md:mb-8'>MILLIGO is an IGO multi-platform, raising funds for new gaming projects, NFTs and more. With MILLIGO, you won't need to lock your coins for stacking, simply do the tasks or buy some NFT tickets to participate in IGO rounds for-ever!</p>
-          <p className='text-14 md:text-16 bg-blue-0 max-w-max mx-auto py-1 px-5 md:py-3 md:px-10 text-blue-50 rounded-5 font-bold cursor-pointer transition-all hover:opacity-70 mb-8 md:mb-12'>Buy NFTs</p>
+          <div className='relative'>
+            <p className='onTooltip text-14 md:text-16 bg-blue-0 max-w-max mx-auto py-1 px-5 md:py-3 md:px-10 text-blue-50 rounded-5 font-bold md:cursor-not-allowed mb-8 md:mb-12'
+              onMouseLeave={() => {
+                if(size.width > 768) {
+                  setShowTooltip(false);
+                }
+              }}
+              onMouseEnter={() => {
+                if(size.width > 768) {
+                  setShowTooltip(true);
+                }
+              }}
+            >Buy NFTs</p>
+            { showTooltip && <p className='absolute top-full left-1/2 transform -translate-x-1/2 translate-y-4 z-100 border border-solid border-pink-150 bg-purple-150 rounded-15 w-60 text-center py-3'>Coming real soon...</p> }
+          </div>
           <p className='animation-pend'><img src="/assets/millipad/circle_02.png" alt="circle" className='mx-auto' /></p>
         </div>
       </section>

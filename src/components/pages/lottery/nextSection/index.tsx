@@ -13,8 +13,6 @@ const NextSection: React.FC<Props> = ({playerData, sendDataNextToLottery}) => {
 
   
   useEffect(() => {
-    console.log(playerData.closed_time);
-    
     const countDownDate = playerData.closed_time.getTime();
     const timerId = setInterval(function() {
 
@@ -114,7 +112,7 @@ const NextSection: React.FC<Props> = ({playerData, sendDataNextToLottery}) => {
                     <p>Your Ticket</p>
                     <p>You have <span onClick={handleViewTicket}>{playerData.your_tickets.length} ticket</span> to enter this party.</p>
                   </div>
-                  <p className="getticket" onClick={handleGetTicket}>Get it now {`>`}</p>
+                  <p className="getticket" onClick={handleGetTicket}>Buy ticket</p>
                 </div>
               </>
             ) : (

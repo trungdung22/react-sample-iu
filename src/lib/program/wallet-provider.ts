@@ -1,17 +1,15 @@
 import { Account, Transaction, TransactionInstruction, Connection } from "@solana/web3.js";
-import Wallet from "@project-serum/sol-wallet-adapter";
 import {
   BaseMessageSignerWalletAdapter,
-  WalletAdapterNetwork,
 } from '@solana/wallet-adapter-base';
-import { COMMITMENT, CLUSTERS } from "./connection";
+import { COMMITMENT } from "./connection";
 import { SolletWalletAdapter } from "lib/wallets/sollet";
 import { PhantomWalletAdapter } from "lib/wallets/phantom";
 import { Coin98WalletAdapter } from "lib/wallets/coin98";
-import { SOLLET_ADAPTER_NETWORD } from './config'; 
+import { SOLLET_ADAPTER_NETWORD } from './config';
+import { PROVIDER_URL } from "data/constants";
 
-const WALLET_LIST = ["sollet", "phantom"];
-const PROVIDER_URL = "https://www.sollet.io";
+// const WALLET_LIST = ["sollet", "phantom"];
 
 export const sendTxUsingExternalSignature = async (
   connection: Connection,
@@ -51,7 +49,7 @@ export const sendTxUsingExternalSignature = async (
   return connection.confirmTransaction(txid, COMMITMENT);
 };
 
-let sollet = new SolletWalletAdapter({ provider: PROVIDER_URL, network: SOLLET_ADAPTER_NETWORD});
+let sollet = new SolletWalletAdapter({ provider: PROVIDER_URL, network: SOLLET_ADAPTER_NETWORD });
 let phantom = new PhantomWalletAdapter();
 let coin98 = new Coin98WalletAdapter();
 

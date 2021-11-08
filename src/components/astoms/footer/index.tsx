@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useParams } from 'react-router';
 import useStyles from './styles';
+import { useWindowSize } from 'data/constants';
 type urlParams = {
   nameProject: string,
 };
 const Footer: React.FC = () => {
+  const [showTooltip, setShowTooltip] = useState(false);
+  const size = useWindowSize();
   const classes = useStyles();
   const history = useHistory();
   const {nameProject} = useParams<urlParams>();
@@ -115,8 +118,10 @@ const Footer: React.FC = () => {
             MILLIGO
           </a>
           </li>
-        <li>
-          <a href="/" className={location === '/tickets' ? 'active ': '' }>
+        <li className=' relative'>
+          <a href="/" className={location === '/tickets' ? 'active ': '' }
+            onClick={(e) => e.preventDefault()}
+          >
             <span>
               <svg width="25" height="19" viewBox="0 0 25 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M15.9216 11.4971C15.9075 11.4775 15.8915 11.4591 15.874 11.4426C15.8564 11.4258 15.8369 11.4108 15.8165 11.3981C15.796 11.3853 15.7737 11.3744 15.7512 11.3659C15.7283 11.3572 15.7048 11.3512 15.6811 11.3472C15.6573 11.3431 15.6329 11.3412 15.6087 11.3418C15.56 11.3436 15.5119 11.3547 15.4674 11.3745C15.4454 11.3845 15.4247 11.3969 15.4047 11.411C15.3851 11.4251 15.3667 11.4407 15.3503 11.4586C15.3334 11.4762 15.3185 11.4957 15.3057 11.5161C15.2926 11.5367 15.282 11.5585 15.2732 11.5815C15.2647 11.604 15.2584 11.6275 15.2544 11.6513C15.2504 11.6754 15.2488 11.6998 15.2495 11.724C15.2501 11.7482 15.2535 11.7725 15.2589 11.796C15.2643 11.8195 15.272 11.8428 15.282 11.8649C15.2921 11.8869 15.3042 11.9081 15.3183 11.9277C15.3324 11.9476 15.3484 11.966 15.3659 11.9825C15.3839 11.9993 15.403 12.0143 15.4238 12.027C15.4442 12.0397 15.4662 12.0507 15.489 12.0591C15.5116 12.0676 15.5351 12.0739 15.5589 12.0779C15.583 12.0819 15.607 12.0839 15.6312 12.0829C15.6557 12.0822 15.6798 12.0793 15.7036 12.0738C15.7271 12.0684 15.75 12.0604 15.7724 12.0503C15.7945 12.0406 15.8156 12.0281 15.8352 12.0141C15.8548 12 15.8732 11.984 15.89 11.9664C15.9065 11.9489 15.9218 11.9294 15.9346 11.9089C15.9473 11.8884 15.9583 11.8665 15.9667 11.8436C15.9752 11.8211 15.9815 11.7976 15.9855 11.7735C15.9895 11.7497 15.9911 11.7253 15.9904 11.7011C15.9898 11.6769 15.9868 11.6525 15.9814 11.629C15.9759 11.6055 15.9679 11.5823 15.9579 11.5602C15.9478 11.5382 15.9357 11.517 15.9216 11.4971Z" fill="#F4E0FF"/>
@@ -126,6 +131,7 @@ const Footer: React.FC = () => {
             </span>
             NFT Tickets
           </a>
+          { showTooltip && <p className='absolute bottom-full left-1/2 transform -translate-x-1/2 -translate-y-2 z-100 border border-solid border-pink-150 bg-purple-150 rounded-15 w-60 text-center py-3'>Coming real soon...</p> }
         </li>
       </ul>
       <footer className={`${classes.root}`}>

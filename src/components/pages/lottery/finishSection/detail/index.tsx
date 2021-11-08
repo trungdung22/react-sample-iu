@@ -42,9 +42,15 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
             Round
           </p>
         </div>
-        <p className={`${classes.infoRound}`}>
+        {/* <p className={`${classes.infoRound}`}>
             <span>{`#${dataSendToDetail.game_no}`}</span>
             {prettyPrintTime(new Date(dataSendToDetail.createdAt))}
+        </p> */}
+        <p className={`${classes.infoRound}`}>
+          <span>{`#${dataSendToDetail.game_no}`}</span>
+          {`${monthName[new Date(dataSendToDetail.createdAt).getMonth()]} 
+          ${new Date(dataSendToDetail.createdAt).getDate()}, 
+          ${new Date(dataSendToDetail.createdAt).getFullYear()}, 11:00 AM UTC`}
         </p>
       </div>
       <div className={`${classes.body}`}>

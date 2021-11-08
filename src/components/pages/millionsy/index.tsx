@@ -5,14 +5,15 @@ import React, { useEffect, useState } from 'react';
 import { fetchPlayerAccount, getGameBoardInfo, registerMilipadPlayer, updateMiliPadPlayer, updateMissionPlayer } from 'lib/utilities/utils';
 import { SolletWalletAdapter } from 'lib/wallets/sollet';
 import { SOLLET_ADAPTER_NETWORD } from 'lib/program/config'; 
-import { HOST_NAME } from 'data/constants';
+import { HOST_NAME, PROVIDER_URL, useWindowSize } from 'data/constants';
 import { getMillipads } from 'lib/utilities/utils';
 import { buyMilliPad } from 'lib/program/lottery-commands';
 import CountUp from 'react-countup';
 const Millionsy: React.FC = () => {
-  const PROVIDER_URL = "https://www.sollet.io";
   const [isNextStepTelegram, setIsNextStepTelegram] = useState(false);
   const [isNextStepTwitter, setIsNextStepTwitter] = useState(false);
+  const size = useWindowSize();
+  const [showTooltip, setShowTooltip] = useState(false);
   const [isActiveSelect, setIsActiveSelect] = useState(false);
   const [valueOption, setValueOption] = useState('');
   const [isFinishSaleRound, setIsFinishSaleRound] = useState(false);
@@ -208,6 +209,7 @@ const Millionsy: React.FC = () => {
   }, [])
   useEffect(() => {
     if (getDataMillipads !== null) {
+      
       setCountDown(new Date(getDataMillipads.end_time).getTime());
       if (getDataMillipads.status !== 'deploy' && getDataMillipads.status !== 'whileList') {
         setGetFlowers(14400);
@@ -293,6 +295,22 @@ const Millionsy: React.FC = () => {
       }, 0);
     }
   }, [countDown])
+  // window.ontouchmove = (e) => {
+  //   if(size.width < 769 && e.target.classList[0] === 'onTooltip') {
+  //     setShowTooltip(true)
+  //   }
+  //   if(size.width < 769 && e.target.classList[0] !== 'onTooltip') {
+  //     setShowTooltip(false)
+  //   }
+  // }
+  // window.onclick = (e) => {
+  //   if(size.width < 769 && e.target.classList[0] === 'onTooltip') {
+  //     setShowTooltip(true)
+  //   }
+  //   if(size.width < 769 && e.target.classList[0] !== 'onTooltip') {
+  //     setShowTooltip(false)
+  //   }
+  // }
   return (
     <>
       {
@@ -410,7 +428,22 @@ const Millionsy: React.FC = () => {
               </div>
               <div className='bg-gray-200 px-4 md:px-8 md:flex items-center justify-between pt-4 pb-6 md:py-4'>
                 <p className='text-pink-50 text-14 tablet992:text-16 font-normal md:text-left mb-4 md:mb-0'>Buy NFT tickets for more slots and better chance to win Lottery lifetime.</p>
-                <p className='text-14 md:text-16 cursor-pointer transition-all hover:opacity-70 px-16 pt-2 pb-2.5 rounded-5 font-bold bg-blue-0 text-blue-50 flex-shrink-0 text-center'>Buy NFT</p>
+                <div className='relative'>
+                  <p className='onTooltip text-14 md:text-16 md:cursor-not-allowed px-16 pt-2 pb-2.5 rounded-5 font-bold bg-blue-0 text-blue-50 flex-shrink-0 text-center'
+                    onMouseLeave={() => {
+                      if(size.width > 768) {
+                        setShowTooltip(false)
+                      }
+                    }}
+                    onMouseEnter={() => {
+                      if(size.width > 768) {
+                        setShowTooltip(true);
+                      }
+                    }}
+                  >Buy NFT</p>
+                  { showTooltip && <p className='absolute top-full left-1/2 transform -translate-x-1/2 translate-y-4 z-100 border border-solid border-pink-150 bg-purple-150 rounded-15 w-60 text-center py-3'>Coming real soon...</p> }
+                </div>
+                
               </div>
               <p className='h-px bg-gray-250 mt-7 mb-5 md:mt-12 md:mb-9'></p>
               <div className='px-4 md:px-8'>

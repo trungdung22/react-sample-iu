@@ -39,7 +39,7 @@ const Four: React.FC<Props> = ({dataSendFour, dataGiveFour}) => {
 
   const handleOnClickChooseNumber = (event: React.MouseEvent) => {
     let cloneNumberChange = data.data.ticketChanges.numberChange;
-    if(event.currentTarget.childNodes[0].textContent !== null) {
+    if(event.currentTarget.childNodes[0].textContent !== null && event.currentTarget.childNodes[0].textContent !== '_') {
       const index = dataChoose.idx > 5 ? 0 : dataChoose.idx + 1;
       const currIndex = dataChoose.idx > 5 ? 0 : dataChoose.idx;
       setDataChoose({

@@ -63,7 +63,7 @@ export const getMillipads = async () => {
     };
     const response = await fetch(`${HOST_NAME}/api/milli-pads`, requestOptions);
     const data = await response.json();
-    return data.results[0];
+    return data;
 }
 
 export const updateMiliPadPlayer = async (amount, code, playerPubkey) => {

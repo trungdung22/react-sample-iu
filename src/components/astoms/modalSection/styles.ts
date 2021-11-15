@@ -80,10 +80,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       cursor: 'pointer',
       transition: 'all 0.2s ease',
       display: 'flex',
-      maxWidth: 18,
-      '&:hover': {
-        opacity: 0.8,
-      }
     },
   },
   closeSubmit: {

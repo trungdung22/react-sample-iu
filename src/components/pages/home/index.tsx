@@ -188,7 +188,7 @@ const Home: React.FC = () => {
           <div className={`${classes.content}`}>
             <Title text={['We start', <br />, 'the next', <br />, 'generation!']}></Title>
             <p className={`${classes.text}`}>The first Lottery and Game launching <br className="sp-768" />platform on Solana</p>
-            <DefaultButon text={'Connect Wallet'} small="small" connect={playerData.data.is_connect} onClick={handleClickConnect}></DefaultButon>
+            <DefaultButon text={'Connect Wallet'} connect={playerData.data.is_connect} onClick={handleClickConnect}></DefaultButon>
           </div>
         </div>
       </div>

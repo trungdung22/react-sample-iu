@@ -40,13 +40,21 @@ const NextSection: React.FC<Props> = ({playerData, sendDataNextToLottery}) => {
       // If the count down is finished, write some text
       if (distance < 0) {
         clearInterval(timerId);
-        timerData = "EXPIRED";
+        timerData = "DRAWING...";
       }
       setTimer(timerData);
     }, 0);
   
     return () => clearInterval(timerId);
   });
+  useEffect(() => {
+    if(timer === 'DRAWING...') {
+      window.sessionStorage.setItem('isOverTimer', 'true')
+    } else {
+      window.sessionStorage.setItem('isOverTimer', 'false')
+    }
+  },[timer])
+  
 
 
   const handleViewTicket = (event: React.MouseEvent) => {

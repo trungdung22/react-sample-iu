@@ -9,6 +9,11 @@ import { HOST_NAME, PROVIDER_URL, useWindowSize } from 'data/constants';
 import { getMillipads } from 'lib/utilities/utils';
 import { buyMilliPad } from 'lib/program/lottery-commands';
 import CountUp from 'react-countup';
+import { Route, useHistory, useParams } from 'react-router-dom';
+
+type urlParams = {
+  nameProject: string,
+};
 const Millionsy: React.FC = () => {
   const [isNextStepTelegram, setIsNextStepTelegram] = useState(false);
   const [isNextStepTwitter, setIsNextStepTwitter] = useState(false);
@@ -27,7 +32,10 @@ const Millionsy: React.FC = () => {
   const [getDataMillipads, setGetDataMillipads] = useState(null);
   const [gameBoards, setGameBoards] = useState(null);
   const [getFlowers, setGetFlowers] = useState(0);
-
+  const {nameProject} = useParams<urlParams>();
+  const history = useHistory();
+  
+  
   const [flagSlots, setFlagSlots] = useState({
     twitter: {
       waggle: 0,
@@ -161,55 +169,65 @@ const Millionsy: React.FC = () => {
   }
 
   const dataGiveFromWallet = (getDataWallet: any) => {
-    if (getDataWallet.is_connect) {
-      fetchPlayerAccount(getDataWallet.publicKey).then(item => setPlayerData({
+    if (getDataWallet.publicKey !== undefined && getDataWallet.publicKey !== '') {
+      fetchPlayerAccount(getDataWallet.publicKey).then(item => {
+        setPlayerData({
+          data: {
+            is_connect: getDataWallet.is_connect,
+            adapter_type: getDataWallet.adapter_type,
+            lamportUnit: item.lamportUnit,
+            publicKey: getDataWallet.publicKey,
+            balanceUSDT: item.balanceUSDT,
+            balanceSOL: item.balanceSOL,
+          }
+        })
+      });
+      setDataModal({
         data: {
-          adapter_type: getDataWallet.adapter_type,
+          ...dataModal.data,
+          show: false,
+        }
+      })
+    }
+  }
+
+  useEffect(() => {
+    if (window.sessionStorage.getItem("data_connect") === "true") {
+      setDataModal({
+        data: {
+          ...dataModal.data,
+          is_connect: true,
+        }
+      }) 
+  
+      fetchPlayerAccount(window.sessionStorage.getItem("publicKey")).then(item => setPlayerData({
+        data: {
+          adapter_type: window.sessionStorage.getItem("adapter_type"),
           is_connect: true,
           lamportUnit: item.lamportUnit,
-          publicKey: getDataWallet.publicKey,
+          publicKey: window.sessionStorage.getItem("publicKey"),
           balanceUSDT: item.balanceUSDT,
           balanceSOL: item.balanceSOL,
         }
       }));
-      resetModalData();
-    } 
-  }
-
-  const resetModalData = () => {
-    setDataModal({
-      data: {
-        is_connect: dataModal.data.is_connect,
-        show: false,
-        first: false,
-        second: false,
-        third: false,
-        four: false,
-        view_ticket: false,
-        view_your: false,
-        submit: false,
-        flag_submit: false,
-        your_ticket: [],
-        history_round: {
-          id: -1, 
-          your_ticket: []
-        },
-        next_round: {
-          next_id: -1,
-          your_ticket: []
-        },
-      }
-    })
-  }
-  
-  useEffect(() => {
+    }
     getGameBoardInfo().then(data => setGameBoards(data));
-    getMillipads().then(data => setGetDataMillipads(data));
+    getMillipads().then(data => {
+      let hasProject = false;
+      data.results.map((e) => {
+        if (e.code === nameProject) {
+          setGetDataMillipads(e)
+          hasProject = true;
+        }
+      })
+      if(!hasProject) {
+        setGetDataMillipads(-1)
+      }
+    });
     setWindowOnLoad(true);
   }, [])
   useEffect(() => {
     if (getDataMillipads !== null) {
-      
       setCountDown(new Date(getDataMillipads.end_time).getTime());
       if (getDataMillipads.status !== 'deploy' && getDataMillipads.status !== 'whileList') {
         setGetFlowers(14400);
@@ -218,6 +236,9 @@ const Millionsy: React.FC = () => {
         const distance = new Date(getDataMillipads.end_time).getTime() - now;
         setGetFlowers(parseInt(((3*24*60*60*1000 - distance) / 18000).toFixed(0)));
       }
+    }
+    if (getDataMillipads === -1) {
+      history.push('/404');
     }
   }, [getDataMillipads])
   useEffect(() => {
@@ -295,22 +316,6 @@ const Millionsy: React.FC = () => {
       }, 0);
     }
   }, [countDown])
-  // window.ontouchmove = (e) => {
-  //   if(size.width < 769 && e.target.classList[0] === 'onTooltip') {
-  //     setShowTooltip(true)
-  //   }
-  //   if(size.width < 769 && e.target.classList[0] !== 'onTooltip') {
-  //     setShowTooltip(false)
-  //   }
-  // }
-  // window.onclick = (e) => {
-  //   if(size.width < 769 && e.target.classList[0] === 'onTooltip') {
-  //     setShowTooltip(true)
-  //   }
-  //   if(size.width < 769 && e.target.classList[0] !== 'onTooltip') {
-  //     setShowTooltip(false)
-  //   }
-  // }
   return (
     <>
       {
@@ -391,14 +396,14 @@ const Millionsy: React.FC = () => {
                   </>
                 }
               </ul>
-              <div className='flex items-center justify-between px-4 md:px-6 tablet992:px-12 py-6 md:py-3'>
+              <div className='flex items-center justify-between px-4 md:px-6 tablet992:px-12 py-6 md:py-4'>
                 <p className='text-14 bg-gray-0 border border-solid border-pink-50 rounded-5 py-1 px-5 text-pink-50 font-bold'>Solana</p>
                 {
                   playerData.data.is_connect ?
-                  <p className='text-14 md:text-16 px-13 pt-2 pb-2.5 rounded-5 font-bold bg-pink-150 text-pink-50 cursor-pointer transition-all hover:opacity-70'
+                  <p className='text-14 px-0 py-2 md:px-3 text-center w-140 rounded-5 font-bold bg-pink-150 text-pink-50 cursor-pointer transition-all hover:opacity-70'
                     onClick={() => setModalDisconnect(true)}
                   >Connected</p> : 
-                  <p className='text-14 md:text-16 cursor-pointer transition-all hover:opacity-70 px-8 pt-2 pb-2.5 rounded-5 font-bold bg-blue-0 text-blue-50'
+                  <p className='text-14 cursor-pointer transition-all hover:opacity-70 px-0 py-2 md:px-3 text-center w-140 rounded-5 font-bold bg-blue-0 text-blue-50'
                     onClick={() => setDataModal({
                       data: {
                         ...dataModal.data,
@@ -506,7 +511,7 @@ const Millionsy: React.FC = () => {
                 <div className='px-4 md:px-8'>
                   <h4 className='text-18 md:text-20 mb-2 md:mb-3.5 text-pink-0'>Sale round</h4>
                   <div className='flex flex-col md:flex-row justify-between md:items-center gap-4'>
-                    <p className='text-pink-50 text-12 md:text-14 font-normal text-justify md:text-left'>Congratulations! You have 1 winning slot. Choose the amount <br className='hidden tablet992:block' /> of USDC you want to buy the tokens.</p>
+                    <p className='text-pink-50 text-12 md:text-14 font-normal text-justify md:text-left'>Congratulations! You have 1 winning slot. Choose the amount <br className='hidden tablet992:block' /> USD of SOL you want to buy the tokens <br className='hidden tablet992:block' />(please note that you will send your SOL, not USDT or USDC)</p>
                     <div className='flex justify-between sm:justify-start md:justify-center items-center gap-12'>
                       <div className={`bg-gray-600 w-100 relative ${isActiveSelect ? 'rounded-tl-5 rounded-tr-5' : 'rounded-5'}`}>
                         <p className={`absolute right-2 top-2.5 cursor-pointer transition-all ${isActiveSelect ? 'transform rotate-180' : ''}`} onClick={() => setIsActiveSelect(!isActiveSelect)}>
@@ -647,7 +652,7 @@ const Millionsy: React.FC = () => {
           <p className='mb-4'><img src="/assets/millipad/list.png" alt="list"/></p>
           <div className='px-4 md:px-6 tablet992:px-12'>
             <p className='text-pink-50 text-12 md:text-14 font-normal text-justify md:text-left mb-2'>Between September and October: Conducting Sale Rounds to fuel the initial development and growth. We appreciate the strong support from the community as well as many funds that reached out to us.<br />In October, the Lottery platform and contract will be audited.<br />Next, MILLIGO and NFTs Ticket will be launched in November. Then in December, promoting social activities to keep building a community that shares our long term vision, also opening Live Drawing at this stage.</p>
-            <p className='text-pink-50 text-12 md:text-14 font-normal text-justify md:text-left mb-2'>From January to March 2020, cross-chain will be available in MILLIONSY platform. Users will be able to buy tickets from other blockchains seamlessly.</p>
+            <p className='text-pink-50 text-12 md:text-14 font-normal text-justify md:text-left mb-2'>From January to March 2022, cross-chain will be available in MILLIONSY platform. Users will be able to buy tickets from other blockchains seamlessly.</p>
             <p className='text-pink-50 text-12 md:text-14 font-normal text-justify md:text-left mb-2'>From April to the end of 2022, completing Fiat Ticket Purchase feature. MILLIONSY will definitely lead the next chapter of the lottery industry with those unique and promising features.</p>
             <h5 className='text-blue-0 text-16 font-bold mb-3 md:mb-4 pt-3 md:pt-8'>Team</h5>
           </div>

@@ -36,7 +36,11 @@ const PartySection: React.FC<Props> = ({partyData, sendDataPartyToLottery}) => {
           )
         }
         
-        <p className={`${classes.buyticket}`} onClick={() => sendDataPartyToLottery(true)}>
+        <p className={`${classes.buyticket}`} onClick={() => {
+          if(window.sessionStorage.getItem('isOverTimer') === 'false') {
+            sendDataPartyToLottery(true)
+          }
+        }}>
           <img src="/assets/lottery/ticket.svg" alt="ticket" />
           <span>Buy Ticket</span>
         </p>

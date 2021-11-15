@@ -85,23 +85,6 @@ const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
     window.sessionStorage.clear();
     sollet.disconnect() as Promise<void>;
   }
-
-  // window.ontouchmove = (e) => {
-  //   if(size.width < 769 && e.target.classList[0] === 'onTooltip') {
-  //     setShowTooltip(true)
-  //   }
-  //   if(size.width < 769 && e.target.classList[0] !== 'onTooltip') {
-  //     setShowTooltip(false)
-  //   }
-  // }
-  // window.onclick = (e) => {
-  //   if(size.width < 769 && e.target.classList[0] === 'onTooltip') {
-  //     setShowTooltip(true)
-  //   }
-  //   if(size.width < 769 && e.target.classList[0] !== 'onTooltip') {
-  //     setShowTooltip(false)
-  //   }
-  // }
   
   return (
     <>

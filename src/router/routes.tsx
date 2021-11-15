@@ -1,4 +1,3 @@
-import { IS_CONNECT } from 'data/constants';
 import { lazy } from 'react';
 
 type Routes = {

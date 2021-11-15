@@ -10,29 +10,15 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     borderRadius: 5,
     padding: '0.5rem 0.75rem',
     cursor: 'pointer',
-    width: 'fit-content',
     transition: 'all 0.2s ease',
+    width: 140,
     '&.connected': {
       color: '#fff',
       background: '#A819FA',
     },
-    // '@media screen and (max-width: 1640px)': {
-    //   fontSize: '1em',
-    //   padding: '1vw 0',
-    //   width: 160,
-    //   borderRadius: '1vw',
-    // },
-    '&.small': {
-      padding: '0.75rem 0',
-      fontSize: '14px',
-      borderRadius: 5,
-      width: 140,
-    },
     '@media screen and (max-width: 768px)': {
       fontSize: '13px',
       padding: '0.5rem 0',
-      width: 120,
-
     },
 
     '&:hover': {

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useStyles from './styles';
 import { HOST_NAME } from 'data/constants';
-import { dataTest } from 'data/db';
 import { InfiniteScroll } from 'react-simple-infinite-scroll'
-import { debug } from 'console';
 import ContentLoader from 'react-content-loader';
 
 type Props = {

@@ -175,10 +175,10 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     '& .getticket': {
       background: '#17F0FF',
       textAlign: 'center',
-      width: 130,
+      width: 140,
       color: '#0B7880',
       borderRadius: 5,
-      padding: '0.5rem 0',
+      padding: '0.5rem 0.75rem',
       fontSize: 14,
       fontWeight: 700,
       cursor: 'pointer',
@@ -191,7 +191,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       padding: '1.25rem 1rem 1.75rem',
       display: 'block',
       '& .getticket': {
-        width: 120,
         padding: '0.5rem 0',
         margin: '0 auto',
       }

@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       borderBottom: '1px solid #616161',
       padding: '0.75rem 0',
       fontSize: 18,
-      '& svg': {
+      '&> svg': {
         maxWidth: 20,
       },
       '& p': {

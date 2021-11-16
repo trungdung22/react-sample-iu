@@ -318,7 +318,7 @@ const Lottery: React.FC = () => {
         .then(async results => {
           resetModalData();
           try {
-            await insertBulkTicket(partyData.data.programId, playerData.data.publicKey, results);
+            await insertBulkTicket(partyData.data.gamePubkey, playerData.data.publicKey, results);
             
             setDataModal({
               data: {

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import useStyles from './styles';
 import { numberWithCommas } from 'lib/utilities/format';
 import ContentLoader from 'react-content-loader';
+import CountUp from 'react-countup';
 
 type Props = {
   partyData: any,
@@ -18,8 +19,8 @@ const PartySection: React.FC<Props> = ({partyData, sendDataPartyToLottery}) => {
             <h3>
               <span>Pump the party</span>
               ${numberWithCommas(Math.round(partyData.gameBalanceUSDT))}
-              <span>~{parseFloat(partyData.gameBalanceSol).toFixed(2)} SOL</span>
-              <span>(+ 500,000 MILLI)</span>
+              <span>~<CountUp decimals={2} decimal="," duration={1.5} start={0} end={parseFloat(parseFloat(partyData.gameBalanceSol).toFixed(2))} />  SOL</span>
+              <span>(+ <CountUp decimals={3} decimal="," duration={1.5} start={0} end={500} /> MILLI)</span>
             </h3>
           ) : (
             <h3>

@@ -1,3 +1,6 @@
+import IconNFTS from 'components/astoms/icons/nfts';
+import IconStar from 'components/astoms/icons/star';
+import IconTicket from 'components/astoms/icons/ticket';
 import React from 'react';
 import useStyles from './styles';
 type Props = {
@@ -10,7 +13,6 @@ const ViewYour: React.FC<Props> = ({dataSendViewYour}) => {
   const countWinningTicket = () => {
     let result = 0;
     const winningType = ['Match3', 'Match4', 'Match5', 'Match6']
-    debugger
     const roll_nums = dataSendViewYour.your_ticket.player_tickets.map(item => item.reward_type);
     
     for (let i = 0; i < roll_nums.length; i++) {
@@ -58,21 +60,21 @@ const ViewYour: React.FC<Props> = ({dataSendViewYour}) => {
         <ul>
           <li>
             <p>
-              <span><img src="/assets/lottery/ticket_nfts.svg" alt="NFTS Tickets" /></span>
+              <span><IconNFTS></IconNFTS></span>
               <span>NFTS Tickets</span>
             </p>
             {nftsTicket.length}
           </li>
           <li>
             <p>
-              <span><img src="/assets/lottery/ticket_def.svg" alt="Total tickets" /></span>
+              <span><IconTicket></IconTicket></span>
               <span>Total tickets</span>
             </p>
             {dataSendViewYour.your_ticket.player_tickets.length}
           </li>
           <li>
             <p>
-              <span><img src="/assets/lottery/icon_star.svg" alt="Winning tickets" /></span>
+              <span><IconStar></IconStar></span>
               <span>Winning tickets</span>
             </p>
             {(<>{countWinningTicket()}</>)}

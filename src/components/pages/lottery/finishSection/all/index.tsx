@@ -84,6 +84,7 @@ const All: React.FC<Props> = ({ dataSendToAll, dataGiveAll }) => {
   // }
 
   useEffect(() => {
+    
     fetch(`${HOST_NAME}/api/game-history-all`, {
       headers : { 
         'Content-Type': 'application/json',
@@ -101,6 +102,7 @@ const All: React.FC<Props> = ({ dataSendToAll, dataGiveAll }) => {
           const error = (data && data.message) || response.statusText;
           return Promise.reject(error);
         }
+        
         setData({
           id: 0,
           info: JSON.parse(JSON.stringify(data.results))
@@ -144,9 +146,9 @@ const All: React.FC<Props> = ({ dataSendToAll, dataGiveAll }) => {
               </div>
               <p className={`${classes.infoRound}`}>
                 <span>{`#${data['info'][data.id]['game_no']}`}</span>
-                {`${monthName[new Date(data['info'][data.id]['createdAt']).getMonth()]} 
-                ${new Date(data['info'][data.id]['createdAt']).getDate()}, 
-                ${new Date(data['info'][data.id]['createdAt']).getFullYear()}, 11:00 AM UTC`}
+                {`${monthName[new Date(data['info'][data.id]['updatedAt']).getMonth()]} 
+                ${new Date(data['info'][data.id]['updatedAt']).getDate()}, 
+                ${new Date(data['info'][data.id]['updatedAt']).getFullYear()}, 11:00 AM UTC`}
               </p>
             </div>
             <div className={`${classes.body}`}>

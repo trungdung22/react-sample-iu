@@ -349,7 +349,7 @@ const Millionsy: React.FC = () => {
                 Followers
                 <span className='text-26 md:text-20 block font-bungee'>
                   {
-                    window.sessionStorage.getItem('windowOnLoad') === 'true' ? <CountUp duration={0.75} start={0} end={getFlowers} /> : 0
+                    getFlowers !== 0 ? <CountUp delay={1.5} duration={1.5} start={0} end={getFlowers} /> : 0
                   }
                 </span>
               </p>
@@ -359,7 +359,8 @@ const Millionsy: React.FC = () => {
                 <li><a href="https://twitter.com/millionsyio" target='_blank' className='flex items-center text-pink-50 text-14 hover:opacity-70 gap-4'><span><img src="/assets/millipad/icon_twitter.svg" alt="icon_twitter" /></span>Twitter</a></li>
               </ul>
               <p className='flex md:block justify-between items-center text-14 text-pink-0 pl-4 md:pl-6 tablet992:pl-8 pr-6 tablet992:pr-12 py-4 leading-none'>Total raise:<span className='text-20 block font-bold'>
-                {window.sessionStorage.getItem('windowOnLoad') === 'true' ? <CountUp duration={0.75} decimals={3} decimal="," start={0} end={480} /> : 0} USDT</span></p>
+                { getFlowers !== 0 ? <CountUp delay={1.5} duration={1.5} decimals={3} decimal="," start={0} end={480} /> : 0} USDT</span>
+              </p>
             </div>
             <div className='rounded-10 bg-gray-150 w-full'>
               {

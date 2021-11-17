@@ -8,7 +8,6 @@ const App: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   
   window.onload = () => {
-    // window.sessionStorage.clear();
     setTimeout(() => {
       setIsLoaded(true);
       window.sessionStorage.setItem('windowOnLoad', 'true');

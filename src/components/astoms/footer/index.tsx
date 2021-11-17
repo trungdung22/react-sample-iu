@@ -56,11 +56,11 @@ const Footer: React.FC = () => {
           text: 'Tokenomics'
         },
         {
-          path: '/',
+          path: 'https://www.coingecko.com/en/coins/millionsy',
           text: 'View on Coingecko'
         },
         {
-          path: '/',
+          path: 'https://coinmarketcap.com/currencies/millionsy',
           text: 'View on CoinMarketCap'
         },
       ]

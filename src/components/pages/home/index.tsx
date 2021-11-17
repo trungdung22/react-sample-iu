@@ -187,7 +187,7 @@ const Home: React.FC = () => {
           </ul>
           <div className={`${classes.content}`}>
             <Title text={['We start', <br />, 'the next', <br />, 'generation!']}></Title>
-            <p className={`${classes.text}`}>The first Lottery and Game launching <br className="sp-768" />platform on Solana</p>
+            <p className={`${classes.text}`}>The first Lottery platform and Game Launchpad on Solana</p>
             <DefaultButon text={'Connect Wallet'} connect={playerData.data.is_connect} onClick={handleClickConnect}></DefaultButon>
           </div>
         </div>

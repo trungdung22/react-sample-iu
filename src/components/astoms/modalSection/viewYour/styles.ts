@@ -81,8 +81,11 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         display: 'flex',
         alignItems: 'center',
         '& span:first-child': {
-          width: 28,
+          width: 37,
           textAlign: 'center',
+          '&>svg': {
+            margin: '0 auto',
+          }
         },
         '& span:last-child': {
           marginLeft: '0.75rem',

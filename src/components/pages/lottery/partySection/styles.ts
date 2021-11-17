@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       color: '#17F0FF',
       textShadow: '0 10px 10px rgba(23, 240, 255, 0.43), 0 15px 15px rgba(212, 125, 255, 0.25)',
 
-      '& span': {
+      '&> span': {
         display: 'block',
         textShadow: 'none',
         fontWeight: 700,
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       '@media screen and (max-width: 768px)': {
         fontSize: 56,
         marginBottom: '0.5rem',
-        '& span': {
+        '&> span': {
           fontSize: 24,
           lineHeight: '5rem',
           '&:last-child': {

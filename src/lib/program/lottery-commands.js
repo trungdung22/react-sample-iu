@@ -108,7 +108,12 @@ export const buyBulkTicket = async (programIdStr, ticketSetNumbers, gamePubkeySt
         createAccountIxArr.push(ticketAccountTx);
         createAccountIxArr.push(buyIx); 
         // ticketIxArr.push(buyIx); 
-        ticketKeyArr.push(ticketAccount.publicKey.toBase58());
+        const ticketObj = {
+            publicKey: ticketAccount.publicKey.toBase58(), 
+            numbers: ticketSetNumbers[i]
+
+        }
+        ticketKeyArr.push(ticketObj);
         ticketAccounts.push(ticketAccount);
     }
 

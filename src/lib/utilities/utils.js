@@ -83,7 +83,7 @@ export const updateMiliPadPlayer = async (amount, code, playerPubkey) => {
     return response;
 }
 
-export const insertBulkTicket = async (programId, playerPubkey, tickets) => {
+export const insertBulkTicket = async (gamePubkey, playerPubkey, tickets) => {
     //post add ticket
     const requestOptions = {
         method: 'POST',
@@ -91,7 +91,7 @@ export const insertBulkTicket = async (programId, playerPubkey, tickets) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({ 
-            programId: programId, 
+            gamePubkey: gamePubkey, 
             tickets: tickets,
             playerPubkey: playerPubkey
         })

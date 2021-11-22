@@ -11,6 +11,7 @@ type Props = {
 
 const PartySection: React.FC<Props> = ({partyData, sendDataPartyToLottery}) => {
   const classes = useStyles();
+  
   return (
     <div className={`${classes.root}`}>
       <div className={`${classes.container}`}>
@@ -18,9 +19,9 @@ const PartySection: React.FC<Props> = ({partyData, sendDataPartyToLottery}) => {
           Math.round(partyData.gameBalanceUSDT) !== 0 ? (
             <h3>
               <span>Pump the party</span>
-              ${numberWithCommas(Math.round(partyData.gameBalanceUSDT))}
-              <span>~<CountUp decimals={2} decimal="," duration={1.5} start={0} end={parseFloat(parseFloat(partyData.gameBalanceSol).toFixed(2))} />  SOL</span>
-              <span>(+ <CountUp decimals={3} decimal="," duration={1.5} start={0} end={500} /> MILLI)</span>
+              <div>$<CountUp separator="," duration={1.5} start={0} end={partyData.gameBalanceUSDT} className='inline-block'/></div>
+              <span>~<CountUp separator="," decimals={2} decimal="." duration={1.5} start={0} end={partyData.gameBalanceSol} />  SOL</span>
+              <span>(+ <CountUp separator="," duration={1.5} start={0} end={500000} /> MILLI)</span>
             </h3>
           ) : (
             <h3>

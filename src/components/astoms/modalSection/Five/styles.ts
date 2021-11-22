@@ -116,7 +116,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       height: 1,
       background: '#616161',
     },
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       padding: '0 1.25rem',
     }
   },

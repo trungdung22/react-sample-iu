@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     alignItems: 'center',
     padding: '15rem 0 18rem',
     transition: 'all 0.2s ease',
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       padding: '8rem 0 5rem',
     },
   },
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     '@media screen and (max-width: 1340px)': {
       fontSize: 18,
     },
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       fontSize: 14,
       lineHeight: '1.4rem',
       margin: '0.5rem 0',
@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       maxWidth: '41vw',
       right: '3%',
     },
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       position: 'relative',
       top: 0,
       right: 0,

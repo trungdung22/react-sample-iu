@@ -48,7 +48,7 @@ const Footer: React.FC = () => {
           text: 'Roadmap'
         },
         {
-          path: 'https://docs.millionsy.io/milli',
+          path: 'https://solscan.io/token/HDLRMKW1FDz2q5Zg778CZx26UgrtnqpUDkNNJHhmVUFr',
           text: 'Token contract'
         },
         {

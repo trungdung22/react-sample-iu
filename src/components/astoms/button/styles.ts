@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       color: '#fff',
       background: '#A819FA',
     },
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       fontSize: '13px',
       padding: '0.5rem 0',
     },

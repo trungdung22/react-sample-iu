@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         // '@media screen and (max-width: 1640px)': {
         //   fontSize: '1.5vw',
         // },
-        '@media screen and (max-width: 768px)': {
+        '@media screen and (max-width: 767px)': {
           fontSize: '10px',
           color: '#F4E0FF',
           '&:hover': {
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
           },
         }
       },
-      '@media screen and (max-width: 768px)': {
+      '@media screen and (max-width: 767px)': {
         display: 'none',
       }
     },
@@ -99,7 +99,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     //     fontSize: '1.6vw',
     //   },
     // },
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       gap: '0',
       '& img': {
         maxWidth: '37px',

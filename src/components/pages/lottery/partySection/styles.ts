@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         color: '#F4E0FF',
         lineHeight: '3.5rem',
       },
-      '@media screen and (max-width: 768px)': {
+      '@media screen and (max-width: 767px)': {
         fontSize: 56,
         marginBottom: '0.5rem',
         '&> span': {
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         },
       }
     },
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       padding: '10rem 0',
       marginBottom: '0',
       background: 'url(assets/lottery/bg_left_sp.png) top 60% right calc(50% + 130px) no-repeat, url(assets/lottery/bg_right_sp.png) center left calc(50% + 150px) no-repeat',
@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     '&:hover': {
       opacity: 0.8,
     },
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       width: 200,
       '& span': {
         fontSize: 20,

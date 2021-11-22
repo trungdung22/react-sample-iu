@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     '@media screen and (max-width: 1640px)': {
       padding: '5.25rem 3% 2rem',
     },
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       padding: '3em 3% 7rem',
     },
   },
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       '@media screen and (max-width: 1920px)': {
         fontSize: '18px',
       },
-      '@media screen and (max-width: 768px)': {
+      '@media screen and (max-width: 767px)': {
         fontSize: '14px',
         marginBottom: '0.5rem',
       },
@@ -49,12 +49,12 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       '@media screen and (max-width: 1920px)': {
         fontSize: '18px',
       },
-      '@media screen and (max-width: 768px)': {
+      '@media screen and (max-width: 767px)': {
         fontSize: '14px',
         lineHeight: '1.72em',
       },
     },
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       '& > div': {
         width: 'auto',
       },
@@ -86,7 +86,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       color: '#F4E0FF',
     },
 
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       '& .logo': {
         fontSize: '36px',
       },
@@ -107,7 +107,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
   footerSticky: {
     display: 'none',
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       position: 'fixed',
       bottom: 0,
       width: '100%',

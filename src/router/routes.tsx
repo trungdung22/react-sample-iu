@@ -38,6 +38,12 @@ const routes: Routes[] = [
     LoadComponent: lazy(() => import('components/pages/millionsy')),
     exact: true,
   },
+  {
+    title: 'NFT',
+    path: '/nft-tickets',
+    LoadComponent: lazy(() => import('components/pages/nft')),
+    exact: true,
+  },
 ];
 
 export default routes;

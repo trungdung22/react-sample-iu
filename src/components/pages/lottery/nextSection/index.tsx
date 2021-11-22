@@ -71,14 +71,16 @@ const NextSection: React.FC<Props> = ({playerData, sendDataNextToLottery}) => {
     }
   }
   const handleGetTicket = (event: React.MouseEvent) => {
-    sendDataNextToLottery({
-      next_round: {
-        next_id: -1,
-        your_ticket: []
-      },
-      view_ticket: false,
-      get_ticket: true,
-    })
+    if(window.sessionStorage.getItem('isOverTimer') === 'false') {
+      sendDataNextToLottery({
+        next_round: {
+          next_id: -1,
+          your_ticket: []
+        },
+        view_ticket: false,
+        get_ticket: true,
+      })
+    }
   }
 
   const monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];

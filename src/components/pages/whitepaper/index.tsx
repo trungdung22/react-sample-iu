@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const Home: React.FC = () => {
+const WhitePaper: React.FC = () => {
 
   return (
     <>
@@ -20,4 +20,4 @@ const Home: React.FC = () => {
   )
 }
 
-export default Home
+export default WhitePaper

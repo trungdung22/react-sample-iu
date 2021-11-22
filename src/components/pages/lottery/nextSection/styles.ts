@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       //     fontSize: '2.15vw',
       //   },
       // },
-      '@media screen and (max-width: 768px)': {
+      '@media screen and (max-width: 767px)': {
         marginBottom: '2rem',
         fontSize: 56,
         '& sup': {
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         },
       },
     },
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       marginTop: '-2rem',
     }
   },
@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     margin: '0 auto',
     transition: 'all 0.2s ease',
 
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       maxWidth: 425,
       padding: '0 3%',
     }
@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     borderRadius: 10,
     border: '1px solid #17F0FF',
     overflow: 'hidden',
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       maxWidth: '100%',
     }
   },
@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     //     marginBottom: '2vw',
     //   },
     // },
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       padding: '1.25rem 1rem 1.75rem',
       '& .title': {
         fontSize: 20,
@@ -126,7 +126,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     //     padding: '1.25vw 0',
     //   },
     // },
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       fontSize: 16,
       paddingRight: '0.75rem',
       borderRadius: '10px',
@@ -161,7 +161,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
           }
         }
       },
-      '@media screen and (max-width: 768px)': {
+      '@media screen and (max-width: 767px)': {
         marginBottom: '1.5rem',
         '& p:nth-child(1)': {
           fontSize: 20,
@@ -187,7 +187,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         opacity: 0.8,
       }
     },
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       padding: '1.25rem 1rem 1.75rem',
       display: 'block',
       '& .getticket': {

@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     //   maxWidth: '65vw'
     // },
 
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       maxWidth: '100%'
     }
   },
@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       //     }
       //   },
       // },
-      '@media screen and (max-width: 768px)': {
+      '@media screen and (max-width: 767px)': {
         marginBottom: '0.75rem',
         '& .title': {
           fontSize: 20,
@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         },
       },
     },
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       padding: '1rem',
     },
   },
@@ -110,7 +110,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     //     padding: '1.25vw 0',
     //   },
     // },
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       fontSize: 16,
       paddingRight: '0.75rem',
       borderRadius: '10px',
@@ -158,7 +158,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     //     fontSize: '2.75vw',
     //   },
     // },
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       display: 'block',
       '& .text': {
         fontSize: 20,
@@ -189,7 +189,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       lineHeight: '1.7rem',
       fontSize: 16,
     },
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       fontSize: 10,
       padding: '0.5rem',
 

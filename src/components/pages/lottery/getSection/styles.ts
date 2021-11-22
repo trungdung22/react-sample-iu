@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       '@media screen and (max-width: 1236px)': {
         marginBottom: '4rem',
       },
-      '@media screen and (max-width: 768px)': {
+      '@media screen and (max-width: 767px)': {
         fontSize: 24,
         marginBottom: '2rem',
       },
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     '@media screen and (max-width: 1640px)': {
       padding: '4.5rem 3%',
     },
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       padding: '3rem 3% 6rem',
     },
   },
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     maxWidth: 1110,
     margin: '0 auto',
     transition: 'all 0.2s ease',
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       maxWidth: 425,
     }
   },
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     justifyContent: 'space-between',
     flexWrap: 'wrap',
     rowGap: '1rem',
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       rowGap: '0',
     },
   },
@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     '@media screen and (max-width: 1236px)': {
       width: '49%',
     },
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       width: '100%',
       border: 'none',
       textAlign: 'center',
@@ -95,7 +95,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     fontSize: 24,
     fontWeight: 700,
     marginBottom: '1rem',
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       fontSize: 20,
       marginBottom: '0.5rem',
     },
@@ -105,7 +105,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     lineHeight: '1.2rem',
     fontSize: 14,
     color: '#F4E0FF',
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       fontSize: 12,
       lineHeight: '1rem',
     },

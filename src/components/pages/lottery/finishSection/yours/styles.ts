@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     // '@media screen and (max-width: 1640px)': {
     //   maxWidth: '65vw'
     // },
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       maxWidth: '100%'
     }
   },
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       color: '#F4E0FF',
 
     },
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       padding: '1rem',
       '& .title': {
         fontSize: 20,
@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       //     textAlign: 'center',
       //   },
       // },
-      '@media screen and (max-width: 768px)': {
+      '@media screen and (max-width: 767px)': {
         fontSize: 14,
         marginBottom: '1rem',
         '& li:nth-child(1)': {
@@ -107,7 +107,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
             // '@media screen and (max-width: 1024px)': {
             //   minWidth: '15vw',
             // },
-            '@media screen and (max-width: 768px)': {
+            '@media screen and (max-width: 767px)': {
               minWidth: 'auto',
               display: 'block'
             }
@@ -137,7 +137,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         //   '& p:nth-child(2)': {
         //     width: '45%',
         //     '& span:nth-child(1)': {
-        //       '@media screen and (max-width: 768px)': {
+        //       '@media screen and (max-width: 767px)': {
         //         minWidth: 'auto',
         //         display: 'block'
         //       }
@@ -150,7 +150,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         //     fontSize: '2vw',
         //   },
         // },
-        '@media screen and (max-width: 768px)': {
+        '@media screen and (max-width: 767px)': {
           fontSize: '14px',
           alignItems: 'flex-start',
           lineHeight: '1.2rem',
@@ -173,14 +173,14 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
           },
         },
       },
-      '@media screen and (max-width: 768px)': {
+      '@media screen and (max-width: 767px)': {
         maxHeight: 300,
       },
     },
     // '@media screen and (max-width: 1640px)': {
     //   padding: '2.5vw 3vw',
     // },
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       padding: '1.25rem 1rem 1.25rem',
     },
   },

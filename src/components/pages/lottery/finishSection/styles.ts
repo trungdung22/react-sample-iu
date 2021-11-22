@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       textAlign: 'center',
       textTransform: 'uppercase',
     },
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       padding: '4rem 0',
       marginTop: '4rem',
       '& h3': {
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     maxWidth: 700,
     margin: '0 auto',
     transition: 'all 0.2s ease',
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       padding: '0 3%',
       maxWidth: 425,
     }
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     '& li.active, & li:not(.slash):hover': {
       background: '#A819FA',
     },
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       gap: '0',
       marginBottom: '2rem',
       '& li.active, & li:not(.slash)': {

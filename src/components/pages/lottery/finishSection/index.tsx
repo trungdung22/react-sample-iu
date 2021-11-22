@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import All from './all';
 import Jackpots from './jackpots';
 import Yours from './yours';
@@ -80,9 +80,8 @@ const FinishedSection: React.FC<Props> = ({playerData, dataGiveFromFinished}) =>
             handleSetComponent('yours')
           }}>Yours</li>
         </ul>
-        {dataYours !== 0 && dataBackYour == false ? (<Detail dataSendToDetail={dataYours} dataGiveDetail={dataGiveAll}></Detail>) : (handerRenderComponent('detail'))}
+        {dataYours !== 0 && dataBackYour === false ? (<Detail dataSendToDetail={dataYours} dataGiveDetail={dataGiveAll}></Detail>) : (handerRenderComponent('detail'))}
         
-        {/* {dataBackYour ? (<Yours dataGiveFromYours={dataGiveFromYours}></Yours>) : (handerRenderComponent('all'))} */}
       </div>
     </div>
   )

@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     '@media screen and (max-width: 1340px)': {
       fontSize: 46,
     },
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (max-width: 767px)': {
       fontSize: 32,
       lineHeight: '2.7rem',
     },

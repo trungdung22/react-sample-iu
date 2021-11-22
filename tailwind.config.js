@@ -1,16 +1,16 @@
 module.exports = {
-  purge: {
-    enabled: true,
-    content: [
-      './src/*.tsx',
-      './src/**/*.tsx',
-    ],
-  },
+  // purge: {
+  //   content: [
+  //     './src/*.tsx',
+  //     './src/**/*.tsx',
+  //   ],
+  // },
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
       fontFamily: {
-        bungee: ['"Bungee", cursive']
+        bungee: ['"Bungee", cursive'],
+        lexend: ['"Lexend", sans-serif'],
       },
       colors: {
         blue: {
@@ -69,6 +69,7 @@ module.exports = {
         '18': '18px',
         '20': '20px',
         '22': '22px',
+        '24': '24px',
         '26': '26px',
         '27': '27px',
         '28': '28px',
@@ -85,20 +86,26 @@ module.exports = {
       maxWidth: {
         '20': '20px',
         '26': '26px',
+        '30': '30px',
         '110': '110px',
         '178': '178px',
         '200': '200px',
+        '264': '264px',
+        '300': '300px',
         '320': '320px',
         '345': '345px',
+        '350': '350px',
         '460': '460px',
         '500': '500px',
         '720': '720px',
         '900': '900px',
-        '1110': '1110px'
+        '1110': '1110px',
+        '1132': '1132px',
       },
       width: {
         '100': '100px',
         '140': '140px',
+        'fit': 'fit-content',
       },
       height: {
         '100vh': '100vh',

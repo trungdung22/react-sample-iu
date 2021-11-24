@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import useStyles from './styles';
 import { UseWallet } from '../../../../lib/program/wallet-provider';
+import { HOST_NAME } from 'data/constants';
 
 type Props = {
   dataGiveWallet: (dataWallet: any) => any
@@ -47,6 +48,25 @@ const ConnectWallet: React.FC<Props> = ({ dataGiveWallet }) => {
       //rootDispatcher.updateConnectionStatus("true");
       //rootDispatcher.updateConnectionPublicKey(response.publicKey.toBase58());
       //rootDispatcher.updateConnectionAdapterType("phantom");
+
+      fetch(`${HOST_NAME}/api/get-token/`, {
+        method: 'POST',
+        headers : { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({'user': response.publicKey.toBase58()})
+      }).then(async response => {
+        const responseData = await response.json();
+        if (!response.ok) {
+          const error = (responseData && responseData.message) || response.statusText;
+          return Promise.reject(error);
+        }
+        
+        window.sessionStorage.setItem('token', responseData['token']);
+      }).catch(err => {
+          console.log(err);
+      })
   }
 
   const connectPhantom = () => {

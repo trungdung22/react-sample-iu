@@ -49,7 +49,7 @@ const ConnectWallet: React.FC<Props> = ({ dataGiveWallet }) => {
       //rootDispatcher.updateConnectionPublicKey(response.publicKey.toBase58());
       //rootDispatcher.updateConnectionAdapterType("phantom");
 
-      fetch(`${HOST_NAME}/api/get-token/`, {
+      fetch(`${HOST_NAME}/api/auth/`, {
         method: 'POST',
         headers : { 
           'Content-Type': 'application/json',
@@ -70,9 +70,9 @@ const ConnectWallet: React.FC<Props> = ({ dataGiveWallet }) => {
   }
 
   const connectPhantom = () => {
-    UseWallet("phantom").then(response => {
+    UseWallet("phantom").then(async response => {
       handleWalletResponse(response, 'phantom');
-    }).catch(error => console.log(error));
+    }).catch(error => console.log('wsss', error));
   }
 
   // const connectCoin69 = () => {
@@ -83,7 +83,7 @@ const ConnectWallet: React.FC<Props> = ({ dataGiveWallet }) => {
   // }
 
   const connectSollet = () => {
-    UseWallet("sollet").then(response => {
+    UseWallet("sollet").then(async response => {
       handleWalletResponse(response, 'sollet');
     }).catch(error => console.log(error));
   }

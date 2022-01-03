@@ -28,7 +28,7 @@ const routes: Routes[] = [
   },
   {
     title: 'MILLIGO',
-    path: '/MILLIGO',
+    path: '/milligo',
     LoadComponent: lazy(() => import('components/pages/MILLIGO')),
     exact: true,
   },
@@ -40,7 +40,7 @@ const routes: Routes[] = [
   },
   {
     title: 'NFT',
-    path: '/nft-tickets',
+    path: '/nft-ticket',
     LoadComponent: lazy(() => import('components/pages/nft')),
     exact: true,
   },

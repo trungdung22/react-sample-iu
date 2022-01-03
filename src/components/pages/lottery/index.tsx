@@ -191,20 +191,26 @@ const Lottery: React.FC = () => {
   }
 
   const dataGiveFromHeader = (getDataHeader: any) => {
-    setDataModal({
-      data: {
-        ...dataModal.data,
-        show: getDataHeader !== undefined && getDataHeader.is_connect !== false ? true : false,
-      }
-    })
-    if (getDataHeader !== undefined && getDataHeader.publicKey !== '') {
-      fetchPlayerAccount(getDataHeader.publicKey).then(item => {
+    if (getDataHeader.disconnect) {
+      setPlayerData({
+        data: {
+          is_connect: false,
+          adapter_type: '',
+          publicKey: '',
+          lamportUnit: 0,
+          balanceUSDT: 0,
+          balanceSOL: 0,
+        }
+      })
+    }
+    if (getDataHeader !== undefined && getDataHeader.data.publicKey !== '' && getDataHeader.data.publicKey !== undefined) {
+      fetchPlayerAccount(getDataHeader.data.publicKey).then(item => {
         setPlayerData({
           data: {
-            is_connect: getDataHeader.is_connect,
-            adapter_type: getDataHeader.adapter_type,
+            is_connect: getDataHeader.data.is_connect,
+            adapter_type: getDataHeader.data.adapter_type,
             lamportUnit: item.lamportUnit,
-            publicKey: getDataHeader.publicKey,
+            publicKey: getDataHeader.data.publicKey,
             balanceUSDT: item.balanceUSDT,
             balanceSOL: item.balanceSOL,
           }
@@ -256,60 +262,11 @@ const Lottery: React.FC = () => {
     })
   }
 
-  const exampleSaleMilli = () => {
-    const milliPadPubkeyStr = "4hQBNPiRg7iFTgpKT1Pv4ktzN38VEy3EK9kEANzwNSUK"; 
-    const milliPadOwnerPubKeyStr = "5x2mWRnpyJCGTkdM8nmqrcfRnAZDfsJ5nqYAevb5W7bo";
-    const code = "milli-lottery";
-    buyMilliPad(partyData.data.programId,
-      milliPadPubkeyStr,
-      milliPadOwnerPubKeyStr,
-      playerData.data.adapter_type, 
-      50)
-      .then(async results => {
-        resetModalData();
-        try {
-          await updateMiliPadPlayer(50, code, playerData.data.publicKey);
-          
-          setDataModal({
-            data: {
-              ...dataModal.data,
-              show: true,
-              flag_submit: true, 
-              submit: true
-            }
-          })
-        } catch (error) {
-          setDataModal({
-            data: {
-              ...dataModal.data,
-              show: true,
-              submit: true,
-              flag_submit: false
-            }
-          })
-        }
-        
-      }).catch(error => {
-        debugger
-        resetModalData();
-        setDataModal({
-          data: {
-            ...dataModal.data,
-            show: true,
-            submit: true,
-            flag_submit: false
-          }
-        })
-        console.log(error)
-      });
-  }
-
   const dataGiveFromModal = (getDataModalTolottery: any) => {
     setDataModal({
       data: getDataModalTolottery,
     })
     if (getDataModalTolottery.flag_submit && getDataModalTolottery.your_ticket.length > 0) {
-      //exampleSaleMilli();
       buyBulkTicket(partyData.data.programId,
         getDataModalTolottery.your_ticket,
         partyData.data.gamePubkey,
@@ -355,15 +312,14 @@ const Lottery: React.FC = () => {
         });
     }
   }
-  
-  
   return (
     <>
+      
       <Star></Star>
       <Header playerData={playerData.data} dataGiveFromHeader={dataGiveFromHeader}></Header>
       <div className={`${classes.root}`}>
-        <PartySection partyData={partyData.data} sendDataPartyToLottery={sendDataPartyToLottery}></PartySection>
-        <NextSection playerData={nextPartyData.data} sendDataNextToLottery={sendDataNextToLottery}></NextSection>
+        <PartySection partyData={partyData.data} playerData={playerData.data} sendDataPartyToLottery={sendDataPartyToLottery}></PartySection>
+        <NextSection playerData={playerData.data} nextData={nextPartyData.data} sendDataNextToLottery={sendDataNextToLottery}></NextSection>
         <FinishedSection playerData={playerData.data} dataGiveFromFinished={dataGiveFromFinished}></FinishedSection>
         <GetSection></GetSection>
         <ModalContent dataModal={dataModal.data} playerData={playerData.data}

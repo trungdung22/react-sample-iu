@@ -21,16 +21,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         color: '#FFE0FD',
         marginTop: '1rem'
       },
-      // '@media screen and (max-width: 1640px)': {
-      //   fontSize: '7.5vw',
-      //   marginBottom: '4vw',
-      //   '& sup': {
-      //     fontSize: '4.5vw',
-      //   },
-      //   '& span': {
-      //     fontSize: '2.15vw',
-      //   },
-      // },
       '@media screen and (max-width: 767px)': {
         marginBottom: '2rem',
         fontSize: 56,
@@ -66,11 +56,11 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     maxWidth: 900,
     margin: '0 auto',
     background: '#303030',
-    borderRadius: 10,
+    borderRadius: 20,
     border: '1px solid #17F0FF',
-    overflow: 'hidden',
     '@media screen and (max-width: 767px)': {
       maxWidth: '100%',
+      borderRadius: 10,
     }
   },
   header: {
@@ -81,13 +71,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       color: '#F4E0FF',
       marginBottom: '1rem',
     },
-    // '@media screen and (max-width: 1640px)': {
-    //   padding: '2.5vw 3vw',
-    //   '& .title': {
-    //     fontSize: '2vw',
-    //     marginBottom: '2vw',
-    //   },
-    // },
     '@media screen and (max-width: 767px)': {
       padding: '1.25rem 1rem 1.75rem',
       '& .title': {
@@ -100,7 +83,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    fontSize: 20,
+    fontSize: 18,
     color: '#F4E0FF',
     background: 'rgba(255, 255, 255, 0.25)',
     paddingRight: '1rem',
@@ -112,20 +95,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       background: 'rgba(140, 36, 191, 0.5)',
       borderRadius: 5,
       width: 100,
-      padding: '0.5rem 0',
+      padding: '0.4rem 0',
       textAlign: 'center',
     },
-    // '@media screen and (max-width: 1640px)': {
-    //   fontSize: '1.5vw',
-    //   paddingRight: '1vw',
-    //   borderRadius: '0.75vw',
-    //   '& span': {
-    //     display: 'inline-block',
-    //     borderRadius: '0.75vw',
-    //     width: '12vw',
-    //     padding: '1.25vw 0',
-    //   },
-    // },
     '@media screen and (max-width: 767px)': {
       fontSize: 16,
       paddingRight: '0.75rem',
@@ -181,11 +153,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       padding: '0.5rem 0.75rem',
       fontSize: 14,
       fontWeight: 700,
-      cursor: 'pointer',
       transition: 'all 0.2s ease',
-      '&:hover': {
-        opacity: 0.8,
-      }
     },
     '@media screen and (max-width: 767px)': {
       padding: '1.25rem 1rem 1.75rem',

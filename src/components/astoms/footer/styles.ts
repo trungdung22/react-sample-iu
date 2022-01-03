@@ -1,10 +1,11 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
+import { Z_BLOCK } from 'zlib';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
     background: '#071526',
     padding: '5.25rem 0 2rem',
-    borderTop: '1px solid #0B7880',
+    borderTop: '1px solid rgba(100, 100, 100, 0.5)',
     '@media screen and (max-width: 1640px)': {
       padding: '5.25rem 3% 2rem',
     },
@@ -114,25 +115,33 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       left: 0,
       justifyContent: 'space-evenly',
       padding: '0.55rem 0',
-      borderTop: '1px solid #0B7880',
-      background: '#071526',
+      borderTop: '1px solid rgba(87, 87, 87, 0.5)',
+      background: '#151515',
       zIndex: 99,
       display: 'flex',
       fontSize: 9,
-      '& a.active': {
-        color: '#B2FAFF',
-        fontWeight: 700,
-        '& path': {
-          fill: '#B2FAFF'
-        }
+      '& a': {
+        fontWeight: 500,
+        display: 'block',
+        padding: '4px 14px',
+        borderRadius: 3,
+        '&.active': {
+          color: '#17F0FF',
+          fontWeight: 700,
+          background: 'rgba(11, 120, 128, 0.3)',
+          '& path': {
+            fill: '#17F0FF'
+          }
+        },
       },
       '& span': {
-        color: '#F4E0FF',
+        color: '#fff',
         display: 'block',
         textAlign: 'center',
         paddingBottom: '0.25rem',
         '& svg': {
           margin: '0 auto',
+          maxHeight: 20,
         }
       },
     }

@@ -3,7 +3,8 @@ import useStyles from './styles';
 const Jackpots: React.FC = () => {
   const classes = useStyles();
   return (
-    <div className={`${classes.root}`}>
+    <div className={`${classes.root} relative`}>
+      <p className='absolute -top-5 md:-top-6 left-0 w-24 md:w-auto'><img src="./assets/lottery/sky_02.svg" alt="" /></p>
       <div className={`${classes.header}`}>
         <div className="top">
           <p className="title">Round</p>

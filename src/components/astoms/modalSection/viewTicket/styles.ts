@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
   listTickets: {
     overflowY: 'auto',
-    maxHeight: 160,
+    maxHeight: 380,
     marginTop: '1rem',
     marginBottom: 0,
     '& dl + dl': {
@@ -54,6 +54,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       fontWeight: 600,
       color: '#fff',
     },
+    '@media screen and (max-width: 767px)': {
+      maxHeight: 280,
+    }
   },
 }));
 

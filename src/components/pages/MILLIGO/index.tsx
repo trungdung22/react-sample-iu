@@ -50,20 +50,26 @@ const MILLIGO: React.FC = () => {
     })
   }
   const dataGiveFromHeader = (getDataHeader: any) => {
-    setDataModal({
-      data: {
-        ...dataModal.data,
-        show: getDataHeader !== undefined && getDataHeader.is_connect !== false ? true : false,
-      }
-    })
-    if (getDataHeader !== undefined && getDataHeader.publicKey !== '') {
-      fetchPlayerAccount(getDataHeader.publicKey).then(item => {
+    if (getDataHeader.disconnect) {
+      setPlayerData({
+        data: {
+          is_connect: false,
+          adapter_type: '',
+          publicKey: '',
+          lamportUnit: 0,
+          balanceUSDT: 0,
+          balanceSOL: 0,
+        }
+      })
+    }
+    if (getDataHeader !== undefined && getDataHeader.data.publicKey !== '' && getDataHeader.data.publicKey !== undefined) {
+      fetchPlayerAccount(getDataHeader.data.publicKey).then(item => {
         setPlayerData({
           data: {
-            is_connect: getDataHeader.is_connect,
-            adapter_type: getDataHeader.adapter_type,
+            is_connect: getDataHeader.data.is_connect,
+            adapter_type: getDataHeader.data.adapter_type,
             lamportUnit: item.lamportUnit,
-            publicKey: getDataHeader.publicKey,
+            publicKey: getDataHeader.data.publicKey,
             balanceUSDT: item.balanceUSDT,
             balanceSOL: item.balanceSOL,
           }
@@ -198,7 +204,7 @@ const MILLIGO: React.FC = () => {
                 }
               }}
             >Buy NFTs</p>
-            { showTooltip && <p className='absolute top-full left-1/2 transform -translate-x-1/2 translate-y-4 z-100 border border-solid border-pink-150 bg-purple-150 rounded-15 w-60 text-center py-3'>Coming real soon...</p> }
+            { showTooltip && <p className='absolute top-full left-1/2 transform -translate-x-1/2 translate-y-4 z-100 border border-solid border-pink-150 bg-purple-150 rounded-5 text-center text-14 md:text-16 pb-0.5 w-40 text-white'>Coming real soon...</p> }
           </div>
           <p className='animation-pend'><img src="/assets/millipad/circle_02.png" alt="circle" className='mx-auto' /></p>
         </div>

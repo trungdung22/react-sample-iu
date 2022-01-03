@@ -4,15 +4,12 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     maxWidth: 700,
     margin: '0 auto',
     background: '#303030',
-    borderRadius: 10,
+    borderRadius: 20,
     border: '1px solid #17F0FF',
-    overflow: 'hidden',
-    // '@media screen and (max-width: 1640px)': {
-    //   maxWidth: '65vw'
-    // },
 
     '@media screen and (max-width: 767px)': {
-      maxWidth: '100%'
+      maxWidth: '100%',
+      borderRadius: 10,
     }
   },
   header: {
@@ -45,21 +42,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
           }
         }
       },
-      // '@media screen and (max-width: 1640px)': {
-      //   marginBottom: '2vw',
-      //   '& .title': {
-      //     fontSize: '2vw',
-      //   },
-      //   '& ul': {
-      //     gap: '1vw',
-      //     '& li': {
-      //       padding: '0 0.5vw',
-      //       '& svg': {
-      //         maxWidth: '2.25vw'
-      //       },
-      //     }
-      //   },
-      // },
       '@media screen and (max-width: 767px)': {
         marginBottom: '0.75rem',
         '& .title': {
@@ -99,17 +81,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       padding: '0.6rem 0',
       textAlign: 'center',
     },
-    // '@media screen and (max-width: 1640px)': {
-    //   fontSize: '1.5vw',
-    //   paddingRight: '1vw',
-    //   borderRadius: '0.75vw',
-    //   '& span': {
-    //     display: 'inline-block',
-    //     borderRadius: '0.75vw',
-    //     width: '12vw',
-    //     padding: '1.25vw 0',
-    //   },
-    // },
     '@media screen and (max-width: 767px)': {
       fontSize: 16,
       paddingRight: '0.75rem',
@@ -146,18 +117,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       color: '#D47DFF',
       paddingBottom: 4,
     },
-    // '@media screen and (max-width: 1640px)': {
-    //   '& .text': {
-    //     fontSize: '2.25vw',
-    //     width: '13vw',
-    //   },
-    //   '& .total': {
-    //     fontSize: '4.5vw',
-    //   },
-    //   '& .unit': {
-    //     fontSize: '2.75vw',
-    //   },
-    // },
     '@media screen and (max-width: 767px)': {
       display: 'block',
       '& .text': {
@@ -180,10 +139,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     fontWeight: 500,
     fontSize: 20,
     wordBreak: 'break-word',
-    // '@media screen and (max-width: 1640px)': {
-    //   padding: '2.5vw',
-    //   fontSize: '2.1vw',
-    // },
     '@media screen and (max-width: 1920px)': {
       padding: '1rem',
       lineHeight: '1.7rem',

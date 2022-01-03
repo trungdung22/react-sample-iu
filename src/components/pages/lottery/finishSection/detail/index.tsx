@@ -27,7 +27,8 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
   }
   
   return (
-    <div className={`${classes.root}`}>
+    <div className={`${classes.root} relative`}>
+      <p className='absolute -top-5 md:-top-6 left-0 w-24 md:w-auto'><img src="./assets/lottery/sky_02.svg" alt="" /></p>
       <div className={`${classes.header}`}>
         <div className="top">
           <p className="title">
@@ -42,15 +43,11 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
             Round
           </p>
         </div>
-        {/* <p className={`${classes.infoRound}`}>
-            <span>{`#${dataSendToDetail.game_no}`}</span>
-            {prettyPrintTime(new Date(dataSendToDetail.createdAt))}
-        </p> */}
         <p className={`${classes.infoRound}`}>
           <span>{`#${dataSendToDetail.game_no}`}</span>
-          {`${monthName[new Date(dataSendToDetail.createdAt).getMonth()]} 
-          ${new Date(dataSendToDetail.createdAt).getDate()}, 
-          ${new Date(dataSendToDetail.createdAt).getFullYear()}, 11:00 AM UTC`}
+          {`${monthName[new Date(dataSendToDetail.updatedAt).getMonth()]} 
+          ${new Date(dataSendToDetail.updatedAt).getDate()}, 
+          ${new Date(dataSendToDetail.updatedAt).getFullYear()}, 11:00 AM UTC`}
         </p>
       </div>
       <div className={`${classes.body}`}>

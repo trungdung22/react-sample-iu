@@ -48,7 +48,9 @@ const FinishedSection: React.FC<Props> = ({playerData, dataGiveFromFinished}) =>
   }
 
   return (
-    <div className={`${classes.root}`}>
+    <div className={`${classes.root} relative`}>
+      <p className='absolute top-1/3 left-10 hidden lg:block xl:left-40 2xl:left-80'><img src="./assets/lottery/star_05.svg" alt="" /></p>
+      <p className='absolute bottom-1/3 hidden lg:block right-10 xl:right-32'><img src="./assets/lottery/star_06.svg" alt="" /></p>
       <div className={`${classes.container}`}>
         <h3>Millionsy airboard</h3>
         <ul className={`${classes.listButton}`}>
@@ -57,23 +59,11 @@ const FinishedSection: React.FC<Props> = ({playerData, dataGiveFromFinished}) =>
             setDataBackYour(false)
             handleSetComponent('jackpots')
           }}>Jackpots</li>
-          <li className="slash">
-            <svg width="16" height="23" viewBox="0 0 16 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <line x1="7.31585" y1="1.85437" x2="1.8543" y2="20.9698" stroke="#A819FA" strokeWidth="3" strokeLinecap="round"/>
-              <line x1="13.6015" y1="1.85437" x2="8.13994" y2="20.9698" stroke="#A819FA" strokeWidth="3" strokeLinecap="round"/>
-            </svg>
-          </li>
           <li className={component === 'all' ? 'active' : ''} onClick={() => {
             setDataYours(0)
             setDataBackYour(false)
             handleSetComponent('all')
           }}>All History</li>
-          <li className="slash">
-            <svg width="16" height="23" viewBox="0 0 16 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <line x1="7.31585" y1="1.85437" x2="1.8543" y2="20.9698" stroke="#A819FA" strokeWidth="3" strokeLinecap="round"/>
-              <line x1="13.6015" y1="1.85437" x2="8.13994" y2="20.9698" stroke="#A819FA" strokeWidth="3" strokeLinecap="round"/>
-            </svg>
-          </li>
           <li className={component === 'yours' ? 'active' : ''} onClick={() => {
             setDataYours(0)
             setDataBackYour(false)

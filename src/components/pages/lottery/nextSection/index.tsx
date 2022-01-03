@@ -4,16 +4,18 @@ import Parser from 'html-react-parser';
 import ContentLoader from 'react-content-loader';
 
 type Props = {
+  nextData: any,
   playerData: any,
   sendDataNextToLottery: (getDataNextTolottery: any) => void,
 }
-const NextSection: React.FC<Props> = ({playerData, sendDataNextToLottery}) => {
+const NextSection: React.FC<Props> = ({nextData, playerData, sendDataNextToLottery}) => {
   const classes = useStyles();
+  const [showTooltipConnect, setShowTooltipConnect] = useState(false);
   const [timer, setTimer] = useState('');
 
   
   useEffect(() => {
-    const countDownDate = playerData.closed_time.getTime();
+    const countDownDate = nextData.closed_time.getTime();
     const timerId = setInterval(function() {
 
       // Get today's date and time
@@ -58,10 +60,10 @@ const NextSection: React.FC<Props> = ({playerData, sendDataNextToLottery}) => {
 
 
   const handleViewTicket = (event: React.MouseEvent) => {
-    if(playerData.your_tickets.length > 0) {
+    if(nextData.your_tickets.length > 0) {
       const next_round = {
-        next_id: playerData.next_id,
-        your_ticket: playerData.your_tickets
+        next_id: nextData.next_id,
+        your_ticket: nextData.your_tickets
       }
       sendDataNextToLottery({
         next_round: next_round,
@@ -70,8 +72,9 @@ const NextSection: React.FC<Props> = ({playerData, sendDataNextToLottery}) => {
       })
     }
   }
+  
   const handleGetTicket = (event: React.MouseEvent) => {
-    if(window.sessionStorage.getItem('isOverTimer') === 'false') {
+    if(window.sessionStorage.getItem('isOverTimer') === 'false' && playerData.is_connect) {
       sendDataNextToLottery({
         next_round: {
           next_id: -1,
@@ -86,7 +89,9 @@ const NextSection: React.FC<Props> = ({playerData, sendDataNextToLottery}) => {
   const monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
   return (
-    <div className={`${classes.root}`}>
+    <div className={`${classes.root} relative`}>
+      <p className='absolute hidden md:block top-72 left-20'><img src="./assets/lottery/star_03.svg" alt="" /></p>
+      <p className='absolute bottom-20 hidden lg:block xl:top-0 right-20 xl:right-40 2xl:right-80 w-10 xl:w-auto'><img src="./assets/lottery/star_04.svg" alt="" /></p>
       <div className={`${classes.container}`}>
         <h3>
           {
@@ -102,17 +107,18 @@ const NextSection: React.FC<Props> = ({playerData, sendDataNextToLottery}) => {
           }
         <span>till the party</span></h3>
         
-        <div className={`${classes.content}`}>
+        <div className={`${classes.content} relative`}>
+          <p className='absolute -top-4 md:-top-6 right-0 w-32 md:w-auto'><img src="./assets/lottery/sky_01.svg" alt="" /></p>
           {
-            playerData.next_id > 0 ? (
+            nextData.next_id > 0 ? (
               <>
                 <div className={`${classes.header}`}>
                   <p className="title">Next Party</p>
                   <p className={`${classes.infoRound}`}>
-                    <span>#{playerData.next_id}</span>
+                    <span>#{nextData.next_id}</span>
                     {
-                      `${monthName[playerData.closed_time.getUTCMonth()]} ${playerData.closed_time.getUTCDate()}, 
-                      ${playerData.closed_time.getFullYear()}, 
+                      `${monthName[nextData.closed_time.getUTCMonth()]} ${nextData.closed_time.getUTCDate()}, 
+                      ${nextData.closed_time.getFullYear()}, 
                       11:00 AM UTC`
                     }
                   </p>
@@ -120,9 +126,22 @@ const NextSection: React.FC<Props> = ({playerData, sendDataNextToLottery}) => {
                 <div className={`${classes.footer}`}>
                   <div className="yourticket">
                     <p>Your Ticket</p>
-                    <p>You have <span onClick={handleViewTicket}>{playerData.your_tickets.length} ticket</span> to enter this party.</p>
+                    <p>You have <span onClick={handleViewTicket}>{nextData.your_tickets.length} ticket</span> to enter this party.</p>
                   </div>
-                  <p className="getticket" onClick={handleGetTicket}>Buy ticket</p>
+                  <div className='relative w-fit mx-auto md:mx-0'>
+                    <p className={`getticket ${playerData.is_connect ? 'cursor-pointer hover:opacity-75' : 'cursor-not-allowed'}`}
+                      onClick={handleGetTicket}
+                      onMouseLeave={() => {
+                        setShowTooltipConnect(false);
+                      }}
+                      onMouseEnter={() => {
+                        if(!playerData.is_connect) {
+                          setShowTooltipConnect(true);
+                        }
+                      }}
+                    >Buy ticket</p>
+                    { showTooltipConnect && <p className='absolute top-full left-3 md:left-1.5 transform translate-y-2 z-100 border border-solid border-pink-150 bg-purple-150 rounded-5 text-center text-12 md:text-14 pt-0.5 pb-1 text-white px-2'>Connect wallet first</p> }
+                  </div>
                 </div>
               </>
             ) : (

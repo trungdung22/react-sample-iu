@@ -2,8 +2,10 @@ import { createStyles, makeStyles, Theme } from '@material-ui/core';
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
     padding: '8rem 0 10rem',
-    background: 'url(assets/lottery/bg_finished.svg) center top no-repeat',
-    backgroundSize: 'cover',
+    // background: 'url(assets/lottery/bg_finished.svg) center top no-repeat',
+    // backgroundSize: 'cover',
+    background: 'url(assets/lottery/bg_christmas.svg) center bottom no-repeat',
+    backgroundSize: '100% auto',
     marginTop: '7.5rem',
     '& h3': {
       color: '#D47DFF',
@@ -14,7 +16,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       textTransform: 'uppercase',
     },
     '@media screen and (max-width: 767px)': {
-      padding: '4rem 0',
+      background: 'url(assets/lottery/bg_christmas.svg) right bottom no-repeat',
+      backgroundSize: '150% auto',
+      padding: '4rem 0 8rem',
       marginTop: '4rem',
       '& h3': {
         fontSize: 26,
@@ -35,36 +39,32 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    gap: '1rem',
-    marginBottom: '4rem',
-    '& li:not(.slash)': {
+    gap: '4rem',
+    gridGap: '4rem',
+    marginBottom: '3rem',
+    '& li': {
       border: '1px solid #A819FA',
-      borderRadius: 15,
+      borderRadius: 5,
       fontSize: 20,
       fontWeight: 700,
       width: 160,
       textAlign: 'center',
-      padding: '0.6rem 0',
+      padding: '0.3rem 0',
       boxSizing: 'border-box',
       cursor: 'pointer',
       transition: 'all 0.2s ease',
-    },
-    '& li.active, & li:not(.slash):hover': {
-      background: '#A819FA',
-    },
-    '@media screen and (max-width: 767px)': {
-      gap: '0',
-      marginBottom: '2rem',
-      '& li.active, & li:not(.slash)': {
-        padding: '0.5rem 0',
-        fontSize: 14,
-        borderRadius: 10,
+      '&.active, &:hover': {
+        background: '#A819FA',
       },
-      '& li.slash': {
-        margin: '0 0.25rem',
-        '& svg': {
-          maxWidth: 10,
-        }
+    },
+
+    '@media screen and (max-width: 767px)': {
+      gap: '1rem',
+      gridGap: '1rem',
+      marginBottom: '2rem',
+      '& li': {
+        padding: '0.3rem 0 0.4rem',
+        fontSize: 14,
       }
     },
   },

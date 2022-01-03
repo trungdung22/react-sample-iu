@@ -257,14 +257,10 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
     dataGiveFromWallet(dataWalletSendLottery.data);
   }, [dataWalletSendLottery])
   
-  if (playerData.is_connect) {
-    window.sessionStorage.setItem('show_connect', 'false');
-  }
-  
 
   return (
     <>
-      { window.sessionStorage.getItem('show_connect') === 'true' && !playerData.is_connect &&
+      {/* { window.sessionStorage.getItem('show_connect') === 'true' && !playerData.is_connect &&
         <div className='fixed top-0 left-0 z-1000 bg-gray-400 h-full w-full'>
           <p className='w-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-2.5 text-16 font-bold text-gray-750 rounded-5 text-center bg-white max-w-320'>
             Connecting
@@ -276,7 +272,7 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
             </span>
           </p>
         </div>
-      }
+      } */}
       {dataModal.show && !dataModal.submit ? (
         <div className={`${classes.root}`}>
           <div className={`${classes.backgroundModal}`} onClick={() => handleClosedModal()}></div>

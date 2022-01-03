@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import useStyles from './styles';
 import Title from 'components/astoms/title/DefaultTitle';
-import DefaultButon from 'components/astoms/button/DefaultButton';
 import Star from 'components/astoms/star';
 import Header from 'components/astoms/header';
 import Footer from 'components/astoms/footer';
 import ModalContent from 'components/astoms/modalSection';
 import { fetchPlayerAccount } from 'lib/utilities/utils';
-import { SolletWalletAdapter } from "lib/wallets/sollet";
-import { SOLLET_ADAPTER_NETWORD } from 'lib/program/config'; 
-import { PROVIDER_URL } from 'data/constants';
+import { useHistory } from 'react-router-dom';
 
 const Home: React.FC = () => {
+  const history = useHistory();
+  history.push('/lottery');
+
   const [playerData, setPlayerData] = useState({
     data: {
       is_connect : false,
@@ -63,7 +63,11 @@ const Home: React.FC = () => {
         }
       }));
     }
+    
+    
   }, [])
+
+  
 
   const dataGiveFromModal = (getDataModalTolottery: any) => {
     setDataModal({
@@ -72,20 +76,26 @@ const Home: React.FC = () => {
   }
 
   const dataGiveFromHeader = (getDataHeader: any) => {
-    setDataModal({
-      data: {
-        ...dataModal.data,
-        show: getDataHeader !== undefined && getDataHeader.is_connect !== false ? true : false,
-      }
-    })
-    if (getDataHeader !== undefined && getDataHeader.publicKey !== '') {
-      fetchPlayerAccount(getDataHeader.publicKey).then(item => {
+    if (getDataHeader.disconnect) {
+      setPlayerData({
+        data: {
+          is_connect: false,
+          adapter_type: '',
+          publicKey: '',
+          lamportUnit: 0,
+          balanceUSDT: 0,
+          balanceSOL: 0,
+        }
+      })
+    }
+    if (getDataHeader !== undefined && getDataHeader.data.publicKey !== '' && getDataHeader.data.publicKey !== undefined) {
+      fetchPlayerAccount(getDataHeader.data.publicKey).then(item => {
         setPlayerData({
           data: {
-            is_connect: getDataHeader.is_connect,
-            adapter_type: getDataHeader.adapter_type,
+            is_connect: getDataHeader.data.is_connect,
+            adapter_type: getDataHeader.data.adapter_type,
             lamportUnit: item.lamportUnit,
-            publicKey: getDataHeader.publicKey,
+            publicKey: getDataHeader.data.publicKey,
             balanceUSDT: item.balanceUSDT,
             balanceSOL: item.balanceSOL,
           }
@@ -117,66 +127,70 @@ const Home: React.FC = () => {
     }
   }
 
-  const sollet = new SolletWalletAdapter({ provider: PROVIDER_URL, network: SOLLET_ADAPTER_NETWORD});
-  const [modalDisconnect, setModalDisconnect] = useState(false);
-  const handleClickConnect = () => {
-    if (playerData.data.is_connect) {
-      setModalDisconnect(true);
-    } else {
-      setDataModal({ data: { ...dataModal.data, show: true }})
-    }
-  }
-  const handleDisconnect = () => {
-    setModalDisconnect(false);
-    window.sessionStorage.clear();
-    sollet.disconnect() as Promise<void>;
-    setDataModal({
-      data: {
-        is_connect: false,
-        show: false,
-        first: false,
-        second: false,
-        third: false,
-        four: false,
-        view_ticket: false,
-        view_your: false,
-        submit: false,
-        flag_submit: false,
-        your_ticket: [],
-        next_round: {
-          next_id: -1,
-          your_ticket: []
-        },
-      }
-    })
-    setPlayerData({
-      data: {
-        is_connect: false,
-        adapter_type: '',
-        publicKey: '',
-        lamportUnit: 0,
-        balanceUSDT: 0,
-        balanceSOL: 0,
-      }
-    })
-  }
+  // const sollet = new SolletWalletAdapter({ provider: PROVIDER_URL, network: SOLLET_ADAPTER_NETWORD});
+  // const [modalDisconnect, setModalDisconnect] = useState(false);
+  // const handleClickConnect = () => {
+  //   if (playerData.data.is_connect) {
+  //     setModalDisconnect(true);
+  //   } else {
+  //     setDataModal({ data: { ...dataModal.data, show: true }})
+  //   }
+  // }
+  // const handleDisconnect = () => {
+  //   setModalDisconnect(false);
+  //   window.sessionStorage.clear();
+  //   sollet.disconnect() as Promise<void>;
+  //   setDataModal({
+  //     data: {
+  //       is_connect: false,
+  //       show: false,
+  //       first: false,
+  //       second: false,
+  //       third: false,
+  //       four: false,
+  //       view_ticket: false,
+  //       view_your: false,
+  //       submit: false,
+  //       flag_submit: false,
+  //       your_ticket: [],
+  //       next_round: {
+  //         next_id: -1,
+  //         your_ticket: []
+  //       },
+  //     }
+  //   })
+  //   setPlayerData({
+  //     data: {
+  //       is_connect: false,
+  //       adapter_type: '',
+  //       publicKey: '',
+  //       lamportUnit: 0,
+  //       balanceUSDT: 0,
+  //       balanceSOL: 0,
+  //     }
+  //   })
+  // }
+
+  // if (playerData.data.is_connect) {
+  //   window.sessionStorage.setItem('show_connect', 'false');
+  // }
 
   return (
     <>
-      {
-        modalDisconnect && 
-        <div className='fixed top-0 left-0 z-1000 h-full w-full'>
-          <div className='absolute top-0 left-0 z-100 bg-gray-400 h-full w-full' onClick={() => setModalDisconnect(false)}></div>
-          <div className='z-1000 w-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 max-w-320 bg-gray-0 rounded-20 border border-solid border-blue-0'>
-            <p className='text-20 font-bold text-blue-50 rounded-5 text-center bg-blue-0 max-w-200 py-1.5 cursor-pointer transition-all hover:opacity-70' onClick={handleDisconnect}>Disconnect</p>
-            <p className='absolute top-1/2 right-0 transform -translate-y-1/2 p-4 cursor-pointer' onClick={() => setModalDisconnect(false)}>
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fillRule="evenodd" clipRule="evenodd" d="M11.7071 1.70711C12.0976 1.31658 12.0976 0.683417 11.7071 0.292893C11.3166 -0.0976311 10.6834 -0.0976311 10.2929 0.292893L6 4.58579L1.70711 0.292894C1.31658 -0.0976301 0.683417 -0.0976301 0.292893 0.292894C-0.0976311 0.683419 -0.0976311 1.31658 0.292893 1.70711L4.58579 6L0.292893 10.2929C-0.0976311 10.6834 -0.0976311 11.3166 0.292893 11.7071C0.683417 12.0976 1.31658 12.0976 1.70711 11.7071L6 7.41421L10.2929 11.7071C10.6834 12.0976 11.3166 12.0976 11.7071 11.7071C12.0976 11.3166 12.0976 10.6834 11.7071 10.2929L7.41421 6L11.7071 1.70711Z" fill="white"/>
+      {/* { 
+        window.sessionStorage.getItem('show_connect') === 'true' && !playerData.data.is_connect &&
+        <div className='fixed top-0 left-0 z-1000 bg-gray-400 h-full w-full'>
+          <p className='w-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-2.5 text-16 font-bold text-gray-750 rounded-5 text-center bg-white max-w-320'>
+            Connecting
+            <span className='inline-block ml-3'>
+              <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.93287 13.779C3.63991 14.0737 3.16493 14.0737 2.87197 13.779L0.219719 11.1116C-0.0732398 10.8169 -0.0732398 10.3392 0.219719 10.0446L2.87197 7.3771C3.16493 7.08246 3.63991 7.08246 3.93287 7.3771C4.22583 7.67174 4.22583 8.14945 3.93287 8.44409L2.56205 9.82277H12.3763C12.7906 9.82277 13.1265 9.48498 13.1265 9.0683V8.50882C13.1265 8.09214 13.4624 7.75435 13.8767 7.75435C14.291 7.75435 14.6268 8.09214 14.6268 8.50882V9.0683C14.6268 10.3183 13.6192 11.3317 12.3763 11.3317H2.56042L3.93287 12.712C4.22583 13.0067 4.22583 13.4844 3.93287 13.779Z" fill="#999999"/>
+                <path d="M11.0671 6.6229C11.3601 6.91754 11.8351 6.91754 12.128 6.6229L14.7803 3.95543C15.0732 3.66079 15.0732 3.18309 14.7803 2.88845L12.128 0.22098C11.8351 -0.0736599 11.3601 -0.0736599 11.0671 0.22098C10.7742 0.515621 10.7742 0.993327 11.0671 1.28797L12.4415 2.67025H2.62413C1.38121 2.67025 0.373619 3.68361 0.373619 4.93366V5.49093C0.373619 5.90761 0.709481 6.2454 1.12379 6.2454C1.5381 6.2454 1.87396 5.90761 1.87396 5.49093V4.93366C1.87396 4.51698 2.20982 4.17919 2.62413 4.17919H12.436L11.0671 5.55591C10.7742 5.85055 10.7742 6.32826 11.0671 6.6229Z" fill="#999999"/>
               </svg>
-            </p>
-          </div>
+            </span>
+          </p>
         </div>
-      }
+      } */}
       <Star></Star>
       <Header playerData={playerData.data} dataGiveFromHeader={dataGiveFromHeader}></Header>
       <div className={`${classes.root}`}>
@@ -188,7 +202,7 @@ const Home: React.FC = () => {
           <div className={`${classes.content}`}>
             <Title text={['We start', <br />, 'the next', <br />, 'generation!']}></Title>
             <p className={`${classes.text}`}>The first Lottery platform and Game Launchpad on Solana</p>
-            <DefaultButon text={'Connect Wallet'} connect={playerData.data.is_connect} onClick={handleClickConnect}></DefaultButon>
+            <p className={`w-140 text-13 md:text-14 font-bold text-center rounded-5 p-2 md:px-3 transition-all cursor-pointer hover:opacity-70 ${playerData.data.is_connect ? 'text-white bg-pink-150' : 'text-blue-50 bg-blue-0'}`}>{playerData.data.is_connect ? 'Connected' : 'Connect Wallet'}</p>
           </div>
         </div>
       </div>

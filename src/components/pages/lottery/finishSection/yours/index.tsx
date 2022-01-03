@@ -18,6 +18,7 @@ const Yours: React.FC<Props> = ({playerData, dataGiveFromYours}) => {
   });
   
   const [error, setError] = useState('');
+  const [stateItem, setStateItem] = useState(0);
 
   const loadMore = () => {
     if (playerData.publicKey !== undefined && playerData.publicKey !== '') {
@@ -31,6 +32,11 @@ const Yours: React.FC<Props> = ({playerData, dataGiveFromYours}) => {
         .then(res => res.json())
         .then(
           res => {
+            res.results.map(item => {
+              if (item.player_tickets.length > 0) {
+                setStateItem(stateItem + 1);
+              }
+            })
             setData({
               items: [...data.items, ...res.results], 
               currGameNo: res.currGameNo,
@@ -52,27 +58,32 @@ const Yours: React.FC<Props> = ({playerData, dataGiveFromYours}) => {
   
 
   const handleRenderRoundItems = (el: any) => {
-    const date = new Date(el.createdAt);
-    const formatTime = (time: number) => {
-      return time < 10 ?  '0' + time : time;
+    console.log(el);
+    
+    if (el.player_tickets.length > 0) {
+      const date = new Date(el.updatedAt);
+      const formatTime = (time: number) => {
+        return time < 10 ?  '0' + time : time;
+      }
+      return (
+        <li key={el.id} onClick={() => dataGiveFromYours(el)}>
+          <p>{el.game_no}</p>
+          <p>
+            <span>{`${formatTime(date.getDate())} thg ${date.getMonth() + 1}, ${date.getFullYear()}`}</span>
+            <span>{`${formatTime(date.getHours())}:${formatTime(date.getMinutes())}`}</span>
+          </p>
+          <p>
+            <span>{el.player_tickets.length}</span>
+            <span><img src="/assets/common/icon_arrow_circle.svg" alt="arrow circle" /></span>
+          </p>
+        </li>
+      )
     }
-    return (
-      <li key={el.id} onClick={() => dataGiveFromYours(el)}>
-        <p>{el.game_no}</p>
-        <p>
-          <span>{`${formatTime(date.getDate())} thg ${date.getMonth() + 1}, ${date.getFullYear()}`}</span>
-          <span>{`${formatTime(date.getHours())}:${formatTime(date.getMinutes())}`}</span>
-        </p>
-        <p>
-          <span>{el.player_tickets.length}</span>
-          <span><img src="/assets/common/icon_arrow_circle.svg" alt="arrow circle" /></span>
-        </p>
-      </li>
-    )
   }
   
   return (
-    <div className={`${classes.root}`}>
+    <div className={`${classes.root} relative`}>
+      <p className='absolute -top-5 md:-top-6 left-0 w-24 md:w-auto'><img src="./assets/lottery/sky_02.svg" alt="" /></p>
       {
         data.items.length > 0 ? (
           <>
@@ -85,19 +96,22 @@ const Yours: React.FC<Props> = ({playerData, dataGiveFromYours}) => {
                 <li>Date</li>
                 <li>Your<br className="sp-768"/> tickets</li>
               </ul>
-              <ul className="listRound">
-                <InfiniteScroll
-                  throttle={100}
-                  threshold={30}
-                  isLoading={data.isLoading}
-                  hasMore={!data.loadAll}
-                  onLoadMore={loadMore}
-                >
-                  {data.items.length > 0
-                    ? data.items.map(item => (handleRenderRoundItems(item)))
-                    : null}
-                </InfiniteScroll>
-              </ul>
+              {
+                stateItem > 0 ? 
+                <ul className="listRound">
+                  <InfiniteScroll
+                    throttle={100}
+                    threshold={30}
+                    isLoading={data.isLoading}
+                    hasMore={!data.loadAll}
+                    onLoadMore={loadMore}
+                  >
+                    {data.items.map(item => (handleRenderRoundItems(item)))}
+                  </InfiniteScroll>
+                </ul>
+                : <p className='text-14 md:text-16 lg:text-18 text-pink-50'>You don't have any ticket.</p>
+              }
+              
             </div>
           </>
         ) : (

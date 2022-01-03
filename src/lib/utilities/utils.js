@@ -148,4 +148,18 @@ export const updateMissionPlayer = async (playerPubkey, missions, code) => {
     };
     const response = await fetch(`${HOST_NAME}/api/milli-pads/update-mission`, requestOptions);
     return response;
-  }
+}
+
+export const updateJoinWhiteListUser = async (playerPubkey) => {
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+            playerPubkey: playerPubkey
+        })
+    };
+    const response = await fetch(`${HOST_NAME}/api/milli-pads/update-first-quest`, requestOptions);
+    return response;
+}

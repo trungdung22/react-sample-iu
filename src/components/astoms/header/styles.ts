@@ -7,9 +7,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     position: 'fixed',
     top: 0,
     left: 0,
-    background: '#071526',
-    padding: '0.5rem 0',
-    borderBottom: '1px solid #0B7880',
+    background: '#151515',
+    borderBottom: '0.5px solid rgba(87, 87, 87, 0.5)',
     display: 'flex',
     alignItems: 'center',
     transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -17,28 +16,41 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     '&.active': {
       top: '-100%',
     },
-    '& ul': {
+    '& .listRouter': {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
-      gap: '2.75rem',
+      gap: '1.25rem',
       '& a': {
         display: 'inline-block',
         fontSize: 16,
-        color: '#fff',
+        color: '#A9A9A9',
         textDecoration: 'none',
         transition: 'all 0.2s ease',
-        '&:hover': {
-          color: '#B2FAFF',
+        fontWeight: '500',
+        padding: '5px 14px',
+        borderRadius: '5px',
+        position: 'relative',
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          width: 0,
+          left: 0,
+          height: 2,
+          background: '#17F0FF',
+          bottom: -24,
+          transition: 'all 0.2s ease',
+        },
+        '&:not(.active):hover': {
+          color: '#fff',
+          background: 'rgba(11, 120, 128, 0.7)',
         },
         '&.active': {
-          color: '#B2FAFF',
-          fontWeight: 700,
+          color: '#17F0FF',
+          '&::before': {
+            width: '100%',
+          },
         },
-
-        // '@media screen and (max-width: 1640px)': {
-        //   fontSize: '1.5vw',
-        // },
         '@media screen and (max-width: 767px)': {
           fontSize: '10px',
           color: '#F4E0FF',
@@ -51,13 +63,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         display: 'none',
       }
     },
-
-    // '@media screen and (max-width: 1640px)': {
-    //   padding: '1em 0',
-    //   '& ul': {
-    //     gap: '3.5vw',
-    //   },
-    // }
   },
   container: {
     display: 'flex',
@@ -89,16 +94,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       fontWeight: 400,
       transition: 'all 0.2s ease',
     },
-
-    // '@media screen and (max-width: 1640px)': {
-    //   gap: '1.75vw',
-    //   '& img': {
-    //     maxWidth: '3.25vw',
-    //   },
-    //   '& span': {
-    //     fontSize: '1.6vw',
-    //   },
-    // },
     '@media screen and (max-width: 767px)': {
       gap: '0',
       '& img': {
@@ -115,9 +110,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     alignItems: 'center',
     justifyContent: 'center',
     gap: '2.5rem',
-    // '@media screen and (max-width: 1640px)': {
-    //   gap: '3.5vw',
-    // },
   },
 }));
 

@@ -2,7 +2,7 @@ import Footer from 'components/astoms/footer';
 import Header from 'components/astoms/header';
 import ModalContent from 'components/astoms/modalSection';
 import React, { useEffect, useState } from 'react';
-import { fetchPlayerAccount, getGameBoardInfo, registerMilipadPlayer, updateMiliPadPlayer, updateMissionPlayer } from 'lib/utilities/utils';
+import { fetchPlayerAccount, getGameBoardInfo, registerMilipadPlayer, updateJoinWhiteListUser, updateMiliPadPlayer, updateMissionPlayer } from 'lib/utilities/utils';
 import { SolletWalletAdapter } from 'lib/wallets/sollet';
 import { SOLLET_ADAPTER_NETWORD } from 'lib/program/config'; 
 import { HOST_NAME, PROVIDER_URL, useWindowSize } from 'data/constants';
@@ -20,6 +20,7 @@ const Millionsy: React.FC = () => {
   const size = useWindowSize();
   const [showTooltip, setShowTooltip] = useState(false);
   const [isActiveSelect, setIsActiveSelect] = useState(false);
+  const [isJoinWhiteList, setIsJoinWhiteList] = useState(false);
   const [valueOption, setValueOption] = useState('');
   const [isFinishSaleRound, setIsFinishSaleRound] = useState(false);
   const [selectedTickets, setSelectedTickets] = useState('telegram');
@@ -107,20 +108,26 @@ const Millionsy: React.FC = () => {
     })
   }
   const dataGiveFromHeader = (getDataHeader: any) => {
-    setDataModal({
-      data: {
-        ...dataModal.data,
-        show: getDataHeader !== undefined && getDataHeader.is_connect !== false ? true : false,
-      }
-    })
-    if (getDataHeader !== undefined && getDataHeader.publicKey !== '') {
-      fetchPlayerAccount(getDataHeader.publicKey).then(item => {
+    if (getDataHeader.disconnect) {
+      setPlayerData({
+        data: {
+          is_connect: false,
+          adapter_type: '',
+          publicKey: '',
+          lamportUnit: 0,
+          balanceUSDT: 0,
+          balanceSOL: 0,
+        }
+      })
+    }
+    if (getDataHeader !== undefined && getDataHeader.data.publicKey !== '' && getDataHeader.data.publicKey !== undefined) {
+      fetchPlayerAccount(getDataHeader.data.publicKey).then(item => {
         setPlayerData({
           data: {
-            is_connect: getDataHeader.is_connect,
-            adapter_type: getDataHeader.adapter_type,
+            is_connect: getDataHeader.data.is_connect,
+            adapter_type: getDataHeader.data.adapter_type,
             lamportUnit: item.lamportUnit,
-            publicKey: getDataHeader.publicKey,
+            publicKey: getDataHeader.data.publicKey,
             balanceUSDT: item.balanceUSDT,
             balanceSOL: item.balanceSOL,
           }
@@ -250,7 +257,7 @@ const Millionsy: React.FC = () => {
   }, [getFlowers])
   useEffect(() => {
     if(playerData.data.is_connect) {
-      fetch(`${HOST_NAME}/api/milli-pads/milli-lottery/player/${playerData.data.publicKey}`, {
+      fetch(`${HOST_NAME}/api/milli-pads/${nameProject}/player/${playerData.data.publicKey}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -258,6 +265,8 @@ const Millionsy: React.FC = () => {
       }).then(response => {
         if(response.status === 200) {
           response.json().then(data => {
+            console.log(data);
+            
             setDataPlayerMilli(data)
           })
         } else {
@@ -399,21 +408,6 @@ const Millionsy: React.FC = () => {
               </ul>
               <div className='flex items-center justify-between px-4 md:px-6 tablet992:px-12 py-6 md:py-4'>
                 <p className='text-14 bg-gray-0 border border-solid border-pink-50 rounded-5 py-1 px-5 text-pink-50 font-bold'>Solana</p>
-                {
-                  playerData.data.is_connect ?
-                  <p className='text-14 px-0 py-2 md:px-3 text-center w-140 rounded-5 font-bold bg-pink-150 text-pink-50 cursor-pointer transition-all hover:opacity-70'
-                    onClick={() => setModalDisconnect(true)}
-                  >Connected</p> : 
-                  <p className='text-14 cursor-pointer transition-all hover:opacity-70 px-0 py-2 md:px-3 text-center w-140 rounded-5 font-bold bg-blue-0 text-blue-50'
-                    onClick={() => setDataModal({
-                      data: {
-                        ...dataModal.data,
-                        show: true,
-                      }
-                    })}
-                  >Connect Wallet</p>
-                }
-                
               </div>
             </div>
           </div>
@@ -426,11 +420,26 @@ const Millionsy: React.FC = () => {
           <section className={`px-3/100 mb-9 md:mb-14 ${getDataMillipads !== null && getDataMillipads.status === 'whileList' ? 'block' : 'hidden'}`}>
             <div className='max-w-900 mx-auto bg-gray-350 rounded-15 pt-5 pb-7 md:pt-8 md:pb-12'>
               <div className='px-4 md:px-8'>
-                <h4 className='text-18 md:text-20 mb-2 md:mb-4 text-pink-0'>NFT ticket pool</h4>
+                <div className='mb-2 md:mb-4 flex justify-between items-center md:block'>
+                  <h4 className='text-18 md:text-20 text-pink-0'>NFT ticket pool</h4>
+                  <p className={`block md:hidden text-blue-50 text-10 rounded-5 transition-all border border-solid border-blue-50 pt-px pb-0.5 px-4 ${isJoinWhiteList ? 'bg-blue-0' : ''}`}
+                    onClick={() => {
+                      updateJoinWhiteListUser(window.sessionStorage.getItem('publicKey'));
+                    }}
+                  >Join this whitelist</p>
+                </div>
                 <p className='text-pink-50 text-12 md:text-14 font-normal text-justify md:text-left mb-2'>Each NFT you own will be added a certain number of slots. These slots are calculated independently in the IDO pools of different projects. </p>
-                <p className='text-pink-50 text-12 md:text-14 font-normal text-justify md:text-left mb-2'>For example, when you have 100 slots from NFT, then you all have 100 slots in all different pools whether used or not, when you use one pool, other pools will not be deducted. The NFT tickets you own will stay there and receive benefits for life until you sell them. We do not limit the number of NFTs you buy, the more you buy, the more slots you will have for potential projects.</p>
+                <p className='text-pink-50 text-12 md:text-14 font-normal text-justify md:text-left mb-2 md:mb-6'>For example, when you have 100 slots from NFT, then you all have 100 slots in all different pools whether used or not, when you use one pool, other pools will not be deducted. The NFT tickets you own will stay there and receive benefits for life until you sell them. We do not limit the number of NFTs you buy, the more you buy, the more slots you will have for potential projects.</p>
                 <p className='block md:hidden h-px bg-gray-250 mt-4 mb-2'></p>
-                <p className='text-pink-50 text-12 md:text-14 font-normal text-justify md:text-left mb-4 md:mb-8 flex justify-between items-end md:block'><span className='pb-0.5 md:pb-0'>You have</span><span><span className='text-pink-0 font-bold text-18 inline-block ml-8 mr-2 text-right'>0 slots</span>from your NFT tickets</span></p>
+                <div className='mb-4 md:mb-8 flex items-center justify-between'>
+                  <p className='text-pink-50 text-12 md:text-14 font-normal text-justify md:text-left flex justify-between items-end md:block'><span className='pb-0.5 md:pb-0'>You have</span><span><span className='text-pink-0 font-bold text-18 inline-block ml-8 mr-2 text-right'>0 slots</span>from your NFT tickets</span></p>
+                  <p className='hidden md:flex text-blue-50 justify-center items-center text-12 gap-2 cursor-pointer transition-all'
+                    onClick={() => {
+                      updateJoinWhiteListUser(window.sessionStorage.getItem('publicKey')).then(res => console.log(res)
+                      );
+                    }}
+                  ><span className={`w-5 h-5 rounded-5 inline-block border border-blue-50 border-solid transition-all ${isJoinWhiteList ? 'bg-blue-0' : ''}`}></span>Join this whitelist</p>
+                </div>
               </div>
               <div className='bg-gray-200 px-4 md:px-8 md:flex items-center justify-between pt-4 pb-6 md:py-4'>
                 <p className='text-pink-50 text-14 tablet992:text-16 font-normal md:text-left mb-4 md:mb-0'>Buy NFT tickets for more slots and better chance to win Lottery lifetime.</p>
@@ -447,7 +456,7 @@ const Millionsy: React.FC = () => {
                       }
                     }}
                   >Buy NFT</p>
-                  { showTooltip && <p className='absolute top-full left-1/2 transform -translate-x-1/2 translate-y-4 z-100 border border-solid border-pink-150 bg-purple-150 rounded-15 w-60 text-center py-3'>Coming real soon...</p> }
+                  { showTooltip && <p className='absolute top-full left-1/2 transform -translate-x-1/2 translate-y-4 z-100 border border-solid border-pink-150 bg-purple-150 rounded-5 text-center text-14 md:text-16 pb-0.5 w-40 text-white'>Coming real soon...</p> }
                 </div>
                 
               </div>

@@ -3,8 +3,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
     padding: '11rem 0',
     marginBottom: '5rem',
-    background: 'url(assets/lottery/bg_left.png) bottom right calc(50% + 450px) no-repeat, url(assets/lottery/bg_right.png) bottom 30% left calc(50% + 440px) no-repeat',
-    backgroundSize: '282px 488px, 316px 314px',
+    // background: 'url(assets/lottery/bg_left.png) bottom right calc(50% + 450px) no-repeat, url(assets/lottery/bg_right.png) bottom 30% left calc(50% + 440px) no-repeat',
+    // backgroundSize: '282px 488px, 316px 314px',
     '& h3': {
       fontWeight: 400,
       marginBottom: '2rem',
@@ -39,8 +39,8 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     '@media screen and (max-width: 767px)': {
       padding: '10rem 0',
       marginBottom: '0',
-      background: 'url(assets/lottery/bg_left_sp.png) top 60% right calc(50% + 130px) no-repeat, url(assets/lottery/bg_right_sp.png) center left calc(50% + 150px) no-repeat',
-      backgroundSize: '54px 375px, 28px 354px',
+      // background: 'url(assets/lottery/bg_left_sp.png) top 60% right calc(50% + 130px) no-repeat, url(assets/lottery/bg_right_sp.png) center left calc(50% + 150px) no-repeat',
+      // backgroundSize: '54px 375px, 28px 354px',
     },
   },
   container: {
@@ -50,35 +50,30 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
   buyticket: {
     position: 'relative',
-    width: 250,
+    width: 260,
     margin: '0 auto',
     transition: 'all 0.2s ease',
-    cursor: 'pointer',
     '& span': {
       display: 'inline-block',
-      fontSize: 20,
+      fontSize: 22,
       fontWeight: 700,
       textAlign: 'center',
       width: 180,
-      padding: '0.75rem 0',
+      padding: '0.5rem 0',
       position: 'absolute',
       top: '50%',
       left: '50%',
-      transform: 'translate(-50%, -60%)',
+      transform: 'translate(-50%, -63%)',
       background: '#A819FA',
-      boxShadow: '0 1px 0px #FA00FF',
-      borderRadius: 20,
-    },
-    '&:hover': {
-      opacity: 0.8,
+      boxShadow: '0 1px 1px 1px #FA00FF',
+      borderRadius: 10,
     },
     '@media screen and (max-width: 767px)': {
-      width: 200,
+      width: 195,
       '& span': {
         fontSize: 20,
-        padding: '0.6rem 0',
-        borderRadius: 10,
         width: 135,
+        padding: '0.25rem 0',
       },
     },
   }

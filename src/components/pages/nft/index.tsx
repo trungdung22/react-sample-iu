@@ -264,13 +264,13 @@ const NFT: React.FC = () => {
                         }
                       }}
                     >
-                      <p className='bg-no-repeat bg-center bg-cover h-24 md:h-184 rounded-5 md:rounded-10' style={{'background': 'url("/assets/nft/under_img_sp.png")'}}></p>
+                      <p className='bg-no-repeat bg-center bg-cover h-24 md:h-184 rounded-5 md:rounded-10' style={{'backgroundImage': 'url("/assets/nft/under_popup.png")'}}></p>
                       <div className='mt-1 md:mt-4'>
                         <p className='text-16 md:text-24 text-blue-17F0FF font-bungee leading-6 md:mb-3'>#051733</p>
-                        <p className='text-8 md:text-12 line-clamp-1'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
-                        <p className='text-8 md:text-12 line-clamp-1'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
+                        <p className='text-8 md:text-12'><span className='font-bold block md:inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
+                        <p className='text-8 md:text-12'><span className='font-bold uppercase block md:inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
                         <p className='w-full h-px bg-gray-A9A9A9 opacity-50 mt-2 md:mt-8'></p>
-                        <p className='flex justify-between font-bold text-14 md:text-18 text-pink-D47DFF pt-1 md:pt-2'><span>~50$</span><span>0.27 SOL</span></p>
+                        <p className='flex justify-between items-center font-bold text-14 md:text-18 text-pink-D47DFF pt-1 md:pt-2'><span className='text-10 md:text-14 font-normal'>~50$</span><span>0.27 SOL</span></p>
                       </div>
                     </div>
                     <div className='col-span-1 bg-gray-151515 text-gray-EBEBEB rounded-5 md:rounded-10 border border-solid border-blue-0B7880 p-1 md:p-2 md:cursor-pointer'
@@ -282,13 +282,13 @@ const NFT: React.FC = () => {
                         }
                       }}
                     >
-                      <p className='bg-no-repeat bg-center bg-cover h-24 md:h-184 rounded-5 md:rounded-10' style={{'background': 'url("/assets/nft/under_img_sp.png")'}}></p>
+                      <p className='bg-no-repeat bg-center bg-cover h-24 md:h-184 rounded-5 md:rounded-10' style={{'backgroundImage': 'url("/assets/nft/under_popup.png")'}}></p>
                       <div className='mt-1 md:mt-4'>
                         <p className='text-16 md:text-24 text-blue-17F0FF font-bungee leading-6 md:mb-3'>#05173341</p>
-                        <p className='text-8 md:text-12 line-clamp-1'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 4 &amp; 3.</p>
-                        <p className='text-8 md:text-12 line-clamp-1'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>4 slots for every IGO round.</p>
+                        <p className='text-8 md:text-12'><span className='font-bold block md:inline-block mr-1'>Lottery:</span>Lifetime drawing with match 4 &amp; 3.</p>
+                        <p className='text-8 md:text-12'><span className='font-bold uppercase block md:inline-block mr-1'>MILLIGO:</span>4 slots for every IGO round.</p>
                         <p className='w-full h-px bg-gray-A9A9A9 opacity-50 mt-2 md:mt-8'></p>
-                        <p className='flex justify-between font-bold text-14 md:text-18 text-pink-D47DFF pt-1 md:pt-2'><span>~50$</span><span>0.27 SOL</span></p>
+                        <p className='flex justify-between items-center font-bold text-14 md:text-18 text-pink-D47DFF pt-1 md:pt-2'><span className='text-10 md:text-14 font-normal'>~50$</span><span>0.27 SOL</span></p>
                       </div>
                     </div>
                     <div className='col-span-1 bg-gray-151515 text-gray-EBEBEB rounded-5 md:rounded-10 border border-solid border-blue-0B7880 p-1 md:p-2 md:cursor-pointer'
@@ -300,13 +300,13 @@ const NFT: React.FC = () => {
                         }
                       }}
                     >
-                      <p className='bg-no-repeat bg-center bg-cover h-24 md:h-184 rounded-5 md:rounded-10' style={{'background': 'url("/assets/nft/under_img_sp.png")'}}></p>
+                      <p className='bg-no-repeat bg-center bg-cover h-24 md:h-184 rounded-5 md:rounded-10' style={{'backgroundImage': 'url("/assets/nft/under_popup.png")'}}></p>
                       <div className='mt-1 md:mt-4'>
                         <p className='text-16 md:text-24 text-blue-17F0FF font-bungee leading-6 md:mb-3'>#0517333541</p>
-                        <p className='text-8 md:text-12 line-clamp-1'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 5, 4 &amp; 3.</p>
-                        <p className='text-8 md:text-12 line-clamp-1'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>10 slot for every IGO round.</p>
+                        <p className='text-8 md:text-12'><span className='font-bold block md:inline-block mr-1'>Lottery:</span>Lifetime drawing with match 5, 4 &amp; 3.</p>
+                        <p className='text-8 md:text-12'><span className='font-bold uppercase block md:inline-block mr-1'>MILLIGO:</span>10 slot for every IGO round.</p>
                         <p className='w-full h-px bg-gray-A9A9A9 opacity-50 mt-2 md:mt-8'></p>
-                        <p className='flex justify-between font-bold text-14 md:text-18 text-pink-D47DFF pt-1 md:pt-2'><span>~50$</span><span>0.27 SOL</span></p>
+                        <p className='flex justify-between items-center font-bold text-14 md:text-18 text-pink-D47DFF pt-1 md:pt-2'><span className='text-10 md:text-14 font-normal'>~50$</span><span>0.27 SOL</span></p>
                       </div>
                     </div>
                     <div className='col-span-1 bg-gray-151515 text-gray-EBEBEB rounded-5 md:rounded-10 border border-solid border-blue-0B7880 p-1 md:p-2 md:cursor-pointer'
@@ -318,13 +318,13 @@ const NFT: React.FC = () => {
                         }
                       }}
                     >
-                      <p className='bg-no-repeat bg-center bg-cover h-24 md:h-184 rounded-5 md:rounded-10' style={{'background': 'url("/assets/nft/under_img_sp.png")'}}></p>
+                      <p className='bg-no-repeat bg-center bg-cover h-24 md:h-184 rounded-5 md:rounded-10' style={{'backgroundImage': 'url("/assets/nft/under_popup.png")'}}></p>
                       <div className='mt-1 md:mt-4'>
                         <p className='text-16 md:text-24 text-blue-17F0FF font-bungee leading-6 md:mb-3'>#051733354143</p>
-                        <p className='text-8 md:text-12 line-clamp-1'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 6, 5, 4 &amp; 3.</p>
-                        <p className='text-8 md:text-12 line-clamp-1'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>50 slot for every IGO round.</p>
+                        <p className='text-8 md:text-12'><span className='font-bold block md:inline-block mr-1'>Lottery:</span>Lifetime drawing with match 6, 5, 4 &amp; 3.</p>
+                        <p className='text-8 md:text-12'><span className='font-bold uppercase block md:inline-block mr-1'>MILLIGO:</span>50 slot for every IGO round.</p>
                         <p className='w-full h-px bg-gray-A9A9A9 opacity-50 mt-2 md:mt-8'></p>
-                        <p className='flex justify-between font-bold text-14 md:text-18 text-pink-D47DFF pt-1 md:pt-2'><span>~50$</span><span>0.27 SOL</span></p>
+                        <p className='flex justify-between items-center font-bold text-14 md:text-18 text-pink-D47DFF pt-1 md:pt-2'><span className='text-10 md:text-14 font-normal'>~50$</span><span>0.27 SOL</span></p>
                       </div>
                     </div>
                     <div className='col-span-1 bg-gray-151515 text-gray-EBEBEB rounded-5 md:rounded-10 border border-solid border-blue-0B7880 p-1 md:p-2 md:cursor-pointer'
@@ -336,13 +336,13 @@ const NFT: React.FC = () => {
                         }
                       }}
                     >
-                      <p className='bg-no-repeat bg-center bg-cover h-24 md:h-184 rounded-5 md:rounded-10' style={{'background': 'url("/assets/nft/under_img_sp.png")'}}></p>
+                      <p className='bg-no-repeat bg-center bg-cover h-24 md:h-184 rounded-5 md:rounded-10' style={{'backgroundImage': 'url("/assets/nft/under_popup.png")'}}></p>
                       <div className='mt-1 md:mt-4'>
                         <p className='text-16 md:text-24 text-blue-17F0FF font-bungee leading-6 md:mb-3'>#051733</p>
-                        <p className='text-8 md:text-12 line-clamp-1'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
-                        <p className='text-8 md:text-12 line-clamp-1'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
+                        <p className='text-8 md:text-12'><span className='font-bold block md:inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
+                        <p className='text-8 md:text-12'><span className='font-bold uppercase block md:inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
                         <p className='w-full h-px bg-gray-A9A9A9 opacity-50 mt-2 md:mt-8'></p>
-                        <p className='flex justify-between font-bold text-14 md:text-18 text-pink-D47DFF pt-1 md:pt-2'><span>~50$</span><span>0.27 SOL</span></p>
+                        <p className='flex justify-between items-center font-bold text-14 md:text-18 text-pink-D47DFF pt-1 md:pt-2'><span className='text-10 md:text-14 font-normal'>~50$</span><span>0.27 SOL</span></p>
                       </div>
                     </div>
                     <div className='col-span-1 bg-gray-151515 text-gray-EBEBEB rounded-5 md:rounded-10 border border-solid border-blue-0B7880 p-1 md:p-2 md:cursor-pointer'
@@ -354,13 +354,13 @@ const NFT: React.FC = () => {
                         }
                       }}
                     >
-                      <p className='bg-no-repeat bg-center bg-cover h-24 md:h-184 rounded-5 md:rounded-10' style={{'background': 'url("/assets/nft/under_img_sp.png")'}}></p>
+                      <p className='bg-no-repeat bg-center bg-cover h-24 md:h-184 rounded-5 md:rounded-10' style={{'backgroundImage': 'url("/assets/nft/under_popup.png")'}}></p>
                       <div className='mt-1 md:mt-4'>
                         <p className='text-16 md:text-24 text-blue-17F0FF font-bungee leading-6 md:mb-3'>#051733</p>
-                        <p className='text-8 md:text-12 line-clamp-1'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
-                        <p className='text-8 md:text-12 line-clamp-1'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
+                        <p className='text-8 md:text-12'><span className='font-bold block md:inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
+                        <p className='text-8 md:text-12'><span className='font-bold uppercase block md:inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
                         <p className='w-full h-px bg-gray-A9A9A9 opacity-50 mt-2 md:mt-8'></p>
-                        <p className='flex justify-between font-bold text-14 md:text-18 text-pink-D47DFF pt-1 md:pt-2'><span>~50$</span><span>0.27 SOL</span></p>
+                        <p className='flex justify-between items-center font-bold text-14 md:text-18 text-pink-D47DFF pt-1 md:pt-2'><span className='text-10 md:text-14 font-normal'>~50$</span><span>0.27 SOL</span></p>
                       </div>
                     </div>
                     <div className='col-span-1 bg-gray-151515 text-gray-EBEBEB rounded-5 md:rounded-10 border border-solid border-blue-0B7880 p-1 md:p-2 md:cursor-pointer'
@@ -372,13 +372,13 @@ const NFT: React.FC = () => {
                         }
                       }}
                     >
-                      <p className='bg-no-repeat bg-center bg-cover h-24 md:h-184 rounded-5 md:rounded-10' style={{'background': 'url("/assets/nft/under_img_sp.png")'}}></p>
+                      <p className='bg-no-repeat bg-center bg-cover h-24 md:h-184 rounded-5 md:rounded-10' style={{'backgroundImage': 'url("/assets/nft/under_popup.png")'}}></p>
                       <div className='mt-1 md:mt-4'>
                         <p className='text-16 md:text-24 text-blue-17F0FF font-bungee leading-6 md:mb-3'>#051733</p>
-                        <p className='text-8 md:text-12 line-clamp-1'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
-                        <p className='text-8 md:text-12 line-clamp-1'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
+                        <p className='text-8 md:text-12'><span className='font-bold block md:inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
+                        <p className='text-8 md:text-12'><span className='font-bold uppercase block md:inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
                         <p className='w-full h-px bg-gray-A9A9A9 opacity-50 mt-2 md:mt-8'></p>
-                        <p className='flex justify-between font-bold text-14 md:text-18 text-pink-D47DFF pt-1 md:pt-2'><span>~50$</span><span>0.27 SOL</span></p>
+                        <p className='flex justify-between items-center font-bold text-14 md:text-18 text-pink-D47DFF pt-1 md:pt-2'><span className='text-10 md:text-14 font-normal'>~50$</span><span>0.27 SOL</span></p>
                       </div>
                     </div>
                     <div className='col-span-1 bg-gray-151515 text-gray-EBEBEB rounded-5 md:rounded-10 border border-solid border-blue-0B7880 p-1 md:p-2 md:cursor-pointer'
@@ -390,13 +390,13 @@ const NFT: React.FC = () => {
                         }
                       }}
                     >
-                      <p className='bg-no-repeat bg-center bg-cover h-24 md:h-184 rounded-5 md:rounded-10' style={{'background': 'url("/assets/nft/under_img_sp.png")'}}></p>
+                      <p className='bg-no-repeat bg-center bg-cover h-24 md:h-184 rounded-5 md:rounded-10' style={{'backgroundImage': 'url("/assets/nft/under_popup.png")'}}></p>
                       <div className='mt-1 md:mt-4'>
                         <p className='text-16 md:text-24 text-blue-17F0FF font-bungee leading-6 md:mb-3'>#051733</p>
-                        <p className='text-8 md:text-12 line-clamp-1'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
-                        <p className='text-8 md:text-12 line-clamp-1'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
+                        <p className='text-8 md:text-12'><span className='font-bold block md:inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
+                        <p className='text-8 md:text-12'><span className='font-bold uppercase block md:inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
                         <p className='w-full h-px bg-gray-A9A9A9 opacity-50 mt-2 md:mt-8'></p>
-                        <p className='flex justify-between font-bold text-14 md:text-18 text-pink-D47DFF pt-1 md:pt-2'><span>~50$</span><span>0.27 SOL</span></p>
+                        <p className='flex justify-between items-center font-bold text-14 md:text-18 text-pink-D47DFF pt-1 md:pt-2'><span className='text-10 md:text-14 font-normal'>~50$</span><span>0.27 SOL</span></p>
                       </div>
                     </div>
                     <div className='col-span-1 bg-gray-151515 text-gray-EBEBEB rounded-5 md:rounded-10 border border-solid border-blue-0B7880 p-1 md:p-2 md:cursor-pointer'
@@ -408,13 +408,13 @@ const NFT: React.FC = () => {
                         }
                       }}
                     >
-                      <p className='bg-no-repeat bg-center bg-cover h-24 md:h-184 rounded-5 md:rounded-10' style={{'background': 'url("/assets/nft/under_img_sp.png")'}}></p>
+                      <p className='bg-no-repeat bg-center bg-cover h-24 md:h-184 rounded-5 md:rounded-10' style={{'backgroundImage': 'url("/assets/nft/under_popup.png")'}}></p>
                       <div className='mt-1 md:mt-4'>
                         <p className='text-16 md:text-24 text-blue-17F0FF font-bungee leading-6 md:mb-3'>#051733</p>
-                        <p className='text-8 md:text-12 line-clamp-1'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
-                        <p className='text-8 md:text-12 line-clamp-1'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
+                        <p className='text-8 md:text-12'><span className='font-bold block md:inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
+                        <p className='text-8 md:text-12'><span className='font-bold uppercase block md:inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
                         <p className='w-full h-px bg-gray-A9A9A9 opacity-50 mt-2 md:mt-8'></p>
-                        <p className='flex justify-between font-bold text-14 md:text-18 text-pink-D47DFF pt-1 md:pt-2'><span>~50$</span><span>0.27 SOL</span></p>
+                        <p className='flex justify-between items-center font-bold text-14 md:text-18 text-pink-D47DFF pt-1 md:pt-2'><span className='text-10 md:text-14 font-normal'>~50$</span><span>0.27 SOL</span></p>
                       </div>
                     </div>
                     <div className='col-span-1 bg-gray-151515 text-gray-EBEBEB rounded-5 md:rounded-10 border border-solid border-blue-0B7880 p-1 md:p-2 md:cursor-pointer'
@@ -426,13 +426,13 @@ const NFT: React.FC = () => {
                         }
                       }}
                     >
-                      <p className='bg-no-repeat bg-center bg-cover h-24 md:h-184 rounded-5 md:rounded-10' style={{'background': 'url("/assets/nft/under_img_sp.png")'}}></p>
+                      <p className='bg-no-repeat bg-center bg-cover h-24 md:h-184 rounded-5 md:rounded-10' style={{'backgroundImage': 'url("/assets/nft/under_popup.png")'}}></p>
                       <div className='mt-1 md:mt-4'>
                         <p className='text-16 md:text-24 text-blue-17F0FF font-bungee leading-6 md:mb-3'>#051733</p>
-                        <p className='text-8 md:text-12 line-clamp-1'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
-                        <p className='text-8 md:text-12 line-clamp-1'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
+                        <p className='text-8 md:text-12'><span className='font-bold block md:inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
+                        <p className='text-8 md:text-12'><span className='font-bold uppercase block md:inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
                         <p className='w-full h-px bg-gray-A9A9A9 opacity-50 mt-2 md:mt-8'></p>
-                        <p className='flex justify-between font-bold text-14 md:text-18 text-pink-D47DFF pt-1 md:pt-2'><span>~50$</span><span>0.27 SOL</span></p>
+                        <p className='flex justify-between items-center font-bold text-14 md:text-18 text-pink-D47DFF pt-1 md:pt-2'><span className='text-10 md:text-14 font-normal'>~50$</span><span>0.27 SOL</span></p>
                       </div>
                     </div>
                     <div className='col-span-1 bg-gray-151515 text-gray-EBEBEB rounded-5 md:rounded-10 border border-solid border-blue-0B7880 p-1 md:p-2 md:cursor-pointer'
@@ -444,13 +444,13 @@ const NFT: React.FC = () => {
                         }
                       }}
                     >
-                      <p className='bg-no-repeat bg-center bg-cover h-24 md:h-184 rounded-5 md:rounded-10' style={{'background': 'url("/assets/nft/under_img_sp.png")'}}></p>
+                      <p className='bg-no-repeat bg-center bg-cover h-24 md:h-184 rounded-5 md:rounded-10' style={{'backgroundImage': 'url("/assets/nft/under_popup.png")'}}></p>
                       <div className='mt-1 md:mt-4'>
                         <p className='text-16 md:text-24 text-blue-17F0FF font-bungee leading-6 md:mb-3'>#051733</p>
-                        <p className='text-8 md:text-12 line-clamp-1'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
-                        <p className='text-8 md:text-12 line-clamp-1'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
+                        <p className='text-8 md:text-12'><span className='font-bold block md:inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
+                        <p className='text-8 md:text-12'><span className='font-bold uppercase block md:inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
                         <p className='w-full h-px bg-gray-A9A9A9 opacity-50 mt-2 md:mt-8'></p>
-                        <p className='flex justify-between font-bold text-14 md:text-18 text-pink-D47DFF pt-1 md:pt-2'><span>~50$</span><span>0.27 SOL</span></p>
+                        <p className='flex justify-between items-center font-bold text-14 md:text-18 text-pink-D47DFF pt-1 md:pt-2'><span className='text-10 md:text-14 font-normal'>~50$</span><span>0.27 SOL</span></p>
                       </div>
                     </div>
                     <div className='col-span-1 bg-gray-151515 text-gray-EBEBEB rounded-5 md:rounded-10 border border-solid border-blue-0B7880 p-1 md:p-2 md:cursor-pointer'
@@ -462,13 +462,13 @@ const NFT: React.FC = () => {
                         }
                       }}
                     >
-                      <p className='bg-no-repeat bg-center bg-cover h-24 md:h-184 rounded-5 md:rounded-10' style={{'background': 'url("/assets/nft/under_img_sp.png")'}}></p>
+                      <p className='bg-no-repeat bg-center bg-cover h-24 md:h-184 rounded-5 md:rounded-10' style={{'backgroundImage': 'url("/assets/nft/under_popup.png")'}}></p>
                       <div className='mt-1 md:mt-4'>
                         <p className='text-16 md:text-24 text-blue-17F0FF font-bungee leading-6 md:mb-3'>#051733</p>
-                        <p className='text-8 md:text-12 line-clamp-1'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
-                        <p className='text-8 md:text-12 line-clamp-1'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
+                        <p className='text-8 md:text-12'><span className='font-bold block md:inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
+                        <p className='text-8 md:text-12'><span className='font-bold uppercase block md:inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
                         <p className='w-full h-px bg-gray-A9A9A9 opacity-50 mt-2 md:mt-8'></p>
-                        <p className='flex justify-between font-bold text-14 md:text-18 text-pink-D47DFF pt-1 md:pt-2'><span>~50$</span><span>0.27 SOL</span></p>
+                        <p className='flex justify-between items-center font-bold text-14 md:text-18 text-pink-D47DFF pt-1 md:pt-2'><span className='text-10 md:text-14 font-normal'>~50$</span><span>0.27 SOL</span></p>
                       </div>
                     </div>
                   </div>
@@ -490,17 +490,21 @@ const NFT: React.FC = () => {
               <path d="M17 9C17.5523 9 18 8.55228 18 8C18 7.44772 17.5523 7 17 7V9ZM0.292892 7.29289C-0.0976315 7.68342 -0.0976315 8.31658 0.292892 8.70711L6.65685 15.0711C7.04738 15.4616 7.68054 15.4616 8.07107 15.0711C8.46159 14.6805 8.46159 14.0474 8.07107 13.6569L2.41421 8L8.07107 2.34315C8.46159 1.95262 8.46159 1.31946 8.07107 0.928932C7.68054 0.538408 7.04738 0.538408 6.65685 0.928932L0.292892 7.29289ZM17 7L1 7V9L17 9V7Z" fill="#F9F9F9"/>
             </svg>
           </p>
-          <p><img src="/assets/nft/under_popup.png" alt="" className='w-full' /></p>
-          <div className='px-3/100 pt-5'>
-            <p className='text-24 font-bungee text-blue-17F0FF leading-8 mb-1'>#051733</p>
-            <div>
-              <p className='text-12 leading-4'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
-              <p className='text-12 leading-4'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
-            </div>
-            <p className='bg-pink-F4E0FF opacity-50 h-px mt-4 mb-1'></p>
-            <div className='flex justify-between items-end'>
-              <p className='text-24 text-pink-D47DFF font-bold leading-8'>~0.27 SOL <span className='block'>50$</span></p>
-              <p className='relative bottom-1 text-12 text-blue-0B7880 font-semibold bg-blue-17F0FF py-2 px-3.5 rounded-4 inline-block transition-all cursor-pointer hover:opacity-70'>Buy ticket</p>
+          <div className='grid grid-cols-1 gap-8'>
+            <div className='col-span-1'>
+              <p><img src="/assets/nft/under_popup.png" alt="" className='w-full' /></p>
+              <div className='px-3/100 pt-5'>
+                <p className='text-24 font-bungee text-blue-17F0FF leading-8 mb-1'>#051733</p>
+                <div>
+                  <p className='text-12 leading-4'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
+                  <p className='text-12 leading-4'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
+                </div>
+                <p className='bg-gray-A9A9A9 opacity-50 h-px mt-4 mb-2'></p>
+                <div className='flex justify-between items-end'>
+                  <p className='text-20 text-pink-D47DFF font-bold leading-8'>~0.27 SOL <span className='text-16 font-normal'>(50$)</span></p>
+                  <p className='text-12 text-blue-0B7880 font-semibold bg-blue-17F0FF py-2 px-3.5 rounded-4 inline-block transition-all cursor-pointer hover:opacity-70'>Buy ticket</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -521,16 +525,17 @@ const NFT: React.FC = () => {
               </span>
             </p>
             <p><img src="/assets/nft/under_popup.png" alt="" className='w-full' /></p>
-            <div className='flex justify-between px-5 pt-2 pb-3'>
+            <div className='px-5 py-3'>
               <div className='flex flex-col justify-center'>
-                <p className='text-32 font-bungee text-blue-17F0FF leading-8 mb-1'>#051733</p>
+                <p className='text-24 font-bungee text-blue-17F0FF leading-7'>#051733</p>
                 <div>
-                  <p className='text-14 leading-4'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
-                  <p className='text-14 leading-4'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
+                  <p className='text-10 leading-4'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
+                  <p className='text-10 leading-4'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
                 </div>
               </div>
-              <div className='flex flex-col justify-between items-end gap-4'>
-                <p className='text-24 text-pink-D47DFF font-bold leading-6'>~0.27 SOL (50$)</p>
+              <p className='bg-gray-575757 opacity-50 h-px mt-4 mb-3'></p>
+              <div className='flex justify-between items-center gap-4'>
+                <p className='text-18 text-pink-D47DFF font-bold leading-6'>~0.27 SOL <span className='text-14 font-light'>(50$)</span></p>
                 <p className='text-12 text-blue-0B7880 font-semibold bg-blue-17F0FF py-2 px-3.5 rounded-4 inline-block transition-all cursor-pointer hover:opacity-70'>Buy ticket</p>
               </div>
             </div>

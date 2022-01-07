@@ -206,7 +206,7 @@ export async function getOrCreateTokenAccountInstruction(connection, walletPubke
             { commitment: 'singleGossip', preflightCommitment: 'singleGossip', }
         )
     }
-    return accountKey.publicKey;
+    return account.publicKey;
 }
 
 function createAssociatedTokenAccountInstruction(

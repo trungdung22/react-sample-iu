@@ -41,7 +41,7 @@ const NFT: React.FC = () => {
 
   const fetchTicketsEntries = (pageNo) => {
     console.log('runing aa: ', pageNo);
-    fetch(`${HOST_NAME}/api/nft-ticket?page=${pageNo}&perPage=1`, {
+    fetch(`${HOST_NAME}/api/nft-ticket?page=${pageNo}&perPage=10`, {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'

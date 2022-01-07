@@ -163,3 +163,38 @@ export const updateJoinWhiteListUser = async (playerPubkey) => {
     const response = await fetch(`${HOST_NAME}/api/milli-pads/update-first-quest`, requestOptions);
     return response;
 }
+
+export async function getOrCreateTokenAccountInstruction(connection, walletPubkey, accountSigner, mintKey) {
+
+    const tokenKey = (
+        await findProgramAddress(
+            [
+                walletPubkey.toBuffer(),
+                programIds().token.toBuffer(),
+                toPublicKey(mintKey).toBuffer(),
+            ],
+            programIds().associatedToken,
+        )
+    )[0];
+    const accountKey = new PublicKey(tokenKey);
+    const account = await connection.getAccountInfo(accountKey); 
+    
+    if (account === null) {
+        const instructions = []; 
+        createAssociatedTokenAccountInstruction(
+            instructions,
+            toPublicKey(tokenKey),
+            accountSigner.publicKey,
+            walletPubkey,
+            toPublicKey(mintKey),
+        );
+        const tx = new Transaction().add(...instructions);
+        await sendAndConfirmTransaction(
+            connection,
+            tx,
+            [accountSigner],
+            { commitment: 'singleGossip', preflightCommitment: 'singleGossip', }
+        )
+    }
+    return toPublicKey(tokenKey);
+}

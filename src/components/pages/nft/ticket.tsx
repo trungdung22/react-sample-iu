@@ -21,6 +21,7 @@ interface MilliNFTAccountDataLayout {
   num_four: String;
   num_five: String;
   num_six: String;
+  price: Number;
 }
 
 type Props = {
@@ -57,9 +58,9 @@ const Ticket: React.FC<Props> = ({
       setTicketNumber('#');
       let nftInfo = {} as MilliNFTAccountDataLayout;
       const nftDecodedInfo = deserializeNFTTicket(res);
-      console.log('ticket rest' ,res);
+      console.log('ticket rest' , nftDecodedInfo.price);
       nftInfo.milli_nft_pubkey = nftAccountPubkey;
-      
+      nftInfo.price = nftDecodedInfo.price;
       nftInfo.token_account_pubkey = nftDecodedInfo.token_account_pubkey;
       nftInfo.mint_pubkey = nftDecodedInfo.mint_pubkey;
       nftInfo.user_pubkey = nftDecodedInfo.user_pubkey
@@ -108,6 +109,7 @@ const Ticket: React.FC<Props> = ({
       mint_pubkey: nftData.mint_pubkey,
       user_pubkey: nftData.user_pubkey,
       milli_nft_pubkey: nftData.milli_nft_pubkey,
+      price: nftData.price
     });
   }
 

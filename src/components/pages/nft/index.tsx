@@ -35,6 +35,7 @@ const NFT: React.FC = () => {
     mint_pubkey: '',
     user_pubkey: '',
     milli_nft_pubkey: '',
+    price: null
   });
 
   useEffect(() => {
@@ -179,7 +180,7 @@ const NFT: React.FC = () => {
   });
 
   const onBuyNFTTicket = () => {
-    buyNFTTicket(selectedTicketData.milli_nft_pubkey, selectedTicketData.user_pubkey,selectedTicketData.token_account_pubkey, selectedTicketData.mint_pubkey, 'phantom')
+    buyNFTTicket(selectedTicketData.milli_nft_pubkey, selectedTicketData.user_pubkey,selectedTicketData.token_account_pubkey, selectedTicketData.mint_pubkey, selectedTicketData.price, 'phantom')
       .then(res => {
         console.log(res);
         console.log('purchase success');
@@ -417,7 +418,7 @@ const NFT: React.FC = () => {
               </div>
               <p className='bg-gray-575757 opacity-50 h-px mt-4 mb-3'></p>
               <div className='flex justify-between items-center gap-4'>
-                <p className='text-18 text-pink-D47DFF font-bold leading-6'>~0.27 MILLI <span className='text-14 font-light'>(50$)</span></p>
+                <p className='text-18 text-pink-D47DFF font-bold leading-6'>~0.27 MILLI <span className='text-14 font-light'>{selectedTicketData.price} USCD</span></p>
                 <p className='text-12 text-blue-0B7880 font-semibold bg-blue-17F0FF py-2 px-3.5 rounded-4 inline-block transition-all cursor-pointer hover:opacity-70' onClick={onBuyNFTTicket}>Buy ticket</p>
               </div>
             </div>

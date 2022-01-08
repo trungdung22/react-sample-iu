@@ -40,7 +40,7 @@ export function buyMilliPad(lamports) {
 }
 
 export function buyNFTTicket(price) {
-  const data = Buffer.from(Uint8Array.of(Command.BuyNFTTIcket,
+  const data = Buffer.from(Uint8Array.of(Command.ExchangeNFT,
     ...new BN(price).toArray("le", 8))
   )
   return data;

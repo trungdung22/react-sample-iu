@@ -83,37 +83,6 @@ const toPublicKey = (key) => {
     return result;
   };
   
-
-async function getOrCreateTokenAccountInstruction(connection, walletPubkey, accountSigner, mintKey) {
-    const tokenKey = (
-        await findProgramAddress(
-            [
-                walletPubkey.toBuffer(),
-                TOKEN_PROGRAM_ID.toBuffer(),
-                toPublicKey(mintKey).toBuffer(),
-            ],
-            SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID,
-        )
-    )[0];
-    const accountKey = new PublicKey(tokenKey);
-    const account = await connection.getAccountInfo(accountKey); 
-    debugger
-    if (account === null) {
-        const instructions = []; 
-        createAssociatedTokenAccountInstruction(
-            instructions,
-            toPublicKey(tokenKey),
-            accountSigner.publicKey,
-            walletPubkey,
-            toPublicKey(mintKey),
-        );
-        const tx = new Transaction().add(...instructions);
-
-        await sendTxUsingExternalSignature(connection, tx, null, null, accountSigner);
-    }
-    return toPublicKey(tokenKey);
-}
-
 async function getTokenAmount(walletAddress, tokenMintAddress) {
 
     const response = await axios({
@@ -236,7 +205,7 @@ export const getBalance = async (publicKey, adapter_type) => {
     
 };
 
-export const buyNFTTicket = async (milli_nft_account, owner_pubkey, token_account_pubkey, mint_pubkey, adapter_type) => {
+export const buyNFTTicket = async (milli_nft_account, owner_pubkey, token_account_pubkey, mint_pubkey, price, adapter_type) => {
     const onwerAccount = new PublicKey(owner_pubkey);
     const milliNftAccount = new PublicKey(milli_nft_account);
 
@@ -287,7 +256,7 @@ export const buyNFTTicket = async (milli_nft_account, owner_pubkey, token_accoun
             { pubkey: buyer_USDC_tokenAccount, isSigner: false, isWritable: true },
             { pubkey: pda_account[0], isSigner: false, isWritable: true },
         ],
-        data: ProgramCommand.buyNFTTicket(4)
+        data: ProgramCommand.buyNFTTicket(price)
     });
     instructions.push(buyIx);
     const tx = await sendTxUsingExternalSignature(connection, instructions, null, null, playerWallet);

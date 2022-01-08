@@ -121,7 +121,10 @@ const Millionsy: React.FC = () => {
       })
     }
     if (getDataHeader !== undefined && getDataHeader.data.publicKey !== '' && getDataHeader.data.publicKey !== undefined) {
-      fetchPlayerAccount(getDataHeader.data.publicKey).then(item => {
+      fetchPlayerAccount(
+        getDataHeader.data.publicKey,
+        getDataHeader.data.adapter_type
+      ).then(item => {
         setPlayerData({
           data: {
             is_connect: getDataHeader.data.is_connect,
@@ -177,7 +180,10 @@ const Millionsy: React.FC = () => {
 
   const dataGiveFromWallet = (getDataWallet: any) => {
     if (getDataWallet.publicKey !== undefined && getDataWallet.publicKey !== '') {
-      fetchPlayerAccount(getDataWallet.publicKey).then(item => {
+      fetchPlayerAccount(
+        getDataWallet.publicKey,
+        getDataWallet.adapter_type
+      ).then(item => {
         setPlayerData({
           data: {
             is_connect: getDataWallet.is_connect,
@@ -207,7 +213,10 @@ const Millionsy: React.FC = () => {
         }
       }) 
   
-      fetchPlayerAccount(window.sessionStorage.getItem("publicKey")).then(item => setPlayerData({
+      fetchPlayerAccount(
+        window.sessionStorage.getItem("publicKey"),
+        window.sessionStorage.getItem("adapter_type"),
+      ).then(item => setPlayerData({
         data: {
           adapter_type: window.sessionStorage.getItem("adapter_type"),
           is_connect: true,

@@ -32,6 +32,7 @@ export const convertUSDT = async (amount) => {
             'Content-Type': 'application/json',
         }
     };
+    debugger
     const response = await fetch(`${HOST_NAME}/api/rate-converter-usdt?amount=${amount}`, requestOptions);
     const data = await response.json();
     return { lamports: data["lamports"] };
@@ -124,7 +125,7 @@ export const getGameBoardInfo = async () => {
     return data;
 }
 
-export const fetchPlayerAccount = async (publicKey) => {
+export const fetchPlayerAccount = async (publicKey, walletType) => {
     if (publicKey === undefined || publicKey === '') {
         return {
             balanceUSDT: 0,
@@ -133,7 +134,7 @@ export const fetchPlayerAccount = async (publicKey) => {
             publicKey: ''
         };
     }
-    const balance = await getBalance(publicKey)
+    const balance = await getBalance(publicKey, walletType);
 
     const balanceConvert = await convertLamport(balance);
     const ticketPrice = await priceTicket()

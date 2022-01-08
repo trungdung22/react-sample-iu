@@ -33,7 +33,7 @@ const Jackpots: React.FC = () => {
         <div className={`${classes.infoPrize}`}>
           <p className="text">Total prize</p>
           <p className="total">~$0</p>
-          <p className="unit">0 SOL</p>
+          <p className="unit">0 MILLI</p>
         </div>
       </div>
       <p className={`${classes.footer}`}>Win a jackpot and get in this board</p>

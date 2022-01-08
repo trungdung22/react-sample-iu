@@ -18,7 +18,6 @@ export const sendTxUsingExternalSignature = async (
   signersExceptWallet: Account[] | null,
   wallet: BaseMessageSignerWalletAdapter
 ) => {
-  debugger
   let tx = new Transaction().add(...instructions);
   let { blockhash } = await connection.getRecentBlockhash();
   tx.recentBlockhash = blockhash;
@@ -31,7 +30,6 @@ export const sendTxUsingExternalSignature = async (
       ...signersExceptWallet.map(s => s.publicKey)
     );
     signersExceptWallet.forEach(acc => {
-      debugger
       tx.partialSign(acc);
     });
   } else {
@@ -91,17 +89,18 @@ export const UseWallet = async (adapterType: string): Promise<BaseMessageSignerW
   }
 };
 
-// let wallet = new Wallet(PROVIDER_URL, CLUSTERS.DEVNET);
 
 // const connectToWallet = () => {
-//   if (!wallet.connected) {
-//     return wallet.connect() as Promise<void>;
+//   debugger
+//   if (!sollet.connected) {
+//     return sollet.connect() as Promise<void>;
 //   } else {
 //     return Promise.resolve();
 //   }
 // };
 
-// export const UseWallet = async (adapterType: string): Promise<Wallet> => {
-//   await connectToWallet();
-//   return wallet;
+// export const UseWallet = async (adapterType: string): Promise<BaseMessageSignerWalletAdapter> => {
+//   debugger
+//   await connectToPhantomWallet();
+//   return sollet;
 // };

@@ -6,6 +6,7 @@
 const BufferLayout = require('buffer-layout');
 const { PublicKey } = require("@solana/web3.js");
 const BN = require("bn.js");
+
 /**
  * Layout for a public key
  */

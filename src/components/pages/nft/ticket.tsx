@@ -136,7 +136,7 @@ const Ticket: React.FC<Props> = ({
             <span className='text-10 md:text-14 font-normal'>
               ~50$
             </span>
-            <span>0.27 SOL</span>
+            <span>0.27 MILLI</span>
           </p>
         </div>
       </div>

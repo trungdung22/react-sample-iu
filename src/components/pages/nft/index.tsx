@@ -127,7 +127,10 @@ const NFT: React.FC = () => {
       })
     }
     if (getDataHeader !== undefined && getDataHeader.data.publicKey !== '' && getDataHeader.data.publicKey !== undefined) {
-      fetchPlayerAccount(getDataHeader.data.publicKey).then(item => {
+      fetchPlayerAccount(
+        getDataHeader.data.publicKey,
+        getDataHeader.data.adapter_type
+      ).then(item => {
         setPlayerData({
           data: {
             is_connect: getDataHeader.data.is_connect,
@@ -144,7 +147,10 @@ const NFT: React.FC = () => {
 
   const dataGiveFromWallet = (getDataWallet: any) => {
     if (getDataWallet.publicKey !== undefined && getDataWallet.publicKey !== '') {
-      fetchPlayerAccount(getDataWallet.publicKey).then(item => {
+      fetchPlayerAccount(
+        getDataWallet.publicKey,
+        getDataWallet.adapter_type,
+      ).then(item => {
         setPlayerData({
           data: {
             is_connect: getDataWallet.is_connect,
@@ -192,7 +198,10 @@ const NFT: React.FC = () => {
         }
       })
 
-      fetchPlayerAccount(window.sessionStorage.getItem("publicKey")).then(item => setPlayerData({
+      fetchPlayerAccount(
+        window.sessionStorage.getItem("publicKey"),
+        window.sessionStorage.getItem("adapter_type")
+      ).then(item => setPlayerData({
         data: {
           adapter_type: window.sessionStorage.getItem("adapter_type"),
           is_connect: true,
@@ -408,7 +417,7 @@ const NFT: React.FC = () => {
               </div>
               <p className='bg-gray-575757 opacity-50 h-px mt-4 mb-3'></p>
               <div className='flex justify-between items-center gap-4'>
-                <p className='text-18 text-pink-D47DFF font-bold leading-6'>~0.27 SOL <span className='text-14 font-light'>(50$)</span></p>
+                <p className='text-18 text-pink-D47DFF font-bold leading-6'>~0.27 MILLI <span className='text-14 font-light'>(50$)</span></p>
                 <p className='text-12 text-blue-0B7880 font-semibold bg-blue-17F0FF py-2 px-3.5 rounded-4 inline-block transition-all cursor-pointer hover:opacity-70' onClick={onBuyNFTTicket}>Buy ticket</p>
               </div>
             </div>

@@ -111,11 +111,11 @@ const Second: React.FC<Props> = ({dataGiveSecond, dataSendSecond, playerData}) =
             onChange={handleChangeInput}
           />
           <div className={`${classes.payunit}`}>
-            <p className="name">SOL</p>
+            <p className="name">MILLI</p>
             <p>~{data.data.price === 0 ? 0 : data.data.price.toFixed(8)}</p>
           </div>
         </div>
-        <p className={`${classes.balance}`}>SOL Balance: {playerData.balanceSOL}</p>
+        <p className={`${classes.balance}`}>MILLI Balance: {playerData.balanceSOL}</p>
         <ul className={`${classes.listButton}`}>
           <li className="max" onClick={handleInputMax}>MAX</li>
         </ul>
@@ -124,7 +124,7 @@ const Second: React.FC<Props> = ({dataGiveSecond, dataSendSecond, playerData}) =
       <div className={`${classes.footer}`}>
           <div className={`${classes.totalPay}`}>
             <p className="text">You pay</p>
-            <p className="price">~ {data.data.price === 0 ? 0 : data.data.price.toFixed(8)} SOL</p>
+            <p className="price">~ {data.data.price === 0 ? 0 : data.data.price.toFixed(8)} MILLI</p>
           </div>
           <ul className={`${classes.listButton}`}>
             <li onClick={handleComfirm}>Buy instantly</li>

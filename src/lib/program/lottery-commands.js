@@ -1,55 +1,144 @@
 import * as ProgramCommand from './builder'
-import { Account, Connection, PublicKey, SystemProgram, Transaction, TransactionInstruction, sendAndConfirmTransaction } from "@solana/web3.js";
+import { Account, Connection, PublicKey, SystemProgram, Transaction, TransactionInstruction, sendAndConfirmTransaction, SYSVAR_RENT_PUBKEY } from "@solana/web3.js";
 import { TICKET_ACCOUNT_DATA_LAYOUT, MILLI_USER_ACCOUNT_DATA_LAYOUT } from './state';
 import { sendTxUsingExternalSignature, UseWallet, sendTxUsingExternalSignatureV2 } from './wallet-provider';
 import { CONNECTION_ULR } from './config';
 import { convertUSDT } from 'lib/utilities/utils';
-import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
-import { SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID, TRADE_MINT_TOKEN } from 'lib/utilities/id';
-import { Token } from '@solana/spl-token';
+import { TOKEN_PROGRAM_ID, Token} from '@solana/spl-token';
 import { getOrCreateTokenAccountInstruction } from 'lib/utilities/utils';
+import { TRADE_MINT_TOKEN, MILLI_MINT_KEY, SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID } from 'lib/utilities/id';
+const axios = require('axios');
 //const connection = new Connection("http://localhost:8899", 'singleGossip');
 //const connection = new Connection("https://api.devnet.solana.com", 'singleGossip');
 const connection = new Connection(CONNECTION_ULR, 'singleGossip');
 const SEED = 'milli';
 
-export const buyTicket = async (programIdString, ticketNumbers, lotteryGamePubkey, lotteryOwnerPubkey) => {
-    // const privateKeyDecoded = privateKeyByteArray.split(',').map(s => parseInt(s));
-    //const playerAccount = new Account(privateKeyDecoded);
-    const playerWallet = await UseWallet();
-    const rentAmount = await connection.getMinimumBalanceForRentExemption(TICKET_ACCOUNT_DATA_LAYOUT.span, 'singleGossip');
-    const ticketAccount = new Account();
-    const programId = new PublicKey(programIdString)
-    const ticketAccountTx = SystemProgram.createAccount({
-        programId: programId,
-        space: TICKET_ACCOUNT_DATA_LAYOUT.span,
-        lamports: rentAmount,
-        fromPubkey: playerWallet.publicKey,
-        basePubkey: playerWallet.publicKey,
-        newAccountPubkey: ticketAccount.publicKey
-    });
+const findProgramAddress = async (
+    seeds,
+    programId,
+  ) => {
+    const result = await PublicKey.findProgramAddress(seeds, programId);
+    return [result[0].toBase58(), result[1]];
+  };
 
-    const buyIx = new TransactionInstruction({
-        programId: programId,
-        keys: [
-            { pubkey: playerWallet.publicKey, isSigner: true, isWritable: true },
-            { pubkey: ticketAccount.publicKey, isSigner: false, isWritable: true },
-            { pubkey: lotteryGamePubkey, isSigner: false, isWritable: false },
-            { pubkey: lotteryOwnerPubkey, isSigner: false, isWritable: true },
-            { pubkey: SystemProgram.programId, isSigner: false, isWritable: true }
-        ],
-        data: ProgramCommand.buyTicket(ticketNumbers)
-    });
-
-    const transaction = new Transaction().add(ticketAccountTx, buyIx);
-    await sendAndConfirmTransaction(
-        connection,
-        transaction,
-        [playerWallet, ticketAccount],
-        { commitment: 'singleGossip', preflightCommitment: 'singleGossip', }
-    )
-    return ticketAccount.publicKey.toBase58();
+  
+function createAssociatedTokenAccountInstruction(
+    instructions,
+    associatedTokenAddress,
+    payer,
+    walletAddress,
+    splTokenMintAddress,
+) {
+    const keys = [
+        {
+            pubkey: payer,
+            isSigner: true,
+            isWritable: true,
+        },
+        {
+            pubkey: associatedTokenAddress,
+            isSigner: false,
+            isWritable: true,
+        },
+        {
+            pubkey: walletAddress,
+            isSigner: false,
+            isWritable: false,
+        },
+        {
+            pubkey: splTokenMintAddress,
+            isSigner: false,
+            isWritable: false,
+        },
+        {
+            pubkey: SystemProgram.programId,
+            isSigner: false,
+            isWritable: false,
+        },
+        {
+            pubkey: TOKEN_PROGRAM_ID,
+            isSigner: false,
+            isWritable: false,
+        },
+        {
+            pubkey: SYSVAR_RENT_PUBKEY,
+            isSigner: false,
+            isWritable: false,
+        },
+    ];
+    instructions.push(
+        new TransactionInstruction({
+            keys,
+            programId: SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID,
+            data: Buffer.from([]),
+        }),
+    );
 }
+
+const toPublicKey = (key) => {
+    if (typeof key !== 'string') {
+      return key;
+    }
+    let result = new PublicKey(key);
+    return result;
+  };
+  
+
+async function getOrCreateTokenAccountInstruction(connection, walletPubkey, accountSigner, mintKey) {
+    const tokenKey = (
+        await findProgramAddress(
+            [
+                walletPubkey.toBuffer(),
+                TOKEN_PROGRAM_ID.toBuffer(),
+                toPublicKey(mintKey).toBuffer(),
+            ],
+            SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID,
+        )
+    )[0];
+    const accountKey = new PublicKey(tokenKey);
+    const account = await connection.getAccountInfo(accountKey); 
+    debugger
+    if (account === null) {
+        const instructions = []; 
+        createAssociatedTokenAccountInstruction(
+            instructions,
+            toPublicKey(tokenKey),
+            accountSigner.publicKey,
+            walletPubkey,
+            toPublicKey(mintKey),
+        );
+        const tx = new Transaction().add(...instructions);
+
+        await sendTxUsingExternalSignature(connection, tx, null, null, accountSigner);
+    }
+    return toPublicKey(tokenKey);
+}
+
+async function getTokenAmount(walletAddress, tokenMintAddress) {
+
+    const response = await axios({
+      url: CONNECTION_ULR,
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      data: [
+          {
+            jsonrpc: "2.0",
+            id: 1,
+            method: "getTokenAccountsByOwner",
+            params: [
+              walletAddress,
+              {
+                mint: tokenMintAddress,
+              },
+              {
+                encoding: "jsonParsed",
+              },
+            ],
+          }
+      ]
+    });
+    return Number(response.data[0].result.value[0].account.data.parsed.info.tokenAmount.amount);
+  }
 
 export const buyMilliPad = async (programIdStr, milliPadPubkeyStr, milliPadOwnerPubKeyStr, adapter_type, usdt_amount) => {
     const programId = new PublicKey(programIdStr);
@@ -80,10 +169,18 @@ export const buyBulkTicket = async (programIdStr, ticketSetNumbers, gamePubkeySt
     const gameOwnerPubkey = new PublicKey(gameOwnerPubkeyStr);
     const playerWallet = await UseWallet(adapter_type);
     const rentAmount = await connection.getMinimumBalanceForRentExemption(TICKET_ACCOUNT_DATA_LAYOUT.span, 'singleGossip');
+    const minToken_token = new Token(
+        connection,
+        MILLI_MINT_KEY,
+        TOKEN_PROGRAM_ID,
+        playerWallet.publicKey
+    );
+    debugger
+    const playerTokenAccount = await minToken_token.getOrCreateAssociatedAccountInfo(playerWallet.publicKey);
+    const ownerTokenAccount = await minToken_token.getOrCreateAssociatedAccountInfo(gameOwnerPubkey);
     let ticketKeyArr = [];
     let ticketAccounts = [];
     let createAccountIxArr = [];
-    let ticketIxArr = [];
     for (let i = 0; i < ticketSetNumbers.length; i++) {
 
         const ticketAccount = new Account();
@@ -103,14 +200,15 @@ export const buyBulkTicket = async (programIdStr, ticketSetNumbers, gamePubkeySt
                 { pubkey: ticketAccount.publicKey, isSigner: false, isWritable: true },
                 { pubkey: gamePubkey, isSigner: false, isWritable: false },
                 { pubkey: gameOwnerPubkey, isSigner: false, isWritable: true },
-                { pubkey: SystemProgram.programId, isSigner: false, isWritable: true }
+                { pubkey: playerTokenAccount.address, isSigner: false, isWritable: true },
+                { pubkey: ownerTokenAccount.address, isSigner: false, isWritable: true },
+                { pubkey: TOKEN_PROGRAM_ID, isSigner: false, isWritable: false }
             ],
             data: ProgramCommand.buyTicket(ticketSetNumbers[i])
         });
 
         createAccountIxArr.push(ticketAccountTx);
         createAccountIxArr.push(buyIx);
-        // ticketIxArr.push(buyIx); 
         const ticketObj = {
             publicKey: ticketAccount.publicKey.toBase58(),
             numbers: ticketSetNumbers[i]
@@ -121,16 +219,21 @@ export const buyBulkTicket = async (programIdStr, ticketSetNumbers, gamePubkeySt
     }
 
     await sendTxUsingExternalSignature(connection, createAccountIxArr, null, ticketAccounts, playerWallet);
-    //await sendTxUsingExternalSignature(connection, ticketIxArr, null, null, playerWallet);
     return ticketKeyArr;
 }
 
-export const getBalance = async (publicKey) => {
+export const getBalance = async (publicKey, adapter_type) => {
     if (typeof publicKey === 'string' || publicKey instanceof String) {
         publicKey = new PublicKey(publicKey);
     }
-    const balance = await connection.getBalance(publicKey).catch(handleConnectionError);
-    return balance;
+    try {
+        debugger
+        const balance = await getTokenAmount(publicKey.toBase58(), MILLI_MINT_KEY.toBase58());
+        return balance;
+    } catch (error) {
+        console.log(error);
+    }
+    
 };
 
 export const buyNFTTicket = async (milli_nft_account, owner_pubkey, token_account_pubkey, mint_pubkey, adapter_type) => {

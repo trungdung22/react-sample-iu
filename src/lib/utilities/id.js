@@ -14,6 +14,9 @@ const pubkeyToString = (key) => {
   return typeof key === 'string' ? key : key?.toBase58() || '';
 };
 
+const MILLI_MINT_KEY = new PublicKey(
+  "fEFJedUYxGpQhW9P4QLv7zPaFpenzUYGhQicPzFiPzc"
+);
 
 const WRAPPED_SOL_MINT = new PublicKey(
   'So11111111111111111111111111111111111111112',
@@ -80,5 +83,6 @@ module.exports = {
   TRADE_MINT_TOKEN,
   TOKEN_PROGRAM_ID,
   SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID,
-  AR_SOL_HOLDER_ID
+  AR_SOL_HOLDER_ID,
+  MILLI_MINT_KEY
 }

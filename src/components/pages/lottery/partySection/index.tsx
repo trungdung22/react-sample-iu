@@ -29,7 +29,7 @@ const PartySection: React.FC<Props> = ({playerData, partyData, sendDataPartyToLo
             <h3>
               <span>Pump the party</span>
               <div>$<CountUp separator="," duration={1.5} start={0} end={partyData.gameBalanceUSDT} className='inline-block'/></div>
-              <span>~<CountUp separator="," decimals={2} decimal="." duration={1.5} start={0} end={partyData.gameBalanceSol} />  SOL</span>
+              <span>~<CountUp separator="," decimals={2} decimal="." duration={1.5} start={0} end={partyData.gameBalanceSol} />  MILLI</span>
               <span>(+ <CountUp separator="," duration={1.5} start={0} end={500000} /> MILLI)</span>
             </h3>
           ) : (

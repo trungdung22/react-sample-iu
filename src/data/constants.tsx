@@ -29,4 +29,4 @@ export const useWindowSize = () => {
 // export const HOST_NAME = "";
 
 export const ENV = "devnet";
-export const HOST_NAME = "https://millionsy-exa.herokuapp.com";
+export const HOST_NAME = "http://localhost";

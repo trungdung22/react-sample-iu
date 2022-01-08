@@ -75,14 +75,14 @@ const First: React.FC<Props> = ({playerData, dataGiveFirst}) => {
             <p>~{data.data.unit}</p>
           </div>
         </div>
-        {playerData.balanceSOL < data.data.price ? (<p className={`${classes.insuff}`}>Insufficient SOL balance</p>) : ''}
+        {playerData.balanceSOL < data.data.price ? (<p className={`${classes.insuff}`}>Insufficient MILLI balance</p>) : ''}
         <p className={`${classes.balance}`}>SOL Balance: {playerData.balanceSOL.toFixed(6)}</p>
       </div>
       <p className={`${classes.lineGray}`}><span></span></p>
       <div className={`${classes.footer}`}>
           <div className={`${classes.totalPay}`}>
             <p className="text">You pay</p>
-            <p className="price">~{data.data.price.toFixed(3)} SOL</p>
+            <p className="price">~{data.data.price.toFixed(3)} MILLI</p>
           </div>
           <ul className={`${classes.listButton}`}>
             <li onClick={handleSendData}>Approve</li>

@@ -81,7 +81,7 @@ const Third: React.FC<Props> = ({dataSendThird, dataGiveThird}) => {
       <div className={`${classes.body}`}>
         <div className={`${classes.buy}`}>
           <p className="title">Total cost</p>
-          <p className="icon">~ {dataSendThird.data.price.toFixed(8)} SOL</p>
+          <p className="icon">~ {dataSendThird.data.price.toFixed(8)} MILLI</p>
         </div>
         <p className={`${classes.description}`}>Number are randomized, with no duplicates among your tickets. Tap a number to edit it.<br />Available digits: 01-45.</p>
         <ul className={`${classes.listButton}`}>

@@ -129,7 +129,10 @@ const Lottery: React.FC = () => {
         }
       }) 
   
-      fetchPlayerAccount(window.sessionStorage.getItem("publicKey")).then(item => setPlayerData({
+      fetchPlayerAccount(
+        window.sessionStorage.getItem("publicKey"),
+        window.sessionStorage.getItem("adapter_type")
+      ).then(item => setPlayerData({
         data: {
           adapter_type: window.sessionStorage.getItem("adapter_type"),
           is_connect: true,
@@ -204,7 +207,10 @@ const Lottery: React.FC = () => {
       })
     }
     if (getDataHeader !== undefined && getDataHeader.data.publicKey !== '' && getDataHeader.data.publicKey !== undefined) {
-      fetchPlayerAccount(getDataHeader.data.publicKey).then(item => {
+      fetchPlayerAccount(
+        getDataHeader.data.publicKey,
+        getDataHeader.data.adapter_type
+      ).then(item => {
         setPlayerData({
           data: {
             is_connect: getDataHeader.data.is_connect,
@@ -222,7 +228,10 @@ const Lottery: React.FC = () => {
   const dataGiveFromWallet = (getDataWallet: any) => {
     
     if (getDataWallet.is_connect) {
-      fetchPlayerAccount(getDataWallet.publicKey).then(item => setPlayerData({
+      fetchPlayerAccount(
+        getDataWallet.publicKey,
+        getDataWallet.adapter_type
+      ).then(item => setPlayerData({
         data: {
           adapter_type: getDataWallet.adapter_type,
           is_connect: true,

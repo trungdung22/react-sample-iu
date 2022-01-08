@@ -9,10 +9,14 @@ const Command = {
   ClaimReward: 4,
   CloseGame: 5,
   UpdateTicketPrice: 6,
-  CreateMilliPad: 7,
-  UpdateMiliPad: 8,
-  SaleMilliPad: 9,
-  BuyNFTTIcket: 12
+  CreateMilliPad: 7, 
+  UpdateMiliPad:8, 
+  SaleMilliPad:9,
+  InitMilliNFT: 10, 
+  IntegrateNFT: 11, 
+  ExchangeNFT: 12,
+  RevokeNFTTokenAuthority: 13,
+  ClaimRewardNFT: 14
 };
 
 export function buyTicket(ticketNumbers) {

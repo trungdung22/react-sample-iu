@@ -175,13 +175,12 @@ export const updateJoinWhiteListUser = async (playerPubkey) => {
 }
 
 export async function getOrCreateTokenAccountInstruction(connection, walletPubkey, accountSigner, mintKey) {
-
     const tokenKey = (
         await findProgramAddress(
             [
                 walletPubkey.toBuffer(),
-                TOKEN_PROGRAM_ID,
-                mintKey,
+                TOKEN_PROGRAM_ID.toBuffer(),
+                mintKey.toBuffer(),
             ],
             SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID,
         )
@@ -206,7 +205,7 @@ export async function getOrCreateTokenAccountInstruction(connection, walletPubke
             { commitment: 'singleGossip', preflightCommitment: 'singleGossip', }
         )
     }
-    return account.publicKey;
+    return accountKey;
 }
 
 function createAssociatedTokenAccountInstruction(

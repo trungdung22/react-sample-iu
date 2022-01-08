@@ -1,4 +1,4 @@
-import { BN } from 'bn.js'; 
+import { BN } from 'bn.js';
 
 
 const Command = {
@@ -9,9 +9,10 @@ const Command = {
   ClaimReward: 4,
   CloseGame: 5,
   UpdateTicketPrice: 6,
-  CreateMilliPad: 7, 
-  UpdateMiliPad:8, 
-  SaleMilliPad:9
+  CreateMilliPad: 7,
+  UpdateMiliPad: 8,
+  SaleMilliPad: 9,
+  BuyNFTTIcket: 12
 };
 
 export function buyTicket(ticketNumbers) {
@@ -31,5 +32,12 @@ export function buyMilliPad(lamports) {
   const data = Buffer.from(Uint8Array.of(Command.SaleMilliPad,
     ...data_amount
   ))
+  return data;
+}
+
+export function buyNFTTicket(price) {
+  const data = Buffer.from(Uint8Array.of(Command.BuyNFTTIcket,
+    ...new BN(price).toArray("le", 8))
+  )
   return data;
 }

@@ -5,8 +5,9 @@ import { sendTxUsingExternalSignature, UseWallet, sendTxUsingExternalSignatureV2
 import { CONNECTION_ULR } from './config';
 import { convertUSDT } from 'lib/utilities/utils';
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token';
-import { TRADE_MINT_TOKEN } from 'lib/utilities/id';
+import { SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID, TRADE_MINT_TOKEN } from 'lib/utilities/id';
 import { Token } from '@solana/spl-token';
+import { getOrCreateTokenAccountInstruction } from 'lib/utilities/utils';
 //const connection = new Connection("http://localhost:8899", 'singleGossip');
 //const connection = new Connection("https://api.devnet.solana.com", 'singleGossip');
 const connection = new Connection(CONNECTION_ULR, 'singleGossip');
@@ -132,44 +133,59 @@ export const getBalance = async (publicKey) => {
     return balance;
 };
 
-export const buyNFTTicket = async (token_account_pubkey, mint_pubkey, adapter_type) => {
+export const buyNFTTicket = async (owner_pubkey, token_account_pubkey, mint_pubkey, adapter_type) => {
+    const onwerAccount = new PublicKey(owner_pubkey);
 
-    // const programId = new PublicKey(programIdStr);
-    // const gamePubkey = new PublicKey(gamePubkeyStr);
-    // const gameOwnerPubkey = new PublicKey(gameOwnerPubkeyStr);
-    // const playerWallet = await UseWallet(adapter_type);
-    const playerWallet = await UseWallet(adapter_type);
+    const programId = new PublicKey('Fx1q31GChnsdaZauYRTcfKjwUAK1Jqyj6CFvzGcem1Ft');
+
+    const playerWallet = await UseWallet();
+    const mintPubkey = new PublicKey(mint_pubkey);
     
-    const minToken_token = new Token(
+    let instructions = [];
+    let singers = [playerWallet];
+    
+    const ticket_token = new Token(
+        connection,
+        mintPubkey,
+        TOKEN_PROGRAM_ID,
+        playerWallet.publicKey
+    );
+
+    const USDC_token = new Token(
         connection,
         TRADE_MINT_TOKEN,
         TOKEN_PROGRAM_ID,
         playerWallet.publicKey
     );
+    const owner_tokenAccount = new PublicKey(token_account_pubkey);
 
-    // console.log(minToken_token.publicKey.toBase58());
-    const a = await minToken_token.getOrCreateAssociatedAccountInfo(new PublicKey('5UzNew13BgVFi8E1cmSu6YoHzC9ka36GgonBwdgmjzi8'));
-    console.log(a.amount);
-    
-    // const mintPubkey = new PublicKey(mint_pubkey);
-    // const tokenAccount = new PublicKey(token_account_pubkey);
+    const buyer_tokenAccount = await getOrCreateTokenAccountInstruction(connection, playerWallet.publicKey, instructions, ticket_token.publicKey);
 
-    // const buyIx = new TransactionInstruction({
-    //     programId: programId,
-    //     keys: [
-    //         { pubkey: TOKEN_PROGRAM_ID, isSigner: false, isWritable: false },
-    //         { pubkey: tokenAccount, isSigner: false, isWritable: true },
-    //         { pubkey: from_trade_token_account, isSigner: false, isWritable: false },
-    //         { pubkey: buyer_account, isSigner: false, isWritable: true },
-    //         { pubkey: buyer_token_account, isSigner: false, isWritable: true },
-    //         { pubkey: buyer_trade_token_account, isSigner: false, isWritable: true },
-    //         { pubkey: pda_account, isSigner: false, isWritable: true },
-    //     ],
-    //     data: ProgramCommand.buyTicket(ticketSetNumbers[i])
-    // });
-    // await sendTxUsingExternalSignature(connection, createAccountIxArr, null, ticketAccounts, playerWallet);
+    const buyer_USDC_tokenAccount = await getOrCreateTokenAccountInstruction(connection, playerWallet.publicKey, instructions, USDC_token.publicKey);
+    // debugger
+    const owner_USDC_tokenAccount = await getOrCreateTokenAccountInstruction(connection, onwerAccount, instructions, USDC_token.publicKey);
 
-    return "hello";
+    const pda_account = await PublicKey.findProgramAddress(
+        [Buffer.from("milli-auction")],
+        programId
+    );
+
+    const buyIx = new TransactionInstruction({
+        programId: programId,
+        keys: [
+            { pubkey: TOKEN_PROGRAM_ID, isSigner: false, isWritable: false },
+            { pubkey: owner_tokenAccount, isSigner: false, isWritable: true },
+            { pubkey: owner_USDC_tokenAccount, isSigner: false, isWritable: true },
+            { pubkey: playerWallet.publicKey, isSigner: false, isWritable: false },
+            { pubkey: buyer_tokenAccount, isSigner: false, isWritable: true },
+            { pubkey: buyer_USDC_tokenAccount, isSigner: false, isWritable: true },
+            { pubkey: pda_account[0], isSigner: false, isWritable: true },
+        ],
+        data: ProgramCommand.buyNFTTicket(4)
+    });
+    instructions.push(buyIx);
+    const tx = await sendTxUsingExternalSignature(connection, instructions, null, null, playerWallet);
+    return tx;
 }
 
 const handleConnectionError = (error) => {

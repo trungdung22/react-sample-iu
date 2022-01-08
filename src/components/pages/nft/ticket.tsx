@@ -9,9 +9,9 @@ import { Commitment, Connection, clusterApiUrl, PublicKey } from '@solana/web3.j
 interface MilliNFTAccountDataLayout {
   status: boolean;
   nft_type: String;
-  user_pubkey: Uint8Array;
-  mint_pubkey: Uint8Array;
-  token_account_pubkey: Uint8Array;
+  user_pubkey: String;
+  mint_pubkey: String;
+  token_account_pubkey: String;
   amount: Uint8Array;
   level: Uint8Array;
   num_one: String;
@@ -56,6 +56,11 @@ const Ticket: React.FC<Props> = ({
       setTicketNumber('#');
       let nftInfo = {} as MilliNFTAccountDataLayout;
       const nftDecodedInfo = deserializeNFTTicket(res);
+
+      nftInfo.token_account_pubkey = nftDecodedInfo.token_account_pubkey;
+      nftInfo.mint_pubkey = nftDecodedInfo.mint_pubkey;
+      nftInfo.user_pubkey = nftDecodedInfo.user_pubkey
+
       nftInfo.num_one = format2digitNumber(nftDecodedInfo.num_one);
       nftInfo.num_two = format2digitNumber(nftDecodedInfo.num_two);
       nftInfo.num_three = format2digitNumber(nftDecodedInfo.num_three);
@@ -79,6 +84,7 @@ const Ticket: React.FC<Props> = ({
           setTicketNumber(prevNumber => prevNumber + nftInfo.num_six);
           break;
         }
+        
       setNftData(nftInfo);
     }).catch(err => {
       console.log("Could not find nft ticket info!");
@@ -96,7 +102,8 @@ const Ticket: React.FC<Props> = ({
     emitTicketData({
       ticketNumber: ticketNumber,
       token_account_pubkey: nftData['token_account_pubkey'],
-      mint_pubkey: nftData['mint_pubkey']
+      mint_pubkey: nftData['mint_pubkey'],
+      user_pubkey: nftData['user_pubkey']
     });
   }
 

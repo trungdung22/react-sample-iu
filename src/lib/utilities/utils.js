@@ -2,6 +2,7 @@
 import { getBalance } from "lib/program/lottery-commands";
 import { IS_CONNECT, HOST_NAME } from 'data/constants';
 import { SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID, TOKEN_PROGRAM_ID } from "./id";
+import { sendTxUsingExternalSignature } from "lib/program/wallet-provider";
 const {
     SystemProgram,
     PublicKey,
@@ -174,7 +175,7 @@ export const updateJoinWhiteListUser = async (playerPubkey) => {
     return response;
 }
 
-export async function getOrCreateTokenAccountInstruction(connection, walletPubkey, accountSigner, mintKey) {
+export async function getOrCreateTokenAccountInstruction(connection, walletPubkey, instructions, mintKey) {
     const tokenKey = (
         await findProgramAddress(
             [
@@ -187,23 +188,14 @@ export async function getOrCreateTokenAccountInstruction(connection, walletPubke
     )[0];
     const accountKey = new PublicKey(tokenKey);
     const account = await connection.getAccountInfo(accountKey);
-
     if (account === null) {
-        const instructions = [];
         createAssociatedTokenAccountInstruction(
             instructions,
             accountKey,
-            accountSigner.publicKey,
+            walletPubkey,
             walletPubkey,
             mintKey,
         );
-        const tx = new Transaction().add(...instructions);
-        await sendAndConfirmTransaction(
-            connection,
-            tx,
-            [accountSigner],
-            { commitment: 'singleGossip', preflightCommitment: 'singleGossip', }
-        )
     }
     return accountKey;
 }

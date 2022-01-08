@@ -33,7 +33,8 @@ const NFT: React.FC = () => {
     ticketNumber: '',
     token_account_pubkey: '',
     mint_pubkey: '',
-    user_pubkey: ''
+    user_pubkey: '',
+    milli_nft_pubkey: '',
   });
 
   useEffect(() => {
@@ -172,11 +173,13 @@ const NFT: React.FC = () => {
   });
 
   const onBuyNFTTicket = () => {
-    buyNFTTicket(selectedTicketData.user_pubkey,selectedTicketData.token_account_pubkey, selectedTicketData.mint_pubkey, 'phantom')
+    buyNFTTicket(selectedTicketData.milli_nft_pubkey, selectedTicketData.user_pubkey,selectedTicketData.token_account_pubkey, selectedTicketData.mint_pubkey, 'phantom')
       .then(res => {
         console.log(res);
+        console.log('purchase success');
       }).catch(err => {
         console.log(err);
+        console.log('purchase fail');
       });
   }
 

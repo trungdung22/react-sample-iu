@@ -133,8 +133,9 @@ export const getBalance = async (publicKey) => {
     return balance;
 };
 
-export const buyNFTTicket = async (owner_pubkey, token_account_pubkey, mint_pubkey, adapter_type) => {
+export const buyNFTTicket = async (milli_nft_account, owner_pubkey, token_account_pubkey, mint_pubkey, adapter_type) => {
     const onwerAccount = new PublicKey(owner_pubkey);
+    const milliNftAccount = new PublicKey(milli_nft_account);
 
     const programId = new PublicKey('Fx1q31GChnsdaZauYRTcfKjwUAK1Jqyj6CFvzGcem1Ft');
 
@@ -174,6 +175,8 @@ export const buyNFTTicket = async (owner_pubkey, token_account_pubkey, mint_pubk
         programId: programId,
         keys: [
             { pubkey: TOKEN_PROGRAM_ID, isSigner: false, isWritable: false },
+            { pubkey: milliNftAccount, isSigner: false, isWritable: false },
+            { pubkey: onwerAccount, isSigner: false, isWritable: false },
             { pubkey: owner_tokenAccount, isSigner: false, isWritable: true },
             { pubkey: owner_USDC_tokenAccount, isSigner: false, isWritable: true },
             { pubkey: playerWallet.publicKey, isSigner: false, isWritable: false },

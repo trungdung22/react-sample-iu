@@ -9,6 +9,7 @@ import { Commitment, Connection, clusterApiUrl, PublicKey } from '@solana/web3.j
 interface MilliNFTAccountDataLayout {
   status: boolean;
   nft_type: String;
+  milli_nft_pubkey: String;
   user_pubkey: String;
   mint_pubkey: String;
   token_account_pubkey: String;
@@ -36,7 +37,7 @@ const Ticket: React.FC<Props> = ({
   emitTicketData
 }) => {
   const [ticketNumber, setTicketNumber] = useState('######');
-  const [nftData, setNftData] = useState({});
+  const [nftData, setNftData] = useState<MilliNFTAccountDataLayout>();
 
   const size = useWindowSize();
   const COMMITMENT: Commitment = "singleGossip";
@@ -56,7 +57,9 @@ const Ticket: React.FC<Props> = ({
       setTicketNumber('#');
       let nftInfo = {} as MilliNFTAccountDataLayout;
       const nftDecodedInfo = deserializeNFTTicket(res);
-
+      console.log('ticket rest' ,res);
+      nftInfo.milli_nft_pubkey = nftAccountPubkey;
+      
       nftInfo.token_account_pubkey = nftDecodedInfo.token_account_pubkey;
       nftInfo.mint_pubkey = nftDecodedInfo.mint_pubkey;
       nftInfo.user_pubkey = nftDecodedInfo.user_pubkey
@@ -101,9 +104,10 @@ const Ticket: React.FC<Props> = ({
 
     emitTicketData({
       ticketNumber: ticketNumber,
-      token_account_pubkey: nftData['token_account_pubkey'],
-      mint_pubkey: nftData['mint_pubkey'],
-      user_pubkey: nftData['user_pubkey']
+      token_account_pubkey: nftData.token_account_pubkey,
+      mint_pubkey: nftData.mint_pubkey,
+      user_pubkey: nftData.user_pubkey,
+      milli_nft_pubkey: nftData.milli_nft_pubkey,
     });
   }
 

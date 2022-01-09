@@ -261,3 +261,11 @@ const findProgramAddress = async (
     const result = await PublicKey.findProgramAddress(seeds, programId);
     return [result[0].toBase58(), result[1]];
 };
+
+const toPublicKey = (key) => {
+    if (typeof key !== 'string') {
+      return key;
+    }
+    let result = new PublicKey(key);
+    return result;
+  };

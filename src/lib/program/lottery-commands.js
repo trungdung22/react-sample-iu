@@ -9,80 +9,10 @@ import { getOrCreateTokenAccountInstruction } from 'lib/utilities/utils';
 import { TRADE_MINT_TOKEN, MILLI_MINT_KEY, SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID } from 'lib/utilities/id';
 const axios = require('axios');
 //const connection = new Connection("http://localhost:8899", 'singleGossip');
-//const connection = new Connection("https://api.devnet.solana.com", 'singleGossip');
-const connection = new Connection(CONNECTION_ULR, 'singleGossip');
+const connection = new Connection("https://api.devnet.solana.com", 'singleGossip');
+// const connection = new Connection(CONNECTION_ULR, 'singleGossip');
 const SEED = 'milli';
 
-const findProgramAddress = async (
-    seeds,
-    programId,
-  ) => {
-    const result = await PublicKey.findProgramAddress(seeds, programId);
-    return [result[0].toBase58(), result[1]];
-  };
-
-  
-function createAssociatedTokenAccountInstruction(
-    instructions,
-    associatedTokenAddress,
-    payer,
-    walletAddress,
-    splTokenMintAddress,
-) {
-    const keys = [
-        {
-            pubkey: payer,
-            isSigner: true,
-            isWritable: true,
-        },
-        {
-            pubkey: associatedTokenAddress,
-            isSigner: false,
-            isWritable: true,
-        },
-        {
-            pubkey: walletAddress,
-            isSigner: false,
-            isWritable: false,
-        },
-        {
-            pubkey: splTokenMintAddress,
-            isSigner: false,
-            isWritable: false,
-        },
-        {
-            pubkey: SystemProgram.programId,
-            isSigner: false,
-            isWritable: false,
-        },
-        {
-            pubkey: TOKEN_PROGRAM_ID,
-            isSigner: false,
-            isWritable: false,
-        },
-        {
-            pubkey: SYSVAR_RENT_PUBKEY,
-            isSigner: false,
-            isWritable: false,
-        },
-    ];
-    instructions.push(
-        new TransactionInstruction({
-            keys,
-            programId: SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID,
-            data: Buffer.from([]),
-        }),
-    );
-}
-
-const toPublicKey = (key) => {
-    if (typeof key !== 'string') {
-      return key;
-    }
-    let result = new PublicKey(key);
-    return result;
-  };
-  
 async function getTokenAmount(walletAddress, tokenMintAddress) {
 
     const response = await axios({
@@ -215,7 +145,6 @@ export const buyNFTTicket = async (milli_nft_account, owner_pubkey, token_accoun
     const mintPubkey = new PublicKey(mint_pubkey);
     
     let instructions = [];
-    let singers = [playerWallet];
     
     const ticket_token = new Token(
         connection,
@@ -235,7 +164,7 @@ export const buyNFTTicket = async (milli_nft_account, owner_pubkey, token_accoun
     const buyer_tokenAccount = await getOrCreateTokenAccountInstruction(connection, playerWallet.publicKey, instructions, ticket_token.publicKey);
 
     const buyer_USDC_tokenAccount = await getOrCreateTokenAccountInstruction(connection, playerWallet.publicKey, instructions, USDC_token.publicKey);
-    // debugger
+
     const owner_USDC_tokenAccount = await getOrCreateTokenAccountInstruction(connection, onwerAccount, instructions, USDC_token.publicKey);
 
     const pda_account = await PublicKey.findProgramAddress(

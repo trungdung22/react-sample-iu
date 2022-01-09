@@ -4,7 +4,7 @@ import Footer from 'components/astoms/footer';
 import Header from 'components/astoms/header';
 import ModalContent from 'components/astoms/modalSection';
 import Star from 'components/astoms/star';
-import { fetchPlayerAccount } from 'lib/utilities/utils';
+import { fetchPlayerAccount, insertNFTTransaction } from 'lib/utilities/utils';
 import React, { useEffect, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import useStyles from './styles';
@@ -35,6 +35,7 @@ const NFT: React.FC = () => {
     mint_pubkey: '',
     user_pubkey: '',
     milli_nft_pubkey: '',
+    status: '',
     price: null
   });
 
@@ -180,14 +181,29 @@ const NFT: React.FC = () => {
   });
 
   const onBuyNFTTicket = () => {
-    buyNFTTicket(selectedTicketData.milli_nft_pubkey, selectedTicketData.user_pubkey,selectedTicketData.token_account_pubkey, selectedTicketData.mint_pubkey, selectedTicketData.price, 'phantom')
-      .then(res => {
-        console.log(res);
-        console.log('purchase success');
-      }).catch(err => {
-        console.log(err);
-        console.log('purchase fail');
-      });
+    if (!playerData.data.is_connect) { 
+      console.log('wallet not connected')
+      return;
+    }
+
+    buyNFTTicket(selectedTicketData.milli_nft_pubkey,
+      selectedTicketData.user_pubkey,
+      selectedTicketData.token_account_pubkey,
+      selectedTicketData.mint_pubkey, selectedTicketData.price,
+      'phantom'
+    ).then(async res => {
+      await insertNFTTransaction('sold', 
+        playerData.data.publicKey,
+        selectedTicketData.mint_pubkey,
+        selectedTicketData.token_account_pubkey,
+        selectedTicketData.milli_nft_pubkey,
+      );
+      // console.log(res);
+      console.log('purchase success');
+    }).catch(err => {
+      console.log(err);
+      console.log('purchase fail');
+    });
   }
 
   useEffect(() => {
@@ -228,7 +244,7 @@ const NFT: React.FC = () => {
   });
 
   const onChangePagination = (event, toSetpageNo) => {
-      setPageNo(toSetpageNo);
+    setPageNo(toSetpageNo);
   }
 
   return (
@@ -357,7 +373,7 @@ const NFT: React.FC = () => {
                   </div>
                 }
                 <div className='mt-6 md:mt-10 pb-6 md:pb-0'>
-                  <Pagination count={ticketEntries.totalPages} showFirstButton showLastButton className={classes.root} siblingCount={1} onChange={onChangePagination}/>
+                  <Pagination count={ticketEntries.totalPages} showFirstButton showLastButton className={classes.root} siblingCount={1} onChange={onChangePagination} />
                 </div>
               </div>
             </div>

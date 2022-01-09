@@ -113,6 +113,30 @@ export const insertBulkTicket = async (gamePubkey, playerPubkey, tickets) => {
     return response;
 }
 
+export const insertNFTTransaction = async (status,
+    user_pubkey,
+    mint_pubkey,
+    token_account_pubkey,
+    milli_nft_account_pubkey) => {
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            // 'Authorization': 
+        },
+        body: JSON.stringify({
+            status : status,
+            user_pubkey : user_pubkey,
+            mint_pubkey : mint_pubkey,
+            token_account_pubkey : token_account_pubkey,
+            milli_nft_account_pubkey : milli_nft_account_pubkey
+        })
+
+    };
+    const response = await fetch(`${HOST_NAME}/api/nft-transaction`, requestOptions);
+    return response;
+}
+
 export const getGameBoardInfo = async () => {
     const requestOptions = {
         method: 'GET',
@@ -264,8 +288,8 @@ const findProgramAddress = async (
 
 const toPublicKey = (key) => {
     if (typeof key !== 'string') {
-      return key;
+        return key;
     }
     let result = new PublicKey(key);
     return result;
-  };
+};

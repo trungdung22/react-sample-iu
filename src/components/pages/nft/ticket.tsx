@@ -7,7 +7,7 @@ import { CLUSTERS, getConnection } from '../../../lib/program/connection';
 import { Commitment, Connection, clusterApiUrl, PublicKey } from '@solana/web3.js';
 
 interface MilliNFTAccountDataLayout {
-  status: boolean;
+  status: String;
   nft_type: String;
   milli_nft_pubkey: String;
   user_pubkey: String;
@@ -37,6 +37,8 @@ const Ticket: React.FC<Props> = ({
   isShowPopupDesktop,
   emitTicketData
 }) => {
+  const [isLoaded, settIsLoaded] = useState(false);
+
   const [ticketNumber, setTicketNumber] = useState('######');
   const [nftData, setNftData] = useState<MilliNFTAccountDataLayout>();
 
@@ -58,9 +60,11 @@ const Ticket: React.FC<Props> = ({
       setTicketNumber('#');
       let nftInfo = {} as MilliNFTAccountDataLayout;
       const nftDecodedInfo = deserializeNFTTicket(res);
-      console.log('ticket rest' , nftDecodedInfo.price);
+      
       nftInfo.milli_nft_pubkey = nftAccountPubkey;
       nftInfo.price = nftDecodedInfo.price;
+      nftInfo.status = nftDecodedInfo.status;
+
       nftInfo.token_account_pubkey = nftDecodedInfo.token_account_pubkey;
       nftInfo.mint_pubkey = nftDecodedInfo.mint_pubkey;
       nftInfo.user_pubkey = nftDecodedInfo.user_pubkey
@@ -87,9 +91,10 @@ const Ticket: React.FC<Props> = ({
         case NFTTypes[3]:
           setTicketNumber(prevNumber => prevNumber + nftInfo.num_six);
           break;
-        }
-        
+      }
+
       setNftData(nftInfo);
+      settIsLoaded(true);
     }).catch(err => {
       console.log("Could not find nft ticket info!");
       console.log(err);
@@ -97,6 +102,8 @@ const Ticket: React.FC<Props> = ({
   }, [])
 
   const cardOnClickHandler = () => {
+    if (!isLoaded)
+      return;
     if (size.width < 768) {
       swipableView(1);
     } else {
@@ -109,7 +116,8 @@ const Ticket: React.FC<Props> = ({
       mint_pubkey: nftData.mint_pubkey,
       user_pubkey: nftData.user_pubkey,
       milli_nft_pubkey: nftData.milli_nft_pubkey,
-      price: nftData.price
+      price: nftData.price,
+      status: nftData.status,
     });
   }
 

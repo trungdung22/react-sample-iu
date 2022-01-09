@@ -50,7 +50,7 @@ const NFT: React.FC = () => {
 
     let filter = {};
     filter = {
-      // isSole: false,
+      isSole: false,
     }
     if (valueInputSearch) {
       let filterRollNums = [];

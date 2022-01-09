@@ -212,5 +212,6 @@ module.exports = {
   MILLI_NFT_ACCOUNT_DATA_LAYOUT,
   deserializeGame,
   deserializeTicket,
-  deserializeNFTTicket
+  deserializeNFTTicket,
+  NFTTypes
 }

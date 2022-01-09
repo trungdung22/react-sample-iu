@@ -22,3 +22,26 @@ export const prettyPrintTime = (time) => {
 export const formatTime = (time) => {
     return time < 10 ? '0' + time : time;
 }
+
+export const buildParamRequest = (filter) => {
+    if (filter == null)
+      return '';
+    let requestQuery = ''
+    for (const [key, value] of Object.entries(filter)) {
+      requestQuery = `${requestQuery}&${key}=${value}`;
+    }
+    return requestQuery;
+}
+
+export const splitArrayIntoChunksOfLen = (arr, len) => {
+    console.log(arr);
+    let chunks = [], i = 0, n = arr.length;
+    while (i < n) {
+      chunks.push(arr.slice(i, i += len));
+    }
+    return chunks;
+}
+
+export const format2digitNumber = (number) => {
+    return ("0" + number).slice(-2);
+}

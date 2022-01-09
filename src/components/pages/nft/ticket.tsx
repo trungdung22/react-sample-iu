@@ -5,6 +5,7 @@ import { useWindowSize } from 'data/constants';
 import { NFTTypes, deserializeNFTTicket, MILLI_NFT_ACCOUNT_DATA_LAYOUT } from '../../../lib/program/state';
 import { CLUSTERS, getConnection } from '../../../lib/program/connection';
 import { Commitment, Connection, clusterApiUrl, PublicKey } from '@solana/web3.js';
+import { format2digitNumber } from 'lib/utilities/format';
 
 interface MilliNFTAccountDataLayout {
   status: String;
@@ -48,10 +49,6 @@ const Ticket: React.FC<Props> = ({
   const connection = new Connection('https://api.devnet.solana.com',
     COMMITMENT
   );
-
-  const format2digitNumber = (number) => {
-    return ("0" + number).slice(-2);
-  }
 
   useEffect(() => {
     connection.getAccountInfo(

@@ -133,7 +133,7 @@ export const insertNFTTransaction = async (status,
         })
 
     };
-    const response = await fetch(`${HOST_NAME}/api/nft-transaction`, requestOptions);
+    const response = await fetch(`${HOST_NAME}/api/nft-buy-ticket`, requestOptions);
     return response;
 }
 

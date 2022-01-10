@@ -101,6 +101,7 @@ export const insertBulkTicket = async (gamePubkey, playerPubkey, tickets) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${window.sessionStorage.token}`
         },
         body: JSON.stringify({
             gamePubkey: gamePubkey,
@@ -174,7 +175,7 @@ export const updateMissionPlayer = async (playerPubkey, missions, code) => {
     const requestOptions = {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
             playerPubkey: playerPubkey,

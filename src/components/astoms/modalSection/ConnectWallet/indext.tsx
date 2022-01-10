@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import useStyles from './styles';
 import { UseWallet } from '../../../../lib/program/wallet-provider';
 import IconPhantom from 'components/astoms/icons/phantom';
+import { HOST_NAME } from 'data/constants';
 
 type Props = {
   dataGiveWallet: (dataWallet: any) => any
@@ -39,17 +40,40 @@ const ConnectWallet: React.FC<Props> = ({ dataGiveWallet }) => {
   //   // tickets: dataSendViewTicket.next_round.your_ticket,
   // })
 
-  const connectPhantom = () => {
-    UseWallet("phantom").then(response => {
-      window.sessionStorage.setItem('show_connect', 'true');
-      dataGiveWallet({ publicKey: response.publicKey.toBase58(), is_connect: true, adapter_type: "phantom" });
+  const handleWalletResponse = (response, walletType) => {
+    window.sessionStorage.setItem('show_connect', 'true');
+      dataGiveWallet({ publicKey: response.publicKey.toBase58(), is_connect: true, adapter_type: walletType });
       window.sessionStorage.setItem('data_connect', 'true')
       window.sessionStorage.setItem('publicKey', response.publicKey.toBase58());
-      window.sessionStorage.setItem('adapter_type', 'phantom');
+      window.sessionStorage.setItem('adapter_type', walletType);
       //rootDispatcher.updateConnectionStatus("true");
       //rootDispatcher.updateConnectionPublicKey(response.publicKey.toBase58());
       //rootDispatcher.updateConnectionAdapterType("phantom");
-    }).catch(error => console.log(error));
+
+      fetch(`${HOST_NAME}/api/auth/`, {
+        method: 'POST',
+        headers : { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({'user': response.publicKey.toBase58()})
+      }).then(async response => {
+        const responseData = await response.json();
+        if (!response.ok) {
+          const error = (responseData && responseData.message) || response.statusText;
+          return Promise.reject(error);
+        }
+        
+        window.sessionStorage.setItem('token', responseData['token']);
+      }).catch(err => {
+          console.log(err);
+      })
+  }
+
+  const connectPhantom = () => {
+    UseWallet("phantom").then(async response => {
+      handleWalletResponse(response, 'phantom');
+    }).catch(error => console.log('wsss', error));
   }
 
   // const connectCoin69 = () => {
@@ -60,15 +84,8 @@ const ConnectWallet: React.FC<Props> = ({ dataGiveWallet }) => {
   // }
 
   const connectSollet = () => {
-    UseWallet("sollet").then(wallet => {
-      window.sessionStorage.setItem('show_connect', 'true');
-      dataGiveWallet({ publicKey: wallet.publicKey.toBase58(), is_connect: true, adapter_type: "sollet" });
-      window.sessionStorage.setItem('data_connect', 'true');
-      window.sessionStorage.setItem('publicKey', wallet.publicKey.toBase58());
-      window.sessionStorage.setItem('adapter_type', 'sollet');
-      //rootDispatcher.updateConnectionStatus("true");
-      //rootDispatcher.updateConnectionPublicKey(wallet.publicKey.toBase58());
-      //rootDispatcher.updateConnectionAdapterType("sollet");
+    UseWallet("sollet").then(async response => {
+      handleWalletResponse(response, 'sollet');
     }).catch(error => console.log(error));
   }
   

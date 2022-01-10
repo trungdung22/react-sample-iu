@@ -77,16 +77,22 @@ const connectToCoin98Wallet = () => {
 };
 
 export const UseWallet = async (adapterType: string): Promise<BaseMessageSignerWalletAdapter> => {
-  if (adapterType === "sollet") {
-    await connectToSolletWallet();
-    return sollet;
-  } else if (adapterType === "coin98") {
-    await connectToCoin98Wallet();
-    return coin98;
-  } else {
-    await connectToPhantomWallet();
-    return phantom;
-  }
+  let wallet;
+  switch(adapterType){
+    case("sollet"):
+      await connectToSolletWallet();
+      wallet = sollet;
+      break;
+    case("coin98"):
+      await connectToCoin98Wallet();
+      wallet = coin98;
+      break;
+    case("phantom"):
+      await connectToPhantomWallet();
+      wallet = phantom;
+      break;
+    }
+    return wallet;
 };
 
 

@@ -23,10 +23,11 @@ const NFT: React.FC = () => {
   const size = useWindowSize();
   const searchInputEl = useRef(null);
   const [pageNo, setPageNo] = useState(1);
-  
+  const [showTooltipConnect, setShowTooltipConnect] = useState(false);
+
   const [tab, setTab] = useState(null);
   const [valueInputSearch, setValueInputSearch] = React.useState('');
-  
+
   const [filteredNftTickets, setFilteredNftTickets] = useState([]);
   const [ticketEntries, setTicketEntries] = useState({
     totalPages: 0,
@@ -35,6 +36,7 @@ const NFT: React.FC = () => {
     tickets: []
   });
 
+  const [queryParam, setQueryParam] = useState({});
 
   const [selectedTicketData, setSelectedTicketData] = useState({
     ticketNumber: '',
@@ -45,6 +47,7 @@ const NFT: React.FC = () => {
     status: '',
     price: null
   });
+  
 
   useEffect(() => {
 
@@ -64,14 +67,28 @@ const NFT: React.FC = () => {
         roll_nums: filterRollNums
       };
     }
-    if(tab){
-      filter = {
-        ...filter,
-        nft_type: tab.toLowerCase()
-      };
+    switch (tab) {
+      case 'your-nfts':
+        filter = {
+          ...filter,
+          user_pubkey: playerData.data.publicKey
+        };
+        filter['isSole'] = true;
+        break;
+      default:
+        if(tab ==null)
+          break;
+        filter = {
+          ...filter,
+          nft_type: tab.toLowerCase()
+        };
     }
-    fetchTicketsEntries(pageNo, filter);
+    setQueryParam(filter);
   }, [pageNo, valueInputSearch, tab]);
+
+  useEffect(()=> {
+    fetchTicketsEntries(pageNo, queryParam);
+  }, [queryParam]);
 
   const fetchTicketsEntries = (pageNo, filter) => {
     const queryParams = buildParamRequest(filter);
@@ -237,15 +254,16 @@ const NFT: React.FC = () => {
       selectedTicketData.user_pubkey,
       selectedTicketData.token_account_pubkey,
       selectedTicketData.mint_pubkey, selectedTicketData.price,
-      'phantom'
+      playerData.data.adapter_type
     ).then(async res => {
-      await insertNFTTransaction('sold',
+      await insertNFTTransaction(
         playerData.data.publicKey,
         selectedTicketData.mint_pubkey,
         selectedTicketData.token_account_pubkey,
         selectedTicketData.milli_nft_pubkey,
       );
-      // console.log(res);
+      setIsShowPopupDesktop(false);
+      fetchTicketsEntries(pageNo, queryParam);
       console.log('purchase success');
     }).catch(err => {
       console.log(err);
@@ -331,19 +349,19 @@ const NFT: React.FC = () => {
             <div className='max-w-1700 mx-auto py-5 md:py-20'>
               <div className='flex flex-col-reverse lg:flex-row justify-between items-center gap-5'>
                 <ul className='flex justify-between md:justify-center lg:justify-start gap-1 md:gap-4 xl:gap-8 w-full rounded-5'>
-                  <li className={`justify-center py-1.5 lg:py-2.5 px-1 screen475:px-3 lg:px-4 rounded-4 md:rounded-5 flex items-center border border-solid border-pink-A819FA-50 lg:border-pink-A819FA text-center text-white cursor-pointer transition-all hover:bg-pink-A819FA font-semibold text-10 md:text-14 xl:text-16 ${tab === 'all' ? 'bg-pink-150' : ''}`}
+                  <li className={`justify-center py-1.5 lg:py-2.5 px-1 screen475:px-3 lg:px-4 rounded-4 md:rounded-5 flex items-center border border-solid border-pink-A819FA-50 lg:border-pink-A819FA text-center text-white cursor-pointer transition-all hover:bg-pink-A819FA font-semibold text-10 md:text-14 xl:text-16 ${tab === null ? 'bg-pink-150' : ''}`}
                     onClick={() => setTab(null)}
                   >All</li>
-                  <li className={`justify-center py-1.5 lg:py-2.5 px-1 screen475:px-3 lg:px-4 rounded-4 md:rounded-5 flex items-center border border-solid border-pink-A819FA-50 lg:border-pink-A819FA text-center text-white cursor-pointer transition-all hover:bg-pink-A819FA font-semibold text-10 md:text-14 xl:text-16 ${tab === 'match-3' ? 'bg-pink-150' : ''}`}
+                  <li className={`justify-center py-1.5 lg:py-2.5 px-1 screen475:px-3 lg:px-4 rounded-4 md:rounded-5 flex items-center border border-solid border-pink-A819FA-50 lg:border-pink-A819FA text-center text-white cursor-pointer transition-all hover:bg-pink-A819FA font-semibold text-10 md:text-14 xl:text-16 ${tab === NFTTypes[0] ? 'bg-pink-150' : ''}`}
                     onClick={() => setTab(NFTTypes[0])}
                   >Match 3</li>
-                  <li className={`justify-center py-1.5 lg:py-2.5 px-1 screen475:px-3 lg:px-4 rounded-4 md:rounded-5 flex items-center border border-solid border-pink-A819FA-50 lg:border-pink-A819FA text-center text-white cursor-pointer transition-all hover:bg-pink-A819FA font-semibold text-10 md:text-14 xl:text-16 ${tab === 'match-4' ? 'bg-pink-150' : ''}`}
+                  <li className={`justify-center py-1.5 lg:py-2.5 px-1 screen475:px-3 lg:px-4 rounded-4 md:rounded-5 flex items-center border border-solid border-pink-A819FA-50 lg:border-pink-A819FA text-center text-white cursor-pointer transition-all hover:bg-pink-A819FA font-semibold text-10 md:text-14 xl:text-16 ${tab === NFTTypes[1] ? 'bg-pink-150' : ''}`}
                     onClick={() => setTab(NFTTypes[1])}
                   >Match 4</li>
-                  <li className={`justify-center py-1.5 lg:py-2.5 px-1 screen475:px-3 lg:px-4 rounded-4 md:rounded-5 flex items-center border border-solid border-pink-A819FA-50 lg:border-pink-A819FA text-center text-white cursor-pointer transition-all hover:bg-pink-A819FA font-semibold text-10 md:text-14 xl:text-16 ${tab === 'match-5' ? 'bg-pink-150' : ''}`}
+                  <li className={`justify-center py-1.5 lg:py-2.5 px-1 screen475:px-3 lg:px-4 rounded-4 md:rounded-5 flex items-center border border-solid border-pink-A819FA-50 lg:border-pink-A819FA text-center text-white cursor-pointer transition-all hover:bg-pink-A819FA font-semibold text-10 md:text-14 xl:text-16 ${tab === NFTTypes[2] ? 'bg-pink-150' : ''}`}
                     onClick={() => setTab(NFTTypes[2])}
                   >Match 5</li>
-                  <li className={`justify-center py-1.5 lg:py-2.5 px-1 screen475:px-3 lg:px-4 rounded-4 md:rounded-5 flex items-center border border-solid border-pink-A819FA-50 lg:border-pink-A819FA text-center text-white cursor-pointer transition-all hover:bg-pink-A819FA font-semibold text-10 md:text-14 xl:text-16 ${tab === 'match-6' ? 'bg-pink-150' : ''}`}
+                  <li className={`justify-center py-1.5 lg:py-2.5 px-1 screen475:px-3 lg:px-4 rounded-4 md:rounded-5 flex items-center border border-solid border-pink-A819FA-50 lg:border-pink-A819FA text-center text-white cursor-pointer transition-all hover:bg-pink-A819FA font-semibold text-10 md:text-14 xl:text-16 ${tab === NFTTypes[3] ? 'bg-pink-150' : ''}`}
                     onClick={() => setTab(NFTTypes[3])}
                   >Match 6</li>
                   <li className={`justify-center py-1.5 lg:py-2.5 px-1 screen475:px-3 lg:px-4 rounded-4 md:rounded-5 flex items-center border border-solid border-pink-A819FA-50 lg:border-pink-A819FA text-center text-white cursor-pointer transition-all hover:bg-pink-A819FA font-semibold text-10 md:text-14 xl:text-16 ${tab === 'your-nfts' ? 'bg-pink-150' : ''}`}
@@ -478,7 +496,17 @@ const NFT: React.FC = () => {
               <p className='bg-gray-575757 opacity-50 h-px mt-4 mb-3'></p>
               <div className='flex justify-between items-center gap-4'>
                 <p className='text-18 text-pink-D47DFF font-bold leading-6'>~0.27 MILLI <span className='text-14 font-light'>{selectedTicketData.price} USCD</span></p>
-                <p className='text-12 text-blue-0B7880 font-semibold bg-blue-17F0FF py-2 px-3.5 rounded-4 inline-block transition-all cursor-pointer hover:opacity-70' onClick={onBuyNFTTicket}>Buy ticket</p>
+                <p className={`text-12 text-blue-0B7880 font-semibold bg-blue-17F0FF py-2 px-3.5 rounded-4 inline-block transition-all cursor-pointer hover:opacity-70 ${playerData.data.is_connect ? 'cursor-pointer hover:opacity-75' : 'cursor-not-allowed'}`}
+                  onClick={onBuyNFTTicket}
+                  onMouseLeave={() => {
+                    setShowTooltipConnect(false);
+                  }}
+                  onMouseEnter={() => {
+                    if (!playerData.data.is_connect) {
+                      setShowTooltipConnect(true);
+                    }
+                  }}>Buy ticket</p>
+                {showTooltipConnect && <p className='absolute top-full left-3 md:left-1.5 transform translate-y-2 z-100 border border-solid border-pink-150 bg-purple-150 rounded-5 text-center text-12 md:text-14 pt-0.5 pb-1 text-white px-2'>Connect wallet first</p>}
               </div>
             </div>
           </div>

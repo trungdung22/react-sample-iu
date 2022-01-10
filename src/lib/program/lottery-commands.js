@@ -141,7 +141,7 @@ export const buyNFTTicket = async (milli_nft_account, owner_pubkey, token_accoun
 
     const programId = new PublicKey('Fx1q31GChnsdaZauYRTcfKjwUAK1Jqyj6CFvzGcem1Ft');
 
-    const playerWallet = await UseWallet();
+    const playerWallet = await UseWallet(adapter_type);
     const mintPubkey = new PublicKey(mint_pubkey);
     
     let instructions = [];

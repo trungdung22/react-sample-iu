@@ -70,24 +70,24 @@ const Ticket: React.FC<Props> = ({
       nftInfo.num_two = format2digitNumber(nftDecodedInfo.num_two);
       nftInfo.num_three = format2digitNumber(nftDecodedInfo.num_three);
 
-      setTicketNumber(prevNumber => prevNumber + nftInfo.num_one + nftInfo.num_two);
-
       nftInfo.num_four = format2digitNumber(nftDecodedInfo.num_four);
       nftInfo.num_five = format2digitNumber(nftDecodedInfo.num_five);
       nftInfo.num_six = format2digitNumber(nftDecodedInfo.num_six);
-      switch (nftDecodedInfo.nft_type) {
+
+      setTicketNumber(nftInfo.num_one.toString() + nftInfo.num_two + nftInfo.num_three + nftInfo.num_four + nftInfo.num_five + nftInfo.num_six);
+      switch (nftDecodedInfo.nft_type.toLocaleLowerCase()) {
         case NFTTypes[0]:
-          setTicketNumber(prevNumber => prevNumber + nftInfo.num_three);
+          setTicketNumber(number => number.slice(0, 6));
           break;
         case NFTTypes[1]:
-          setTicketNumber(prevNumber => prevNumber + nftInfo.num_four);
+          setTicketNumber(number => number.slice(0, 8));
           break;
         case NFTTypes[2]:
-          setTicketNumber(prevNumber => prevNumber + nftInfo.num_five);
+          setTicketNumber(number => number.slice(0, 10));
           break;
         case NFTTypes[3]:
-          setTicketNumber(prevNumber => prevNumber + nftInfo.num_six);
-          break;
+          setTicketNumber(number => number.slice(0, 12));
+
       }
 
       setNftData(nftInfo);

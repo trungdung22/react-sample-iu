@@ -114,7 +114,7 @@ export const insertBulkTicket = async (gamePubkey, playerPubkey, tickets) => {
     return response;
 }
 
-export const insertNFTTransaction = async (status,
+export const insertNFTTransaction = async (
     user_pubkey,
     mint_pubkey,
     token_account_pubkey,
@@ -126,7 +126,6 @@ export const insertNFTTransaction = async (status,
             // 'Authorization': 
         },
         body: JSON.stringify({
-            status : status,
             user_pubkey : user_pubkey,
             mint_pubkey : mint_pubkey,
             token_account_pubkey : token_account_pubkey,

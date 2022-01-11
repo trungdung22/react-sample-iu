@@ -71,7 +71,8 @@ const MILLI_NFT_ACCOUNT_DATA_LAYOUT = BufferLayout.struct([
   BufferLayout.u8("num_four"),
   BufferLayout.u8("num_five"),
   BufferLayout.u8("num_six"),
-  uint64('price')
+  uint64('price'),
+  publicKey("trade_mint_pubkey"),
 ]);
 
 const MILLI_USER_ACCOUNT_DATA_LAYOUT = BufferLayout.struct([
@@ -201,6 +202,7 @@ function deserializeNFTTicket(accountInfo) {
     num_five: new BN(data.num_five, 1, "le").toNumber(),
     num_six: new BN(data.num_six, 1, "le").toNumber(),
     price: new BN(data.price, 8, "le").toNumber(),
+    trade_mint_pubkey: new PublicKey(data.trade_mint_pubkey).toBase58(),
   };
 }
 

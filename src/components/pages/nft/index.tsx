@@ -17,6 +17,7 @@ import { buyNFTTicket } from '../../../lib/program/lottery-commands';
 import { buildParamRequest, splitArrayIntoChunksOfLen } from 'lib/utilities/format';
 import debounce from 'lodash.debounce';
 import { NFTTypes } from 'lib/program/state';
+import ViewSubmit from 'components/astoms/modalSection/ViewSubmit';
 
 const NFT: React.FC = () => {
   const classes = useStyles();
@@ -45,9 +46,10 @@ const NFT: React.FC = () => {
     user_pubkey: '',
     milli_nft_pubkey: '',
     status: '',
-    price: null
+    price: null,
+    imageURL: ''
   });
-  
+
 
   useEffect(() => {
 
@@ -71,12 +73,12 @@ const NFT: React.FC = () => {
       case 'your-nfts':
         filter = {
           ...filter,
+          isSole: true,
           user_pubkey: playerData.data.publicKey
         };
-        filter['isSole'] = true;
         break;
       default:
-        if(tab ==null)
+        if (tab == null)
           break;
         filter = {
           ...filter,
@@ -84,11 +86,11 @@ const NFT: React.FC = () => {
         };
     }
     setQueryParam(filter);
-  }, [pageNo, valueInputSearch, tab]);
+  }, [valueInputSearch, tab]);
 
-  useEffect(()=> {
+  useEffect(() => {
     fetchTicketsEntries(pageNo, queryParam);
-  }, [queryParam]);
+  }, [queryParam, pageNo]);
 
   const fetchTicketsEntries = (pageNo, filter) => {
     const queryParams = buildParamRequest(filter);
@@ -249,7 +251,6 @@ const NFT: React.FC = () => {
       console.log('wallet not connected')
       return;
     }
-
     buyNFTTicket(selectedTicketData.milli_nft_pubkey,
       selectedTicketData.user_pubkey,
       selectedTicketData.token_account_pubkey,
@@ -269,6 +270,12 @@ const NFT: React.FC = () => {
       console.log(err);
       console.log('purchase fail');
     });
+    // setDataModal({
+    //   data: {
+    //     ...dataModal.data,
+    //     flag_submit: true,
+    //   }
+    // })
   }
 
   useEffect(() => {
@@ -424,6 +431,7 @@ const NFT: React.FC = () => {
                       {
                         filteredNftTickets.map((ticket) => {
                           return <Ticket key={ticket.milli_nft_account_pubkey}
+                            metadataURL={ticket.metadataURL}
                             emitTicketData={setSelectedTicketData}
                             nftAccountPubkey={ticket.milli_nft_account_pubkey}
                             swipableView={setSwipeableViewsIndex}
@@ -452,7 +460,7 @@ const NFT: React.FC = () => {
           </p>
           <div className='grid grid-cols-1 gap-8'>
             <div className='col-span-1'>
-              <p><img src="/assets/nft/under_popup.png" alt="" className='w-full' /></p>
+              <p><img src={selectedTicketData.imageURL} alt="" className='w-full' /></p>
               <div className='px-3/100 pt-5'>
                 <p className='text-24 font-bungee text-blue-17F0FF leading-8 mb-1'>#051733</p>
                 <div>
@@ -484,7 +492,7 @@ const NFT: React.FC = () => {
                 </svg>
               </span>
             </p>
-            <p><img src="/assets/nft/under_popup.png" alt="" className='w-full' /></p>
+            <p><img src={selectedTicketData.imageURL} width='500' alt="" className='w-full' /></p>
             <div className='px-5 py-3'>
               <div className='flex flex-col justify-center'>
                 <p className='text-24 font-bungee text-blue-17F0FF leading-7'>{selectedTicketData.ticketNumber}</p>
@@ -495,7 +503,7 @@ const NFT: React.FC = () => {
               </div>
               <p className='bg-gray-575757 opacity-50 h-px mt-4 mb-3'></p>
               <div className='flex justify-between items-center gap-4'>
-                <p className='text-18 text-pink-D47DFF font-bold leading-6'>~0.27 MILLI <span className='text-14 font-light'>{selectedTicketData.price} USCD</span></p>
+                <p className='text-18 text-pink-D47DFF font-bold leading-6'>~0.27 MILLI <span className='text-14 font-light'>{selectedTicketData.price/1000000} USCD</span></p>
                 <p className={`text-12 text-blue-0B7880 font-semibold bg-blue-17F0FF py-2 px-3.5 rounded-4 inline-block transition-all cursor-pointer hover:opacity-70 ${playerData.data.is_connect ? 'cursor-pointer hover:opacity-75' : 'cursor-not-allowed'}`}
                   onClick={onBuyNFTTicket}
                   onMouseLeave={() => {
@@ -512,6 +520,7 @@ const NFT: React.FC = () => {
           </div>
         </div>
       }
+      {/* <ViewSubmit dataSendViewSubmit={dataModal.data.flag_submit}></ViewSubmit> */}
     </>
   )
 }

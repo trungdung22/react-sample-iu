@@ -26,7 +26,8 @@ interface MilliNFTAccountDataLayout {
 }
 
 type Props = {
-  nftAccountPubkey: any,
+  nftAccountPubkey: string,
+  metadataURL: string
   swipableView: (value: any) => void,
   isShowPopupDesktop: (isShown: boolean) => void,
   emitTicketData: (ticketNumber: any) => void,
@@ -34,6 +35,7 @@ type Props = {
 
 const Ticket: React.FC<Props> = ({
   nftAccountPubkey,
+  metadataURL,
   swipableView,
   isShowPopupDesktop,
   emitTicketData
@@ -42,6 +44,7 @@ const Ticket: React.FC<Props> = ({
 
   const [ticketNumber, setTicketNumber] = useState('######');
   const [nftData, setNftData] = useState<MilliNFTAccountDataLayout>();
+  const [imageURL, setImageURL] = useState(`${metadataURL}/image.png`);
 
   const size = useWindowSize();
   const COMMITMENT: Commitment = "singleGossip";
@@ -57,7 +60,7 @@ const Ticket: React.FC<Props> = ({
       setTicketNumber('#');
       let nftInfo = {} as MilliNFTAccountDataLayout;
       const nftDecodedInfo = deserializeNFTTicket(res);
-      
+      console.log(nftDecodedInfo);
       nftInfo.milli_nft_pubkey = nftAccountPubkey;
       nftInfo.price = nftDecodedInfo.price;
       nftInfo.status = nftDecodedInfo.status;
@@ -74,19 +77,19 @@ const Ticket: React.FC<Props> = ({
       nftInfo.num_five = format2digitNumber(nftDecodedInfo.num_five);
       nftInfo.num_six = format2digitNumber(nftDecodedInfo.num_six);
 
-      setTicketNumber(nftInfo.num_one.toString() + nftInfo.num_two + nftInfo.num_three + nftInfo.num_four + nftInfo.num_five + nftInfo.num_six);
+      setTicketNumber(`#${nftInfo.num_one.toString() + nftInfo.num_two.toString() + nftInfo.num_three.toString() + nftInfo.num_four.toString() + nftInfo.num_five.toString() + nftInfo.num_six.toString()}`);
       switch (nftDecodedInfo.nft_type.toLocaleLowerCase()) {
         case NFTTypes[0]:
-          setTicketNumber(number => number.slice(0, 6));
+          setTicketNumber(number => number.slice(0, 7));
           break;
         case NFTTypes[1]:
-          setTicketNumber(number => number.slice(0, 8));
+          setTicketNumber(number => number.slice(0, 9));
           break;
         case NFTTypes[2]:
-          setTicketNumber(number => number.slice(0, 10));
+          setTicketNumber(number => number.slice(0, 11));
           break;
         case NFTTypes[3]:
-          setTicketNumber(number => number.slice(0, 12));
+          setTicketNumber(number => number.slice(0, 13));
 
       }
 
@@ -115,6 +118,7 @@ const Ticket: React.FC<Props> = ({
       milli_nft_pubkey: nftData.milli_nft_pubkey,
       price: nftData.price,
       status: nftData.status,
+      imageURL: imageURL
     });
   }
 
@@ -123,7 +127,7 @@ const Ticket: React.FC<Props> = ({
       <div className='col-span-1 bg-gray-151515 text-gray-EBEBEB rounded-5 md:rounded-10 border border-solid border-blue-0B7880 p-1 md:p-2 md:cursor-pointer'
         onClick={cardOnClickHandler}
       >
-        <p className='bg-no-repeat bg-center bg-cover h-24 md:h-184 rounded-5 md:rounded-10' style={{ 'backgroundImage': 'url("/assets/nft/under_popup.png")' }}></p>
+        <p className='bg-no-repeat bg-center bg-cover h-24 md:h-184 rounded-5 md:rounded-10' style={{ 'backgroundImage': `url(${imageURL}` }}></p>
         <div className='mt-1 md:mt-4'>
           <p className='text-16 md:text-24 text-blue-17F0FF font-bungee leading-6 md:mb-3'>{ticketNumber}
           </p>

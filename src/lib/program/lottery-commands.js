@@ -6,7 +6,7 @@ import { CONNECTION_ULR } from './config';
 import { convertUSDT } from 'lib/utilities/utils';
 import { TOKEN_PROGRAM_ID, Token} from '@solana/spl-token';
 import { getOrCreateTokenAccountInstruction } from 'lib/utilities/utils';
-import { TRADE_MINT_TOKEN, MILLI_MINT_KEY, SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID } from 'lib/utilities/id';
+import { USDC_REP_MINT_TOKEN, MILLI_MINT_KEY, SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID } from 'lib/utilities/id';
 const axios = require('axios');
 //const connection = new Connection("http://localhost:8899", 'singleGossip');
 const connection = new Connection("https://api.devnet.solana.com", 'singleGossip');
@@ -139,7 +139,9 @@ export const buyNFTTicket = async (milli_nft_account, owner_pubkey, token_accoun
     const onwerAccount = new PublicKey(owner_pubkey);
     const milliNftAccount = new PublicKey(milli_nft_account);
 
-    const programId = new PublicKey('Fx1q31GChnsdaZauYRTcfKjwUAK1Jqyj6CFvzGcem1Ft');
+    // const programId = new PublicKey('Fx1q31GChnsdaZauYRTcfKjwUAK1Jqyj6CFvzGcem1Ft');
+    const programId = new PublicKey('8pKHJxuSqkUHRx4vS1H3jaDXzBF4hdC2YL1Hic4ejwep');
+
 
     const playerWallet = await UseWallet(adapter_type);
     const mintPubkey = new PublicKey(mint_pubkey);
@@ -155,17 +157,17 @@ export const buyNFTTicket = async (milli_nft_account, owner_pubkey, token_accoun
 
     const USDC_token = new Token(
         connection,
-        TRADE_MINT_TOKEN,
+        USDC_REP_MINT_TOKEN,
         TOKEN_PROGRAM_ID,
         playerWallet.publicKey
     );
     const owner_tokenAccount = new PublicKey(token_account_pubkey);
 
-    const buyer_tokenAccount = await getOrCreateTokenAccountInstruction(connection, playerWallet.publicKey, instructions, ticket_token.publicKey);
+    const buyer_tokenAccount = await getOrCreateTokenAccountInstruction(connection, playerWallet.publicKey, instructions, mintPubkey);
 
-    const buyer_USDC_tokenAccount = await getOrCreateTokenAccountInstruction(connection, playerWallet.publicKey, instructions, USDC_token.publicKey);
+    const buyer_USDC_tokenAccount = await getOrCreateTokenAccountInstruction(connection, playerWallet.publicKey, instructions, USDC_REP_MINT_TOKEN);
 
-    const owner_USDC_tokenAccount = await getOrCreateTokenAccountInstruction(connection, onwerAccount, instructions, USDC_token.publicKey);
+    const owner_USDC_tokenAccount = await getOrCreateTokenAccountInstruction(connection, onwerAccount, instructions, USDC_REP_MINT_TOKEN);
 
     const pda_account = await PublicKey.findProgramAddress(
         [Buffer.from("milli-auction")],
@@ -176,12 +178,13 @@ export const buyNFTTicket = async (milli_nft_account, owner_pubkey, token_accoun
         programId: programId,
         keys: [
             { pubkey: TOKEN_PROGRAM_ID, isSigner: false, isWritable: false },
-            { pubkey: milliNftAccount, isSigner: false, isWritable: false },
+            { pubkey: milliNftAccount, isSigner: false, isWritable: true },
             { pubkey: onwerAccount, isSigner: false, isWritable: false },
             { pubkey: owner_tokenAccount, isSigner: false, isWritable: true },
+            { pubkey: USDC_REP_MINT_TOKEN, isSigner: false, isWritable: false },
             { pubkey: owner_USDC_tokenAccount, isSigner: false, isWritable: true },
-            { pubkey: playerWallet.publicKey, isSigner: false, isWritable: false },
             { pubkey: buyer_tokenAccount, isSigner: false, isWritable: true },
+            { pubkey: playerWallet.publicKey, isSigner: false, isWritable: false },
             { pubkey: buyer_USDC_tokenAccount, isSigner: false, isWritable: true },
             { pubkey: pda_account[0], isSigner: false, isWritable: true },
         ],

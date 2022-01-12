@@ -207,7 +207,6 @@ function deserializeNFTTicket(accountInfo) {
 }
 
 module.exports = {
-  NFTTypes,
   GAME_ACCOUNT_DATA_LAYOUT,
   TICKET_ACCOUNT_DATA_LAYOUT,
   MILLI_USER_ACCOUNT_DATA_LAYOUT,

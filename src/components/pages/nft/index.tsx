@@ -257,10 +257,12 @@ const NFT: React.FC = () => {
       selectedTicketData.mint_pubkey, selectedTicketData.price,
       playerData.data.adapter_type
     ).then(async res => {
+      debugger
+      console.log(res)
       await insertNFTTransaction(
         playerData.data.publicKey,
         selectedTicketData.mint_pubkey,
-        selectedTicketData.token_account_pubkey,
+        res,
         selectedTicketData.milli_nft_pubkey,
       );
       setIsShowPopupDesktop(false);

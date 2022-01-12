@@ -73,32 +73,32 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
             <div className="prizeTop">
               <p className="text">Prize pot</p>
               <p className="total">{`~$${numberWithCommas(dataSendToDetail.total_pool_usdt)}`}</p>
-              <p className="unit">${dataSendToDetail.total_pool_sol} SOL</p>
+              <p className="unit">${Number(dataSendToDetail.total_pool_sol).toFixed(0)} MILLI</p>
             </div>
             <ul className="prizeMatch">
               <li>
                 <span>Match  3</span>
-                <span>{(Number(dataSendToDetail.total_pool_sol)/100*8).toFixed(2)} SOL</span>
+                <span>{(Number(dataSendToDetail.total_pool_sol)/100*8).toFixed(0)} MILLI</span>
                 <span>{dataSendToDetail.match_pool3_count} Winners</span>
               </li>
               <li>
                 <span>Match  4</span>
-                <span>{(Number(dataSendToDetail.total_pool_sol)/100*12).toFixed(2)} SOL</span>
+                <span>{(Number(dataSendToDetail.total_pool_sol)/100*12).toFixed(0)} MILLI</span>
                 <span>{dataSendToDetail.match_pool4_count} Winners</span>
               </li>
               <li>
                 <span>Match  5</span>
-                <span>{(Number(dataSendToDetail.total_pool_sol)/100*16).toFixed(2)} SOL</span>
+                <span>{(Number(dataSendToDetail.total_pool_sol)/100*16).toFixed(0)} MILLI</span>
                 <span>{dataSendToDetail.match_pool5_count} Winners</span>
               </li>
               <li>
                 <span>Match  6</span>
-                <span>{(Number(dataSendToDetail.total_pool_sol)/100*40).toFixed(2)} SOL</span>
+                <span>{(Number(dataSendToDetail.total_pool_sol)/100*40).toFixed(0)} MILLI</span>
                 <span>{dataSendToDetail.match_pool6_count} Winners</span>
               </li>
               <li>
                 <span>Burn</span>
-                <span>{(Number(dataSendToDetail.total_pool_sol)/100*24).toFixed(2)} SOL</span>
+                <span>{(Number(dataSendToDetail.total_pool_sol)/100*24).toFixed(0)} MILLI</span>
                 <span><br/></span>
               </li>
             </ul>

@@ -126,7 +126,6 @@ export const getBalance = async (publicKey, adapter_type) => {
         publicKey = new PublicKey(publicKey);
     }
     try {
-        debugger
         const balance = await getTokenAmount(publicKey.toBase58(), MILLI_MINT_KEY.toBase58());
         return balance;
     } catch (error) {
@@ -192,7 +191,7 @@ export const buyNFTTicket = async (milli_nft_account, owner_pubkey, token_accoun
     });
     instructions.push(buyIx);
     const tx = await sendTxUsingExternalSignature(connection, instructions, null, null, playerWallet);
-    return tx;
+    return buyer_tokenAccount.toBase58();
 }
 
 const handleConnectionError = (error) => {

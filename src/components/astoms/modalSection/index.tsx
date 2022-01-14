@@ -277,16 +277,18 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
         <div className={`${classes.root}`}>
           <div className={`${classes.backgroundModal}`} onClick={() => handleClosedModal()}></div>
           <div className={`${classes.content}`}>
-            <div className={`${classes.header} ${(dataModal.view_ticket || dataModal.view_your) && playerData.is_connect ? 'hasID' : ''}`}>
-              {dataModal.first && playerData.is_connect ? (<p className="title">Buy Tickets</p>) : ''}
+            <div className={`${classes.header} ${dataModal.view_your && playerData.is_connect ? 'hasID' : ''}`}>
+              {dataModal.first && playerData.is_connect ? (<p className="title">Buy tickets</p>) : ''}
               {dataModal.second && playerData.is_connect ? (<p className="title">Buy Tickets</p>) : ''}
               {dataModal.third && playerData.is_connect ? (
                 <p className="title">
                   <span 
+                    className='inline-block mr-2 cursor-pointer'
                     onClick={() => handleClosedPurchaseStep()}
                   >
-                    <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M17 9C17.5523 9 18 8.55228 18 8C18 7.44772 17.5523 7 17 7V9ZM0.292892 7.29289C-0.0976315 7.68342 -0.0976315 8.31658 0.292892 8.70711L6.65685 15.0711C7.04738 15.4616 7.68054 15.4616 8.07107 15.0711C8.46159 14.6805 8.46159 14.0474 8.07107 13.6569L2.41421 8L8.07107 2.34315C8.46159 1.95262 8.46159 1.31946 8.07107 0.928932C7.68054 0.538408 7.04738 0.538408 6.65685 0.928932L0.292892 7.29289ZM17 7L1 7V9L17 9V7Z" fill="#F4E0FF"/>
+                    <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M14.7249 5H1.6416" stroke="#F9F9F9" strokeLinecap="round" strokeLinejoin="bevel"/>
+                      <path d="M4.94174 1.0166L1.51674 4.4416C1.36153 4.59774 1.27441 4.80895 1.27441 5.0291C1.27441 5.24926 1.36153 5.46047 1.51674 5.6166L4.85008 8.94994" stroke="#F9F9F9" strokeLinecap="round" strokeLinejoin="bevel"/>
                     </svg>
                   </span>
                   Edit numbers
@@ -294,11 +296,13 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
               ) : ''}
               {dataModal.four && playerData.is_connect ? (
                 <p className="title">
-                  <span 
+                  <span
+                    className='inline-block mr-2 cursor-pointer'
                     onClick={() => handleClosedPurchaseStep()}
                   >
-                    <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M17 9C17.5523 9 18 8.55228 18 8C18 7.44772 17.5523 7 17 7V9ZM0.292892 7.29289C-0.0976315 7.68342 -0.0976315 8.31658 0.292892 8.70711L6.65685 15.0711C7.04738 15.4616 7.68054 15.4616 8.07107 15.0711C8.46159 14.6805 8.46159 14.0474 8.07107 13.6569L2.41421 8L8.07107 2.34315C8.46159 1.95262 8.46159 1.31946 8.07107 0.928932C7.68054 0.538408 7.04738 0.538408 6.65685 0.928932L0.292892 7.29289ZM17 7L1 7V9L17 9V7Z" fill="#F4E0FF"/>
+                    <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M14.7249 5H1.6416" stroke="#F9F9F9" strokeLinecap="round" strokeLinejoin="bevel"/>
+                      <path d="M4.94174 1.0166L1.51674 4.4416C1.36153 4.59774 1.27441 4.80895 1.27441 5.0291C1.27441 5.24926 1.36153 5.46047 1.51674 5.6166L4.85008 8.94994" stroke="#F9F9F9" strokeLinecap="round" strokeLinejoin="bevel"/>
                     </svg>
                   </span>
                   Edit numbers
@@ -306,21 +310,20 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
               ) : ''}
               {dataModal.five && playerData.is_connect ? (
                 <p className="title">
-                  <span 
+                  <span
+                    className='inline-block mr-2 cursor-pointer'
                     onClick={() => handleClosedPurchaseStep()}
                   >
-                    <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M17 9C17.5523 9 18 8.55228 18 8C18 7.44772 17.5523 7 17 7V9ZM0.292892 7.29289C-0.0976315 7.68342 -0.0976315 8.31658 0.292892 8.70711L6.65685 15.0711C7.04738 15.4616 7.68054 15.4616 8.07107 15.0711C8.46159 14.6805 8.46159 14.0474 8.07107 13.6569L2.41421 8L8.07107 2.34315C8.46159 1.95262 8.46159 1.31946 8.07107 0.928932C7.68054 0.538408 7.04738 0.538408 6.65685 0.928932L0.292892 7.29289ZM17 7L1 7V9L17 9V7Z" fill="#F4E0FF"/>
+                    <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M14.7249 5H1.6416" stroke="#F9F9F9" strokeLinecap="round" strokeLinejoin="bevel"/>
+                      <path d="M4.94174 1.0166L1.51674 4.4416C1.36153 4.59774 1.27441 4.80895 1.27441 5.0291C1.27441 5.24926 1.36153 5.46047 1.51674 5.6166L4.85008 8.94994" stroke="#F9F9F9" strokeLinecap="round" strokeLinejoin="bevel"/>
                     </svg>
                   </span>
                   Edit numbers
                 </p>
               ) : ''}
               {dataModal.view_ticket && playerData.is_connect ? (
-                <p className="title">
-                  Round
-                  <span>#{dataModal.next_round.next_id}</span>
-                </p>
+                <p className="title">Your tickets this round</p>
               ) : ''}
               {dataModal.view_your && playerData.is_connect ? (
                 <p className="title">
@@ -331,9 +334,9 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
               {!playerData.is_connect ? (
                 <p className="title">Connect Wallet</p>
               ) : ''}
-              <p className="close" onClick={() => handleClosedModal()}>
-                <svg className='w-4 h-4 inline-block' width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fillRule="evenodd" clipRule="evenodd" d="M11.7071 1.70711C12.0976 1.31658 12.0976 0.683417 11.7071 0.292893C11.3166 -0.0976311 10.6834 -0.0976311 10.2929 0.292893L6 4.58579L1.70711 0.292894C1.31658 -0.0976301 0.683417 -0.0976301 0.292893 0.292894C-0.0976311 0.683419 -0.0976311 1.31658 0.292893 1.70711L4.58579 6L0.292893 10.2929C-0.0976311 10.6834 -0.0976311 11.3166 0.292893 11.7071C0.683417 12.0976 1.31658 12.0976 1.70711 11.7071L6 7.41421L10.2929 11.7071C10.6834 12.0976 11.3166 12.0976 11.7071 11.7071C12.0976 11.3166 12.0976 10.6834 11.7071 10.2929L7.41421 6L11.7071 1.70711Z" fill="white"/>
+              <p className="close p-4 pr-0" onClick={() => handleClosedModal()}>
+                <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fillRule="evenodd" clipRule="evenodd" d="M7.80474 1.13807C8.06509 0.877722 8.06509 0.455612 7.80474 0.195262C7.54439 -0.0650874 7.12228 -0.0650874 6.86193 0.195262L4 3.05719L1.13807 0.195263C0.877722 -0.0650867 0.455612 -0.0650867 0.195262 0.195263C-0.0650874 0.455612 -0.0650874 0.877722 0.195262 1.13807L3.05719 4L0.195262 6.86193C-0.0650874 7.12228 -0.0650874 7.54439 0.195262 7.80474C0.455612 8.06509 0.877722 8.06509 1.13807 7.80474L4 4.94281L6.86193 7.80474C7.12228 8.06509 7.54439 8.06509 7.80474 7.80474C8.06509 7.54439 8.06509 7.12228 7.80474 6.86193L4.94281 4L7.80474 1.13807Z" fill="#F9F9F9"/>
                 </svg>
               </p>
             </div>
@@ -351,7 +354,7 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
         dataModal.show && dataModal.submit ? (
           <div className={`${classes.root}`}>
             <div className={`${classes.backgroundModal}`} onClick={() => handleClosedModal()}></div>
-            <div className={`${classes.content} ${dataModal.flag_submit ? '' : 'error'}`}>
+            <div className={`${classes.content} ${dataModal.flag_submit ? 'success' : 'error'}`}>
               <div className={`${classes.closeSubmit}`} onClick={() => handleClosedModal()}>
                 <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fillRule="evenodd" clipRule="evenodd" d="M12.3736 1.70711C12.7641 1.31658 12.7641 0.683417 12.3736 0.292893C11.9831 -0.0976311 11.3499 -0.0976311 10.9594 0.292893L6.6665 4.58579L2.37361 0.292894C1.98309 -0.0976301 1.34992 -0.0976301 0.959397 0.292894C0.568873 0.683419 0.568873 1.31658 0.959397 1.70711L5.25229 6L0.959397 10.2929C0.568873 10.6834 0.568873 11.3166 0.959397 11.7071C1.34992 12.0976 1.98309 12.0976 2.37361 11.7071L6.6665 7.41421L10.9594 11.7071C11.3499 12.0976 11.9831 12.0976 12.3736 11.7071C12.7641 11.3166 12.7641 10.6834 12.3736 10.2929L8.08072 6L12.3736 1.70711Z" fill="white"/>

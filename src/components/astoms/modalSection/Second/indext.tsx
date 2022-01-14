@@ -7,25 +7,32 @@ type Props = {
   playerData: any
 }
 const Second: React.FC<Props> = ({dataGiveSecond, dataSendSecond, playerData}) => {
-
+  
   const [data, setData] = useState({
     data: {
       ticketCount: 0,
       price: 0,
-      unit: 0.3,
+      unit: 0,
       tickets: [Array()],
       third: false,
       five: false,
     }
   });
 
+  const [valueTickets, setValueTickets] = useState('1');
+
   useEffect(()=>{
-    priceTicket().then(item => setData({
-       data: {
-         ...data.data,
-         unit: item.sol
-       }
-    }));
+    priceTicket().then(item => {
+      setData({
+        data: {
+          ...data.data,
+          unit: item.sol,
+          ticketCount: parseInt(valueTickets),
+          price: item.sol * parseInt(valueTickets),
+          tickets: Array(parseInt(valueTickets)).fill(0).map(() => handleRandomTicket())
+        }
+     })
+    });
    }, [])
 
   const classes = useStyles();
@@ -59,34 +66,42 @@ const Second: React.FC<Props> = ({dataGiveSecond, dataSendSecond, playerData}) =
   }
   
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (parseInt(event.target.value) > 5) {
-      event.target.value = "5";
-    }
-    const total = event.target.value !== '' ? data.data.unit * parseFloat(event.target.value) : 0;
-    setData({
-      data: {
-        ...data.data,
-        ticketCount: event.target.value !== '' ? parseInt(event.target.value) : 0,
-        price: total,
-        tickets: event.target.value !== '' ? Array(parseInt(event.target.value)).fill(0).map(() => handleRandomTicket()) : [Array()]
-      }
-    })
+    // if (parseInt(event.target.value) > 5) {
+    //   event.target.value = "5";
+    // }
+    // if (parseInt(event.target.value) < 1 || event.target.value === '') {
+    //   event.target.value = "1";
+    // }
+    // const total = event.target.value !== '' ? data.data.unit * parseFloat(event.target.value) : 0;
+    // setData({
+    //   data: {
+    //     ...data.data,
+    //     ticketCount: event.target.value !== '' ? parseInt(event.target.value) : 0,
+    //     price: total,
+    //     tickets: event.target.value !== '' ? Array(parseInt(event.target.value)).fill(0).map(() => handleRandomTicket()) : [Array()]
+    //   }
+    // })
+    // setValueTickets(event.target.value);
   };
   const handleEditNumber = (event: React.MouseEvent) => {
-    setData({
-      data: {
-        ...data.data,
-        third: true,
-      }
-    })
+    if(data.data.price > 0) {
+      setData({
+        data: {
+          ...data.data,
+          third: true,
+        }
+      })
+    }
   }
   const handleComfirm = (event: React.MouseEvent) => {
-    setData({
-      data: {
-        ...data.data,
-        five: true,
-      }
-    })
+    if(data.data.price > 0) {
+      setData({
+        data: {
+          ...data.data,
+          five: true,
+        }
+      })
+    }
   }
 
   useEffect(() => {
@@ -94,51 +109,69 @@ const Second: React.FC<Props> = ({dataGiveSecond, dataSendSecond, playerData}) =
       dataGiveSecond(data.data);
     }
   }, [data])
+
+  useEffect(() => {
+    const total = data.data.unit * parseInt(valueTickets);
+    setData({
+      data: {
+        ...data.data,
+        ticketCount: parseInt(valueTickets),
+        price: total,
+        tickets: Array(parseInt(valueTickets)).fill(0).map(() => handleRandomTicket())
+      }
+    })
+  }, [valueTickets])
   
   return (
     <>
-      <div className={`${classes.body}`}>
-        <div className={`${classes.buy}`}>
-          <p className="title">Buy</p>
-          <p className="icon">Tickets<span><img src="/assets/common/icon_ticket_modal.svg" alt="ticket"/></span></p>
-        </div>
-        <div className={`${classes.inputNumber}`}>
-          <input
-            autoFocus
-            maxLength={2}
-            min="1" max="6"
-            value={data.data.ticketCount}
-            onChange={handleChangeInput}
-          />
-          <div className={`${classes.payunit}`}>
-            <p className="name">SOL</p>
-            <p>~{data.data.price === 0 ? 0 : data.data.price.toFixed(8)}</p>
+      <div className='p-4 pb-2'>
+        <div className='flex justify-between items-center'>
+          <p className='text-12 font-medium text-pink-D47DFF'>Max is 5 tickets</p>
+          <div className='flex justify-center items-center rounded-5 overflow-hidden border border-solid border-blue-ADFAFF w-fit'>
+            <p className='inline-block w-30 h-30 bg-blue-0B7880 cursor-pointer relative'
+              onClick={() => {
+                if (parseInt(valueTickets) > 1) {
+                  setValueTickets((parseInt(valueTickets) - 1).toString());
+                }
+              }}
+            >
+              <span className={`w-2.5 h-px bg-gray-F9F9F9 absolute top-1/2 left-2.5 ${parseInt(valueTickets) === 1 ? 'opacity-50' : ''}`}></span>
+            </p>
+            {/* <input
+              autoFocus
+              value=
+              // onChange={handleChangeInput}
+              onKeyPress={(e) => {
+                e.preventDefault();
+              }}
+              className=''
+            /> */}
+            <p className='w-30 h-30 flex justify-center items-center text-14 text-blue-17F0FF font-semibold outline-none bg-transparent text-center'>{valueTickets}</p>
+            <p className='inline-block w-30 h-30 bg-blue-0B7880 cursor-pointer relative'
+              onClick={() => {
+                if (parseInt(valueTickets) < 5) {
+                  setValueTickets((parseInt(valueTickets) + 1).toString());
+                }
+              }}
+            >
+              <span className={`w-2.5 h-px bg-gray-F9F9F9 absolute top-1/2 left-2.5 ${parseInt(valueTickets) === 5 ? 'opacity-50' : ''}`}></span>
+              <span className={`h-2.5 w-px bg-gray-F9F9F9 absolute top-2.5 left-1/2 ${parseInt(valueTickets) === 5 ? 'opacity-50' : ''}`}></span>
+            </p>
           </div>
         </div>
-        <p className={`${classes.balance}`}>SOL Balance: {playerData.balanceSOL}</p>
-        <ul className={`${classes.listButton}`}>
-          <li className="max" onClick={handleInputMax}>MAX</li>
-        </ul>
+        <p className='text-10 font-semibold text-right mt-1.5 mb-1.5'>MILLI Balance: {playerData.balanceSOL}</p>
+        <div className='flex justify-between items-center mb-2'>
+          <p className="text-12 font-semibold">You pay</p>
+          <p className="text-14 font-bold text-pink-D47DFF">~ {data.data.price === 0 ? 0 : data.data.price.toFixed(8)} MILLI</p>
+        </div>
       </div>
-      <p className={`${classes.lineGray}`}><span></span></p>
-      <div className={`${classes.footer}`}>
-          <div className={`${classes.totalPay}`}>
-            <p className="text">You pay</p>
-            <p className="price">~ {data.data.price === 0 ? 0 : data.data.price.toFixed(8)} SOL</p>
-          </div>
-          <ul className={`${classes.listButton}`}>
-            <li onClick={handleComfirm}>Buy instantly</li>
-            <li className="edit" onClick={handleEditNumber}>
-              View / Edit numbers
-              <span>
-                <svg width="23" height="12" viewBox="0 0 23 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M1.36768 5.3335C0.953462 5.3335 0.617676 5.66928 0.617676 6.0835C0.617676 6.49771 0.953462 6.8335 1.36768 6.8335V5.3335ZM21.898 6.61383C22.1909 6.32093 22.1909 5.84606 21.898 5.55317L17.125 0.780195C16.8321 0.487302 16.3573 0.487302 16.0644 0.780195C15.7715 1.07309 15.7715 1.54796 16.0644 1.84086L20.307 6.0835L16.0644 10.3261C15.7715 10.619 15.7715 11.0939 16.0644 11.3868C16.3573 11.6797 16.8321 11.6797 17.125 11.3868L21.898 6.61383ZM1.36768 6.8335H21.3677V5.3335H1.36768V6.8335Z" fill="#17F0FF"/>
-                </svg>
-              </span>
-            </li>
-          </ul>
-          <p className={`${classes.note}`}>"Buy instanly" allows you to pick no-duplicate random numbers to your tickets. By the time each round begins, prices will be set, evaluated to $2. Purchases are final.</p>
-        </div>
+      <div className='p-4 bg-gray-575757-30'>
+        <ul className='grid grid-cols-2 gap-2.5 mb-1'>
+          <li className='transition-all hover:opacity-70 text-center col-span-1 font-semibold text-12 cursor-pointer rounded-3 border border-solid border-blue-17F0FF py-1.5 text-blue-17F0FF' onClick={handleEditNumber}>Edit numbers</li>
+          <li className='transition-all hover:opacity-70 text-center col-span-1 font-semibold text-12 cursor-pointer rounded-3 border border-solid border-blue-17F0FF py-1.5 text-blue-0B7880 bg-blue-17F0FF' onClick={handleComfirm}>Buy instantly</li>
+        </ul>
+        <p className='text-10 text-gray-EBEBEB'>"Buy instanly" allows you to pick no-duplicate random numbers to your tickets. By the time each round begins, prices will be set, evaluated to $2. Purchases are final.</p>
+      </div>
     </>
   )
 }

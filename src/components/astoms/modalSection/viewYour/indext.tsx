@@ -88,17 +88,34 @@ const ViewYour: React.FC<Props> = ({dataSendViewYour}) => {
 
   return (
     <>
-      <div className={`${classes.winingNumber}`}>
-        <p>Winning Number</p>
-        <ul>
+      <div className='px-3 py-4'>
+        <p className='text-14 font-semibold'>Winning Number</p>
+        <ul className='flex justify-between my-3'>
           { 
             dataSendViewYour.your_ticket.roll_nums.map((el: number, index: number) => (
-              <li key={index} className='bg-gray-041A29-30'>{el < 10 ? `0${el}` : el}</li>
+              // <li key={index} className='bg-gray-041A29-30'>{el < 10 ? `0${el}` : el}</li>
+              <li key={index} className={`w-35 h-35 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full cursor-pointer`}>
+                <p className={`flex justify-center items-center w-full h-full text-16 font-bungee rounded-full bg-gray-151515`}><span className='text-blue-17F0FF'>{el < 10 ? `0${el}` : el}</span></p>
+              </li>
             ))
           }
         </ul>
+        <p className='text-14 font-semibold'>Your tickets</p>
+        <ul className='grid grid-cols-2 gap-4 mt-1'>
+          <li className='col-span-1 bg-gray-575757-20 px-2 pt-1.5 pb-1 rounded-5 cursor-pointer'>
+            <span className='block text-gray-EBEBEB text-10 leading-none'>NFT Tickets</span>
+            <span className='text-16 font-bold text-pink-D47DFF leading-none'>0</span>
+          </li>  
+          <li className='col-span-1 bg-gray-575757-20 px-2 pt-1.5 pb-1 rounded-5 cursor-pointer'>
+            <span className='block text-gray-EBEBEB text-10 leading-none'>Lottery Tickets</span>
+            <span className='text-16 font-bold text-pink-D47DFF leading-none'>0</span>
+          </li>
+        </ul>
       </div>
-      <div className={`${classes.countTicket}`}>
+      <div className='bg-gray-575757-30 p-4'>
+        <p className='text-12 font-bold text-pink-D47DFF'>You have no ticket</p>
+      </div>
+      {/* <div className={`${classes.countTicket}`}>
         <p className='px-5'>Your tickets</p>
         <ul>
           <li className={`cursor-pointer px-5 mx-px transition-all ${ filterTickets === 'nft' ? 'bg-pink-4A246D' : 'hover:bg-pink-4A246D bg-gray-0D0E0E'}`} data-tickets="nft"
@@ -129,14 +146,14 @@ const ViewYour: React.FC<Props> = ({dataSendViewYour}) => {
             {(<>{countWinningTicket()}</>)}
           </li>
         </ul>
-      </div>
+      </div> */}
 
-      <div className={`${classes.listTickets}`}>
+      {/* <div className={`${classes.listTickets}`}>
         {handleRenderRoundItemsNftsTickets()}
         {handleRenderRoundItems()}
         {handleRenderWinningTickets()}
         { (nftsTicket.length < 1 && filterTickets === 'nft') || (winningTicket.length < 1 && filterTickets === 'winning') ? <p className='text-14 md:text-16 lg:text-18'>You don't have any ticket.</p> : '' }
-      </div>
+      </div> */}
     </>
   )
 }

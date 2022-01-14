@@ -3,41 +3,45 @@ import useStyles from './styles';
 const Jackpots: React.FC = () => {
   const classes = useStyles();
   return (
-    <div className={`${classes.root} relative`}>
-      <p className='absolute -top-5 md:-top-6 left-0 w-24 md:w-auto'><img src="./assets/lottery/sky_02.svg" alt="" /></p>
-      <div className={`${classes.header}`}>
-        <div className="top">
-          <p className="title">Round</p>
-          <ul>
-            <li>
-              <svg width="26" height="16" viewBox="0 0 26 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0.292892 7.2929C-0.0976315 7.68342 -0.0976314 8.31658 0.292893 8.70711L6.65686 15.0711C7.04738 15.4616 7.68054 15.4616 8.07107 15.0711C8.46159 14.6805 8.46159 14.0474 8.07107 13.6569L2.41421 8L8.07107 2.34315C8.46159 1.95262 8.46159 1.31946 8.07107 0.928934C7.68054 0.538409 7.04738 0.538409 6.65685 0.928934L0.292892 7.2929ZM26 7L1 7L1 9L26 9L26 7Z" fill="#A2A2A2"/>
+    <>
+      <div className='p-3.5 md:px-8 md:pt-3 md:pb-5'>
+        <div className='flex justify-between'>
+          <p className='text-14 md:text-16 font-bold mb-2 md:mb-2.5'>Round</p>
+          <ul className='flex justify-end items-center'>
+            <li className='cursor-pointer'>
+              <svg width="17" height="8" viewBox="0 0 17 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.646681 3.64645C0.45142 3.84171 0.45142 4.15829 0.646681 4.35356L3.82866 7.53554C4.02392 7.7308 4.34051 7.7308 4.53577 7.53554C4.73103 7.34027 4.73103 7.02369 4.53577 6.82843L1.70734 4L4.53577 1.17157C4.73103 0.976312 4.73103 0.65973 4.53577 0.464468C4.34051 0.269206 4.02392 0.269206 3.82866 0.464468L0.646681 3.64645ZM16.6719 3.5L1.00023 3.5L1.00023 4.5L16.6719 4.5L16.6719 3.5Z" fill="#A2A2A2"/>
               </svg>
             </li>
-            <li>
-              <svg width="26" height="16" viewBox="0 0 26 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M25.7071 8.70711C26.0976 8.31658 26.0976 7.68342 25.7071 7.29289L19.3431 0.928932C18.9526 0.538408 18.3195 0.538408 17.9289 0.928932C17.5384 1.31946 17.5384 1.95262 17.9289 2.34315L23.5858 8L17.9289 13.6569C17.5384 14.0474 17.5384 14.6805 17.9289 15.0711C18.3195 15.4616 18.9526 15.4616 19.3431 15.0711L25.7071 8.70711ZM0 9H25V7H0V9Z" fill="#A1A1A1"/>
+            <li className='cursor-pointer mx-4'>
+              <svg width="17" height="8" viewBox="0 0 17 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16.6224 4.35355C16.8176 4.15829 16.8176 3.84171 16.6224 3.64645L13.4404 0.464466C13.2451 0.269204 12.9285 0.269204 12.7333 0.464466C12.538 0.659728 12.538 0.976311 12.7333 1.17157L15.5617 4L12.7333 6.82843C12.538 7.02369 12.538 7.34027 12.7333 7.53553C12.9285 7.7308 13.2451 7.7308 13.4404 7.53553L16.6224 4.35355ZM0.597168 4.5H16.2688V3.5H0.597168V4.5Z" fill="#A2A2A2"/>
               </svg>
             </li>
-            <li>
-              <svg width="28" height="16" viewBox="0 0 28 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M25.7071 8.70711C26.0976 8.31658 26.0976 7.68342 25.7071 7.29289L19.3431 0.928932C18.9526 0.538408 18.3195 0.538408 17.9289 0.928932C17.5384 1.31946 17.5384 1.95262 17.9289 2.34315L23.5858 8L17.9289 13.6569C17.5384 14.0474 17.5384 14.6805 17.9289 15.0711C18.3195 15.4616 18.9526 15.4616 19.3431 15.0711L25.7071 8.70711ZM0 9H25V7H0V9Z" fill="#A1A1A1"/>
-                <line x1="27" y1="2" x2="27" y2="13" stroke="#A1A1A1" strokeWidth="2" strokeLinecap="round"/>
+            <li className='cursor-pointer'>
+              <svg width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16.7269 7.35355C16.9221 7.15829 16.9221 6.84171 16.7269 6.64645L13.5449 3.46447C13.3496 3.2692 13.033 3.2692 12.8378 3.46447C12.6425 3.65973 12.6425 3.97631 12.8378 4.17157L15.6662 7L12.8378 9.82843C12.6425 10.0237 12.6425 10.3403 12.8378 10.5355C13.033 10.7308 13.3496 10.7308 13.5449 10.5355L16.7269 7.35355ZM0.70166 7.5H16.3733V6.5H0.70166V7.5Z" fill="#A1A1A1"/>
+                <line x1="17.5" y1="0.5" x2="17.5" y2="12.5" stroke="#A1A1A1" strokeLinecap="round"/>
               </svg>
             </li>
           </ul>
         </div>
-        <p className={`${classes.infoRound}`}><span>#0</span>Otc 26, 2021, 11:00 AM</p>
+        <p className='bg-gray-F9F9F9-20 text-right rounded-5 flex justify-between items-center text-gray-A9A9A9 pr-2.5'>
+          <span className='text-14 md:text-16 font-bold text-pink-F4E0FF p-2 md:px-8 text-center bg-pink-8C24BF rounded-5 inline-block'>#0</span>
+          Otc 26, 2021, 11:00 AM
+        </p>
       </div>
-      <div className={`${classes.body}`}>
-        <div className={`${classes.infoPrize}`}>
-          <p className="text">Total prize</p>
-          <p className="total">~$0</p>
-          <p className="unit">0 SOL</p>
+      <div className='bg-gray-EBEBEB-10 p-3.5 md:px-8 md:pt-6 md:pb-4'>
+        <div className='md:flex justify-between md:items-end'>
+          <p className='text-14 md:text-16 font-bold mb-2 md:mb-0'>Prize pot</p>
+          <div className='flex justify-between md:w-3/5'>
+            <p className='text-28 md:text-32 font-bungee text-blue-17F0FF leading-none'>~$0</p>
+            <p className='text-20 font-bungee text-blue-17F0FF relative top-0.5'>0 MILLI</p>
+          </div>
         </div>
       </div>
-      <p className={`${classes.footer}`}>Win a jackpot and get in this board</p>
-    </div>
+      <p className='text-center p-3.5'>u6PJ8DtQuPFnfmwHbGFULQ4u4EgjDiyYKjVEsynXq2w</p>
+    </>
   )
 }
 

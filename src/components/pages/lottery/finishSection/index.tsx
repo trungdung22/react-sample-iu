@@ -48,30 +48,29 @@ const FinishedSection: React.FC<Props> = ({playerData, dataGiveFromFinished}) =>
   }
 
   return (
-    <div className={`${classes.root} relative`}>
-      <p className='absolute top-1/3 left-10 hidden lg:block xl:left-40 2xl:left-80'><img src="./assets/lottery/star_05.svg" alt="" /></p>
-      <p className='absolute bottom-1/3 hidden lg:block right-10 xl:right-32'><img src="./assets/lottery/star_06.svg" alt="" /></p>
-      <div className={`${classes.container}`}>
-        <h3>Millionsy airboard</h3>
-        <ul className={`${classes.listButton}`}>
-          <li className={component === 'jackpots' ? 'active' : ''} onClick={() =>{
-            setDataYours(0)
-            setDataBackYour(false)
-            handleSetComponent('jackpots')
-          }}>Jackpots</li>
-          <li className={component === 'all' ? 'active' : ''} onClick={() => {
-            setDataYours(0)
-            setDataBackYour(false)
-            handleSetComponent('all')
-          }}>All History</li>
-          <li className={component === 'yours' ? 'active' : ''} onClick={() => {
-            setDataYours(0)
-            setDataBackYour(false)
-            handleSetComponent('yours')
-          }}>Yours</li>
-        </ul>
-        {dataYours !== 0 && dataBackYour === false ? (<Detail dataSendToDetail={dataYours} dataGiveDetail={dataGiveAll}></Detail>) : (handerRenderComponent('detail'))}
-        
+    <div className={`${classes.root} px-3/100 py-16 md:pb-20 md:pt-10`}>
+      <div className='max-w-700 mx-auto'>
+        <h3 className='font-bungee text-center text-20 md:text-32 text-pink-D47DFF mb-6 md:mb-12 uppercase'>Millionsy airboard</h3>
+        <div className='rounded-10 bg-gray-151515 overflow-hidden border border-solid border-gray-575757-50'>
+          <ul className='flex justify-center font-semibold text-white bg-gray-575757-30 py-3 md:py-4'>
+            <li className={`rounded-5 cursor-pointer w-20 flex justify-center items-center h-32px md:h-34px md:w-92 text-center transition-all ${component === 'jackpots' ? 'bg-pink-8C24BF' : 'hover:bg-gray-575757-50'}`} onClick={() =>{
+              setDataYours(0)
+              setDataBackYour(false)
+              handleSetComponent('jackpots')
+            }}>Jackpots</li>
+            <li className={`rounded-5 cursor-pointer w-20 flex justify-center items-center h-32px md:h-34px md:w-92 text-center transition-all mx-1 ${component === 'all' ? 'bg-pink-8C24BF' : 'hover:bg-gray-575757-50'}`} onClick={() => {
+              setDataYours(0)
+              setDataBackYour(false)
+              handleSetComponent('all')
+            }}>All History</li>
+            <li className={`rounded-5 cursor-pointer w-20 flex justify-center items-center h-32px md:h-34px md:w-92 text-center transition-all ${component === 'yours' ? 'bg-pink-8C24BF' : 'hover:bg-gray-575757-50'}`} onClick={() => {
+              setDataYours(0)
+              setDataBackYour(false)
+              handleSetComponent('yours')
+            }}>Yours</li>
+          </ul>
+          {dataYours !== 0 && dataBackYour === false ? (<Detail dataSendToDetail={dataYours} dataGiveDetail={dataGiveAll}></Detail>) : (handerRenderComponent('detail'))}
+        </div>
       </div>
     </div>
   )

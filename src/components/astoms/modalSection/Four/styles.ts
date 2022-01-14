@@ -1,11 +1,9 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 const useStyles = makeStyles((theme: Theme) => createStyles({
   body: {
-    padding: '1.25rem 1.25rem 0.5rem 1.25rem',
+    padding: '0.5rem 1rem 1rem',
   },
-  footer: {
-    padding: '1.25rem',
-  },
+  footer: {},
   chooseNumber: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -15,17 +13,14 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       alignItems: 'center',
       justifyContent: 'center',
       cursor: 'pointer',
-      marginRight: '1.08rem',
-      marginBottom: '0.6rem',
+      marginRight: '8px',
+      marginBottom: '2px',
       color: '#fff',
-      fontSize: 14,
+      fontSize: 12,
       width: '28px',
       height: '28px',
       '&:nth-child(7n)': {
         marginRight: 0,
-      },
-      '&.active': {
-        background: '#A819FA',
       },
       '&:not(.active):hover': {
         color: '#B2FAFF',

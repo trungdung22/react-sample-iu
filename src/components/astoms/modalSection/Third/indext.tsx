@@ -78,15 +78,11 @@ const Third: React.FC<Props> = ({dataSendThird, dataGiveThird}) => {
   
   return (
     <>
-      <div className={`${classes.body}`}>
-        <div className={`${classes.buy}`}>
-          <p className="title">Total cost</p>
-          <p className="icon">~ {dataSendThird.data.price.toFixed(8)} SOL</p>
+      <div className='p-4 pt-2'>
+        <div className='flex justify-between items-center'>
+          <p className='text-12 font-medium text-pink-D47DFF'>Total cost</p>
+          <p className='text-14 font-bold text-pink-D47DFF'>~ {dataSendThird.data.price.toFixed(8)} MILLI</p>
         </div>
-        <p className={`${classes.description}`}>Number are randomized, with no duplicates among your tickets. Tap a number to edit it.<br />Available digits: 01-45.</p>
-        <ul className={`${classes.listButton}`}>
-          <li className="random" onClick={handleRandomTickets}>Randomize</li>
-        </ul>
         <div className={`${classes.listTickets}`}>
           { 
             data.data.tickets.map((el: [], index: number) => (
@@ -96,7 +92,7 @@ const Third: React.FC<Props> = ({dataSendThird, dataGiveThird}) => {
                   <ul onClick={(event)=>handleChangeNumber(event, index)}>
                     {
                       el.map((item, index) => (
-                        <li key={index}>{item < 10 ? `0${item}` : item}</li>
+                        <li key={index} className='text-14 font-semibold'>{item < 10 ? `0${item}` : item}</li>
                       ))
                     }
                   </ul>
@@ -106,20 +102,14 @@ const Third: React.FC<Props> = ({dataSendThird, dataGiveThird}) => {
           }
         </div>
       </div>
-      <p className={`${classes.lineGray}`}><span></span></p>
-      <div className={`${classes.footer}`}>
-        <ul className={`${classes.listButton}`}>
-          <li onClick={handleConfirm}>Confirm and Buy</li>
-          <li className="goback" onClick={handleGoBack}>
-            <span>
-              <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M17 9C17.5523 9 18 8.55228 18 8C18 7.44772 17.5523 7 17 7V9ZM0.292892 7.29289C-0.0976315 7.68342 -0.0976315 8.31658 0.292892 8.70711L6.65685 15.0711C7.04738 15.4616 7.68054 15.4616 8.07107 15.0711C8.46159 14.6805 8.46159 14.0474 8.07107 13.6569L2.41421 8L8.07107 2.34315C8.46159 1.95262 8.46159 1.31946 8.07107 0.928932C7.68054 0.538408 7.04738 0.538408 6.65685 0.928932L0.292892 7.29289ZM17 7L1 7V9L17 9V7Z" fill="#D47DFF"/>
-              </svg>
-            </span>
-            Go back
-          </li>
+      <div className='p-4 bg-gray-575757-30'>
+        <ul className='grid grid-cols-11 gap-2.5 mb-2'>
+          <li className='transition-all hover:opacity-70 text-center col-span-5 font-semibold text-12 cursor-pointer rounded-3 border border-solid border-blue-17F0FF py-1.5 text-blue-17F0FF' onClick={handleRandomTickets}>Randomize</li>
+          <li className='transition-all hover:opacity-70 text-center col-span-6 font-semibold text-12 cursor-pointer rounded-3 border border-solid border-blue-17F0FF py-1.5 text-blue-0B7880 bg-blue-17F0FF' onClick={handleConfirm}>Confirm and Buy</li>
         </ul>
+        <p className='text-10 text-gray-EBEBEB'>Number are randomized, with no duplicates among your tickets. Tap a number to edit it. Available digits: 01-45.</p>
       </div>
+      
     </>
   )
 }

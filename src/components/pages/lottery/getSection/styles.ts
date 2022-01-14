@@ -5,8 +5,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     padding: '4.5rem 0',
     '& h3': {
       color: '#D47DFF',
-      fontSize: 48,
-      fontWeight: 700,
+      fontSize: 54,
       marginBottom: '5rem',
       textAlign: 'center',
       textTransform: 'uppercase',

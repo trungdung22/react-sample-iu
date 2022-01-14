@@ -18,7 +18,7 @@ export const sendTxUsingExternalSignature = async (
   signersExceptWallet: Account[] | null,
   wallet: BaseMessageSignerWalletAdapter
 ) => {
-  debugger
+  // debugger
   let tx = new Transaction().add(...instructions);
   let { blockhash } = await connection.getRecentBlockhash();
   tx.recentBlockhash = blockhash;
@@ -31,7 +31,7 @@ export const sendTxUsingExternalSignature = async (
       ...signersExceptWallet.map(s => s.publicKey)
     );
     signersExceptWallet.forEach(acc => {
-      debugger
+      // debugger
       tx.partialSign(acc);
     });
   } else {

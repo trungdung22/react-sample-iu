@@ -64,16 +64,16 @@ const GetSection: React.FC = () => {
         <h3 className='font-bungee text-center text-20 md:text-32 text-pink-D47DFF mb-6 md:mb-8 uppercase'>HOW TO BUY</h3>
         <div className='bg-gray-151515 p-1.5 md:p-2.5 rounded-10'>
           <ul className='border border-solid border-blue-0B7880-50 grid grid-cols-1 md:grid-cols-3 px-1 md:px-0 md:py-4 rounded-5 md:rounded-10 mb-4'>
-            <li className='col-span-1 px-1 md:px-4 md:pb-4 md:pt-0 pt-2 pb-3'>
-              <h6 className='text-14 md:text-16 text-pink-D47DFF font-bold mb-0.5'>Get the tickets</h6>
+            <li className='col-span-1 px-1 md:px-4 py-2 md:py-0'>
+              <h6 className='text-14 md:text-16 text-pink-D47DFF font-bold md:mb-0.5'>Get the tickets</h6>
               <p>Every ticket equals to 2$ and can be bought with $MILLI token. Price will be set when the round begins.</p>
             </li>
-            <li className='col-span-1 px-1 md:px-4 md:pb-4 md:pt-0 py-3 border-t border-b md:border-l md:border-r md:border-t-0 md:border-b-0 border-solid border-gray-575757-50'>
-              <h6 className='text-14 md:text-16 text-pink-D47DFF font-bold mb-0.5'>Choose 6 numbers</h6>
+            <li className='col-span-1 px-1 md:px-4 py-2 md:py-0 border-t border-b md:border-l md:border-r md:border-t-0 md:border-b-0 border-solid border-gray-575757-50'>
+              <h6 className='text-14 md:text-16 text-pink-D47DFF font-bold md:mb-0.5'>Choose 6 numbers</h6>
               <p>Freely choose 6 different numbers from 1 to 45 (the order doesn't matter). You can select by yourself or let the machine choose randomly.</p>
             </li>
-            <li className='col-span-1 px-1 md:px-4 md:pb-4 md:pt-0 pt-3 pb-4'>
-              <h6 className='text-14 md:text-16 text-pink-D47DFF font-bold mb-0.5'>Wait for the party</h6>
+            <li className='col-span-1 px-1 md:px-4 py-2 md:py-0'>
+              <h6 className='text-14 md:text-16 text-pink-D47DFF font-bold md:mb-0.5'>Wait for the party</h6>
               <p>There is 1 draw every day, ends at 11am UTC and starts 35 minutes after that. The prize is automatically sent to the winner's wallet.</p>
             </li>
           </ul>
@@ -81,60 +81,60 @@ const GetSection: React.FC = () => {
           <div className='flex flex-col md:flex-row md:items-center justify-between rounded-3 md:rounded-5 bg-gray-575757-20 p-2.5 md:px-4 md:py-3.5 mb-2.5'>
             <p className='mb-2 md:mb-0'>The Winning Number is</p>
             <ul>
-              <li className='w-10 h-10 md:w-50 md:h-50 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full mr-15px screen475:mr-5'>
-                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-gray-222222 rounded-full'><span className='text-gradient-17F0FF-to-0BA8B4'>40</span></p>
+              <li className='w-10 h-10 md:w-50 md:h-50 bg-blue-17F0FF p-px inline-block rounded-full mr-15px screen475:mr-5'>
+                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-gray-222222 rounded-full'><span className='text-blue-17F0FF'>40</span></p>
               </li>
-              <li className='w-10 h-10 md:w-50 md:h-50 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full mr-15px screen475:mr-5'>
-                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-gray-222222 rounded-full'><span className='text-gradient-17F0FF-to-0BA8B4'>15</span></p>
+              <li className='w-10 h-10 md:w-50 md:h-50 bg-blue-17F0FF p-px inline-block rounded-full mr-15px screen475:mr-5'>
+                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-gray-222222 rounded-full'><span className='text-blue-17F0FF'>15</span></p>
               </li>
-              <li className='w-10 h-10 md:w-50 md:h-50 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full mr-15px screen475:mr-5'>
-                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-gray-222222 rounded-full'><span className='text-gradient-17F0FF-to-0BA8B4'>12</span></p>
+              <li className='w-10 h-10 md:w-50 md:h-50 bg-blue-17F0FF p-px inline-block rounded-full mr-15px screen475:mr-5'>
+                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-gray-222222 rounded-full'><span className='text-blue-17F0FF'>12</span></p>
               </li>
-              <li className='w-10 h-10 md:w-50 md:h-50 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full mr-15px screen475:mr-5'>
-                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-gray-222222 rounded-full'><span className='text-gradient-17F0FF-to-0BA8B4'>20</span></p>
+              <li className='w-10 h-10 md:w-50 md:h-50 bg-blue-17F0FF p-px inline-block rounded-full mr-15px screen475:mr-5'>
+                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-gray-222222 rounded-full'><span className='text-blue-17F0FF'>20</span></p>
               </li>
-              <li className='w-10 h-10 md:w-50 md:h-50 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full mr-15px screen475:mr-5'>
-                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-gray-222222 rounded-full'><span className='text-gradient-17F0FF-to-0BA8B4'>35</span></p>
+              <li className='w-10 h-10 md:w-50 md:h-50 bg-blue-17F0FF p-px inline-block rounded-full mr-15px screen475:mr-5'>
+                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-gray-222222 rounded-full'><span className='text-blue-17F0FF'>35</span></p>
               </li>
-              <li className='w-10 h-10 md:w-50 md:h-50 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full'>
-                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-gray-222222 rounded-full'><span className='text-gradient-17F0FF-to-0BA8B4'>28</span></p>
+              <li className='w-10 h-10 md:w-50 md:h-50 bg-blue-17F0FF p-px inline-block rounded-full'>
+                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-gray-222222 rounded-full'><span className='text-blue-17F0FF'>28</span></p>
               </li>
             </ul>
           </div>
           <div className='flex flex-col md:flex-row md:items-center justify-between rounded-3 md:rounded-5 bg-gray-575757-20 p-2.5 md:px-4 md:py-3.5 mb-2.5'>
             <p className='mb-2 md:mb-0'>Your ticket</p>
             <ul>
-              <li className='w-10 h-10 md:w-50 md:h-50 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full mr-15px screen475:mr-5 opacity-50'>
-                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-gray-222222 rounded-full'><span className='text-gradient-17F0FF-to-0BA8B4'>05</span></p>
+              <li className='w-10 h-10 md:w-50 md:h-50 bg-blue-17F0FF p-px inline-block rounded-full mr-15px screen475:mr-5 opacity-50'>
+                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-gray-222222 rounded-full'><span className='text-blue-17F0FF'>05</span></p>
               </li>
-              <li className='w-10 h-10 md:w-50 md:h-50 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full mr-15px screen475:mr-5'>
-                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-gray-222222 rounded-full'><span className='text-gradient-17F0FF-to-0BA8B4'>20</span></p>
+              <li className='w-10 h-10 md:w-50 md:h-50 bg-blue-17F0FF p-px inline-block rounded-full mr-15px screen475:mr-5'>
+                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-gray-222222 rounded-full'><span className='text-blue-17F0FF'>20</span></p>
               </li>
-              <li className='w-10 h-10 md:w-50 md:h-50 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full mr-15px screen475:mr-5 opacity-50'>
-                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-gray-222222 rounded-full'><span className='text-gradient-17F0FF-to-0BA8B4'>32</span></p>
+              <li className='w-10 h-10 md:w-50 md:h-50 bg-blue-17F0FF p-px inline-block rounded-full mr-15px screen475:mr-5 opacity-50'>
+                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-gray-222222 rounded-full'><span className='text-blue-17F0FF'>32</span></p>
               </li>
-              <li className='w-10 h-10 md:w-50 md:h-50 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full mr-15px screen475:mr-5'>
-                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-gray-222222 rounded-full'><span className='text-gradient-17F0FF-to-0BA8B4'>12</span></p>
+              <li className='w-10 h-10 md:w-50 md:h-50 bg-blue-17F0FF p-px inline-block rounded-full mr-15px screen475:mr-5'>
+                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-gray-222222 rounded-full'><span className='text-blue-17F0FF'>12</span></p>
               </li>
-              <li className='w-10 h-10 md:w-50 md:h-50 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full mr-15px screen475:mr-5'>
-                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-gray-222222 rounded-full'><span className='text-gradient-17F0FF-to-0BA8B4'>35</span></p>
+              <li className='w-10 h-10 md:w-50 md:h-50 bg-blue-17F0FF p-px inline-block rounded-full mr-15px screen475:mr-5'>
+                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-gray-222222 rounded-full'><span className='text-blue-17F0FF'>35</span></p>
               </li>
-              <li className='w-10 h-10 md:w-50 md:h-50 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full opacity-50'>
-                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-gray-222222 rounded-full'><span className='text-gradient-17F0FF-to-0BA8B4'>22</span></p>
+              <li className='w-10 h-10 md:w-50 md:h-50 bg-blue-17F0FF p-px inline-block rounded-full opacity-50'>
+                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-gray-222222 rounded-full'><span className='text-blue-17F0FF'>22</span></p>
               </li>
             </ul>
           </div>
           <div className='flex flex-col md:flex-row md:items-center justify-between rounded-3 md:rounded-5 bg-blue-17F0FF-10 p-2.5 md:px-4 md:py-3.5 mb-2.5'>
             <p className='mb-2 md:mb-0'>Then you match 3 numbers and win the PRIZE!</p>
             <ul>
-              <li className='w-10 h-10 md:w-50 md:h-50 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full mr-15px screen475:mr-5'>
-                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-blue-152b2c rounded-full'><span className='text-gradient-17F0FF-to-0BA8B4'>20</span></p>
+              <li className='w-10 h-10 md:w-50 md:h-50 bg-blue-17F0FF p-px inline-block rounded-full mr-15px screen475:mr-5'>
+                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-blue-152b2c rounded-full'><span className='text-blue-17F0FF'>20</span></p>
               </li>
-              <li className='w-10 h-10 md:w-50 md:h-50 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full mr-15px screen475:mr-5'>
-                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-blue-152b2c rounded-full'><span className='text-gradient-17F0FF-to-0BA8B4'>12</span></p>
+              <li className='w-10 h-10 md:w-50 md:h-50 bg-blue-17F0FF p-px inline-block rounded-full mr-15px screen475:mr-5'>
+                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-blue-152b2c rounded-full'><span className='text-blue-17F0FF'>12</span></p>
               </li>
-              <li className='w-10 h-10 md:w-50 md:h-50 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full'>
-                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-blue-152b2c rounded-full'><span className='text-gradient-17F0FF-to-0BA8B4'>35</span></p>
+              <li className='w-10 h-10 md:w-50 md:h-50 bg-blue-17F0FF p-px inline-block rounded-full'>
+                <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-blue-152b2c rounded-full'><span className='text-blue-17F0FF'>35</span></p>
               </li>
             </ul>
           </div>
@@ -143,43 +143,43 @@ const GetSection: React.FC = () => {
             <p className='mb-2 md:mb-3.5'>The order doesn’t matter, two tickets below are absolute the same:</p>
             <div className='flex flex-col md:flex-row items-start md:items-center justify-between'>
               <ul className='bg-blue-17F0FF-10 px-2.5 py-1.5 md:py-2.5 md:px-5 inline-block rounded-full mb-2.5 md:mb-0'>
-                <li className='w-30 h-30 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full mr-2.5'>
-                  <p className='flex justify-center items-center w-full h-full text-12 font-bungee bg-blue-213638 rounded-full'><span className='text-gradient-17F0FF-to-0BA8B4'>40</span></p>
+                <li className='w-30 h-30 bg-blue-17F0FF p-px inline-block rounded-full mr-2.5'>
+                  <p className='flex justify-center items-center w-full h-full text-12 font-bungee bg-blue-213638 rounded-full'><span className='text-blue-17F0FF'>40</span></p>
                 </li>
-                <li className='w-30 h-30 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full mr-2.5'>
-                  <p className='flex justify-center items-center w-full h-full text-12 font-bungee bg-blue-213638 rounded-full'><span className='text-gradient-17F0FF-to-0BA8B4'>15</span></p>
+                <li className='w-30 h-30 bg-blue-17F0FF p-px inline-block rounded-full mr-2.5'>
+                  <p className='flex justify-center items-center w-full h-full text-12 font-bungee bg-blue-213638 rounded-full'><span className='text-blue-17F0FF'>15</span></p>
                 </li>
-                <li className='w-30 h-30 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full mr-2.5'>
-                  <p className='flex justify-center items-center w-full h-full text-12 font-bungee bg-blue-213638 rounded-full'><span className='text-gradient-17F0FF-to-0BA8B4'>12</span></p>
+                <li className='w-30 h-30 bg-blue-17F0FF p-px inline-block rounded-full mr-2.5'>
+                  <p className='flex justify-center items-center w-full h-full text-12 font-bungee bg-blue-213638 rounded-full'><span className='text-blue-17F0FF'>12</span></p>
                 </li>
-                <li className='w-30 h-30 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full mr-2.5'>
-                  <p className='flex justify-center items-center w-full h-full text-12 font-bungee bg-blue-213638 rounded-full'><span className='text-gradient-17F0FF-to-0BA8B4'>20</span></p>
+                <li className='w-30 h-30 bg-blue-17F0FF p-px inline-block rounded-full mr-2.5'>
+                  <p className='flex justify-center items-center w-full h-full text-12 font-bungee bg-blue-213638 rounded-full'><span className='text-blue-17F0FF'>20</span></p>
                 </li>
-                <li className='w-30 h-30 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full mr-2.5'>
-                  <p className='flex justify-center items-center w-full h-full text-12 font-bungee bg-blue-213638 rounded-full'><span className='text-gradient-17F0FF-to-0BA8B4'>35</span></p>
+                <li className='w-30 h-30 bg-blue-17F0FF p-px inline-block rounded-full mr-2.5'>
+                  <p className='flex justify-center items-center w-full h-full text-12 font-bungee bg-blue-213638 rounded-full'><span className='text-blue-17F0FF'>35</span></p>
                 </li>
-                <li className='w-30 h-30 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full'>
-                  <p className='flex justify-center items-center w-full h-full text-12 font-bungee bg-blue-213638 rounded-full'><span className='text-gradient-17F0FF-to-0BA8B4'>28</span></p>
+                <li className='w-30 h-30 bg-blue-17F0FF p-px inline-block rounded-full'>
+                  <p className='flex justify-center items-center w-full h-full text-12 font-bungee bg-blue-213638 rounded-full'><span className='text-blue-17F0FF'>28</span></p>
                 </li>
               </ul>
               <ul className='bg-blue-17F0FF-10 px-2.5 py-1.5 md:py-2.5 md:px-5 inline-block rounded-full'>
-                <li className='w-30 h-30 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full mr-2.5'>
-                  <p className='flex justify-center items-center w-full h-full text-12 font-bungee bg-blue-213638 rounded-full'><span className='text-gradient-17F0FF-to-0BA8B4'>40</span></p>
+                <li className='w-30 h-30 bg-blue-17F0FF p-px inline-block rounded-full mr-2.5'>
+                  <p className='flex justify-center items-center w-full h-full text-12 font-bungee bg-blue-213638 rounded-full'><span className='text-blue-17F0FF'>40</span></p>
                 </li>
-                <li className='w-30 h-30 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full mr-2.5'>
-                  <p className='flex justify-center items-center w-full h-full text-12 font-bungee bg-blue-213638 rounded-full'><span className='text-gradient-17F0FF-to-0BA8B4'>15</span></p>
+                <li className='w-30 h-30 bg-blue-17F0FF p-px inline-block rounded-full mr-2.5'>
+                  <p className='flex justify-center items-center w-full h-full text-12 font-bungee bg-blue-213638 rounded-full'><span className='text-blue-17F0FF'>15</span></p>
                 </li>
-                <li className='w-30 h-30 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full mr-2.5'>
-                  <p className='flex justify-center items-center w-full h-full text-12 font-bungee bg-blue-213638 rounded-full'><span className='text-gradient-17F0FF-to-0BA8B4'>12</span></p>
+                <li className='w-30 h-30 bg-blue-17F0FF p-px inline-block rounded-full mr-2.5'>
+                  <p className='flex justify-center items-center w-full h-full text-12 font-bungee bg-blue-213638 rounded-full'><span className='text-blue-17F0FF'>12</span></p>
                 </li>
-                <li className='w-30 h-30 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full mr-2.5'>
-                  <p className='flex justify-center items-center w-full h-full text-12 font-bungee bg-blue-213638 rounded-full'><span className='text-gradient-17F0FF-to-0BA8B4'>20</span></p>
+                <li className='w-30 h-30 bg-blue-17F0FF p-px inline-block rounded-full mr-2.5'>
+                  <p className='flex justify-center items-center w-full h-full text-12 font-bungee bg-blue-213638 rounded-full'><span className='text-blue-17F0FF'>20</span></p>
                 </li>
-                <li className='w-30 h-30 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full mr-2.5'>
-                  <p className='flex justify-center items-center w-full h-full text-12 font-bungee bg-blue-213638 rounded-full'><span className='text-gradient-17F0FF-to-0BA8B4'>35</span></p>
+                <li className='w-30 h-30 bg-blue-17F0FF p-px inline-block rounded-full mr-2.5'>
+                  <p className='flex justify-center items-center w-full h-full text-12 font-bungee bg-blue-213638 rounded-full'><span className='text-blue-17F0FF'>35</span></p>
                 </li>
-                <li className='w-30 h-30 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full'>
-                  <p className='flex justify-center items-center w-full h-full text-12 font-bungee bg-blue-213638 rounded-full'><span className='text-gradient-17F0FF-to-0BA8B4'>28</span></p>
+                <li className='w-30 h-30 bg-blue-17F0FF p-px inline-block rounded-full'>
+                  <p className='flex justify-center items-center w-full h-full text-12 font-bungee bg-blue-213638 rounded-full'><span className='text-blue-17F0FF'>28</span></p>
                 </li>
               </ul>
             </div>

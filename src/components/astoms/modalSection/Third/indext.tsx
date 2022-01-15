@@ -103,9 +103,9 @@ const Third: React.FC<Props> = ({dataSendThird, dataGiveThird}) => {
         </div>
       </div>
       <div className='p-4 bg-gray-575757-30'>
-        <ul className='grid grid-cols-11 gap-2.5 mb-2'>
-          <li className='transition-all hover:opacity-70 text-center col-span-5 font-semibold text-12 cursor-pointer rounded-3 border border-solid border-blue-17F0FF py-1.5 text-blue-17F0FF' onClick={handleRandomTickets}>Randomize</li>
-          <li className='transition-all hover:opacity-70 text-center col-span-6 font-semibold text-12 cursor-pointer rounded-3 border border-solid border-blue-17F0FF py-1.5 text-blue-0B7880 bg-blue-17F0FF' onClick={handleConfirm}>Confirm and Buy</li>
+        <ul className='grid grid-cols-11 gap-2.5 mb-2.5'>
+          <li className='transition-all hover:opacity-70 text-center col-span-5 font-semibold text-12 cursor-pointer rounded-3 border border-solid border-blue-17F0FF flex justify-center items-center h-32px text-blue-17F0FF' onClick={handleRandomTickets}>Randomize</li>
+          <li className='transition-all hover:opacity-70 text-center col-span-6 font-semibold text-12 cursor-pointer rounded-3 border border-solid border-blue-17F0FF flex justify-center items-center h-32px text-blue-0B7880 bg-blue-17F0FF' onClick={handleConfirm}>Confirm and Buy</li>
         </ul>
         <p className='text-10 text-gray-EBEBEB'>Number are randomized, with no duplicates among your tickets. Tap a number to edit it. Available digits: 01-45.</p>
       </div>

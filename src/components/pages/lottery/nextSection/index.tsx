@@ -60,7 +60,7 @@ const NextSection: React.FC<Props> = ({nextData, playerData, sendDataNextToLotte
 
 
   const handleViewTicket = (event: React.MouseEvent) => {
-    if(nextData.your_tickets.length > 0) {
+    // if(nextData.your_tickets.length > 0) {
       const next_round = {
         next_id: nextData.next_id,
         your_ticket: nextData.your_tickets
@@ -70,7 +70,7 @@ const NextSection: React.FC<Props> = ({nextData, playerData, sendDataNextToLotte
         view_ticket: true,
         get_ticket: false,
       })
-    }
+    // }
   }
   
   const handleGetTicket = (event: React.MouseEvent) => {
@@ -91,7 +91,7 @@ const NextSection: React.FC<Props> = ({nextData, playerData, sendDataNextToLotte
   return (
     <div className='px-3/100 py-16 md:pb-44 md:pt-10'>
       <div className='max-w-700 mx-auto'>
-        <h3 className='font-bungee text-54 md:text-52 text-blue-17F0FF text-center leading-none'>
+        <h3 className='font-bungee text-40 md:text-52 text-blue-17F0FF text-center leading-none'>
           {
             timer == '' ? (
               <ContentLoader
@@ -104,7 +104,7 @@ const NextSection: React.FC<Props> = ({nextData, playerData, sendDataNextToLotte
             ) : Parser(timer)
           }
         </h3>
-        <h2 className='text-16 md:text-20 font-bold text-center leading-none mt-2 mb-9'>till the party</h2>
+        <h2 className='text-16 md:text-20 font-bold text-center leading-none mt-4 mb-10'>till the party</h2>
         
         <div className='bg-gray-151515 rounded-10 border border-solid border-gray-575757-50'>
           {

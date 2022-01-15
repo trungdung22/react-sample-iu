@@ -29,9 +29,9 @@ const Footer: React.FC = () => {
         <li>
           <a href="/milligo" className={location === '/milligo' ? 'active ': '' }>
             <span>
-              <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5.70908 14.4805C5.40069 14.179 5.28455 14.3305 5.21596 14.3977C3.44009 16.1348 1.8635 20.3263 2.69698 19.9169C5.43062 19.0876 6.23671 18.8703 8.01252 17.1333C8.08117 17.0661 8.23904 16.9555 7.92167 16.6449L5.70908 14.4805Z" stroke="#D1D1D1" strokeWidth="1.25"/>
-                <path d="M16.1961 13.5749C16.1163 13.3211 16.2836 13.1988 16.354 13.1229C20.2437 8.92954 22.7158 3.34271 20.8839 1.5133C19.0615 -0.306246 13.6391 2.23437 9.44077 6.09042C9.35772 6.16681 9.19401 6.31146 8.90114 6.2504L7.59311 5.93939C7.22994 5.85315 6.71679 5.99811 6.45281 6.2617L1.65323 11.0542C1.38925 11.3179 1.47501 11.5809 1.84384 11.6387L5.31522 12.1835C5.68405 12.2414 6.20177 12.0731 6.46569 11.8094C6.46569 11.8094 6.6448 11.6301 6.82476 11.8097C7.8176 12.801 9.66256 14.6432 10.6085 15.5878C10.7965 15.7755 10.6164 15.9541 10.6164 15.9541C10.3524 16.2177 10.1838 16.7346 10.2419 17.1029L10.7873 20.5692C10.8453 20.9376 11.1087 21.0232 11.3727 20.7596L16.1723 15.9669C16.4363 15.7033 16.5815 15.191 16.495 14.8284L16.1961 13.5749ZM15.1216 7.3832C14.3086 6.57145 14.3086 5.25547 15.1216 4.44384C15.9344 3.63208 17.2523 3.63208 18.0653 4.44384C18.8782 5.25541 18.8782 6.57145 18.0653 7.38314C17.2523 8.1949 15.9344 8.1949 15.1216 7.3832Z" stroke="#D1D1D1" strokeWidth="1.25"/>
+              <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path className='special' d="M5.70908 15.0679C5.40069 14.7664 5.28455 14.9179 5.21596 14.9851C3.44009 16.7222 1.8635 20.9137 2.69698 20.5043C5.43062 19.675 6.23671 19.4577 8.01252 17.7207C8.08117 17.6536 8.23904 17.5429 7.92167 17.2323L5.70908 15.0679Z" stroke="#D1D1D1" strokeWidth="1.25"/>
+                <path className='special' d="M16.1961 14.1623C16.1163 13.9085 16.2836 13.7862 16.354 13.7103C20.2437 9.51695 22.7158 3.93011 20.8839 2.1007C19.0615 0.281156 13.6391 2.82177 9.44077 6.67782C9.35772 6.75421 9.19401 6.89887 8.90114 6.83781L7.59311 6.52679C7.22994 6.44055 6.71679 6.58551 6.45281 6.8491L1.65323 11.6416C1.38925 11.9053 1.47501 12.1683 1.84384 12.2261L5.31522 12.7709C5.68405 12.8288 6.20177 12.6605 6.46569 12.3968C6.46569 12.3968 6.6448 12.2175 6.82476 12.3971C7.8176 13.3884 9.66256 15.2307 10.6085 16.1752C10.7965 16.3629 10.6164 16.5415 10.6164 16.5415C10.3524 16.8051 10.1838 17.322 10.2419 17.6903L10.7873 21.1566C10.8453 21.525 11.1087 21.6106 11.3727 21.347L16.1723 16.5543C16.4363 16.2907 16.5815 15.7785 16.495 15.4158L16.1961 14.1623ZM15.1216 7.97061C14.3086 7.15885 14.3086 5.84287 15.1216 5.03124C15.9344 4.21948 17.2523 4.21948 18.0653 5.03124C18.8782 5.84281 18.8782 7.15885 18.0653 7.97055C17.2523 8.7823 15.9344 8.7823 15.1216 7.97061Z" stroke="#D1D1D1" stroke-width="1.25"/>
               </svg>
             </span>
             MILLIGO
@@ -52,47 +52,47 @@ const Footer: React.FC = () => {
       <footer className='bg-gray-151515'>
         <div className='px-3/100'>
           <div className='max-w-1200 mx-auto'>
-            <div className='grid grid-cols-1 md:grid-cols-4 py-6 md:py-14'>
-              <div className='col-span-1 mb-3 md:mb-0'>
-                <p className='text-pink-D47DFF font-bold mb-2 md:mb-6 text-14'>Platform</p>
+            <div className='grid grid-cols-1 md:grid-cols-4 py-8 md:py-14'>
+              <div className='col-span-1 mb-5 md:mb-0'>
+                <p className='text-pink-D47DFF font-bold mb-2 md:mb-6 text-14 md:text-16'>Platform</p>
                 <ul>
                   <li className='mb-2.5 md:mb-3.5'><a href="https://forms.gle/ERJc45o4btDsoerT6" className='text-blue-17F0FF hover:underline'>Apply for IGO</a></li>
                   <li className='mb-2.5 md:mb-3.5'><a href="https://docs.millionsy.io/lottery/how-to-play " className='text-gray-A9A9A9 hover:text-white hover:underline'>How to buy ticket</a></li>
                   <li className='mb-2.5 md:mb-3.5'><a href="https://docs.millionsy.io" className='text-gray-A9A9A9 hover:text-white hover:underline'>Documents</a></li>
-                  <li className='mb-2.5 md:mb-3.5'><a href="https://www.millionsy.io/whitepaper/" className='text-gray-A9A9A9 hover:text-white hover:underline'>Whitepaper</a></li>
+                  <li><a href="https://www.millionsy.io/whitepaper/" className='text-gray-A9A9A9 hover:text-white hover:underline'>Whitepaper</a></li>
                 </ul>
               </div>
-              <div className='col-span-1 mb-3 md:mb-0'>
-                <p className='text-pink-D47DFF font-bold mb-2 md:mb-6 text-14'>Token</p>
+              <div className='col-span-1 mb-5 md:mb-0'>
+                <p className='text-pink-D47DFF font-bold mb-2 md:mb-6 text-14 md:text-16'>Token</p>
                 <ul>
                   <li className='mb-2.5 md:mb-3.5'><a href="https://solscan.io/token/HDLRMKW1FDz2q5Zg778CZx26UgrtnqpUDkNNJHhmVUFr" className='text-gray-A9A9A9 hover:text-white hover:underline'>Token contract</a></li>
                   <li className='mb-2.5 md:mb-3.5'><a href="https://docs.millionsy.io/tokenomic/milli" className='text-gray-A9A9A9 hover:text-white hover:underline'>Tokenomics</a></li>
                   <li className='mb-2.5 md:mb-3.5'><a href="https://www.coingecko.com/en/coins/millionsy" className='text-gray-A9A9A9 hover:text-white hover:underline'>Coingecko</a></li>
-                  <li className='mb-2.5 md:mb-3.5'><a href="https://coinmarketcap.com/currencies/millionsy/" className='text-gray-A9A9A9 hover:text-white hover:underline'>CoinMarketCap</a></li>
+                  <li><a href="https://coinmarketcap.com/currencies/millionsy/" className='text-gray-A9A9A9 hover:text-white hover:underline'>CoinMarketCap</a></li>
                 </ul>
               </div>
-              <div className='col-span-1 mb-3 md:mb-0'>
-                <p className='text-pink-D47DFF font-bold mb-2 md:mb-6 text-14'>Social</p>
+              <div className='col-span-1 mb-5 md:mb-0'>
+                <p className='text-pink-D47DFF font-bold mb-2 md:mb-6 text-14 md:text-16'>Social</p>
                 <ul>
                   <li className='mb-2.5 md:mb-3.5'><a href="https://twitter.com/MILLIONSYio" className='text-gray-A9A9A9 hover:text-white hover:underline'>Twitter</a></li>
                   <li className='mb-2.5 md:mb-3.5'><a href="https://t.me/MILLIONSYio" className='text-gray-A9A9A9 hover:text-white hover:underline'>Telegram</a></li>
                   <li className='mb-2.5 md:mb-3.5'><a href="https://t.me/MILLIONSYchannel" className='text-gray-A9A9A9 hover:text-white hover:underline'>Medium</a></li>
-                  <li className='mb-2.5 md:mb-3.5'><a href="http://millionsyio.medium.com" className='text-gray-A9A9A9 hover:text-white hover:underline'>Telegram Channel</a></li>
+                  <li><a href="http://millionsyio.medium.com" className='text-gray-A9A9A9 hover:text-white hover:underline'>Telegram Channel</a></li>
                 </ul>
               </div>
               <div className='col-span-1'>
-                <p className='text-pink-D47DFF font-bold mb-2 md:mb-6 text-14'>Animation</p>
+                <p className='text-pink-D47DFF font-bold mb-2 md:mb-6 text-14 md:text-16'>Animation</p>
                 <ul>
                   <li className='mb-2.5 md:mb-3.5'><a href="https://www.youtube.com/c/MILLIONSYio" className='text-gray-A9A9A9 hover:text-white hover:underline'>Youtube</a></li>
                   <li className='mb-2.5 md:mb-3.5'><a href="https://www.instagram.com/millionsyio/" className='text-gray-A9A9A9 hover:text-white hover:underline'>Instagram</a></li>
                   <li className='mb-2.5 md:mb-3.5'><a href="http://www.tiktok.com/@millionsyio" className='text-gray-A9A9A9 hover:text-white hover:underline'>Tiktok</a></li>
-                  <li className='mb-2.5 md:mb-3.5'><a href="https://t.me/addstickers/MILLIONSY" className='text-gray-A9A9A9 hover:text-white hover:underline'>Sticker</a></li>
+                  <li><a href="https://t.me/addstickers/MILLIONSY" className='text-gray-A9A9A9 hover:text-white hover:underline'>Sticker</a></li>
                 </ul>
               </div>
             </div>
             <p className='h-px bg-gray-575757-50'></p>
-            <div className='py-6 md:pt-20 md:pb-16'>
-              <p className='font-bungee text-blue-17F0FF text-36 md:text-56 mb-1 md:mb-6 leading-8'><a href="/">Millionsy</a></p>
+            <div className='pt-4 pb-8 md:py-16'>
+              <p className='font-bungee text-blue-17F0FF text-36 md:text-56 mb-1 md:mb-5 leading-8'><a href="/">Millionsy</a></p>
               <p className='text-10 md:text-12 text-gray-F9F9F9-50'>Ver 2.1. Copyright 2021 | MILLIONSY Limited</p>
             </div>
           </div>

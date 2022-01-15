@@ -56,8 +56,8 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
                 <ul className='flex justify-between screen475:block'>
                 {
                   dataSendToDetail.roll_nums.map((element, index) => (
-                      <li key={index} className={`w-10 h-10 md:w-50 md:h-50 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full ${index < 5 ? 'screen475:mr-5' : ''}`}>
-                        <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-gray-151515 rounded-full'><span className='text-gradient-17F0FF-to-0BA8B4'>{element < 10 ? `0${element}` : element}</span></p>
+                      <li key={index} className={`w-10 h-10 md:w-50 md:h-50 bg-blue-17F0FF p-px inline-block rounded-full ${index < 5 ? 'screen475:mr-5' : ''}`}>
+                        <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-gray-151515 rounded-full'><span className='text-17F0FFbg-blue-17F0FF'>{element < 10 ? `0${element}` : element}</span></p>
                       </li>
                     )
                   )
@@ -128,7 +128,7 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
           </div>
         </div>
       </div>
-      <p className='text-14 font-semibold flex justify-center items-center cursor-pointer py-3.5' onClick={() => setSlide(!slide)}>
+      <p className='text-14 font-semibold flex justify-center items-center cursor-pointer py-3.5 transition-all hover:opacity-70' onClick={() => setSlide(!slide)}>
         {slide ? (
           <>
             Detail

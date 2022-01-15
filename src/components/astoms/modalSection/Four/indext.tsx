@@ -91,7 +91,7 @@ const Four: React.FC<Props> = ({dataSendFour, dataGiveFour}) => {
         <ul className='flex justify-between mt-3'>
           {
             data.data.ticketChanges.numberChange.map((el: number, index: number) => (
-              <li key={index} className={`w-35 h-35 bg-gradient-17F0FF-to-0BA8B4 p-px inline-block rounded-full cursor-pointer`}
+              <li key={index} className={`w-35 h-35 bg-blue-17F0FF p-px inline-block rounded-full cursor-pointer`}
                 onClick={(event) => handleOnClickTicket(event, index)}
               >
                 <p className={`flex justify-center items-center w-full h-full text-16 font-bungee rounded-full ${index === dataChoose.idx ? 'bg-blue-0B7880 box-shadow-0440-inset' : 'bg-gray-151515'}`}><span className='text-blue-17F0FF'>{el < 10 ? `0${el}` : el}</span></p>
@@ -102,7 +102,7 @@ const Four: React.FC<Props> = ({dataSendFour, dataGiveFour}) => {
       </div>
       
       <div className={`p-4 bg-gray-575757-30`}>
-        <p onClick={handleSendData} className='w-fit transition-all hover:opacity-70 text-center font-semibold text-12 cursor-pointer rounded-3 border border-solid py-1.5 text-blue-0B7880 bg-blue-17F0FF px-8 mx-auto'>Submit</p>
+        <p onClick={handleSendData} className='transition-all hover:opacity-70 text-center font-semibold text-12 cursor-pointer rounded-3 border border-solid text-blue-0B7880 bg-blue-17F0FF w-28 h-32px flex justify-center items-center mx-auto'>Submit</p>
       </div>
     </>
   )

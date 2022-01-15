@@ -67,9 +67,9 @@ const Five: React.FC<Props> = ({dataSendFive, dataGiveFive}) => {
         </div>
       </div>
       <div className='p-4 bg-gray-575757-30'>
-        <ul className='grid grid-cols-11 gap-2.5 mb-2'>
-          <li className='text-center col-span-5 font-semibold text-12 rounded-3 border border-solid border-gray-A9A9A9 py-1.5 text-gray-A9A9A9'>Randomize</li>
-          <li className='text-center col-span-6 font-semibold text-12 rounded-3 border border-solid border-gray-F9F9F9 py-1.5 text-gray-A9A9A9 bg-gray-F9F9F9 flex justify-center items-center'>
+        <ul className='grid grid-cols-11 gap-2.5 mb-2.5'>
+          <li className='text-center col-span-5 font-semibold text-12 rounded-3 border border-solid border-gray-A9A9A9 flex justify-center items-center h-32px text-gray-A9A9A9'>Randomize</li>
+          <li className='text-center col-span-6 font-semibold text-12 rounded-3 border border-solid border-gray-F9F9F9 flex justify-center items-center h-32px text-gray-A9A9A9 bg-gray-F9F9F9'>
             Confirming
             <span className='inline-block ml-2'>
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">

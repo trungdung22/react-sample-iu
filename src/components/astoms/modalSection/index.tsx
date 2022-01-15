@@ -322,7 +322,7 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
                   Edit numbers
                 </p>
               ) : ''}
-              {dataModal.view_ticket && playerData.is_connect ? (
+              {dataModal.view_ticket ? (
                 <p className="title">Your tickets this round</p>
               ) : ''}
               {dataModal.view_your && playerData.is_connect ? (
@@ -330,9 +330,6 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
                   Round
                   <span>#{dataModal.your_ticket.game_no}</span>
                 </p>
-              ) : ''}
-              {!playerData.is_connect ? (
-                <p className="title">Connect Wallet</p>
               ) : ''}
               <p className="close p-4 pr-0" onClick={() => handleClosedModal()}>
                 <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -345,9 +342,8 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
             {dataModal.third && playerData.is_connect ? (<Third dataGiveThird={dataGiveThird} dataSendThird={dataTicketModal}></Third>) : ''}
             {dataModal.four && playerData.is_connect ? (<Four dataGiveFour={dataGiveFour} dataSendFour={dataTicketModal}></Four>) : ''}
             {dataModal.five && playerData.is_connect ? (<Five dataGiveFive={dataGiveFive} dataSendFive={dataTicketModal}></Five>) : ''}
-            {dataModal.view_ticket && playerData.is_connect ? (<ViewTicket dataGiveViewTicket={dataGiveViewTicket} dataSendViewTicket={dataModal}></ViewTicket>) : ''}
+            {dataModal.view_ticket ? (<ViewTicket dataGiveViewTicket={dataGiveViewTicket} dataSendViewTicket={dataModal}></ViewTicket>) : ''}
             {dataModal.view_your && playerData.is_connect ? (<ViewYour dataSendViewYour={dataModal}></ViewYour>) : ''}
-            {!playerData.is_connect ? (<ConnectWallet dataGiveWallet={dataGiveWallet}></ConnectWallet>) : ''}
           </div>
         </div>
       ) : (

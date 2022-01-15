@@ -19,15 +19,15 @@ const PartySection: React.FC<Props> = ({playerData, partyData, sendDataPartyToLo
         {
           Math.round(partyData.gameBalanceUSDT) !== 0 ? (
             <h3>
-              <span className='text-24 md:text-20 leading-none text-center block font-bold'>Pump the party</span>
-              <span className='font-bungee text-54 md:text-52 text-blue-17F0FF text-center leading-none block mt-6 md:mt-7 mb-6 md:mb-10'>
+              <span className='text-16 md:text-20 leading-none text-center block font-bold'>Pump the party</span>
+              <span className='font-bungee text-40 md:text-52 text-blue-17F0FF text-center leading-none block mt-9 md:mt-7 mb-8 md:mb-10'>
                 $<CountUp separator="," duration={1.5} start={0} end={partyData.gameBalanceUSDT} />
               </span>
-              <span className='text-20 md:text-20 leading-none text-center block font-bold'>~<CountUp separator="," decimals={2} decimal="." duration={1.5} start={0} end={partyData.gameBalanceSol} /> SOL</span>
+              <span className='text-16 md:text-20 leading-none text-center block font-bold'>~<CountUp separator="," decimals={2} decimal="." duration={1.5} start={0} end={partyData.gameBalanceSol} /> MILLI</span>
             </h3>
           ) : (
             <h3>
-              <span className='text-24 md:text-20 leading-none text-center block font-bold'>Pump the party</span>
+              <span className='text-16 md:text-20 leading-none text-center block font-bold'>Pump the party</span>
               <ContentLoader
                 viewBox="0 0 700 90"
                 backgroundColor="#fff"
@@ -40,7 +40,7 @@ const PartySection: React.FC<Props> = ({playerData, partyData, sendDataPartyToLo
           )
         }
         
-        <div className='relative w-130 md:w-148 mx-auto mt-12 md:mt-20'>
+        <div className='relative w-119 md:w-148 mx-auto mt-14 md:mt-18'>
           <div className={`${playerData.is_connect ? 'cursor-pointer hover:opacity-75' : 'cursor-not-allowed'}`}
             onClick={() => {
               if(window.sessionStorage.getItem('isOverTimer') === 'false' && playerData.is_connect) {

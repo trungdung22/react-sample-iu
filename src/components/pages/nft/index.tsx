@@ -15,6 +15,7 @@ const NFT: React.FC = () => {
   const classes = useStyles();
   const size = useWindowSize();
   const [notification, setNotification] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
   const [isShowPopupDesktop, setIsShowPopupDesktop] = useState(false);
   const [tab, setTab] = useState('all');
   const [value, setValue] = React.useState(0);
@@ -135,8 +136,10 @@ const NFT: React.FC = () => {
 
   window.addEventListener('resize', function() {
     if (size.width > 767) {
+      setIsMobile(false);
       setValue(0);
     } else {
+      setIsMobile(true);
       setIsShowPopupDesktop(false);
     }
   });
@@ -148,8 +151,9 @@ const NFT: React.FC = () => {
       <SwipeableViews
         index={value}
         disabled={true}
-        // animateHeight={true}
-        // animateTransitions={true}
+        animateHeight={isMobile ? true : false}
+        animateTransitions={true}
+        ignoreNativeScroll={true}
       >
         <section>
           {
@@ -158,8 +162,8 @@ const NFT: React.FC = () => {
               <div className='border-b font-lexend px-3/100'>
                 <div className='max-w-1446 mx-auto my-4 md:my-14 relative'>
                   <div className='max-w-1060 mx-auto'>
-                    <h4 className='font-bungee text-20 md:text-32 text-blue-17F0FF leading-7 md:leading-8 mb-2 md:mb-4'>The first lifetime<br className='block md:hidden' /> lottery ticket ever in<br className='block md:hidden' /> the world!</h4>
-                    <p className='text-gray-EBEBEB text-justify'>NFT tickets are used for the Lottery platform and MILLIGO by MILLIONSY. When you buy a 3-digital NFT ticket, you can participate in all MILLIONSY draws for life with the highest prize of Match 3. Similarly, when you hold a 6-digit NFT ticket, you have the right to draw in the entire Match 3 to Match 6. Every NFT ticket has a unique code. NFT holders will be slotted to participate in IGO rounds on the MILLIGO platform. And MORE for the lifetime benefit in all MILLIONSY platform.</p>
+                    <h4 className='font-bungee text-20 md:text-32 text-blue-17F0FF leading-7 md:leading-9 mb-2 md:mb-4 pr-4'>The first lifetime<br className='block md:hidden' /> lottery ticket ever in<br className='block md:hidden' /> the world!</h4>
+                    <p className='text-gray-EBEBEB text-justify'>NFT tickets are used for the Lottery platform and MILLIGO by MILLIONSY. When you buy a 3-degit NFT ticket, you can participate in all MILLIONSY draws for life with the highest prize of Match 3. Similarly, when you hold a 6-digit NFT ticket, you have the right to draw in the entire Match 3 to Match 6. Every NFT ticket has a unique code. NFT holders will be slotted to participate in IGO rounds on the MILLIGO platform. And MORE for the lifetime benefit in all MILLIONSY platform.</p>
                   </div>
                   <p className='absolute top-0 right-0 transition-all hover:opacity-70 cursor-pointer w-3.5 md:w-auto'
                     onClick={() => setNotification(false)}
@@ -179,22 +183,22 @@ const NFT: React.FC = () => {
             <div className='max-w-1060 mx-auto py-5 md:py-12 lg:py-12'>
               <div className='flex flex-col-reverse lg:flex-row justify-between items-end lg:items-center'>
                 <ul className='flex justify-between items-center md:justify-start w-full rounded-5'>
-                  <li className={`justify-center h-32px md:h-34px px-1 screen475:px-3 mr-1 md:mr-2 lg:mr-8 xl:mr-10 rounded-4 md:rounded-5 flex w-1/6 lg:w-auto items-center border border-solid border-pink-A819FA-50 lg:border-pink-A819FA text-center text-white cursor-pointer transition-all hover:bg-pink-A819FA font-semibold text-10 md:text-12 ${ tab === 'all' ? 'bg-pink-150' : '' }`}
+                  <li className={`justify-center h-32px md:h-34px px-1 screen475:px-3 mr-1 md:mr-3 lg:mr-5 rounded-4 md:rounded-5 flex w-1/6 lg:w-auto items-center border border-solid border-pink-8C24BF text-center text-white cursor-pointer transition-all hover:bg-pink-8C24BF font-semibold text-10 md:text-12 ${ tab === 'all' ? 'bg-pink-8C24BF' : '' }`}
                     onClick={() => setTab('all')}
                   >All</li>
-                  <li className={`justify-center h-32px md:h-34px px-1 screen475:px-3 mr-1 md:mr-2 lg:mr-8 xl:mr-10 rounded-4 md:rounded-5 flex w-1/6 lg:w-auto items-center border border-solid border-pink-A819FA-50 lg:border-pink-A819FA text-center text-white cursor-pointer transition-all hover:bg-pink-A819FA font-semibold text-10 md:text-12 ${ tab === 'match-3' ? 'bg-pink-150' : '' }`}
+                  <li className={`justify-center h-32px md:h-34px px-1 screen475:px-3 mr-1 md:mr-3 lg:mr-5 rounded-4 md:rounded-5 flex w-1/6 lg:w-auto items-center border border-solid border-pink-8C24BF text-center text-white cursor-pointer transition-all hover:bg-pink-8C24BF font-semibold text-10 md:text-12 ${ tab === 'match-3' ? 'bg-pink-8C24BF' : '' }`}
                     onClick={() => setTab('match-3')}
                   >Match 3</li>
-                  <li className={`justify-center h-32px md:h-34px px-1 screen475:px-3 mr-1 md:mr-2 lg:mr-8 xl:mr-10 rounded-4 md:rounded-5 flex w-1/6 lg:w-auto items-center border border-solid border-pink-A819FA-50 lg:border-pink-A819FA text-center text-white cursor-pointer transition-all hover:bg-pink-A819FA font-semibold text-10 md:text-12 ${ tab === 'match-4' ? 'bg-pink-150' : '' }`}
+                  <li className={`justify-center h-32px md:h-34px px-1 screen475:px-3 mr-1 md:mr-3 lg:mr-5 rounded-4 md:rounded-5 flex w-1/6 lg:w-auto items-center border border-solid border-pink-8C24BF text-center text-white cursor-pointer transition-all hover:bg-pink-8C24BF font-semibold text-10 md:text-12 ${ tab === 'match-4' ? 'bg-pink-8C24BF' : '' }`}
                     onClick={() => setTab('match-4')}
                   >Match 4</li>
-                  <li className={`justify-center h-32px md:h-34px px-1 screen475:px-3 mr-1 md:mr-2 lg:mr-8 xl:mr-10 rounded-4 md:rounded-5 flex w-1/6 lg:w-auto items-center border border-solid border-pink-A819FA-50 lg:border-pink-A819FA text-center text-white cursor-pointer transition-all hover:bg-pink-A819FA font-semibold text-10 md:text-12 ${ tab === 'match-5' ? 'bg-pink-150' : '' }`}
+                  <li className={`justify-center h-32px md:h-34px px-1 screen475:px-3 mr-1 md:mr-3 lg:mr-5 rounded-4 md:rounded-5 flex w-1/6 lg:w-auto items-center border border-solid border-pink-8C24BF text-center text-white cursor-pointer transition-all hover:bg-pink-8C24BF font-semibold text-10 md:text-12 ${ tab === 'match-5' ? 'bg-pink-8C24BF' : '' }`}
                     onClick={() => setTab('match-5')}
                   >Match 5</li>
-                  <li className={`justify-center h-32px md:h-34px px-1 screen475:px-3 mr-1 md:mr-2 lg:mr-8 xl:mr-10 rounded-4 md:rounded-5 flex w-1/6 lg:w-auto items-center border border-solid border-pink-A819FA-50 lg:border-pink-A819FA text-center text-white cursor-pointer transition-all hover:bg-pink-A819FA font-semibold text-10 md:text-12 ${ tab === 'match-6' ? 'bg-pink-150' : '' }`}
+                  <li className={`justify-center h-32px md:h-34px px-1 screen475:px-3 mr-1 md:mr-3 lg:mr-5 rounded-4 md:rounded-5 flex w-1/6 lg:w-auto items-center border border-solid border-pink-8C24BF text-center text-white cursor-pointer transition-all hover:bg-pink-8C24BF font-semibold text-10 md:text-12 ${ tab === 'match-6' ? 'bg-pink-8C24BF' : '' }`}
                     onClick={() => setTab('match-6')}
                   >Match 6</li>
-                  <li className={`justify-center h-32px md:h-34px px-1 screen475:px-3 lg:px-4 rounded-4 md:rounded-5 flex w-1/6 lg:w-auto items-center border border-solid border-pink-A819FA-50 lg:border-pink-A819FA text-center text-white cursor-pointer transition-all hover:bg-pink-A819FA font-semibold text-10 md:text-12 ${ tab === 'your-nfts' ? 'bg-pink-150' : '' }`}
+                  <li className={`justify-center h-32px md:h-34px px-1 screen475:px-3 lg:px-4 rounded-4 md:rounded-5 flex w-1/6 lg:w-auto items-center border border-solid border-pink-8C24BF text-center text-white cursor-pointer transition-all hover:bg-pink-8C24BF font-semibold text-10 md:text-12 ${ tab === 'your-nfts' ? 'bg-pink-8C24BF' : '' }`}
                     onClick={() => setTab('your-nfts')}
                   >Yours</li>
                 </ul>
@@ -254,6 +258,7 @@ const NFT: React.FC = () => {
                       onClick={() => {
                         if (size.width < 768) {
                           setValue(1);
+                          window.scrollTo(0, 0);
                         } else {
                           setIsShowPopupDesktop(true);
                         }
@@ -272,6 +277,7 @@ const NFT: React.FC = () => {
                       onClick={() => {
                         if (size.width < 768) {
                           setValue(1);
+                          window.scrollTo(0, 0);
                         } else {
                           setIsShowPopupDesktop(true);
                         }
@@ -290,6 +296,7 @@ const NFT: React.FC = () => {
                       onClick={() => {
                         if (size.width < 768) {
                           setValue(1);
+                          window.scrollTo(0, 0);
                         } else {
                           setIsShowPopupDesktop(true);
                         }
@@ -308,6 +315,7 @@ const NFT: React.FC = () => {
                       onClick={() => {
                         if (size.width < 768) {
                           setValue(1);
+                          window.scrollTo(0, 0);
                         } else {
                           setIsShowPopupDesktop(true);
                         }
@@ -326,6 +334,7 @@ const NFT: React.FC = () => {
                       onClick={() => {
                         if (size.width < 768) {
                           setValue(1);
+                          window.scrollTo(0, 0);
                         } else {
                           setIsShowPopupDesktop(true);
                         }
@@ -344,6 +353,7 @@ const NFT: React.FC = () => {
                       onClick={() => {
                         if (size.width < 768) {
                           setValue(1);
+                          window.scrollTo(0, 0);
                         } else {
                           setIsShowPopupDesktop(true);
                         }
@@ -362,6 +372,7 @@ const NFT: React.FC = () => {
                       onClick={() => {
                         if (size.width < 768) {
                           setValue(1);
+                          window.scrollTo(0, 0);
                         } else {
                           setIsShowPopupDesktop(true);
                         }
@@ -380,6 +391,7 @@ const NFT: React.FC = () => {
                       onClick={() => {
                         if (size.width < 768) {
                           setValue(1);
+                          window.scrollTo(0, 0);
                         } else {
                           setIsShowPopupDesktop(true);
                         }
@@ -398,6 +410,7 @@ const NFT: React.FC = () => {
                       onClick={() => {
                         if (size.width < 768) {
                           setValue(1);
+                          window.scrollTo(0, 0);
                         } else {
                           setIsShowPopupDesktop(true);
                         }
@@ -416,6 +429,7 @@ const NFT: React.FC = () => {
                       onClick={() => {
                         if (size.width < 768) {
                           setValue(1);
+                          window.scrollTo(0, 0);
                         } else {
                           setIsShowPopupDesktop(true);
                         }
@@ -434,6 +448,7 @@ const NFT: React.FC = () => {
                       onClick={() => {
                         if (size.width < 768) {
                           setValue(1);
+                          window.scrollTo(0, 0);
                         } else {
                           setIsShowPopupDesktop(true);
                         }
@@ -452,6 +467,7 @@ const NFT: React.FC = () => {
                       onClick={() => {
                         if (size.width < 768) {
                           setValue(1);
+                          window.scrollTo(0, 0);
                         } else {
                           setIsShowPopupDesktop(true);
                         }

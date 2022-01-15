@@ -15,7 +15,10 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         }
       },
       '& button': {
+        fontSize: 14,
         color: 'rgba(255, 255, 255, 0.5)',
+        fontFamily: '"Lexend", sans-serif',
+        fontWeight: '600',
         '&:hover': {
           color: '#B2FAFF',
         },
@@ -23,7 +26,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
           color: ' #0B7880',
           background: '#17F0FF',
           borderRadius: '5px',
-          fontWeight: '700',
         }
       },
       '& .MuiPaginationItem-ellipsis': {

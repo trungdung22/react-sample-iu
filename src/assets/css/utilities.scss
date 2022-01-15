@@ -2,6 +2,14 @@
   stroke: #fff;
 }
 
+.hover-arrow:hover path {
+  fill: #fff;
+}
+
+.hover-arrow:hover line {
+  stroke: #fff;
+}
+
 .animation-pend {
   animation: pend 3s ease-in-out infinite alternate-reverse;
 }

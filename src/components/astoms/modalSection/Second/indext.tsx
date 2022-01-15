@@ -166,9 +166,9 @@ const Second: React.FC<Props> = ({dataGiveSecond, dataSendSecond, playerData}) =
         </div>
       </div>
       <div className='p-4 bg-gray-575757-30'>
-        <ul className='grid grid-cols-2 gap-2.5 mb-1'>
-          <li className='transition-all hover:opacity-70 text-center col-span-1 font-semibold text-12 cursor-pointer rounded-3 border border-solid border-blue-17F0FF py-1.5 text-blue-17F0FF' onClick={handleEditNumber}>Edit numbers</li>
-          <li className='transition-all hover:opacity-70 text-center col-span-1 font-semibold text-12 cursor-pointer rounded-3 border border-solid border-blue-17F0FF py-1.5 text-blue-0B7880 bg-blue-17F0FF' onClick={handleComfirm}>Buy instantly</li>
+        <ul className='grid grid-cols-2 gap-2.5 mb-2.5'>
+          <li className='transition-all hover:opacity-70 text-center col-span-1 font-semibold text-12 cursor-pointer rounded-3 border border-solid border-blue-17F0FF flex justify-center items-center h-32px text-blue-17F0FF' onClick={handleEditNumber}>Edit numbers</li>
+          <li className='transition-all hover:opacity-70 text-center col-span-1 font-semibold text-12 cursor-pointer rounded-3 border border-solid border-blue-17F0FF flex justify-center items-center h-32px text-blue-0B7880 bg-blue-17F0FF' onClick={handleComfirm}>Buy instantly</li>
         </ul>
         <p className='text-10 text-gray-EBEBEB'>"Buy instanly" allows you to pick no-duplicate random numbers to your tickets. By the time each round begins, prices will be set, evaluated to $2. Purchases are final.</p>
       </div>

@@ -243,7 +243,7 @@ const MILLIGO: React.FC = () => {
                 <ul className='grid grid-cols-3 py-4 bg-gray-151515 rounded-5 max-w-500'>
                   <li className='col-span-1 px-4 text-center'>
                     <p className='text-pink-D47DFF text-16 font-bold mb-2'>No staking</p>
-                    <p><a href="/nft-ticket" className='bg-blue-17F0FF py-1.5 text-blue-0B7880 rounded-5 font-semibold text-12 block'>Buy NFTS</a></p>
+                    <p><a href="/nft-ticket" className='bg-blue-17F0FF h-34px w-20 mx-auto flex justify-center items-center text-blue-0B7880 rounded-5 font-semibold text-12 transition-all hover:opacity-70'>Buy NFTS</a></p>
                   </li>
                   <li className='col-span-1 px-4 text-center border-l border-r border-solid border-gray-575757-50'>
                     <p className='text-pink-D47DFF text-16 font-bold mb-4'>Raised capital</p>
@@ -266,7 +266,7 @@ const MILLIGO: React.FC = () => {
             <ul className='grid grid-cols-3 py-2 bg-gray-151515 rounded-5'>
               <li className='col-span-1 px-2.5 text-center'>
                 <p className='text-pink-D47DFF text-12 screen475:text-14 font-bold mb-2'>No staking</p>
-                <p><a href="/nft-ticket" className='bg-blue-17F0FF py-1.5 text-blue-0B7880 rounded-5 font-semibold text-12 block'>Buy NFTS</a></p>
+                <p><a href="/nft-ticket" className='bg-blue-17F0FF w-20 h-32px mx-auto flex justify-center items-center text-blue-0B7880 rounded-5 font-semibold text-12'>Buy NFTS</a></p>
               </li>
               <li className='col-span-1 px-2.5 text-center border-l border-r border-solid border-gray-575757-50'>
                 <p className='text-pink-D47DFF text-12 screen475:text-14 font-bold mb-4'>Raised capital</p>
@@ -281,7 +281,7 @@ const MILLIGO: React.FC = () => {
         </div>
       </section>
       <section className='mb-16 md:mb-20 px-3/100'>
-        <h3 className='font-bungee text-center text-20 md:text-32 text-pink-D47DFF mb-8 md:mb-14 uppercase'>upcoming Pools</h3>
+        <h3 className='font-bungee text-center text-20 md:text-32 text-pink-D47DFF mb-8 md:mb-14 uppercase'>upcoming projects</h3>
         <div className='max-w-1110 mx-auto'>
           <div className='flex justify-center'>
             <div className='rounded-5 overflow-hidden max-w-400 cursor-pointer relative transition-all hover:opacity-70 bg-gray-151515 border border-solid border-gray-575757-50'>

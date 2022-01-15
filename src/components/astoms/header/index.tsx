@@ -142,7 +142,7 @@ const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
       ></div>
       <header className={`bg-gray-151515 px-3/100 ${classes.root} ${offset && (size.width < 769) ? 'active' : ''}`}>
         <div className={`flex items-center justify-between w-full transition-all max-w-1680 mx-auto`}>
-          <a href="/" className={`${classes.headerLeft}`}><img src="/assets/common/logo.png" alt="Millionsy" /><span className='inline-block ml-1.5'>Millionsy</span></a>
+          <a href="/" className={`${classes.headerLeft}`}><img src="/assets/common/logo.png" alt="Millionsy" className='rounded-3' /><span className='inline-block ml-1.5'>Millionsy</span></a>
           <div className={`${classes.headerRight} relative`}>
             <ul className={`listRouter mr-24`}>
               <li className='mr-8'><a href="/lottery" className={location === '/lottery' ? 'active ': '' }>Lottery</a></li>
@@ -150,7 +150,7 @@ const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
               <li><a href="/nft-ticket" className={location === '/nft-ticket' ? 'active ': ''}>NFT Ticket</a></li>
             </ul>
             <div className='py-1 md:py-2'>
-              <p className={`font-bold flex justify-center items-center text-center rounded-3 px-2 h-32px md:h-34px md:px-2.5 transition-all cursor-pointer hover:opacity-70 ${ playerData.is_connect ? 'text-white bg-pink-150' : window.sessionStorage.getItem('show_connect') === 'true' && !playerData.is_connect ? 'text-gray-A9A9A9 bg-gray-F9F9F9': 'text-blue-50 bg-blue-0'}`}
+              <p className={`font-semibold flex justify-center items-center text-center rounded-2 md:rounded-3 px-2 h-32px md:h-34px md:px-2.5 transition-all cursor-pointer hover:opacity-70 ${ playerData.is_connect ? 'text-white bg-pink-150' : window.sessionStorage.getItem('show_connect') === 'true' && !playerData.is_connect ? 'text-gray-A9A9A9 bg-gray-F9F9F9': 'text-blue-50 bg-blue-0'}`}
                 onClick={handleClickConnect}
               >
                 <span className='inline-block mr-1'>

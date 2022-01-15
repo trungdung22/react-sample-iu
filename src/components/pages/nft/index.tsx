@@ -4,7 +4,7 @@ import Footer from 'components/astoms/footer';
 import Header from 'components/astoms/header';
 import ModalContent from 'components/astoms/modalSection';
 import Star from 'components/astoms/star';
-import { fetchPlayerAccount, insertNFTTransaction } from 'lib/utilities/utils';
+import { fetchPlayerAccount, getGameBoardInfo, insertNFTTransaction } from 'lib/utilities/utils';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import useStyles from './styles';
@@ -38,6 +38,15 @@ const NFT: React.FC = () => {
   });
 
   const [queryParam, setQueryParam] = useState({});
+  const [programInfo, setProgramInfo] = useState({
+    programId: '',
+    ownerPubkey: ''
+    // gameStatus: item.gameStatus,
+    // gamePubkey: item.gamePubkey,
+    // gameBalanceSol: item.gameBalanceSOL,
+    // gameBalanceUSDT: item.gameBalanceUSDT,
+    // gameRollNums: item.gameRollNums
+  });
 
   const [selectedTicketData, setSelectedTicketData] = useState({
     ticketNumber: '',
@@ -251,18 +260,17 @@ const NFT: React.FC = () => {
       console.log('wallet not connected')
       return;
     }
-    buyNFTTicket(selectedTicketData.milli_nft_pubkey,
+    buyNFTTicket(programInfo.programId,
+      selectedTicketData.milli_nft_pubkey,
       selectedTicketData.user_pubkey,
       selectedTicketData.token_account_pubkey,
       selectedTicketData.mint_pubkey, selectedTicketData.price,
       playerData.data.adapter_type
-    ).then(async res => {
-      debugger
-      console.log(res)
+    ).then(async buyer_tokenAccount => {
       await insertNFTTransaction(
         playerData.data.publicKey,
         selectedTicketData.mint_pubkey,
-        res,
+        buyer_tokenAccount,
         selectedTicketData.milli_nft_pubkey,
       );
       setIsShowPopupDesktop(false);
@@ -301,6 +309,16 @@ const NFT: React.FC = () => {
           balanceUSDT: item.balanceUSDT,
           balanceSOL: item.balanceSOL,
         }
+      }));
+
+      getGameBoardInfo().then(item => setProgramInfo({
+        programId: item.programId,
+        ownerPubkey: item.ownerPubkey
+        // gameStatus: item.gameStatus,
+        // gamePubkey: item.gamePubkey,
+        // gameBalanceSol: item.gameBalanceSOL,
+        // gameBalanceUSDT: item.gameBalanceUSDT,
+        // gameRollNums: item.gameRollNums
       }));
     }
   }, [])
@@ -505,7 +523,7 @@ const NFT: React.FC = () => {
               </div>
               <p className='bg-gray-575757 opacity-50 h-px mt-4 mb-3'></p>
               <div className='flex justify-between items-center gap-4'>
-                <p className='text-18 text-pink-D47DFF font-bold leading-6'>~0.27 MILLI <span className='text-14 font-light'>{selectedTicketData.price/1000000} USCD</span></p>
+                <p className='text-18 text-pink-D47DFF font-bold leading-6'>~0.27 MILLI <span className='text-14 font-light'>{selectedTicketData.price / 1000000} USCD</span></p>
                 <p className={`text-12 text-blue-0B7880 font-semibold bg-blue-17F0FF py-2 px-3.5 rounded-4 inline-block transition-all cursor-pointer hover:opacity-70 ${playerData.data.is_connect ? 'cursor-pointer hover:opacity-75' : 'cursor-not-allowed'}`}
                   onClick={onBuyNFTTicket}
                   onMouseLeave={() => {

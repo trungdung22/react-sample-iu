@@ -22,7 +22,8 @@ interface MilliNFTAccountDataLayout {
   num_four: String;
   num_five: String;
   num_six: String;
-  price: Number;
+  price: number;
+  description: String;
 }
 
 type Props = {
@@ -56,11 +57,11 @@ const Ticket: React.FC<Props> = ({
   useEffect(() => {
     connection.getAccountInfo(
       new PublicKey(nftAccountPubkey)
-    ).then(res => {
+    ).then(async res => {
       setTicketNumber('#');
       let nftInfo = {} as MilliNFTAccountDataLayout;
       const nftDecodedInfo = deserializeNFTTicket(res);
-      console.log(nftDecodedInfo);
+      // console.log(nftDecodedInfo);
       nftInfo.milli_nft_pubkey = nftAccountPubkey;
       nftInfo.price = nftDecodedInfo.price;
       nftInfo.status = nftDecodedInfo.status;
@@ -90,9 +91,17 @@ const Ticket: React.FC<Props> = ({
           break;
         case NFTTypes[3]:
           setTicketNumber(number => number.slice(0, 13));
-
       }
-
+      
+      let a = await fetch(metadataURL);
+      // check for error response
+      const response_data = await a.json();
+      if (!a.ok) {
+        // get error message from body or default to response statusText
+        const error = (response_data && response_data.message) || a.statusText;
+        return Promise.reject(error);
+      }
+      nftInfo.description = response_data.description;
       setNftData(nftInfo);
       settIsLoaded(true);
     }).catch(err => {
@@ -111,46 +120,50 @@ const Ticket: React.FC<Props> = ({
     }
 
     emitTicketData({
+      ...nftData,
       ticketNumber: ticketNumber,
-      token_account_pubkey: nftData.token_account_pubkey,
-      mint_pubkey: nftData.mint_pubkey,
-      user_pubkey: nftData.user_pubkey,
-      milli_nft_pubkey: nftData.milli_nft_pubkey,
-      price: nftData.price,
-      status: nftData.status,
+      // token_account_pubkey: nftData.token_account_pubkey,
+      // mint_pubkey: nftData.mint_pubkey,
+      // user_pubkey: nftData.user_pubkey,
+      // milli_nft_pubkey: nftData.milli_nft_pubkey,
+      // price: nftData.price,
+      // status: nftData.status,
       imageURL: imageURL
     });
   }
 
   return (
     <>
-      <div className='col-span-1 bg-gray-151515 text-gray-EBEBEB rounded-5 md:rounded-10 border border-solid border-blue-0B7880 p-1 md:p-2 md:cursor-pointer'
-        onClick={cardOnClickHandler}
-      >
-        <p className='bg-no-repeat bg-center bg-cover h-24 md:h-184 rounded-5 md:rounded-10' style={{ 'backgroundImage': `url(${imageURL}` }}></p>
-        <div className='mt-1 md:mt-4'>
-          <p className='text-16 md:text-24 text-blue-17F0FF font-bungee leading-6 md:mb-3'>{ticketNumber}
-          </p>
-          <p className='text-8 md:text-12'>
-            <span className='font-bold block md:inline-block mr-1'>
-              Lottery:
-            </span>Lifetime drawing with match 4 &amp; 3.
-          </p>
-          <p className='text-8 md:text-12'>
-            <span className='font-bold uppercase block md:inline-block mr-1'>
-              MILLIGO:
-            </span>
-            4 slots for every IGO round.
-          </p>
-          <p className='w-full h-px bg-gray-A9A9A9 opacity-50 mt-2 md:mt-8'></p>
-          <p className='flex justify-between items-center font-bold text-14 md:text-18 text-pink-D47DFF pt-1 md:pt-2'>
-            <span className='text-10 md:text-14 font-normal'>
-              ~50$
-            </span>
-            <span>0.27 MILLI</span>
-          </p>
+      {isLoaded &&
+        <div className='col-span-1 bg-gray-151515 text-gray-EBEBEB rounded-5 md:rounded-10 border border-solid border-blue-0B7880 p-1 md:p-2 md:cursor-pointer'
+          onClick={cardOnClickHandler}
+        >
+          <p className='bg-no-repeat bg-center bg-cover h-24 md:h-184 rounded-5 md:rounded-10' style={{ 'backgroundImage': `url(${imageURL}` }}></p>
+          <div className='mt-1 md:mt-4'>
+            <p className='text-16 md:text-24 text-blue-17F0FF font-bungee leading-6 md:mb-3'>{ticketNumber}
+            </p>
+            <p className='text-8 md:text-12'>
+              {nftData.description}
+              {/* <span className='font-bold block md:inline-block mr-1'>
+                Lottery:
+              </span>Lifetime drawing with match 4 &amp; 3.
+            </p>
+            <p className='text-8 md:text-12'>
+              <span className='font-bold uppercase block md:inline-block mr-1'>
+                MILLIGO:
+              </span>
+              4 slots for every IGO round. */}
+            </p>
+            <p className='w-full h-px bg-gray-A9A9A9 opacity-50 mt-2 md:mt-8'></p>
+            <p className='flex justify-between items-center font-bold text-14 md:text-18 text-pink-D47DFF pt-1 md:pt-2'>
+              <span className='text-10 md:text-14 font-normal'>
+                ~50$
+              </span>
+              <span>{nftData.price/1000000} MILLI</span>
+            </p>
+          </div>
         </div>
-      </div>
+      }
     </>
   )
 }

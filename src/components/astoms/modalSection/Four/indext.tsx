@@ -81,25 +81,28 @@ const Four: React.FC<Props> = ({dataSendFour, dataGiveFour}) => {
   return (
     <>
       <div className={`${classes.body}`}>
-        <ul className={`${classes.chooseNumber} test`}>
+        <ul className={`${classes.chooseNumber}`}>
           {
             Array(45).fill(1).map((el, index) => (
-              <li key={index} className={`${index + 1 == dataChoose.value ? 'active' : ''}`} onClick={handleOnClickChooseNumber}>{!handleCheck(index+1)?(index < 9 ? `0${index+1}` : index+1): '_'}</li>
+              <li key={index} className={`${index + 1 == dataChoose.value ? 'active' : ''}`} onClick={handleOnClickChooseNumber}>{!handleCheck(index+1)?(index < 9 ? `0${index + 1}` : index + 1): '_'}</li>
+            ))
+          }
+        </ul>
+        <ul className='flex justify-between mt-3'>
+          {
+            data.data.ticketChanges.numberChange.map((el: number, index: number) => (
+              <li key={index} className={`w-35 h-35 bg-blue-17F0FF p-px inline-block rounded-full cursor-pointer`}
+                onClick={(event) => handleOnClickTicket(event, index)}
+              >
+                <p className={`flex justify-center items-center w-full h-full text-16 font-bungee rounded-full ${index === dataChoose.idx ? 'bg-blue-0B7880 box-shadow-0440-inset' : 'bg-gray-151515'}`}><span className='text-blue-17F0FF'>{el < 10 ? `0${el}` : el}</span></p>
+              </li>
             ))
           }
         </ul>
       </div>
-      <ul className={`${classes.listNumber}`}>
-        {
-          data.data.ticketChanges.numberChange.map((el: number, index: number) => (
-            <li key={index} className={index === dataChoose.idx ? 'active' : ''} onClick={(event) => handleOnClickTicket(event, index)}>{el < 10 ? `0${el}` : el}</li>
-          ))
-        }
-      </ul>
-      <div className={`${classes.footer}`}>
-        <ul className={`${classes.listButton}`}>
-          <li onClick={handleSendData}>Submit</li>
-        </ul>
+      
+      <div className={`p-4 bg-gray-575757-30`}>
+        <p onClick={handleSendData} className='transition-all hover:opacity-70 text-center font-semibold text-12 cursor-pointer rounded-3 border border-solid text-blue-0B7880 bg-blue-17F0FF w-28 h-32px flex justify-center items-center mx-auto'>Submit</p>
       </div>
     </>
   )

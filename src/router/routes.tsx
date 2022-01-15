@@ -34,7 +34,7 @@ const routes: Routes[] = [
   },
   {
     title: 'Millionsy',
-    path: '/MILLIGO/:nameProject',
+    path: '/milligo/:nameProject',
     LoadComponent: lazy(() => import('components/pages/millionsy')),
     exact: true,
   },

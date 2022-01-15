@@ -1,16 +1,7 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 const useStyles = makeStyles((theme: Theme) => createStyles({
-  body: {
-    padding: '1.25rem',
-    background: '#201E1E',
-    '& .title': {
-      fontSize: 20,
-      fontWeight: 700,
-    }
-  },
-  footer: {
-    padding: '1.25rem',
-  },
+  body: {},
+  footer: {},
   listButton: {
     '& li': {
       fontWeight: 700,
@@ -33,30 +24,31 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
   listTickets: {
     overflowY: 'auto',
-    maxHeight: 380,
-    marginTop: '1rem',
     marginBottom: 0,
+    marginTop: '5px',
+    maxHeight: 190,
     '& dl + dl': {
-      marginTop: '1rem',
+      marginTop: '18px',
     },
     '& dt': {
-      fontSize: 16,
-      marginBottom: '0.5rem',
+      fontSize: 12,
+      marginBottom: '0.25rem',
+      color: '#EBEBEB',
     },
     '& ul': {
-      background: 'rgba(168, 25, 250, 0.2)',
+      padding: '3px 12px',
+      background: '#0B7880',
       boxShadow: 'inset 0 4px 4px rgb(0 0 0 / 25%)',
-      border: '1px solid #A819FA',
-      borderRadius: 10,
+      border: '1px solid #ADFAFF',
+      borderRadius: 5,
       display: 'flex',
-      justifyContent: 'space-between',
-      padding: '0.75rem 1rem',
       fontWeight: 600,
       color: '#fff',
+      width: 'fit-content',
+      '& li + li': {
+        marginLeft: 23,
+      }
     },
-    '@media screen and (max-width: 767px)': {
-      maxHeight: 280,
-    }
   },
 }));
 

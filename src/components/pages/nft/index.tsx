@@ -132,6 +132,7 @@ const NFT: React.FC = () => {
   }
 
   const [notification, setNotification] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
   const [isShowPopupDesktop, setIsShowPopupDesktop] = useState(false);
 
   const [swipeableViewsIndex, setSwipeableViewsIndex] = useState(0); // swipable view
@@ -330,7 +331,9 @@ const NFT: React.FC = () => {
   window.addEventListener('resize', function () {
     if (size.width > 767) {
       setSwipeableViewsIndex(0);
+      setIsMobile(false);
     } else {
+      setIsMobile(true);
       setIsShowPopupDesktop(false);
     }
   });
@@ -341,12 +344,13 @@ const NFT: React.FC = () => {
 
   return (
     <>
-      <Star></Star>
       <Header playerData={playerData.data} dataGiveFromHeader={dataGiveFromHeader}></Header>
-
       <SwipeableViews
-        axis={'x'}
         index={swipeableViewsIndex}
+        disabled={true}
+        animateHeight={isMobile ? true : false}
+        animateTransitions={true}
+        ignoreNativeScroll={true}
       >
         <section>
           {
@@ -354,17 +358,17 @@ const NFT: React.FC = () => {
             <>
               <div className='border-b font-lexend px-3/100'>
                 <div className='max-w-1446 mx-auto my-4 md:my-14 relative'>
-                  <div className='max-w-1011 mx-auto'>
-                    <h4 className='font-bungee text-24 lg:text-32 text-blue-17F0FF leading-7 md:leading-8 mb-2 md:mb-4'>The first lifetime<br className='block md:hidden' /> lottery ticket ever in<br className='block md:hidden' /> the world!</h4>
-                    <p className='text-pink-F4E0FF text-10 lg:text-14 font-medium text-justify'>NFT tickets are used for the Lottery platform and MILLIGO by MILLIONSY. When you buy a 3-digital NFT ticket, you can participate in all MILLIONSY draws for life with the highest prize of Match 3. Similarly, when you hold a 6-digit NFT ticket, you have the right to draw in the entire Match 3 to Match 6. Every NFT ticket has a unique code. NFT holders will be slotted to participate in IGO rounds on the MILLIPAD platform. And MORE for the lifetime benefit in all MILLIONSY platform.</p>
+                  <div className='max-w-1060 mx-auto'>
+                    <h4 className='font-bungee text-20 md:text-32 text-blue-17F0FF leading-7 md:leading-9 mb-2 md:mb-4 pr-4'>The first lifetime<br className='block md:hidden' /> lottery ticket ever in<br className='block md:hidden' /> the world!</h4>
+                    <p className='text-gray-EBEBEB text-justify'>NFT tickets are used for the Lottery platform and MILLIGO by MILLIONSY. When you buy a 3-degit NFT ticket, you can participate in all MILLIONSY draws for life with the highest prize of Match 3. Similarly, when you hold a 6-digit NFT ticket, you have the right to draw in the entire Match 3 to Match 6. Every NFT ticket has a unique code. NFT holders will be slotted to participate in IGO rounds on the MILLIGO platform. And MORE for the lifetime benefit in all MILLIONSY platform.</p>
                   </div>
-                  <p className='absolute top-0 right-0 transition-all hover:opacity-70 cursor-pointer'
+                  <p className='absolute top-0 right-0 transition-all hover:opacity-70 cursor-pointer w-3.5 md:w-auto'
                     onClick={() => setNotification(false)}
                   >
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M10.0001 18.3334C14.6025 18.3334 18.3334 14.6024 18.3334 10C18.3334 5.39765 14.6025 1.66669 10.0001 1.66669C5.39771 1.66669 1.66675 5.39765 1.66675 10C1.66675 14.6024 5.39771 18.3334 10.0001 18.3334Z" stroke="#F4E0FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="bevel" />
-                      <path d="M13.1085 13.0501L7.2168 7.15839" stroke="#F4E0FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="bevel" />
-                      <path d="M7.2168 13.0501L13.1085 7.15839" stroke="#F4E0FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="bevel" />
+                    <svg className='w-full' width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M10.0001 18.3334C14.6025 18.3334 18.3334 14.6024 18.3334 10C18.3334 5.39765 14.6025 1.66669 10.0001 1.66669C5.39771 1.66669 1.66675 5.39765 1.66675 10C1.66675 14.6024 5.39771 18.3334 10.0001 18.3334Z" stroke="#EBEBEB" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="bevel"/>
+                      <path d="M13.1085 13.0501L7.2168 7.15839" stroke="#EBEBEB" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="bevel"/>
+                      <path d="M7.2168 13.0501L13.1085 7.15839" stroke="#EBEBEB" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="bevel"/>
                     </svg>
                   </p>
                 </div>
@@ -373,29 +377,29 @@ const NFT: React.FC = () => {
             </>
           }
           <div className='font-lexend px-3/100'>
-            <div className='max-w-1700 mx-auto py-5 md:py-20'>
-              <div className='flex flex-col-reverse lg:flex-row justify-between items-center gap-5'>
-                <ul className='flex justify-between md:justify-center lg:justify-start gap-1 md:gap-4 xl:gap-8 w-full rounded-5'>
-                  <li className={`justify-center py-1.5 lg:py-2.5 px-1 screen475:px-3 lg:px-4 rounded-4 md:rounded-5 flex items-center border border-solid border-pink-A819FA-50 lg:border-pink-A819FA text-center text-white cursor-pointer transition-all hover:bg-pink-A819FA font-semibold text-10 md:text-14 xl:text-16 ${tab === null ? 'bg-pink-150' : ''}`}
+            <div className='max-w-1060 mx-auto py-5 md:py-12 lg:py-12'>
+              <div className='flex flex-col-reverse lg:flex-row justify-between items-end lg:items-center'>
+                <ul className='flex justify-between items-center md:justify-start w-full rounded-5'>
+                  <li className={`justify-center h-32px md:h-34px px-1 screen475:px-3 mr-1 md:mr-3 lg:mr-5 rounded-4 md:rounded-5 flex w-1/6 lg:w-auto items-center border border-solid border-pink-8C24BF text-center text-white cursor-pointer transition-all hover:bg-pink-8C24BF font-semibold text-10 md:text-12 ${tab === null ? 'bg-pink-8C24BF' : ''}`}
                     onClick={() => setTab(null)}
                   >All</li>
-                  <li className={`justify-center py-1.5 lg:py-2.5 px-1 screen475:px-3 lg:px-4 rounded-4 md:rounded-5 flex items-center border border-solid border-pink-A819FA-50 lg:border-pink-A819FA text-center text-white cursor-pointer transition-all hover:bg-pink-A819FA font-semibold text-10 md:text-14 xl:text-16 ${tab === NFTTypes[0] ? 'bg-pink-150' : ''}`}
+                  <li className={`justify-center h-32px md:h-34px px-1 screen475:px-3 mr-1 md:mr-3 lg:mr-5 rounded-4 md:rounded-5 flex w-1/6 lg:w-auto items-center border border-solid border-pink-8C24BF text-center text-white cursor-pointer transition-all hover:bg-pink-8C24BF font-semibold text-10 md:text-12 ${tab === NFTTypes[0] ? 'bg-pink-8C24BF' : ''}`}
                     onClick={() => setTab(NFTTypes[0])}
                   >Match 3</li>
-                  <li className={`justify-center py-1.5 lg:py-2.5 px-1 screen475:px-3 lg:px-4 rounded-4 md:rounded-5 flex items-center border border-solid border-pink-A819FA-50 lg:border-pink-A819FA text-center text-white cursor-pointer transition-all hover:bg-pink-A819FA font-semibold text-10 md:text-14 xl:text-16 ${tab === NFTTypes[1] ? 'bg-pink-150' : ''}`}
+                  <li className={`justify-center h-32px md:h-34px px-1 screen475:px-3 mr-1 md:mr-3 lg:mr-5 rounded-4 md:rounded-5 flex w-1/6 lg:w-auto items-center border border-solid border-pink-8C24BF text-center text-white cursor-pointer transition-all hover:bg-pink-8C24BF font-semibold text-10 md:text-12 ${tab === NFTTypes[1] ? 'bg-pink-8C24BF' : ''}`}
                     onClick={() => setTab(NFTTypes[1])}
                   >Match 4</li>
-                  <li className={`justify-center py-1.5 lg:py-2.5 px-1 screen475:px-3 lg:px-4 rounded-4 md:rounded-5 flex items-center border border-solid border-pink-A819FA-50 lg:border-pink-A819FA text-center text-white cursor-pointer transition-all hover:bg-pink-A819FA font-semibold text-10 md:text-14 xl:text-16 ${tab === NFTTypes[2] ? 'bg-pink-150' : ''}`}
+                  <li className={`justify-center h-32px md:h-34px px-1 screen475:px-3 mr-1 md:mr-3 lg:mr-5 rounded-4 md:rounded-5 flex w-1/6 lg:w-auto items-center border border-solid border-pink-8C24BF text-center text-white cursor-pointer transition-all hover:bg-pink-8C24BF font-semibold text-10 md:text-12 ${tab === NFTTypes[2] ? 'bg-pink-8C24BF' : ''}`}
                     onClick={() => setTab(NFTTypes[2])}
                   >Match 5</li>
-                  <li className={`justify-center py-1.5 lg:py-2.5 px-1 screen475:px-3 lg:px-4 rounded-4 md:rounded-5 flex items-center border border-solid border-pink-A819FA-50 lg:border-pink-A819FA text-center text-white cursor-pointer transition-all hover:bg-pink-A819FA font-semibold text-10 md:text-14 xl:text-16 ${tab === NFTTypes[3] ? 'bg-pink-150' : ''}`}
+                  <li className={`justify-center h-32px md:h-34px px-1 screen475:px-3 mr-1 md:mr-3 lg:mr-5 rounded-4 md:rounded-5 flex w-1/6 lg:w-auto items-center border border-solid border-pink-8C24BF text-center text-white cursor-pointer transition-all hover:bg-pink-8C24BF font-semibold text-10 md:text-12 ${tab === NFTTypes[3] ? 'bg-pink-8C24BF' : ''}`}
                     onClick={() => setTab(NFTTypes[3])}
                   >Match 6</li>
-                  <li className={`justify-center py-1.5 lg:py-2.5 px-1 screen475:px-3 lg:px-4 rounded-4 md:rounded-5 flex items-center border border-solid border-pink-A819FA-50 lg:border-pink-A819FA text-center text-white cursor-pointer transition-all hover:bg-pink-A819FA font-semibold text-10 md:text-14 xl:text-16 ${tab === 'your-nfts' ? 'bg-pink-150' : ''}`}
+                  <li className={`justify-center h-32px md:h-34px px-1 screen475:px-3 mr-1 md:mr-3 lg:mr-5 rounded-4 md:rounded-5 flex w-1/6 lg:w-auto items-center border border-solid border-pink-8C24BF text-center text-white cursor-pointer transition-all hover:bg-pink-8C24BF font-semibold text-10 md:text-12 ${tab === 'your-nfts' ? 'bg-pink-8C24BF' : ''}`}
                     onClick={() => setTab('your-nfts')}
-                  >Your NFTs</li>
+                  >Yours</li>
                 </ul>
-                <div className='relative lg:max-w-300 w-full'>
+                <div className='relative sm:max-w-230 w-full mb-5 lg:mb-0'>
                   <p>
                     <input
                       ref={searchInputEl}
@@ -414,7 +418,7 @@ const NFT: React.FC = () => {
                           setValueInputSearch('');
                         }
                       }}
-                      className={`text-white placeholder-white bg-transparent font-light pr-10 outline-none py-1 lg:py-3 w-full text-14 lg:text-16 border border-solid rounded-3 md:rounded-5 search-nft ${valueInputSearch !== '' ? 'border-blue-17F0FF pl-4' : 'border-gray-B4B4B4-80 pl-10 lg:pl-4'}`}
+                      className={`text-white placeholder-white bg-transparent font-light pr-10 outline-none h-32px md:h-34px leading-normal w-full border border-solid rounded-5 md:rounded-3 search-nft ${valueInputSearch !== '' ? 'border-pink-8C24BF pl-4' : 'border-gray-B4B4B4-80 pl-10 lg:pl-4'}`}
                     />
                   </p>
                   {
@@ -439,15 +443,15 @@ const NFT: React.FC = () => {
                   }
                 </div>
               </div>
-              <div className='max-w-1460 mx-auto'>
+              <div className='max-w-1060 mx-auto'>
                 {
                   !filteredNftTickets.length &&
-                  <p className='text-12 md:text-16 text-blue-ADFAFF mt-5 md:mt-10'>There is nothing here. Try something else!</p>
+                  <p className='text-blue-ADFAFF mt-5 md:mt-10'>There is nothing here. Try something else!</p>
                 }
                 {
                   !!filteredNftTickets.length &&
                   <div>
-                    <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3 lg:gap-5 mt-5 md:mt-24'>
+                    <div className='grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3 lg:gap-5 mt-5 md:mt-12'>
                       {
                         filteredNftTickets.map((ticket) => {
                           return <Ticket key={ticket.milli_nft_account_pubkey}
@@ -468,7 +472,7 @@ const NFT: React.FC = () => {
             </div>
           </div>
         </section>
-        <div {...handlers}>
+        <div>
           <p className='px-3/100 py-5'
             onClick={() => {
               setSwipeableViewsIndex(0);
@@ -481,16 +485,16 @@ const NFT: React.FC = () => {
           <div className='grid grid-cols-1 gap-8'>
             <div className='col-span-1'>
               <p><img src={selectedTicketData.imageURL} alt="" className='w-full' /></p>
-              <div className='px-3/100 pt-5'>
-                <p className='text-24 font-bungee text-blue-17F0FF leading-8 mb-1'>#051733</p>
+              <div className='px-3/100 py-5'>
+                <p className='text-20 font-bungee text-blue-17F0FF leading-8 mb-1'>#051733</p>
                 <div>
                   <p className='text-12 leading-4'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
                   <p className='text-12 leading-4'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
                 </div>
-                <p className='bg-gray-A9A9A9 opacity-50 h-px mt-4 mb-2'></p>
+                <p className='bg-gray-A9A9A9 opacity-50 h-px mt-5 mb-3'></p>
                 <div className='flex justify-between items-end'>
-                  <p className='text-20 text-pink-D47DFF font-bold leading-8'>~0.27 SOL <span className='text-16 font-normal'>(50$)</span></p>
-                  <p className='text-12 text-blue-0B7880 font-semibold bg-blue-17F0FF py-2 px-3.5 rounded-4 inline-block transition-all cursor-pointer hover:opacity-70'>Buy ticket</p>
+                  <p><span className='text-20 text-blue-17F0FF font-bold leading-6 mr-2'>~0.27 SOL</span><span>(50$)</span></p>
+                  <p className='text-12 text-blue-0B7880 font-semibold bg-blue-17F0FF h-32px w-20 rounded-4 inline-flex justify-center items-center transition-all cursor-pointer hover:opacity-70'>Buy ticket</p>
                 </div>
               </div>
             </div>
@@ -503,9 +507,9 @@ const NFT: React.FC = () => {
       {
         isShowPopupDesktop &&
         <div className='fixed top-0 left-0 z-1000 h-full w-full'>
-          <div className='bg-gray-400 h-full w-full z-100 top-0 left-0 absolute' onClick={handleResetDataPopupTicket}></div>
-          <div className='w-full absolute z-1000 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-151515 max-w-700 rounded-10'>
-            <p className='flex justify-end px-5 py-4' onClick={handleResetDataPopupTicket}>
+          <div className='bg-black opacity-50 h-full w-full z-100 top-0 left-0 absolute' onClick={handleResetDataPopupTicket}></div>
+          <div className='w-full absolute z-1000 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-151515 max-w-600 rounded-10 border border-solid border-gray-575757-50'>
+            <p className='flex justify-end px-5 py-4 bg-gray-575757-30' onClick={handleResetDataPopupTicket}>
               <span className='inline-block transition-all cursor-pointer hover:opacity-70'>
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fillRule="evenodd" clipRule="evenodd" d="M9.75592 1.42259C10.0814 1.09715 10.0814 0.569515 9.75592 0.244078C9.43049 -0.0813592 8.90285 -0.0813592 8.57741 0.244078L5 3.82149L1.42259 0.244078C1.09715 -0.0813584 0.569515 -0.0813584 0.244078 0.244079C-0.0813592 0.569515 -0.0813592 1.09715 0.244078 1.42259L3.82149 5L0.244078 8.57741C-0.0813592 8.90285 -0.0813592 9.43048 0.244078 9.75592C0.569515 10.0814 1.09715 10.0814 1.42259 9.75592L5 6.17851L8.57741 9.75592C8.90285 10.0814 9.43049 10.0814 9.75592 9.75592C10.0814 9.43049 10.0814 8.90285 9.75592 8.57741L6.17851 5L9.75592 1.42259Z" fill="white" />
@@ -515,26 +519,18 @@ const NFT: React.FC = () => {
             <p><img src={selectedTicketData.imageURL} width='500' alt="" className='w-full' /></p>
             <div className='px-5 py-3'>
               <div className='flex flex-col justify-center'>
-                <p className='text-24 font-bungee text-blue-17F0FF leading-7'>{selectedTicketData.ticketNumber}</p>
+                <p className='text-20 font-bungee text-blue-17F0FF mb-1'>{selectedTicketData.ticketNumber}</p>
                 <div>
-                  <p className='text-10 leading-4'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
-                  <p className='text-10 leading-4'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
+                  <p className='text-14 leading-4'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
+                  <p className='text-14 leading-4'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
                 </div>
               </div>
-              <p className='bg-gray-575757 opacity-50 h-px mt-4 mb-3'></p>
+              <p className='bg-gray-575757 opacity-50 h-px mt-4 mb-5'></p>
               <div className='flex justify-between items-center gap-4'>
-                <p className='text-18 text-pink-D47DFF font-bold leading-6'>~0.27 MILLI <span className='text-14 font-light'>{selectedTicketData.price / 1000000} USCD</span></p>
-                <p className={`text-12 text-blue-0B7880 font-semibold bg-blue-17F0FF py-2 px-3.5 rounded-4 inline-block transition-all cursor-pointer hover:opacity-70 ${playerData.data.is_connect ? 'cursor-pointer hover:opacity-75' : 'cursor-not-allowed'}`}
+                <p><span className='text-20 text-blue-17F0FF font-bold leading-6 mr-2'>~0.27 MILLI</span><span>{selectedTicketData.price / 1000000} USCD</span></p>
+                <p className='text-12 text-blue-0B7880 font-semibold bg-blue-17F0FF w-92 h-34px rounded-4 inline-flex justify-center items-center transition-all cursor-pointer hover:opacity-70'
                   onClick={onBuyNFTTicket}
-                  onMouseLeave={() => {
-                    setShowTooltipConnect(false);
-                  }}
-                  onMouseEnter={() => {
-                    if (!playerData.data.is_connect) {
-                      setShowTooltipConnect(true);
-                    }
-                  }}>Buy ticket</p>
-                {showTooltipConnect && <p className='absolute top-full left-3 md:left-1.5 transform translate-y-2 z-100 border border-solid border-pink-150 bg-purple-150 rounded-5 text-center text-12 md:text-14 pt-0.5 pb-1 text-white px-2'>Connect wallet first</p>}
+                >Buy ticket</p>
               </div>
             </div>
           </div>

@@ -1,17 +1,5 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 const useStyles = makeStyles((theme: Theme) => createStyles({
-  root: {
-    maxWidth: 700,
-    margin: '0 auto',
-    background: '#303030',
-    borderRadius: 20,
-    border: '1px solid #17F0FF',
-
-    '@media screen and (max-width: 767px)': {
-      maxWidth: '100%',
-      borderRadius: 10,
-    }
-  },
   header: {
     padding: '1.5rem 2rem',
     '& .top': {

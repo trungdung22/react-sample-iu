@@ -8,10 +8,10 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     width: '100%',
     zIndex: 100,
     fontSize: 18,
-    color: '#F4E0FF',
+    color: '#F9F9F9',
   },
   backgroundModal: {
-    background: 'rgba(142, 142, 142, 0.5)',
+    background: 'rgba(0, 0, 0, 0.5)',
     height: '100vh',
     position: 'absolute',
     width: '100%',
@@ -24,35 +24,37 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     transform: 'translate(-50%, -50%)',
     maxHeight: '95%',
     zIndex: 1000,
-    background: '#303030',
-    borderRadius: 20,
-    border: '1px solid #17F0FF',
+    background: '#151515',
+    borderRadius: 10,
+    border: '1px solid rgba(87, 87, 87, 0.5)',
     fontSize: 16,
     width: '100%',
-    maxWidth: 345,
+    maxWidth: 280,
     overflow: 'hidden',
     '&.error': {
+      background: '#1D1D45',
       border: '1px solid #A819FA',
-    }
+    },
+    '&.success': {
+      background: '#1D1D45',
+    },
   },
   header: {
-    borderBottom: '1px solid #616161',
-    padding: '1.5rem 1.25rem',
+    padding: '0 1.25rem',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    background: 'rgba(87, 87, 87, 0.3)',
 
     '&.hasID': {
-      borderBottom: 0,
-      padding: '1.25rem 1.5rem',
       '& span': {
-        background: 'rgba(140, 36, 191, 0.5)',
+        background: 'rgba(140, 36, 191, 0.8)',
         display: 'inline-block',
         cursor: 'default',
         margin: '0 0 0 0.5rem',
-        padding: '0.5rem 1.25rem',
-        fontSize: 16,
-        borderRadius: 10,
+        padding: '2px 10px',
+        fontSize: 12,
+        borderRadius: 5,
         '&:hover': {
           opacity: 1
         },
@@ -60,21 +62,20 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     },
 
     '& .title': {
-      fontSize: 20,
-      fontWeight: 700,
+      fontSize: 14,
+      fontWeight: 600,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      gap: '0.5rem',
-      '& span': {
-        display: 'inline-block',
-        marginRight: '0.75rem',
-        transition: 'all 0.2s ease',
-        cursor: 'pointer',
-        '&:hover': {
-          opacity: 0.6
-        }
-      }
+      // '& span': {
+      //   display: 'inline-block',
+      //   marginRight: '0.75rem',
+      //   transition: 'all 0.2s ease',
+      //   cursor: 'pointer',
+      //   '&:hover': {
+      //     opacity: 0.6
+      //   }
+      // }
     },
     '& .close': {
       cursor: 'pointer',

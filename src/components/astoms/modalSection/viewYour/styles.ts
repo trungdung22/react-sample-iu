@@ -1,58 +1,60 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 const useStyles = makeStyles((theme: Theme) => createStyles({
   winingNumber: {
-    borderTop: '1px solid #616161',
-    padding: '1.25rem 1.25rem 0.75rem',
-    '& p': {
-      fontSize: 20,
-      fontWeight: 700,
-      marginBottom: '0.75rem',
+    overflowY: 'auto',
+    marginBottom: 0,
+    marginTop: '5px',
+    maxHeight: 190,
+    '& dl + dl': {
+      marginTop: '18px',
+    },
+    '& dt': {
+      fontSize: 12,
+      marginBottom: '0.25rem',
+      color: '#EBEBEB',
     },
     '& ul': {
+      cursor: 'pointer',
+      padding: '3px 12px',
+      transition: 'all 0.2s ease',
+      background: '#0B7880',
+      boxShadow: 'inset 0 4px 4px rgb(0 0 0 / 25%)',
+      border: '1px solid #ADFAFF',
+      borderRadius: 5,
       display: 'flex',
-      alignItems: 'center',
       justifyContent: 'space-between',
-      gap: '0.5rem',
-      '& li': {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: '50%',
-        border: '1px solid #17F0FF',
-        fontWeight: 700,
-        color: '#17F0FF',
-        width: 40,
-        height: 40,
-        fontSize: 18,
-      },
-    }
+      fontWeight: 600,
+      color: '#fff',
+      '&:hover': {
+        opacity: 0.8,
+      }
+    },
   },
   listTickets: {
     overflowY: 'auto',
-    padding: '0 1.25rem',
-    maxHeight: 186,
-    marginTop: '1rem',
-    marginBottom: '1.25rem',
+    marginBottom: 0,
+    marginTop: '5px',
+    maxHeight: 190,
     '& dl + dl': {
-      marginTop: '1rem',
+      marginTop: '18px',
     },
     '& dt': {
-      marginBottom: '0.5rem',
-      fontSize: 16,
+      fontSize: 12,
+      marginBottom: '0.25rem',
+      color: '#EBEBEB',
     },
     '& ul': {
-      background: 'rgba(168, 25, 250, 0.2)',
+      padding: '3px 12px',
+      background: '#0B7880',
       boxShadow: 'inset 0 4px 4px rgb(0 0 0 / 25%)',
-      border: '1px solid #A819FA',
-      borderRadius: 10,
+      border: '1px solid #ADFAFF',
+      borderRadius: 5,
       display: 'flex',
-      width: 'fit-content',
       fontWeight: 600,
-      padding: '0.75rem 0',
       color: '#fff',
-      '& li': {
-        width: 48,
-        textAlign: 'center',
+      width: 'fit-content',
+      '& li + li': {
+        marginLeft: 23,
       }
     },
   },

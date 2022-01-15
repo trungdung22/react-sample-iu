@@ -12,7 +12,7 @@
 }
 
 a {
-  color: #fff;
+  color: #F9F9F9;
   text-decoration: none;
 }
 
@@ -25,13 +25,12 @@ img {
 }
 
 body {
-  color: #fff;
-  font-size: 16px;
+  color: #F9F9F9;
+  font-size: 14px;
   background: #010810;
-  font-family: 'Lexend', sans-serif;
   overflow-x: hidden;
   font-weight: 300;
-  padding-top: 80px;
+  padding-top: 50px;
 }
 
 .pc-475,
@@ -66,8 +65,8 @@ body {
 
 @media screen and (max-width: 767px) {
   body {
-    font-size: 14px;
-    padding-top: 48px;
+    font-size: 12px;
+    padding-top: 40px;
     padding-bottom: 56px;
   }
 

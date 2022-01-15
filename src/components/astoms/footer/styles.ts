@@ -108,6 +108,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   },
   footerSticky: {
     display: 'none',
+    color: '#D1D1D1',
     '@media screen and (max-width: 767px)': {
       position: 'fixed',
       bottom: 0,
@@ -130,12 +131,14 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
           fontWeight: 700,
           background: 'rgba(11, 120, 128, 0.3)',
           '& path': {
-            fill: '#17F0FF'
+            fill: '#17F0FF',
+            '&.special': {
+              stroke: '#17F0FF',
+            }
           }
         },
       },
       '& span': {
-        color: '#fff',
         display: 'block',
         textAlign: 'center',
         paddingBottom: '0.25rem',

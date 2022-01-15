@@ -22,7 +22,7 @@ const ViewSubmit: React.FC<Props> = ({dataSendViewSubmit}) => {
           )}
         </div>
         <div className={`${classes.submitContent} ${dataSendViewSubmit ? '' : 'error'}`}>
-          <p className={`${classes.submitTitle} ${dataSendViewSubmit ? '' : 'error'}`}>{dataSendViewSubmit ? 'Successful purchased!' : 'Error.'}</p>
+          <p className={`${classes.submitTitle} ${dataSendViewSubmit ? '' : 'error'}`}>{dataSendViewSubmit ? 'Successful purchased!' : 'Error'}</p>
           {dataSendViewSubmit ? '' : <p className={`${classes.submitDes}`}>Please try again. Confirm the transaction and make sure you are paying enough gas!</p>}
         </div>
       </div>

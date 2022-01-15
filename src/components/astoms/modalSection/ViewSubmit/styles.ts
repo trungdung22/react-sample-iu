@@ -5,26 +5,22 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     alignItems: 'center',
   },
   submitIcon: {
-    padding: '0 1rem',
+    padding: '0 0.75rem',
 
   },
   submitContent: {
-    padding: '1.5rem 1rem',
+    padding: '1.25rem 1rem',
     borderLeft: '1px solid #17F0FF',
     '&.error': {
       borderLeft: '1px solid #A819FA'
     }
   },
   submitTitle: {
-    fontSize: 18,
-    fontWeight: 700,
-    '&.error': {
-      fontSize: 22,
-    }
+    fontSize: 14,
+    fontWeight: 600,
   },
   submitDes: {
-    fontSize: 16,
-    lineHeight: '1.3rem',
+    fontSize: 12,
   },
 }));
 

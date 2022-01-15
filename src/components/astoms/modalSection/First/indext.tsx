@@ -71,12 +71,12 @@ const First: React.FC<Props> = ({playerData, dataGiveFirst}) => {
             onChange={handleChangeInput}
           />
           <div className={`${classes.payunit}`}>
-            <p className="name">SOL</p>
+            <p className="name">MILLI</p>
             <p>~{data.data.unit}</p>
           </div>
         </div>
         {playerData.balanceSOL < data.data.price ? (<p className={`${classes.insuff}`}>Insufficient MILLI balance</p>) : ''}
-        <p className={`${classes.balance}`}>SOL Balance: {playerData.balanceSOL.toFixed(6)}</p>
+        <p className={`${classes.balance}`}>MILLI Balance: {playerData.balanceSOL.toFixed(6)}</p>
       </div>
       <p className={`${classes.lineGray}`}><span></span></p>
       <div className={`${classes.footer}`}>

@@ -58,76 +58,75 @@ const Yours: React.FC<Props> = ({playerData, dataGiveFromYours}) => {
   
 
   const handleRenderRoundItems = (el: any) => {
-    console.log(el);
-    
-    if (el.player_tickets.length > 0) {
+    // if (el.player_tickets.length > 0) {
       const date = new Date(el.updatedAt);
       const formatTime = (time: number) => {
         return time < 10 ?  '0' + time : time;
       }
       return (
-        <li key={el.id} onClick={() => dataGiveFromYours(el)}>
-          <p>{el.game_no}</p>
-          <p>
-            <span>{`${formatTime(date.getDate())} thg ${date.getMonth() + 1}, ${date.getFullYear()}`}</span>
-            <span>{`${formatTime(date.getHours())}:${formatTime(date.getMinutes())}`}</span>
+        <li key={el.id} onClick={() => dataGiveFromYours(el)} className='font-semibold flex items-center relative cursor-pointer transition-all hover:opacity-70 py-1 md:py-2'>
+          <p className='font-medium text-center w-12 flex-shrink-0 md:w-14 mr-4 sm:mr-12 md:mr-16'>{el.game_no}</p>
+          <p className='w-28 md:w-52 mr-8 md:mr-16'>
+            <span className='block md:inline-block w-full md:w-28 mr-8'>{`${formatTime(date.getDate())} thg ${date.getMonth() + 1}, ${date.getFullYear()}`}</span>
+            <span className='text-gray-A9A9A9'>{`${formatTime(date.getHours())}:${formatTime(date.getMinutes())}`}</span>
           </p>
           <p>
-            <span>{el.player_tickets.length}</span>
-            <span><img src="/assets/common/icon_arrow_circle.svg" alt="arrow circle" /></span>
+            <span className='font-bold text-12 md:text-16 text-center w-14 md:w-28 inline-block'>{el.player_tickets.length}</span>
+            <span className='inline-block absolute top-3 md:top-2.5 right-0 w-3.5 md:w-auto'>
+              <svg className='max-w-full' width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="10" r="9.5" stroke="#EBEBEB"/>
+                <path d="M8.16699 13.9834L11.592 10.5584C11.7472 10.4022 11.8343 10.191 11.8343 9.97088C11.8343 9.75073 11.7472 9.53952 11.592 9.38338L8.25866 6.05005" stroke="#F4E0FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="bevel"/>
+              </svg>
+            </span>
           </p>
         </li>
       )
-    }
+    // }
   }
   
   return (
-    <div className={`${classes.root} relative`}>
-      <p className='absolute -top-5 md:-top-6 left-0 w-24 md:w-auto'><img src="./assets/lottery/sky_02.svg" alt="" /></p>
+    <div className='p-3.5 md:px-8 md:py-4'>
       {
         data.items.length > 0 ? (
-          <>
-            <div className={`${classes.header}`}>
-              <p className="title">Round</p>
-            </div>
-            <div className={`${classes.body}`}>
-              <ul className="listLabel">
-                <li>#</li>
-                <li>Date</li>
-                <li>Your<br className="sp-768"/> tickets</li>
+          <div className=''>
+            <ul className='flex items-center'>
+              <li className='text-14 md:text-16 text-pink-D47DFF font-bold uppercase leading-none md:leading-normal w-12 md:w-14 mr-4 sm:mr-12 md:mr-16'>Round</li>
+              <li className='text-14 md:text-16 text-pink-D47DFF font-bold uppercase leading-none md:leading-normal w-28 md:w-52 mr-8 md:mr-16'>Date</li>
+              <li className='text-14 md:text-16 text-pink-D47DFF font-bold uppercase leading-none md:leading-normal text-center md:text-left'>Your<br className='block md:hidden'/> tickets</li>
+            </ul>
+            {/* {
+              stateItem > 0 ?  */}
+              <ul className='h-64 md:h-72 overflow-y-auto overflow-x-hidden'>
+                <InfiniteScroll
+                  throttle={100}
+                  threshold={30}
+                  isLoading={data.isLoading}
+                  hasMore={!data.loadAll}
+                  onLoadMore={loadMore}
+                >
+                  {data.items.map(item => (handleRenderRoundItems(item)))}
+                </InfiniteScroll>
               </ul>
-              {
-                stateItem > 0 ? 
-                <ul className="listRound">
-                  <InfiniteScroll
-                    throttle={100}
-                    threshold={30}
-                    isLoading={data.isLoading}
-                    hasMore={!data.loadAll}
-                    onLoadMore={loadMore}
-                  >
-                    {data.items.map(item => (handleRenderRoundItems(item)))}
-                  </InfiniteScroll>
-                </ul>
-                : <p className='text-14 md:text-16 lg:text-18 text-pink-50'>You don't have any ticket.</p>
-              }
-              
-            </div>
-          </>
+              {/* : <p className='text-gray-EBEBEB mt-4'>You don't have any ticket.</p>
+            } */}
+            
+          </div>
         ) : (
           <ContentLoader
             viewBox="0 0 700 312"
             backgroundColor="#fff"
             foregroundColor="#dcdcdc"
           >
-            <rect x="32" y="32" rx="4" ry="4" width="180" height="20" />
-            <rect x="32" y="72" rx="4" ry="4" width="642" height="20" />
-            <rect x="32" y="112" rx="4" ry="4" width="642" height="20" />
-            <rect x="32" y="152" rx="4" ry="4" width="642" height="20" />
-            <rect x="32" y="192" rx="4" ry="4" width="642" height="20" />
-            <rect x="32" y="232" rx="4" ry="4" width="642" height="20" />
-            <rect x="32" y="272" rx="4" ry="4" width="642" height="20" />
-            <rect x="32" y="312" rx="4" ry="4" width="642" height="20" />
+            <rect x="0" y="32" rx="4" ry="4" width="180" height="20" />
+            <rect x="265" y="32" rx="4" ry="4" width="180" height="20" />
+            <rect x="520" y="32" rx="4" ry="4" width="180" height="20" />
+            <rect x="0" y="72" rx="4" ry="4" width="700" height="20" />
+            <rect x="0" y="112" rx="4" ry="4" width="700" height="20" />
+            <rect x="0" y="152" rx="4" ry="4" width="700" height="20" />
+            <rect x="0" y="192" rx="4" ry="4" width="700" height="20" />
+            <rect x="0" y="232" rx="4" ry="4" width="700" height="20" />
+            <rect x="0" y="272" rx="4" ry="4" width="700" height="20" />
+            <rect x="0" y="312" rx="4" ry="4" width="700" height="20" />
           </ContentLoader>
         )
       }

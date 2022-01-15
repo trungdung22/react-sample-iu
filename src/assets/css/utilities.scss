@@ -1,5 +1,13 @@
 .fill-white:hover path {
+  stroke: #fff;
+}
+
+.hover-arrow:hover path {
   fill: #fff;
+}
+
+.hover-arrow:hover line {
+  stroke: #fff;
 }
 
 .animation-pend {
@@ -8,6 +16,10 @@
 
 .box-shadow-0440 {
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.box-shadow-0440-inset {
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25) inset;
 }
 
 .translateLeftSmall {
@@ -37,6 +49,16 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.bg-gradient-17F0FF-to-0BA8B4 {
+  background-image: linear-gradient(to bottom, #17F0FF, #0BA8B4);
+}
+.text-gradient-17F0FF-to-0BA8B4 {
+  background: linear-gradient(to bottom, #17F0FF, #0BA8B4);
+  background: -webkit-linear-gradient(to bottom, #17F0FF, #0BA8B4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .christmas-santa {

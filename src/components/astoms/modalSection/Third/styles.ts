@@ -1,11 +1,7 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 const useStyles = makeStyles((theme: Theme) => createStyles({
-  body: {
-    padding: '1.25rem',
-  },
-  footer: {
-    padding: '1.25rem',
-  },
+  body: {},
+  footer: {},
   description: {
     color: '#fff',
     lineHeight: '1.2rem',
@@ -77,23 +73,24 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   listTickets: {
     overflowY: 'auto',
     marginBottom: 0,
-    marginTop: '1.5rem',
-    maxHeight: 160,
+    marginTop: '5px',
+    maxHeight: 190,
     '& dl + dl': {
-      marginTop: '1rem',
+      marginTop: '18px',
     },
     '& dt': {
-      fontSize: 16,
-      marginBottom: '0.5rem',
+      fontSize: 12,
+      marginBottom: '0.25rem',
+      color: '#EBEBEB',
     },
     '& ul': {
       cursor: 'pointer',
-      padding: '0.75rem 1rem',
+      padding: '3px 12px',
       transition: 'all 0.2s ease',
-      background: 'rgba(168, 25, 250, 0.2)',
+      background: '#0B7880',
       boxShadow: 'inset 0 4px 4px rgb(0 0 0 / 25%)',
-      border: '1px solid #A819FA',
-      borderRadius: 10,
+      border: '1px solid #ADFAFF',
+      borderRadius: 5,
       display: 'flex',
       justifyContent: 'space-between',
       fontWeight: 600,

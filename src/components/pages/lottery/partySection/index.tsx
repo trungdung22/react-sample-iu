@@ -14,27 +14,20 @@ const PartySection: React.FC<Props> = ({playerData, partyData, sendDataPartyToLo
   const classes = useStyles();
   
   return (
-    <div className={`${classes.root} relative overflow-hidden`}>
-      <p className='absolute top-32 md:top-40 lg:top-1/3 left-8 md:left-8 lg:left-20 w-6 md:w-10 lg:w-auto'><img src="./assets/lottery/star_01.svg" alt="" /></p>
-      <p className='absolute bottom-20 block md:hidden md:top-40 lg:top-1/3 left-8 md:left-8 lg:left-20 w-6 md:w-10 lg:w-auto'><img src="./assets/lottery/star_01.svg" alt="" /></p>
-      <p className='absolute block md:hidden bottom-10 right-20 w-12'><img src="./assets/lottery/star_01.svg" alt="" /></p>
-      <p className='absolute bottom-24 md:top-1/2 right-4 md:right-8 lg:right-20'><img src="./assets/lottery/star_02.svg" alt="" /></p>
-      <div className={`${classes.container} relative`}>
-        <p className='absolute w-14 md:w-18 lg:w-110 translateLeftSmall christmas-santa'><img src="./assets/lottery/santa.png" alt="" /></p>
-        <p className='absolute w-16 md:w-20 lg:w-auto translateRightSmall christmas-star_yellow01'><img src="./assets/lottery/star_yellow_01.png" alt="" /></p>
-        <p className='absolute w-20 md:w-24 lg:w-auto translateRightSmall christmas-star_yellow02'><img src="./assets/lottery/star_yellow_02.png" alt="" /></p>
-        <p className='absolute w-20 md:w-24 lg:w-auto translateLeftSmall christmas-hook'><img src="./assets/lottery/hook.png" alt="" /></p>
+    <div className={`${classes.root} px-3/100 md:pb-44 pb-36 pt-40`}>
+      <div className='max-w-700 mx-auto'>
         {
           Math.round(partyData.gameBalanceUSDT) !== 0 ? (
             <h3>
-              <span>Pump the party</span>
-              <div>$<CountUp separator="," duration={1.5} start={0} end={partyData.gameBalanceUSDT} className='inline-block'/></div>
-              <span>~<CountUp separator="," decimals={2} decimal="." duration={1.5} start={0} end={partyData.gameBalanceSol} />  MILLI</span>
-              <span>(+ <CountUp separator="," duration={1.5} start={0} end={500000} /> MILLI)</span>
+              <span className='text-16 md:text-20 leading-none text-center block font-bold'>Pump the party</span>
+              <span className='font-bungee text-40 md:text-52 text-blue-17F0FF text-center leading-none block mt-9 md:mt-7 mb-8 md:mb-10'>
+                $<CountUp separator="," duration={1.5} start={0} end={partyData.gameBalanceUSDT} />
+              </span>
+              <span className='text-16 md:text-20 leading-none text-center block font-bold'>~<CountUp separator="," decimals={2} decimal="." duration={1.5} start={0} end={partyData.gameBalanceSol} /> MILLI</span>
             </h3>
           ) : (
             <h3>
-              <span>Pump the party</span>
+              <span className='text-16 md:text-20 leading-none text-center block font-bold'>Pump the party</span>
               <ContentLoader
                 viewBox="0 0 700 90"
                 backgroundColor="#fff"
@@ -47,8 +40,8 @@ const PartySection: React.FC<Props> = ({playerData, partyData, sendDataPartyToLo
           )
         }
         
-        <div className='relative w-fit mx-auto'>
-          <p className={`${classes.buyticket} ${playerData.is_connect ? 'cursor-pointer hover:opacity-75' : 'cursor-not-allowed'}`}
+        <div className='relative w-119 md:w-148 mx-auto mt-14 md:mt-18'>
+          <div className={`${playerData.is_connect ? 'cursor-pointer hover:opacity-75' : 'cursor-not-allowed'}`}
             onClick={() => {
               if(window.sessionStorage.getItem('isOverTimer') === 'false' && playerData.is_connect) {
                 sendDataPartyToLottery(true)
@@ -63,10 +56,12 @@ const PartySection: React.FC<Props> = ({playerData, partyData, sendDataPartyToLo
               }
             }}
           >
-            <img src="/assets/lottery/ticket.svg" alt="ticket" />
-            <span>Buy Ticket</span>
-          </p>
-          { showTooltipConnect && <p className='absolute top-full left-3 md:left-16 transform translate-y-2 z-100 border border-solid border-pink-150 bg-purple-150 rounded-5 text-center text-12 md:text-14 pt-0.5 pb-1 text-white px-2'>Connect wallet first</p> }
+            <picture>
+              <source media="(min-width: 768px)" srcSet="/assets/lottery/buyticket_pc.png" />
+              <img src="/assets/lottery/buyticket_sp.png" alt=""/>
+            </picture>
+          </div>
+          { showTooltipConnect && <p className='absolute top-full left-1/4 screen475:left-1/2 transform -translate-x-1/2 translate-y-2 z-100 border border-solid border-pink-A819FA bg-gray-151515 rounded-5 text-center text-14 md:text-16 py-1 w-44 text-pink-A819FA font-medium'>Connect wallet first</p> }
         </div>
       </div>
     </div>

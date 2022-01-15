@@ -197,7 +197,6 @@ const Home: React.FC = () => {
           </p>
         </div>
       } */}
-      <Star></Star>
       <Header playerData={playerData.data} dataGiveFromHeader={dataGiveFromHeader}></Header>
       <div className={`${classes.root}`}>
         <div className={`${classes.container}`}>

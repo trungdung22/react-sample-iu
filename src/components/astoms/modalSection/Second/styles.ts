@@ -1,11 +1,7 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 const useStyles = makeStyles((theme: Theme) => createStyles({
-  body: {
-    padding: '1.25rem',
-  },
-  footer: {
-    padding: '1.25rem',
-  },
+  body: {},
+  footer: {},
   buy: {
     display: 'flex',
     alignItems: 'center',
@@ -21,27 +17,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         maxWidth: 35,
       }
     },
-  },
-  inputNumber: {
-    color: '#D47DFF',
-    position: 'relative',
-    marginBottom: '0.5rem',
-    '& input': {
-      borderRadius: 10,
-      outline: 'none',
-      border: '1px solid #A819FA',
-      background: 'rgba(168, 25, 250, 0.1)',
-      width: '100%',
-      textAlign: 'right',
-      padding: '0.75rem 1rem 2.25rem',
-      fontWeight: 700,
-      fontSize: 22,
-      color: '#D47DFF',
-      '&::placeholder': {
-        fontSize: 22,
-        color: '#D47DFF',
-      },
-    }
   },
   payunit: {
     position: 'absolute',

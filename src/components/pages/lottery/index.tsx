@@ -323,8 +323,6 @@ const Lottery: React.FC = () => {
   }
   return (
     <>
-      
-      <Star></Star>
       <Header playerData={playerData.data} dataGiveFromHeader={dataGiveFromHeader}></Header>
       <div className={`${classes.root}`}>
         <PartySection partyData={partyData.data} playerData={playerData.data} sendDataPartyToLottery={sendDataPartyToLottery}></PartySection>

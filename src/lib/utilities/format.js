@@ -4,9 +4,9 @@ const monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'
 export const numberWithCommas = (x) => {
     if (typeof x === 'string') {
         var convert_val = Number(x);
-        return convert_val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return convert_val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
 export const prettyPrintTime = (time) => {

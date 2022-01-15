@@ -145,9 +145,7 @@ const NFT: React.FC = () => {
   });
   return (
     <>
-      <Star></Star>
       <Header playerData={playerData.data} dataGiveFromHeader={dataGiveFromHeader}></Header>
-      
       <SwipeableViews
         index={value}
         disabled={true}

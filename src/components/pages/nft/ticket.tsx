@@ -93,16 +93,16 @@ const Ticket: React.FC<Props> = ({
           setTicketNumber(number => number.slice(0, 13));
       }
       
-      let a = await fetch(metadataURL);
+      let metadataRes = await fetch(metadataURL);
       // check for error response
-      const response_data = await a.json();
-      if (!a.ok) {
+      const metadata_data = await metadataRes.json();
+      if (!metadataRes.ok) {
         // get error message from body or default to response statusText
-        const error = (response_data && response_data.message) || a.statusText;
+        const error = (metadata_data && metadata_data.message) || metadataRes.statusText;
         return Promise.reject(error);
       }
-      nftInfo.description = response_data.description;
-      console.log( nftInfo.description.split(':'))
+      nftInfo.description = metadata_data.description;
+      // console.log( nftInfo.description.split(':'))
       setNftData(nftInfo);
       settIsLoaded(true);
     }).catch(err => {

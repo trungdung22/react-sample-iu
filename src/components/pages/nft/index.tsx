@@ -56,7 +56,8 @@ const NFT: React.FC = () => {
     milli_nft_pubkey: '',
     status: '',
     price: null,
-    imageURL: ''
+    imageURL: '',
+    description: ''
   });
 
 
@@ -488,8 +489,9 @@ const NFT: React.FC = () => {
               <div className='px-3/100 py-5'>
                 <p className='text-20 font-bungee text-blue-17F0FF leading-8 mb-1'>#051733</p>
                 <div>
-                  <p className='text-12 leading-4'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
-                  <p className='text-12 leading-4'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
+                  {selectedTicketData.description}
+                  {/* <p className='text-12 leading-4'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
+                  <p className='text-12 leading-4'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p> */}
                 </div>
                 <p className='bg-gray-A9A9A9 opacity-50 h-px mt-5 mb-3'></p>
                 <div className='flex justify-between items-end'>
@@ -521,8 +523,9 @@ const NFT: React.FC = () => {
               <div className='flex flex-col justify-center'>
                 <p className='text-20 font-bungee text-blue-17F0FF mb-1'>{selectedTicketData.ticketNumber}</p>
                 <div>
-                  <p className='text-14 leading-4'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
-                  <p className='text-14 leading-4'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
+                  {selectedTicketData.description}
+                  {/* <p className='text-14 leading-4'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
+                  <p className='text-14 leading-4'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p> */}
                 </div>
               </div>
               <p className='bg-gray-575757 opacity-50 h-px mt-4 mb-5'></p>

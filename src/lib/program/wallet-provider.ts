@@ -8,6 +8,7 @@ import { PhantomWalletAdapter } from "lib/wallets/phantom";
 import { Coin98WalletAdapter } from "lib/wallets/coin98";
 import { SOLLET_ADAPTER_NETWORD } from './config';
 import { PROVIDER_URL } from "data/constants";
+import { HOST_NAME } from 'data/constants';
 
 // const WALLET_LIST = ["sollet", "phantom"];
 
@@ -77,7 +78,7 @@ const connectToCoin98Wallet = () => {
 };
 
 export const UseWallet = async (adapterType: string): Promise<BaseMessageSignerWalletAdapter> => {
-  let wallet;
+  let wallet: BaseMessageSignerWalletAdapter;
   switch(adapterType){
     case("sollet"):
       await connectToSolletWallet();
@@ -92,9 +93,30 @@ export const UseWallet = async (adapterType: string): Promise<BaseMessageSignerW
       wallet = phantom;
       break;
     }
+    authenticate(wallet.publicKey.toString());
     return wallet;
 };
 
+const authenticate = (walletPubkey) => {
+  fetch(`${HOST_NAME}/api/auth/`, {
+    method: 'POST',
+    headers : { 
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+    body: JSON.stringify({'user': walletPubkey})
+  }).then(async response => {
+    const responseData = await response.json();
+    if (!response.ok) {
+      const error = (responseData && responseData.message) || response.statusText;
+      return Promise.reject(error);
+    }
+    
+    window.sessionStorage.setItem('token', responseData['token']);
+  }).catch(err => {
+      console.log(err);
+  })
+}
 
 // const connectToWallet = () => {
 //   debugger

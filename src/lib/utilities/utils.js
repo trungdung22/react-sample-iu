@@ -123,7 +123,7 @@ export const insertNFTTransaction = async (
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            // 'Authorization': 
+            'Authorization': sessionStorage.getItem('token') 
         },
         body: JSON.stringify({
             user_pubkey : user_pubkey,

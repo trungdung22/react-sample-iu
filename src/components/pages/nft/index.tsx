@@ -493,7 +493,7 @@ const NFT: React.FC = () => {
                 </div>
                 <p className='bg-gray-A9A9A9 opacity-50 h-px mt-5 mb-3'></p>
                 <div className='flex justify-between items-end'>
-                  <p><span className='text-20 text-blue-17F0FF font-bold leading-6 mr-2'>~0.27 SOL</span><span>(50$)</span></p>
+                  <p><span className='text-20 text-blue-17F0FF font-bold leading-6 mr-2'>{selectedTicketData.price / 1000000} MILLI</span><span>({selectedTicketData.price / 1000000 * 2}$)</span></p>
                   <p className='text-12 text-blue-0B7880 font-semibold bg-blue-17F0FF h-32px w-20 rounded-4 inline-flex justify-center items-center transition-all cursor-pointer hover:opacity-70'>Buy ticket</p>
                 </div>
               </div>

@@ -26,7 +26,7 @@ export interface MilliNFTAccountDataLayout {
   price: number;
   priceMilli: number;
   priceDollar: number;
-  description: String;
+  description: string;
   imageURL: string;
 }
 
@@ -106,8 +106,8 @@ const Ticket: React.FC<Props> = ({
         const error = (metadata_data && metadata_data.message) || metadataRes.statusText;
         return Promise.reject(error);
       }
-      nftInfo.description = metadata_data.description;
-      // console.log( nftInfo.description.split(':'))
+      console.log( metadata_data.description.split('.'))
+      nftInfo.description = metadata_data.description.split('.').join('</br>');
       setNftData(nftInfo);
       settIsLoaded(true);
     }).catch(err => {
@@ -138,7 +138,7 @@ const Ticket: React.FC<Props> = ({
           <p className='bg-no-repeat bg-center bg-cover h-24 sm:h-36 lg:h-48 rounded-5 md:rounded-10' style={{ 'backgroundImage': `url(${nftData.imageURL}` }}></p>
           <div className='mt-1 md:mt-2.5'>
             <p className='text-16 md:text-20 text-blue-17F0FF font-bungee leading-6 md:mb-1'>{nftData.ticketNumber}</p>
-            <p> {nftData.description}</p>
+            <div dangerouslySetInnerHTML={{ __html: nftData.description }} ></div>
             {/* <p className='text-10 md:text-14'>
             <span className='inline-block mr-1 font-semibold'>Lottery:</span>
             Lifetime drawing with match 3.</p>

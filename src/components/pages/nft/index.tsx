@@ -482,7 +482,8 @@ const NFT: React.FC = () => {
                 <div className='px-3/100 py-5'>
                   <p className='text-20 font-bungee text-blue-17F0FF leading-8 mb-1'>{selectedTicketData.ticketNumber}</p>
                   <div>
-                    {selectedTicketData.description}
+                    <div dangerouslySetInnerHTML={{ __html: selectedTicketData.description }} ></div>
+
                     {/* <p className='text-12 leading-4'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
                   <p className='text-12 leading-4'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p> */}
                   </div>
@@ -519,7 +520,7 @@ const NFT: React.FC = () => {
               <div className='flex flex-col justify-center'>
                 <p className='text-20 font-bungee text-blue-17F0FF mb-1'>{selectedTicketData.ticketNumber}</p>
                 <div>
-                  {selectedTicketData.description}
+                  <div dangerouslySetInnerHTML={{ __html: selectedTicketData.description }} ></div>
                   {/* <p className='text-14 leading-4'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
                   <p className='text-14 leading-4'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p> */}
                 </div>

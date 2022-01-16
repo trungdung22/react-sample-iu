@@ -257,7 +257,7 @@ const NFT: React.FC = () => {
       selectedTicketData.milli_nft_pubkey,
       selectedTicketData.user_pubkey,
       selectedTicketData.token_account_pubkey,
-      selectedTicketData.mint_pubkey, selectedTicketData.priceMilli,
+      selectedTicketData.mint_pubkey, selectedTicketData.price,
       playerData.data.adapter_type
     ).then(async buyer_tokenAccount => {
       await insertNFTTransaction(
@@ -489,7 +489,9 @@ const NFT: React.FC = () => {
                   <p className='bg-gray-A9A9A9 opacity-50 h-px mt-5 mb-3'></p>
                   <div className='flex justify-between items-end'>
                     <p><span className='text-20 text-blue-17F0FF font-bold leading-6 mr-2'>{selectedTicketData.priceMilli} MILLI</span><span>({selectedTicketData.priceDollar}$)</span></p>
-                    <p className='text-12 text-blue-0B7880 font-semibold bg-blue-17F0FF h-32px w-20 rounded-4 inline-flex justify-center items-center transition-all cursor-pointer hover:opacity-70'>Buy ticket</p>
+                    <p className='text-12 text-blue-0B7880 font-semibold bg-blue-17F0FF h-32px w-20 rounded-4 inline-flex justify-center items-center transition-all cursor-pointer hover:opacity-70'
+                      onClick={onBuyNFTTicket}
+                    >Buy ticket</p>
                   </div>
                 </div>
               </div>

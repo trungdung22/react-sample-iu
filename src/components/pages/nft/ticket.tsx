@@ -23,6 +23,7 @@ export interface MilliNFTAccountDataLayout {
   num_four: String;
   num_five: String;
   num_six: String;
+  price: number;
   priceMilli: number;
   priceDollar: number;
   description: String;
@@ -65,6 +66,7 @@ const Ticket: React.FC<Props> = ({
       // console.log(nftDecodedInfo);
       nftInfo.imageURL = `${metadataURL}/image.png`;
       nftInfo.milli_nft_pubkey = nftAccountPubkey;
+      nftInfo.price = nftDecodedInfo.price;
       nftInfo.priceMilli = nftDecodedInfo.price / 1000000;
       nftInfo.priceDollar = nftDecodedInfo.price / 1000000 * 2; // 1 milli  = 2 $
       nftInfo.status = nftDecodedInfo.status;

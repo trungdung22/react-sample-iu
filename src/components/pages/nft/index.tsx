@@ -18,6 +18,7 @@ import { buildParamRequest, splitArrayIntoChunksOfLen } from 'lib/utilities/form
 import debounce from 'lodash.debounce';
 import { NFTTypes } from 'lib/program/state';
 import ViewSubmit from 'components/astoms/modalSection/ViewSubmit';
+import { MilliNFTAccountDataLayout } from './ticket';
 
 const NFT: React.FC = () => {
   const classes = useStyles();
@@ -48,17 +49,7 @@ const NFT: React.FC = () => {
     // gameRollNums: item.gameRollNums
   });
 
-  const [selectedTicketData, setSelectedTicketData] = useState({
-    ticketNumber: '',
-    token_account_pubkey: '',
-    mint_pubkey: '',
-    user_pubkey: '',
-    milli_nft_pubkey: '',
-    status: '',
-    price: null,
-    imageURL: '',
-    description: ''
-  });
+  const [selectedTicketData, setSelectedTicketData] = useState<MilliNFTAccountDataLayout>();
 
 
   useEffect(() => {
@@ -266,7 +257,7 @@ const NFT: React.FC = () => {
       selectedTicketData.milli_nft_pubkey,
       selectedTicketData.user_pubkey,
       selectedTicketData.token_account_pubkey,
-      selectedTicketData.mint_pubkey, selectedTicketData.price,
+      selectedTicketData.mint_pubkey, selectedTicketData.priceMilli,
       playerData.data.adapter_type
     ).then(async buyer_tokenAccount => {
       await insertNFTTransaction(
@@ -367,9 +358,9 @@ const NFT: React.FC = () => {
                     onClick={() => setNotification(false)}
                   >
                     <svg className='w-full' width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M10.0001 18.3334C14.6025 18.3334 18.3334 14.6024 18.3334 10C18.3334 5.39765 14.6025 1.66669 10.0001 1.66669C5.39771 1.66669 1.66675 5.39765 1.66675 10C1.66675 14.6024 5.39771 18.3334 10.0001 18.3334Z" stroke="#EBEBEB" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="bevel"/>
-                      <path d="M13.1085 13.0501L7.2168 7.15839" stroke="#EBEBEB" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="bevel"/>
-                      <path d="M7.2168 13.0501L13.1085 7.15839" stroke="#EBEBEB" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="bevel"/>
+                      <path d="M10.0001 18.3334C14.6025 18.3334 18.3334 14.6024 18.3334 10C18.3334 5.39765 14.6025 1.66669 10.0001 1.66669C5.39771 1.66669 1.66675 5.39765 1.66675 10C1.66675 14.6024 5.39771 18.3334 10.0001 18.3334Z" stroke="#EBEBEB" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="bevel" />
+                      <path d="M13.1085 13.0501L7.2168 7.15839" stroke="#EBEBEB" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="bevel" />
+                      <path d="M7.2168 13.0501L13.1085 7.15839" stroke="#EBEBEB" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="bevel" />
                     </svg>
                   </p>
                 </div>
@@ -473,35 +464,38 @@ const NFT: React.FC = () => {
             </div>
           </div>
         </section>
-        <div>
-          <p className='px-3/100 py-5'
-            onClick={() => {
-              setSwipeableViewsIndex(0);
-            }}
-          >
-            <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M17 9C17.5523 9 18 8.55228 18 8C18 7.44772 17.5523 7 17 7V9ZM0.292892 7.29289C-0.0976315 7.68342 -0.0976315 8.31658 0.292892 8.70711L6.65685 15.0711C7.04738 15.4616 7.68054 15.4616 8.07107 15.0711C8.46159 14.6805 8.46159 14.0474 8.07107 13.6569L2.41421 8L8.07107 2.34315C8.46159 1.95262 8.46159 1.31946 8.07107 0.928932C7.68054 0.538408 7.04738 0.538408 6.65685 0.928932L0.292892 7.29289ZM17 7L1 7V9L17 9V7Z" fill="#F9F9F9" />
-            </svg>
-          </p>
-          <div className='grid grid-cols-1 gap-8'>
-            <div className='col-span-1'>
-              <p><img src={selectedTicketData.imageURL} alt="" className='w-full' /></p>
-              <div className='px-3/100 py-5'>
-                <p className='text-20 font-bungee text-blue-17F0FF leading-8 mb-1'>#051733</p>
-                <div>
-                  {selectedTicketData.description}
-                  {/* <p className='text-12 leading-4'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
+        {
+          selectedTicketData &&
+          <div>
+            <p className='px-3/100 py-5'
+              onClick={() => {
+                setSwipeableViewsIndex(0);
+              }}
+            >
+              <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17 9C17.5523 9 18 8.55228 18 8C18 7.44772 17.5523 7 17 7V9ZM0.292892 7.29289C-0.0976315 7.68342 -0.0976315 8.31658 0.292892 8.70711L6.65685 15.0711C7.04738 15.4616 7.68054 15.4616 8.07107 15.0711C8.46159 14.6805 8.46159 14.0474 8.07107 13.6569L2.41421 8L8.07107 2.34315C8.46159 1.95262 8.46159 1.31946 8.07107 0.928932C7.68054 0.538408 7.04738 0.538408 6.65685 0.928932L0.292892 7.29289ZM17 7L1 7V9L17 9V7Z" fill="#F9F9F9" />
+              </svg>
+            </p>
+            <div className='grid grid-cols-1 gap-8'>
+              <div className='col-span-1'>
+                <p><img src={selectedTicketData.imageURL} alt="" className='w-full' /></p>
+                <div className='px-3/100 py-5'>
+                  <p className='text-20 font-bungee text-blue-17F0FF leading-8 mb-1'>{selectedTicketData.ticketNumber}</p>
+                  <div>
+                    {selectedTicketData.description}
+                    {/* <p className='text-12 leading-4'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
                   <p className='text-12 leading-4'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p> */}
-                </div>
-                <p className='bg-gray-A9A9A9 opacity-50 h-px mt-5 mb-3'></p>
-                <div className='flex justify-between items-end'>
-                  <p><span className='text-20 text-blue-17F0FF font-bold leading-6 mr-2'>{selectedTicketData.price / 1000000} MILLI</span><span>({selectedTicketData.price / 1000000 * 2}$)</span></p>
-                  <p className='text-12 text-blue-0B7880 font-semibold bg-blue-17F0FF h-32px w-20 rounded-4 inline-flex justify-center items-center transition-all cursor-pointer hover:opacity-70'>Buy ticket</p>
+                  </div>
+                  <p className='bg-gray-A9A9A9 opacity-50 h-px mt-5 mb-3'></p>
+                  <div className='flex justify-between items-end'>
+                    <p><span className='text-20 text-blue-17F0FF font-bold leading-6 mr-2'>{selectedTicketData.priceMilli} MILLI</span><span>({selectedTicketData.priceDollar}$)</span></p>
+                    <p className='text-12 text-blue-0B7880 font-semibold bg-blue-17F0FF h-32px w-20 rounded-4 inline-flex justify-center items-center transition-all cursor-pointer hover:opacity-70'>Buy ticket</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        }
       </SwipeableViews>
       <Footer></Footer>
       <ModalContent dataModal={dataModal.data} playerData={playerData.data}
@@ -530,7 +524,7 @@ const NFT: React.FC = () => {
               </div>
               <p className='bg-gray-575757 opacity-50 h-px mt-4 mb-5'></p>
               <div className='flex justify-between items-center gap-4'>
-                <p><span className='text-20 text-blue-17F0FF font-bold leading-6 mr-2'>~0.27 MILLI</span><span>{selectedTicketData.price / 1000000} USCD</span></p>
+                <p><span className='text-20 text-blue-17F0FF font-bold leading-6 mr-2'>~{selectedTicketData.priceMilli} MILLI</span><span>{selectedTicketData.priceDollar} $</span></p>
                 <p className='text-12 text-blue-0B7880 font-semibold bg-blue-17F0FF w-92 h-34px rounded-4 inline-flex justify-center items-center transition-all cursor-pointer hover:opacity-70'
                   onClick={onBuyNFTTicket}
                 >Buy ticket</p>

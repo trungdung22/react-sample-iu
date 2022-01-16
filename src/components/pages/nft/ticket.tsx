@@ -7,7 +7,8 @@ import { CLUSTERS, getConnection } from '../../../lib/program/connection';
 import { Commitment, Connection, clusterApiUrl, PublicKey } from '@solana/web3.js';
 import { format2digitNumber } from 'lib/utilities/format';
 
-interface MilliNFTAccountDataLayout {
+export interface MilliNFTAccountDataLayout {
+  ticketNumber: String;
   status: String;
   nft_type: String;
   milli_nft_pubkey: String;
@@ -22,8 +23,10 @@ interface MilliNFTAccountDataLayout {
   num_four: String;
   num_five: String;
   num_six: String;
-  price: number;
+  priceMilli: number;
+  priceDollar: number;
   description: String;
+  imageURL: string;
 }
 
 type Props = {
@@ -43,7 +46,6 @@ const Ticket: React.FC<Props> = ({
 }) => {
   const [isLoaded, settIsLoaded] = useState(false);
 
-  const [ticketNumber, setTicketNumber] = useState('######');
   const [nftData, setNftData] = useState<MilliNFTAccountDataLayout>();
   const [imageURL, setImageURL] = useState(`${metadataURL}/image.png`);
 
@@ -58,12 +60,13 @@ const Ticket: React.FC<Props> = ({
     connection.getAccountInfo(
       new PublicKey(nftAccountPubkey)
     ).then(async res => {
-      setTicketNumber('#');
       let nftInfo = {} as MilliNFTAccountDataLayout;
       const nftDecodedInfo = deserializeNFTTicket(res);
       // console.log(nftDecodedInfo);
+      nftInfo.imageURL = `${metadataURL}/image.png`;
       nftInfo.milli_nft_pubkey = nftAccountPubkey;
-      nftInfo.price = nftDecodedInfo.price;
+      nftInfo.priceMilli = nftDecodedInfo.price / 1000000;
+      nftInfo.priceDollar = nftDecodedInfo.price / 1000000 * 2; // 1 milli  = 2 $
       nftInfo.status = nftDecodedInfo.status;
 
       nftInfo.token_account_pubkey = nftDecodedInfo.token_account_pubkey;
@@ -77,20 +80,20 @@ const Ticket: React.FC<Props> = ({
       nftInfo.num_four = format2digitNumber(nftDecodedInfo.num_four);
       nftInfo.num_five = format2digitNumber(nftDecodedInfo.num_five);
       nftInfo.num_six = format2digitNumber(nftDecodedInfo.num_six);
-
-      setTicketNumber(`#${nftInfo.num_one.toString() + nftInfo.num_two.toString() + nftInfo.num_three.toString() + nftInfo.num_four.toString() + nftInfo.num_five.toString() + nftInfo.num_six.toString()}`);
+      
+      nftInfo.ticketNumber =`#${nftInfo.num_one.toString() + nftInfo.num_two.toString() + nftInfo.num_three.toString() + nftInfo.num_four.toString() + nftInfo.num_five.toString() + nftInfo.num_six.toString()}`
       switch (nftDecodedInfo.nft_type.toLocaleLowerCase()) {
         case NFTTypes[0]:
-          setTicketNumber(number => number.slice(0, 7));
+          nftInfo.ticketNumber = nftInfo.ticketNumber.slice(0, 7);
           break;
         case NFTTypes[1]:
-          setTicketNumber(number => number.slice(0, 9));
+          nftInfo.ticketNumber = nftInfo.ticketNumber.slice(0, 9);
           break;
         case NFTTypes[2]:
-          setTicketNumber(number => number.slice(0, 11));
+          nftInfo.ticketNumber = nftInfo.ticketNumber.slice(0, 11);
           break;
         case NFTTypes[3]:
-          setTicketNumber(number => number.slice(0, 13));
+          nftInfo.ticketNumber = nftInfo.ticketNumber.slice(0, 13);
       }
       
       let metadataRes = await fetch(metadataURL);
@@ -121,17 +124,7 @@ const Ticket: React.FC<Props> = ({
       isShowPopupDesktop(true);
     }
 
-    emitTicketData({
-      ...nftData,
-      ticketNumber: ticketNumber,
-      // token_account_pubkey: nftData.token_account_pubkey,
-      // mint_pubkey: nftData.mint_pubkey,
-      // user_pubkey: nftData.user_pubkey,
-      // milli_nft_pubkey: nftData.milli_nft_pubkey,
-      // price: nftData.price,
-      // status: nftData.status,
-      imageURL: imageURL
-    });
+    emitTicketData(nftData);
   }
 
   return (
@@ -140,16 +133,16 @@ const Ticket: React.FC<Props> = ({
         <div className='col-span-1 bg-gray-151515 text-gray-EBEBEB rounded-5 md:rounded-10 border border-solid border-gray-A9A9A9-50 p-1 md:p-2 cursor-pointer transition-all hover:opacity-70'
         onClick={cardOnClickHandler}
         >
-          <p className='bg-no-repeat bg-center bg-cover h-24 sm:h-36 lg:h-48 rounded-5 md:rounded-10' style={{ 'backgroundImage': `url(${imageURL}` }}></p>
+          <p className='bg-no-repeat bg-center bg-cover h-24 sm:h-36 lg:h-48 rounded-5 md:rounded-10' style={{ 'backgroundImage': `url(${nftData.imageURL}` }}></p>
           <div className='mt-1 md:mt-2.5'>
-            <p className='text-16 md:text-20 text-blue-17F0FF font-bungee leading-6 md:mb-1'>{ticketNumber}</p>
+            <p className='text-16 md:text-20 text-blue-17F0FF font-bungee leading-6 md:mb-1'>{nftData.ticketNumber}</p>
             <p> {nftData.description}</p>
             {/* <p className='text-10 md:text-14'>
             <span className='inline-block mr-1 font-semibold'>Lottery:</span>
             Lifetime drawing with match 3.</p>
             <p className='text-10 md:text-14'><span className='uppercase inline-block mr-1 font-semibold'>MILLIGO:</span>1 slot for every IGO round.</p> */}
             <p className='w-full h-px bg-gray-A9A9A9-50 mt-2'></p>
-            <p className='flex justify-between items-center font-bold text-14 md:text-18 text-blue-17F0FF pt-1 md:pt-2'><span className='text-10 md:text-14 font-light text-gray-EBEBEB'>~({nftData.price / 1000000 * 2})$</span><span>{nftData.price/1000000} MILLI</span></p>
+            <p className='flex justify-between items-center font-bold text-14 md:text-18 text-blue-17F0FF pt-1 md:pt-2'><span className='text-10 md:text-14 font-light text-gray-EBEBEB'>~({nftData.priceDollar})$</span><span>{nftData.priceMilli} MILLI</span></p>
           </div>
         </div>
       }

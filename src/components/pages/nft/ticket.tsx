@@ -6,6 +6,7 @@ import { NFTTypes, deserializeNFTTicket, MILLI_NFT_ACCOUNT_DATA_LAYOUT } from '.
 import { CLUSTERS, getConnection } from '../../../lib/program/connection';
 import { Commitment, Connection, clusterApiUrl, PublicKey } from '@solana/web3.js';
 import { format2digitNumber } from 'lib/utilities/format';
+import { off } from 'process';
 
 export interface MilliNFTAccountDataLayout {
   ticketNumber: String;
@@ -82,8 +83,8 @@ const Ticket: React.FC<Props> = ({
       nftInfo.num_four = format2digitNumber(nftDecodedInfo.num_four);
       nftInfo.num_five = format2digitNumber(nftDecodedInfo.num_five);
       nftInfo.num_six = format2digitNumber(nftDecodedInfo.num_six);
-      
-      nftInfo.ticketNumber =`#${nftInfo.num_one.toString() + nftInfo.num_two.toString() + nftInfo.num_three.toString() + nftInfo.num_four.toString() + nftInfo.num_five.toString() + nftInfo.num_six.toString()}`
+
+      nftInfo.ticketNumber = `#${nftInfo.num_one.toString() + nftInfo.num_two.toString() + nftInfo.num_three.toString() + nftInfo.num_four.toString() + nftInfo.num_five.toString() + nftInfo.num_six.toString()}`
       switch (nftDecodedInfo.nft_type.toLocaleLowerCase()) {
         case NFTTypes[0]:
           nftInfo.ticketNumber = nftInfo.ticketNumber.slice(0, 7);
@@ -97,7 +98,7 @@ const Ticket: React.FC<Props> = ({
         case NFTTypes[3]:
           nftInfo.ticketNumber = nftInfo.ticketNumber.slice(0, 13);
       }
-      
+
       let metadataRes = await fetch(metadataURL);
       // check for error response
       const metadata_data = await metadataRes.json();
@@ -106,8 +107,8 @@ const Ticket: React.FC<Props> = ({
         const error = (metadata_data && metadata_data.message) || metadataRes.statusText;
         return Promise.reject(error);
       }
-      console.log( metadata_data.description.split('.'))
-      nftInfo.description = metadata_data.description.split('.').join('</br>');
+      console.log(metadata_data.description.split('.'))
+      nftInfo.description = buildDescriptionDisplay(metadata_data.description);
       setNftData(nftInfo);
       settIsLoaded(true);
     }).catch(err => {
@@ -115,6 +116,23 @@ const Ticket: React.FC<Props> = ({
       console.log(err);
     });
   }, [])
+
+  const buildDescriptionDisplay = (desctiption) => {
+    let arr = desctiption.split(' ');
+    arr = arr.map(ele => {
+      if (ele.includes('.')) {
+        return ele += '</p>';
+      }
+      if (ele.includes('Lottery')) {
+        return `<p class='text-10 md:text-14'><span class='inline-block mr-1 font-semibold'>${ele}</span>`;
+      }
+      if (ele.includes('MILLIGO')) {
+        return ` <p class='text-10 md:text-14'><span class='uppercase inline-block mr-1 font-semibold'>${ele}</span>`;
+      }
+      return ele;
+    });
+    return arr.join(' ');
+  }
 
   const cardOnClickHandler = () => {
     if (!isLoaded)
@@ -133,16 +151,12 @@ const Ticket: React.FC<Props> = ({
     <>
       {isLoaded &&
         <div className='col-span-1 bg-gray-151515 text-gray-EBEBEB rounded-5 md:rounded-10 border border-solid border-gray-A9A9A9-50 p-1 md:p-2 cursor-pointer transition-all hover:opacity-70'
-        onClick={cardOnClickHandler}
+          onClick={cardOnClickHandler}
         >
           <p className='bg-no-repeat bg-center bg-cover h-24 sm:h-36 lg:h-48 rounded-5 md:rounded-10' style={{ 'backgroundImage': `url(${nftData.imageURL}` }}></p>
           <div className='mt-1 md:mt-2.5'>
             <p className='text-16 md:text-20 text-blue-17F0FF font-bungee leading-6 md:mb-1'>{nftData.ticketNumber}</p>
             <div dangerouslySetInnerHTML={{ __html: nftData.description }} ></div>
-            {/* <p className='text-10 md:text-14'>
-            <span className='inline-block mr-1 font-semibold'>Lottery:</span>
-            Lifetime drawing with match 3.</p>
-            <p className='text-10 md:text-14'><span className='uppercase inline-block mr-1 font-semibold'>MILLIGO:</span>1 slot for every IGO round.</p> */}
             <p className='w-full h-px bg-gray-A9A9A9-50 mt-2'></p>
             <p className='flex justify-between items-center font-bold text-14 md:text-18 text-blue-17F0FF pt-1 md:pt-2'><span className='text-10 md:text-14 font-light text-gray-EBEBEB'>~({nftData.priceDollar})$</span><span>{nftData.priceMilli} MILLI</span></p>
           </div>

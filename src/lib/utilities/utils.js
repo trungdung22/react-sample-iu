@@ -119,11 +119,12 @@ export const insertNFTTransaction = async (
     mint_pubkey,
     token_account_pubkey,
     milli_nft_account_pubkey) => {
+    const token = `Bearer ${sessionStorage.getItem('token')}` ;
     const requestOptions = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': sessionStorage.getItem('token') 
+            'Authorization': token
         },
         body: JSON.stringify({
             user_pubkey : user_pubkey,

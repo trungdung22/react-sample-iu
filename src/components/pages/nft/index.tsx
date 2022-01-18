@@ -24,9 +24,10 @@ const NFT: React.FC = () => {
   const classes = useStyles();
   const size = useWindowSize();
   const searchInputEl = useRef(null);
-  const [pageNo, setPageNo] = useState(1);
   const [showTooltipConnect, setShowTooltipConnect] = useState(false);
-
+  
+  // avoid first update when access page
+  const firstUpdate = useRef(true);
   const [tab, setTab] = useState(null);
   const [valueInputSearch, setValueInputSearch] = React.useState('');
 
@@ -38,7 +39,11 @@ const NFT: React.FC = () => {
     tickets: []
   });
 
-  const [queryParam, setQueryParam] = useState({});
+  const [queryParam, setQueryParam] = useState({
+    isSole: false,
+    page: 1,
+    perPage: 10
+  });
   const [programInfo, setProgramInfo] = useState({
     programId: '',
     ownerPubkey: ''
@@ -53,10 +58,15 @@ const NFT: React.FC = () => {
 
 
   useEffect(() => {
-
-    let filter = {};
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return;
+    }
+    let filter: any;
     filter = {
       isSole: false,
+      page: 1,
+      perPage: 10
     }
     if (valueInputSearch) {
       let filterRollNums = [];
@@ -90,12 +100,12 @@ const NFT: React.FC = () => {
   }, [valueInputSearch, tab]);
 
   useEffect(() => {
-    fetchTicketsEntries(pageNo, queryParam);
-  }, [queryParam, pageNo]);
+    fetchTicketsEntries();
+  }, [queryParam]);
 
-  const fetchTicketsEntries = (pageNo, filter) => {
-    const queryParams = buildParamRequest(filter);
-    fetch(`${HOST_NAME}/api/nft-ticket?page=${pageNo}&perPage=10${queryParams}`, {
+  const fetchTicketsEntries = () => {
+    const queryParams = buildParamRequest(queryParam);
+    fetch(`${HOST_NAME}/api/nft-ticket?${queryParams}`, {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
@@ -267,7 +277,7 @@ const NFT: React.FC = () => {
         selectedTicketData.milli_nft_pubkey,
       );
       setIsShowPopupDesktop(false);
-      fetchTicketsEntries(pageNo, queryParam);
+      fetchTicketsEntries();
       console.log('purchase success');
     }).catch(err => {
       console.log(err);
@@ -331,7 +341,11 @@ const NFT: React.FC = () => {
   });
 
   const onChangePagination = (event, toSetpageNo) => {
-    setPageNo(toSetpageNo);
+    // console.log('asdasdasdasd')
+    setQueryParam({
+      ...queryParam,
+      page: toSetpageNo
+    });
   }
 
   return (

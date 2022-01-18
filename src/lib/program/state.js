@@ -174,10 +174,10 @@ const NFTStatues = [
 ];
 
 const NFTTypes = [
-  'three',
-  'four',
-  'five',
-  'six',
+  '3-match',
+  '4-match',
+  '5-match',
+  '6-match',
 ];
 
 function deserializeNFTTicket(accountInfo) {

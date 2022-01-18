@@ -107,8 +107,7 @@ const Ticket: React.FC<Props> = ({
         const error = (metadata_data && metadata_data.message) || metadataRes.statusText;
         return Promise.reject(error);
       }
-      console.log(metadata_data.description.split('.'))
-      nftInfo.description = buildDescriptionDisplay(metadata_data.description);
+      nftInfo.description = metadata_data.description;
       setNftData(nftInfo);
       settIsLoaded(true);
     }).catch(err => {
@@ -116,23 +115,6 @@ const Ticket: React.FC<Props> = ({
       console.log(err);
     });
   }, [])
-
-  const buildDescriptionDisplay = (desctiption) => {
-    let arr = desctiption.split(' ');
-    arr = arr.map(ele => {
-      if (ele.includes('.')) {
-        return ele += '</p>';
-      }
-      if (ele.includes('Lottery')) {
-        return `<p class='text-10 md:text-14'><span class='inline-block mr-1 font-semibold'>${ele}</span>`;
-      }
-      if (ele.includes('MILLIGO')) {
-        return ` <p class='text-10 md:text-14'><span class='uppercase inline-block mr-1 font-semibold'>${ele}</span>`;
-      }
-      return ele;
-    });
-    return arr.join(' ');
-  }
 
   const cardOnClickHandler = () => {
     if (!isLoaded)

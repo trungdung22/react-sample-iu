@@ -32,7 +32,7 @@ export const convertUSDT = async (amount) => {
             'Content-Type': 'application/json',
         }
     };
-    debugger
+    // debugger
     const response = await fetch(`${HOST_NAME}/api/rate-converter-usdt?amount=${amount}`, requestOptions);
     const data = await response.json();
     return { lamports: data["lamports"] };

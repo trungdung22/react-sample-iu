@@ -80,19 +80,21 @@ const Third: React.FC<Props> = ({dataSendThird, dataGiveThird}) => {
     <>
       <div className='p-4 pt-2'>
         <div className='flex justify-between items-center'>
-          <p className='text-12 font-medium text-pink-D47DFF'>Total cost</p>
-          <p className='text-14 font-bold text-pink-D47DFF'>~ {dataSendThird.data.price.toFixed(8)} MILLI</p>
+          <p className='text-body-sp md:text-body-pc font-medium text-pink-secondary'>Total cost</p>
+          <p className='text-h3-sp md:text-h3-pc font-bold text-pink-secondary'>~ {dataSendThird.data.price.toFixed(8)} MILLI</p>
         </div>
         <div className={`${classes.listTickets}`}>
           { 
             data.data.tickets.map((el: [], index: number) => (
               <dl key={index}>
-                <dt>#{index < 9 ? `00${index + 1}` : `0${index + 1}`}</dt>
+                <dt className='text-body-sp md:text-body-pc'>#{index < 9 ? `00${index + 1}` : `0${index + 1}`}</dt>
                 <dd>
-                  <ul onClick={(event)=>handleChangeNumber(event, index)}>
+                  <ul className='border border-solid border-blue-secondary bg-gray-lightbox' 
+                    onClick={(event)=>handleChangeNumber(event, index)}
+                  >
                     {
                       el.map((item, index) => (
-                        <li key={index} className='text-14 font-semibold'>{item < 10 ? `0${item}` : item}</li>
+                        <li key={index} className='text-h3-sp md:text-h3-pc font-semibold text-gray-primary'>{item < 10 ? `0${item}` : item}</li>
                       ))
                     }
                   </ul>
@@ -102,12 +104,12 @@ const Third: React.FC<Props> = ({dataSendThird, dataGiveThird}) => {
           }
         </div>
       </div>
-      <div className='p-4 bg-gray-575757-30'>
+      <div className='p-4 bg-gray-lightbox'>
         <ul className='grid grid-cols-11 gap-2.5 mb-2.5'>
-          <li className='transition-all hover:opacity-70 text-center col-span-5 font-semibold text-12 cursor-pointer rounded-3 border border-solid border-blue-17F0FF flex justify-center items-center h-32px text-blue-17F0FF' onClick={handleRandomTickets}>Randomize</li>
-          <li className='transition-all hover:opacity-70 text-center col-span-6 font-semibold text-12 cursor-pointer rounded-3 border border-solid border-blue-17F0FF flex justify-center items-center h-32px text-blue-0B7880 bg-blue-17F0FF' onClick={handleConfirm}>Confirm and Buy</li>
+          <li className='transition-all hover:opacity-70 text-center col-span-5 font-semibold text-body-sp md:text-body-pc cursor-pointer rounded-3 border border-solid border-blue-17F0FF flex justify-center items-center h-32px text-blue-primary' onClick={handleRandomTickets}>Randomize</li>
+          <li className='transition-all hover:opacity-70 text-center col-span-6 font-semibold text-body-sp md:text-body-pc cursor-pointer rounded-3 border border-solid border-blue-17F0FF flex justify-center items-center h-32px text-gray-box bg-blue-primary' onClick={handleConfirm}>Confirm and Buy</li>
         </ul>
-        <p className='text-10 text-gray-EBEBEB'>Number are randomized, with no duplicates among your tickets. Tap a number to edit it. Available digits: 01-45.</p>
+        <p className='text-bodybox-sp md:text-bodybox-pc'>Number are randomized, with no duplicates among your tickets. Tap a number to edit it. Available digits: 01-45.</p>
       </div>
       
     </>

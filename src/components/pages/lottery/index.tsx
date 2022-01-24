@@ -321,6 +321,15 @@ const Lottery: React.FC = () => {
         });
     }
   }
+
+  useEffect(() => {
+    if(dataModal.data.show) {
+      document.body.style.overflowY = 'hidden';
+    } else {
+      document.body.style.overflowY = 'scroll';
+    }
+  }, [dataModal])
+
   return (
     <>
       <Header playerData={playerData.data} dataGiveFromHeader={dataGiveFromHeader}></Header>

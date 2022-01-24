@@ -33,6 +33,9 @@ module.exports = {
           '213638': '#213638',
           '0B7880-30': 'rgba(11, 120, 128, 0.3)',
           '0B7880-50': 'rgba(11, 120, 128, 0.5)',
+          
+          'primary': '#00FFFF',
+          'secondary': '#AAFFFF',
         },
         pink: {
           '0': '#D47DFF',
@@ -46,6 +49,10 @@ module.exports = {
           'A819FA-50': 'rgba(168, 25, 250, 0.5)',
           'D47DFF' : '#D47DFF',
           '4A246D' : '#4A246D',
+
+          'primary': '#FF00FF',
+          'primary-30': 'rgba(255, 0, 255, 0.3)',
+          'secondary': '#FF55FF',
         },
         purple: {
           '0': '#250A45',
@@ -99,6 +106,15 @@ module.exports = {
           '151515': '#151515',
           '041A29-30': 'rgba(4, 26, 41, 0.3)',
           '393939-50': 'rgba(57, 57, 57, 0.5)',
+
+          'body': '#EBEBEB',
+          'body-50': 'rgba(235, 235, 235, 0.5)',
+          'primary': '#F9F9F9',
+          'boxline': '#575757',
+          'boxline-50': 'rgba(87, 87, 87, 0.5)',
+          'lightbox': '#293333',
+          'box': '#1A2222',
+          'page': '#000F0F',
         }
       },
       padding: {
@@ -141,6 +157,22 @@ module.exports = {
         '52': '52px',
         '54': '54px',
         '56': '56px',
+
+        'banner-pc': '52px',
+        'h1-pc': '32px',
+        'h2-pc': '20px',
+        'h3-pc': '16px',
+        'button-pc': '14px',
+        'body-pc': '14px',
+        'bodybox-pc': '12px',
+
+        'banner-sp': '40px',
+        'h1-sp': '20px',
+        'h2-sp': '16px',
+        'h3-sp': '14px',
+        'button-sp': '12px',
+        'body-sp': '12px',
+        'bodybox-sp': '10px',
       },
       maxWidth: {
         '20': '20px',
@@ -163,6 +195,7 @@ module.exports = {
         '300': '300px',
         '320': '320px',
         '331': '331px',
+        '335': '335px',
         '345': '345px',
         '350': '350px',
         '400': '400px',
@@ -191,6 +224,7 @@ module.exports = {
         '30': '30px',
         '35': '35px',
         '50': '50px',
+        '72px': '72px',
         '80px': '80px',
         '90': '90px',
         '92': '92px',

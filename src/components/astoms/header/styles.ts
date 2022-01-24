@@ -7,7 +7,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     position: 'fixed',
     top: 0,
     left: 0,
-    borderBottom: '0.5px solid rgba(87, 87, 87, 0.5)',
     display: 'flex',
     alignItems: 'center',
     transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -21,8 +20,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       justifyContent: 'space-between',
       '& a': {
         display: 'flex',
-        fontSize: 14,
-        color: '#A9A9A9',
         textDecoration: 'none',
         transition: 'all 0.2s ease',
         fontWeight: '500',
@@ -38,16 +35,11 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
           width: 0,
           left: 0,
           height: 2,
-          background: '#17F0FF',
+          background: '#00FFFF',
           bottom: -8,
           transition: 'all 0.2s ease',
         },
-        '&:not(.active):hover': {
-          color: '#fff',
-          background: 'rgba(11, 120, 128, 0.7)',
-        },
         '&.active': {
-          color: '#17F0FF',
           '&::before': {
             width: '100%',
           },
@@ -62,7 +54,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     display: 'flex',
     alignItems: 'center',
     textDecoration: 'none',
-    color: '#fff',
     cursor: 'pointer',
     '& img': {
       maxWidth: 30,

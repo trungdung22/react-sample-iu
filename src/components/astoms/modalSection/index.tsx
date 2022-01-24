@@ -276,12 +276,12 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
       {dataModal.show && !dataModal.submit ? (
         <div className={`${classes.root}`}>
           <div className={`${classes.backgroundModal}`} onClick={() => handleClosedModal()}></div>
-          <div className={`${classes.content}`}>
-            <div className={`${classes.header} ${dataModal.view_your && playerData.is_connect ? 'hasID' : ''}`}>
-              {dataModal.first && playerData.is_connect ? (<p className="title">Buy tickets</p>) : ''}
-              {dataModal.second && playerData.is_connect ? (<p className="title">Buy Tickets</p>) : ''}
+          <div className={`${classes.content} bg-gray-box border border-solid border-gray-boxline-50`}>
+            <div className={`${classes.header} bg-gray-lightbox ${dataModal.view_your && playerData.is_connect ? 'hasID' : ''}`}>
+              {dataModal.first && playerData.is_connect ? (<p className="title text-h3-sp md:text-h3-pc text-gray-primary">Buy ticket</p>) : ''}
+              {dataModal.second && playerData.is_connect ? (<p className="title text-h3-sp md:text-h3-pc text-gray-primary">Buy Ticket</p>) : ''}
               {dataModal.third && playerData.is_connect ? (
-                <p className="title">
+                <p className="title text-h3-sp md:text-h3-pc text-gray-primary">
                   <span 
                     className='inline-block mr-2 cursor-pointer'
                     onClick={() => handleClosedPurchaseStep()}
@@ -295,7 +295,7 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
                 </p>
               ) : ''}
               {dataModal.four && playerData.is_connect ? (
-                <p className="title">
+                <p className="title text-h3-sp md:text-h3-pc text-gray-primary">
                   <span
                     className='inline-block mr-2 cursor-pointer'
                     onClick={() => handleClosedPurchaseStep()}
@@ -309,7 +309,7 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
                 </p>
               ) : ''}
               {dataModal.five && playerData.is_connect ? (
-                <p className="title">
+                <p className="title text-h3-sp md:text-h3-pc text-gray-primary">
                   <span
                     className='inline-block mr-2 cursor-pointer'
                     onClick={() => handleClosedPurchaseStep()}
@@ -323,10 +323,10 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
                 </p>
               ) : ''}
               {dataModal.view_ticket ? (
-                <p className="title">Your tickets this round</p>
+                <p className="title text-h3-sp md:text-h3-pc text-gray-primary">Your tickets this round</p>
               ) : ''}
               {dataModal.view_your && playerData.is_connect ? (
-                <p className="title">
+                <p className="title text-h3-sp md:text-h3-pc text-gray-primary">
                   Round
                   <span>#{dataModal.your_ticket.game_no}</span>
                 </p>
@@ -350,11 +350,13 @@ const ModalContent: React.FC<Props> = ({dataModal, playerData, dataGiveFromModal
         dataModal.show && dataModal.submit ? (
           <div className={`${classes.root}`}>
             <div className={`${classes.backgroundModal}`} onClick={() => handleClosedModal()}></div>
-            <div className={`${classes.content} ${dataModal.flag_submit ? 'success' : 'error'}`}>
-              <div className={`${classes.closeSubmit}`} onClick={() => handleClosedModal()}>
-                <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fillRule="evenodd" clipRule="evenodd" d="M12.3736 1.70711C12.7641 1.31658 12.7641 0.683417 12.3736 0.292893C11.9831 -0.0976311 11.3499 -0.0976311 10.9594 0.292893L6.6665 4.58579L2.37361 0.292894C1.98309 -0.0976301 1.34992 -0.0976301 0.959397 0.292894C0.568873 0.683419 0.568873 1.31658 0.959397 1.70711L5.25229 6L0.959397 10.2929C0.568873 10.6834 0.568873 11.3166 0.959397 11.7071C1.34992 12.0976 1.98309 12.0976 2.37361 11.7071L6.6665 7.41421L10.9594 11.7071C11.3499 12.0976 11.9831 12.0976 12.3736 11.7071C12.7641 11.3166 12.7641 10.6834 12.3736 10.2929L8.08072 6L12.3736 1.70711Z" fill="white"/>
-                </svg>
+            <div className={`${classes.content} bg-gray-box border border-solid ${dataModal.flag_submit ? 'border-blue-primary' : 'border-pink-primary'}`}>
+              <div className={`${classes.closeSubmit} p-3 md:p-4`} onClick={() => handleClosedModal()}>
+                <p className='inline-block w-2 md:w-3 h-2 md:h-3'>
+                  <svg className='max-w-full max-h-full' width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M12.3736 1.70711C12.7641 1.31658 12.7641 0.683417 12.3736 0.292893C11.9831 -0.0976311 11.3499 -0.0976311 10.9594 0.292893L6.6665 4.58579L2.37361 0.292894C1.98309 -0.0976301 1.34992 -0.0976301 0.959397 0.292894C0.568873 0.683419 0.568873 1.31658 0.959397 1.70711L5.25229 6L0.959397 10.2929C0.568873 10.6834 0.568873 11.3166 0.959397 11.7071C1.34992 12.0976 1.98309 12.0976 2.37361 11.7071L6.6665 7.41421L10.9594 11.7071C11.3499 12.0976 11.9831 12.0976 12.3736 11.7071C12.7641 11.3166 12.7641 10.6834 12.3736 10.2929L8.08072 6L12.3736 1.70711Z" fill="white"/>
+                  </svg>
+                </p>
               </div>
               <ViewSubmit dataSendViewSubmit={dataModal.flag_submit}></ViewSubmit>
             </div>

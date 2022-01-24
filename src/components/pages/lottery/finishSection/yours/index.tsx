@@ -58,7 +58,7 @@ const Yours: React.FC<Props> = ({playerData, dataGiveFromYours}) => {
   
 
   const handleRenderRoundItems = (el: any) => {
-    // if (el.player_tickets.length > 0) {
+    if (el.player_tickets.length > 0) {
       const date = new Date(el.updatedAt);
       const formatTime = (time: number) => {
         return time < 10 ?  '0' + time : time;
@@ -68,20 +68,20 @@ const Yours: React.FC<Props> = ({playerData, dataGiveFromYours}) => {
           <p className='font-medium text-center w-12 flex-shrink-0 md:w-14 mr-4 sm:mr-12 md:mr-16'>{el.game_no}</p>
           <p className='w-28 md:w-52 mr-8 md:mr-16'>
             <span className='block md:inline-block w-full md:w-28 mr-8'>{`${formatTime(date.getDate())} thg ${date.getMonth() + 1}, ${date.getFullYear()}`}</span>
-            <span className='text-gray-A9A9A9'>{`${formatTime(date.getHours())}:${formatTime(date.getMinutes())}`}</span>
+            <span className='text-gray-boxline'>{`${formatTime(date.getHours())}:${formatTime(date.getMinutes())}`}</span>
           </p>
           <p>
             <span className='font-bold text-12 md:text-16 text-center w-14 md:w-28 inline-block'>{el.player_tickets.length}</span>
             <span className='inline-block absolute top-3 md:top-2.5 right-0 w-3.5 md:w-auto'>
               <svg className='max-w-full' width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="10" cy="10" r="9.5" stroke="#EBEBEB"/>
-                <path d="M8.16699 13.9834L11.592 10.5584C11.7472 10.4022 11.8343 10.191 11.8343 9.97088C11.8343 9.75073 11.7472 9.53952 11.592 9.38338L8.25866 6.05005" stroke="#F4E0FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="bevel"/>
+                <path d="M8.16699 13.9834L11.592 10.5584C11.7472 10.4022 11.8343 10.191 11.8343 9.97088C11.8343 9.75073 11.7472 9.53952 11.592 9.38338L8.25866 6.05005" stroke="#EBEBEB" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="bevel"/>
               </svg>
             </span>
           </p>
         </li>
       )
-    // }
+    }
   }
   
   return (
@@ -90,12 +90,12 @@ const Yours: React.FC<Props> = ({playerData, dataGiveFromYours}) => {
         data.items.length > 0 ? (
           <div className=''>
             <ul className='flex items-center'>
-              <li className='text-14 md:text-16 text-pink-D47DFF font-bold uppercase leading-none md:leading-normal w-12 md:w-14 mr-4 sm:mr-12 md:mr-16'>Round</li>
-              <li className='text-14 md:text-16 text-pink-D47DFF font-bold uppercase leading-none md:leading-normal w-28 md:w-52 mr-8 md:mr-16'>Date</li>
-              <li className='text-14 md:text-16 text-pink-D47DFF font-bold uppercase leading-none md:leading-normal text-center md:text-left'>Your<br className='block md:hidden'/> tickets</li>
+              <li className='text-14 md:text-16 text-pink-secondary font-bold uppercase leading-none md:leading-normal w-12 md:w-14 mr-4 sm:mr-12 md:mr-16'>Round</li>
+              <li className='text-14 md:text-16 text-pink-secondary font-bold uppercase leading-none md:leading-normal w-28 md:w-52 mr-8 md:mr-16'>Date</li>
+              <li className='text-14 md:text-16 text-pink-secondary font-bold uppercase leading-none md:leading-normal text-center md:text-left'>Your<br className='block md:hidden'/> tickets</li>
             </ul>
-            {/* {
-              stateItem > 0 ?  */}
+            {
+              stateItem > 0 ? 
               <ul className='h-64 md:h-72 overflow-y-auto overflow-x-hidden'>
                 <InfiniteScroll
                   throttle={100}
@@ -107,15 +107,15 @@ const Yours: React.FC<Props> = ({playerData, dataGiveFromYours}) => {
                   {data.items.map(item => (handleRenderRoundItems(item)))}
                 </InfiniteScroll>
               </ul>
-              {/* : <p className='text-gray-EBEBEB mt-4'>You don't have any ticket.</p>
-            } */}
+              : <p className='mt-4'>You don't have any ticket.</p>
+            }
             
           </div>
         ) : (
           <ContentLoader
             viewBox="0 0 700 312"
-            backgroundColor="#fff"
-            foregroundColor="#dcdcdc"
+            backgroundColor="#293333"
+            foregroundColor="#575757"
           >
             <rect x="0" y="32" rx="4" ry="4" width="180" height="20" />
             <rect x="265" y="32" rx="4" ry="4" width="180" height="20" />

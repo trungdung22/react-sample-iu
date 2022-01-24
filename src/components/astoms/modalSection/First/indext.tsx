@@ -53,7 +53,7 @@ const First: React.FC<Props> = ({playerData, dataGiveFirst}) => {
 
   return (
     <>
-      <div className={`${classes.body}`}>
+      {/* <div className={`${classes.body}`}>
         <div className={`${classes.buy}`}>
           <p className="title">Buy</p>
           <p className="icon">Tickets<span><img src="/assets/common/icon_ticket_modal.svg" alt="ticket"/></span></p>
@@ -80,14 +80,14 @@ const First: React.FC<Props> = ({playerData, dataGiveFirst}) => {
       </div>
       <p className={`${classes.lineGray}`}><span></span></p>
       <div className={`${classes.footer}`}>
-          <div className={`${classes.totalPay}`}>
-            <p className="text">You pay</p>
-            <p className="price">~{data.data.price.toFixed(3)} MILLI</p>
-          </div>
-          <ul className={`${classes.listButton}`}>
-            <li onClick={handleSendData}>Approve</li>
-          </ul>
+        <div className={`${classes.totalPay}`}>
+          <p className="text">You pay</p>
+          <p className="price">~{data.data.price.toFixed(3)} MILLI</p>
         </div>
+        <ul className={`${classes.listButton}`}>
+          <li onClick={handleSendData} className='bg-blue-primary'>Approve</li>
+        </ul>
+      </div> */}
     </>
   )
 }

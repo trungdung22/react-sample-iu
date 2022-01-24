@@ -242,24 +242,24 @@ const MILLIGO: React.FC = () => {
           <div className='flex justify-between items-center'>
             <p className='flex-shrink-0 max-w-124 md:max-w-228 lg:max-w-350 mr-2 md:mr-4'><img src="/assets/millipad/milligo_banner.png" alt="" /></p>
             <div>
-              <h3 className='text-20 md:text-36 lg:text-52 text-blue-17F0FF uppercase font-bungee leading-tight mb-4'>LAUNCHING GAME,<br />NFT AND MORE</h3>
+              <h3 className='text-20 md:text-36 lg:text-banner-pc text-blue-primary uppercase font-bungee leading-tight mb-4'>LAUNCHING GAME,<br />NFT AND MORE</h3>
               <p>MILLIGO is a multi-chain IGO platform which supports new gaming, NFT projects to raise funds and so much more. To participate in an IGO on MILLIGO, you don’t need to stake your coins, just do some social tasks or buy some NFT tickets.</p>
               <div className='hidden md:block'>
                 <ul className='my-8'>
                   <li className='inline-block max-w-124 mr-4'><img src="/assets/millipad/banner_solana.png" alt="" /></li>
                   <li className='inline-block max-w-112'><img src="/assets/millipad/banner_bsc.png" alt="" /></li>
                 </ul>
-                <ul className='grid grid-cols-3 py-4 bg-gray-151515 rounded-5 max-w-500'>
+                <ul className='grid grid-cols-3 py-4 bg-gray-box rounded-5 max-w-500'>
                   <li className='col-span-1 px-4 text-center'>
-                    <p className='text-pink-D47DFF text-16 font-bold mb-2'>No staking</p>
-                    <p><a href="/nft-ticket" className='bg-blue-17F0FF h-34px w-20 mx-auto flex justify-center items-center text-blue-0B7880 rounded-5 font-semibold text-12 transition-all hover:opacity-70'>Buy NFTS</a></p>
+                    <p className='text-pink-secondary text-h3-pc font-bold mb-2'>No staking</p>
+                    <p><a href="/nft-ticket" className='bg-blue-primary h-34px w-20 mx-auto flex justify-center items-center text-gray-box rounded-5 font-semibold text-bodybox-pc transition-all hover:opacity-70'>Buy NFT</a></p>
                   </li>
-                  <li className='col-span-1 px-4 text-center border-l border-r border-solid border-gray-575757-50'>
-                    <p className='text-pink-D47DFF text-16 font-bold mb-4'>Raised capital</p>
+                  <li className='col-span-1 px-4 text-center border-l border-r border-solid border-gray-boxline-50'>
+                    <p className='text-pink-secondary text-h3-pc font-bold mb-4'>Raised capital</p>
                     <p>200,000</p>
                   </li>
                   <li className='col-span-1 px-4 text-center'>
-                    <p className='text-pink-D47DFF text-16 font-bold mb-4'>Funded projects</p>
+                    <p className='text-pink-secondary text-h3-pc font-bold mb-4'>Funded projects</p>
                     <p>1</p>
                   </li>
                 </ul>
@@ -272,17 +272,17 @@ const MILLIGO: React.FC = () => {
               <li className='inline-block max-w-124 mr-4'><img src="/assets/millipad/banner_solana.png" alt="" /></li>
               <li className='inline-block max-w-112'><img src="/assets/millipad/banner_bsc.png" alt="" /></li>
             </ul>
-            <ul className='grid grid-cols-3 py-2 bg-gray-151515 rounded-5'>
+            <ul className='grid grid-cols-3 py-2 bg-gray-box rounded-5'>
               <li className='col-span-1 px-2.5 text-center'>
-                <p className='text-pink-D47DFF text-12 screen475:text-14 font-bold mb-2'>No staking</p>
-                <p><a href="/nft-ticket" className='bg-blue-17F0FF w-20 h-32px mx-auto flex justify-center items-center text-blue-0B7880 rounded-5 font-semibold text-12'>Buy NFTS</a></p>
+                <p className='text-pink-secondary text-body-sp screen475:text-body-pc font-bold mb-2'>No staking</p>
+                <p><a href="/nft-ticket" className='bg-blue-primary w-20 h-32px mx-auto flex justify-center items-center text-gray-box rounded-5 font-semibold text-body-sp transition-all hover:opacity-70'>Buy NFT</a></p>
               </li>
-              <li className='col-span-1 px-2.5 text-center border-l border-r border-solid border-gray-575757-50'>
-                <p className='text-pink-D47DFF text-12 screen475:text-14 font-bold mb-4'>Raised capital</p>
+              <li className='col-span-1 px-2.5 text-center border-l border-r border-solid border-gray-boxline-50'>
+                <p className='text-pink-secondary text-body-sp screen475:text-body-pc font-bold mb-4'>Raised capital</p>
                 <p>200,000</p>
               </li>
               <li className='col-span-1 px-2.5 text-center'>
-                <p className='text-pink-D47DFF text-12 screen475:text-14 font-bold mb-4'>Funded projects</p>
+                <p className='text-pink-secondary text-body-sp screen475:text-body-pc font-bold mb-4'>Funded projects</p>
                 <p>1</p>
               </li>
             </ul>
@@ -290,10 +290,10 @@ const MILLIGO: React.FC = () => {
         </div>
       </section>
       <section className='mb-16 md:mb-20 px-3/100'>
-        <h3 className='font-bungee text-center text-20 md:text-32 text-pink-D47DFF mb-8 md:mb-14 uppercase'>upcoming projects</h3>
+        <h3 className='font-bungee text-center text-h1-sp md:text-h1-pc text-blue-primary mb-8 md:mb-14 uppercase'>upcoming projects</h3>
         <div className='max-w-1110 mx-auto'>
           <div className='flex justify-center'>
-            <div className='rounded-5 overflow-hidden max-w-400 cursor-pointer relative transition-all hover:opacity-70 bg-gray-151515 border border-solid border-gray-575757-50'>
+            <div className='rounded-5 overflow-hidden max-w-400 cursor-pointer relative transition-all hover:opacity-70 bg-gray-box border border-solid border-gray-boxline-50'>
               {
                 getDataMillipads !== null && getDataMillipads[0].status !== 'complete'
                 ?
@@ -301,15 +301,15 @@ const MILLIGO: React.FC = () => {
                   <a href={`/milligo/${getDataMillipads[0].code}`} className='block absolute top-0 left-0 w-full h-full z-1'></a>
                   <p className='relative'>
                     <img src="/assets/millipad/under_img1.png" alt={getDataMillipads[0].code} />
-                    <span className='text-blue-17F0FF font-semibold text-10 md:text-12 rounded-5 inline-block bg-gray-151515 absolute top-2 right-2 py-0.5 px-2'>7 days</span>
+                    <span className='text-blue-primary font-semibold text-bodybox-sp md:text-bodybox-pc rounded-5 inline-block bg-gray-box absolute top-2 right-2 py-0.5 px-2'>7 days</span>
                   </p>
                   <div className='p-4 pb-2 md:pb-1.5'>
-                    <h4 className=' text-blue-17F0FF font-bungee uppercase leading-none text-16 md:text-20 mb-0.5'>{getDataMillipads[0].code}</h4>
-                    <p className='text-gray-EBEBEB'>NFT, Game</p>
-                    <p className='h-px bg-gray-575757 opacity-50 mt-3 md:mt-4 mb-2'></p>
+                    <h4 className=' text-blue-primary font-bungee uppercase leading-none text-h2-sp md:text-h2-pc mb-0.5'>{getDataMillipads[0].code}</h4>
+                    <p>NFT, Game</p>
+                    <p className='h-px bg-gray-boxline opacity-50 mt-3 md:mt-4 mb-2'></p>
                     <dl className='flex justify-between items-end'>
                       <dt className='relative bottom-1'>Total raise</dt>
-                      <dd className='text-16 md:text-20 font-bold'>
+                      <dd className='text-h2-sp md:text-h2-pc font-bold text-gray-primary'>
                         <span>200,000 USDT</span>
                         <span className='inline-block ml-2 relative top-px'>
                           <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -340,15 +340,15 @@ const MILLIGO: React.FC = () => {
                 <>
                   <p className='relative'>
                     <img src="/assets/millipad/under_rectangle_big.png" alt="Coming" />
-                    <span className='text-blue-17F0FF font-semibold text-10 md:text-12 rounded-5 inline-block bg-gray-151515 absolute top-2 right-2 py-0.5 px-2'>Coming</span>
+                    <span className='text-blue-primary font-semibold text-bodybox-sp md:text-bodybox-pc rounded-5 inline-block bg-gray-box absolute top-2 right-2 py-0.5 px-2'>Coming</span>
                   </p>
                   <div className='p-4 pb-2 md:pb-1.5'>
-                    <h4 className=' text-blue-17F0FF font-bungee uppercase leading-none text-16 md:text-20 mb-0.5'>Coming</h4>
-                    <p className='text-gray-EBEBEB'>Coming</p>
-                    <p className='h-px bg-gray-575757 opacity-50 mt-3 md:mt-4 mb-2'></p>
+                    <h4 className=' text-blue-primary font-bungee uppercase leading-none text-h2-sp md:text-h2-pc mb-0.5'>Coming</h4>
+                    <p>Coming</p>
+                    <p className='h-px bg-gray-boxline opacity-50 mt-3 md:mt-4 mb-2'></p>
                     <dl className='flex justify-between items-end'>
                       <dt className='relative bottom-1'>Total raise</dt>
-                      <dd className='text-16 md:text-20 font-bold'>
+                      <dd className='text-h2-sp md:text-h2-pc font-bold text-gray-primary'>
                         <span>Coming</span>
                         <span className='inline-block ml-2 relative top-px'>
                           <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -380,23 +380,23 @@ const MILLIGO: React.FC = () => {
           </div>
         </div>
       </section>
-      <section className='bg-gray-292929 pt-6 md:pt-14 pb-5 md:pb-6 px-3/100'>
+      <section className='bg-gray-box pt-6 md:pt-14 pb-5 md:pb-6 px-3/100'>
         <div className='max-w-1110 mx-auto'>
-          <h3 className='font-bungee text-center text-20 md:text-32 text-pink-D47DFF mb-4 md:mb-6 uppercase'>funded projects</h3>
+          <h3 className='font-bungee text-center text-h1-sp md:text-h1-pc text-blue-primary mb-4 md:mb-6 uppercase'>funded projects</h3>
           <ul className='flex flex-wrap justify-center'>
             {getDataMillipads !== null && handleLoadClosedPool()}
           </ul>
           <ul className='flex justify-center mt-6 md:mt-9'>
-            <li className='cursor-pointer fill-white mr-4'>
+            <li className='cursor-pointer transition-all hover:opacity-70 mr-4'>
               <svg width="22" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M21.0879 7L1.46289 7" stroke="#575757" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="bevel"/>
-                <path d="M6.41309 1.02499L1.27559 6.16249C1.04277 6.39669 0.912095 6.71351 0.912095 7.04374C0.912095 7.37397 1.04277 7.69078 1.27559 7.92499L6.27559 12.925" stroke="#575757" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="bevel"/>
+                <path d="M21.0879 7L1.46289 7" stroke="#f9f9f9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="bevel"/>
+                <path d="M6.41309 1.02499L1.27559 6.16249C1.04277 6.39669 0.912095 6.71351 0.912095 7.04374C0.912095 7.37397 1.04277 7.69078 1.27559 7.92499L6.27559 12.925" stroke="#f9f9f9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="bevel"/>
               </svg>
             </li>
-            <li className='cursor-pointer fill-white'>
+            <li className='cursor-pointer transition-all hover:opacity-70'>
               <svg width="22" height="14" viewBox="0 0 22 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0.912109 7H20.5371" stroke="#575757" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="bevel"/>
-                <path d="M15.5869 12.975L20.7244 7.83751C20.9572 7.60331 21.0879 7.28649 21.0879 6.95626C21.0879 6.62603 20.9572 6.30921 20.7244 6.07501L15.7244 1.07501" stroke="#575757" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="bevel"/>
+                <path d="M0.912109 7H20.5371" stroke="#f9f9f9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="bevel"/>
+                <path d="M15.5869 12.975L20.7244 7.83751C20.9572 7.60331 21.0879 7.28649 21.0879 6.95626C21.0879 6.62603 20.9572 6.30921 20.7244 6.07501L15.7244 1.07501" stroke="#f9f9f9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="bevel"/>
               </svg>
             </li>
           </ul>
@@ -404,32 +404,32 @@ const MILLIGO: React.FC = () => {
       </section>
       <section className='py-7 md:pt-24 md:pb-16 px-3/100 mb-14 md:mb-20'>
         <div className='max-w-875 mx-auto'>
-          <h3 className='font-bungee text-center text-20 md:text-32 text-pink-D47DFF mb-8 md:mb-10 uppercase'>About MILLIGO</h3>
-          <div className='rounded-5 bg-gray-151515 py-4 md:py-6'>
+          <h3 className='font-bungee text-center text-h1-sp md:text-h1-pc text-blue-primary mb-8 md:mb-10 uppercase'>About MILLIGO</h3>
+          <div className='rounded-5 bg-gray-box py-4 md:py-6'>
             <ul className='grid grid-cols-1 md:grid-cols-3 md:gap-y-4 px-3/100 md:px-0'>
-              <li className='col-span-1 pb-3 md:pb-0 md:px-4 border-b md:border-b-0 border-solid border-gray-575757-50'>
-                <p className='text-pink-D47DFF font-bold text-14 md:text-16 md:mb-2'>Highly Vetted Projects</p>
+              <li className='col-span-1 pb-3 md:pb-0 md:px-4 border-b md:border-b-0 border-solid border-gray-boxline-50'>
+                <p className='text-pink-secondary font-bold text-h3-sp md:text-h3-pc md:mb-2'>Highly Vetted Projects</p>
                 <p>Get access to top projects’ IGO across multi-blockchain</p>
               </li>
-              <li className='col-span-1 py-3 md:py-0 md:px-4 border-b md:border-b-0 md:border-l md:border-r border-solid border-gray-575757-50'>
-                <p className='text-pink-D47DFF font-bold text-14 md:text-16 md:mb-2'>Fair</p>
+              <li className='col-span-1 py-3 md:py-0 md:px-4 border-b md:border-b-0 md:border-l md:border-r border-solid border-gray-boxline-50'>
+                <p className='text-pink-secondary font-bold text-h3-sp md:text-h3-pc md:mb-2'>Fair</p>
                 <p>With The MILLIONSY VRF, all users have an equal chance to win a whitelist spot.</p>
               </li>
-              <li className='col-span-1 py-3 md:py-0 md:px-4 border-b md:border-b-0 border-solid border-gray-575757-50'>
-                <p className='text-pink-D47DFF font-bold text-14 md:text-16 md:mb-2'>Multi-chain support</p>
+              <li className='col-span-1 py-3 md:py-0 md:px-4 border-b md:border-b-0 border-solid border-gray-boxline-50'>
+                <p className='text-pink-secondary font-bold text-h3-sp md:text-h3-pc md:mb-2'>Multi-chain support</p>
                 <p>MILLIGO is now available on Solana and it will soon be accessible on BSC, other platforms.</p>
               </li>
-              <li className='col-span-1 py-3 md:py-0 md:px-4 border-b md:border-b-0 border-solid border-gray-575757-50'>
-                <p className='text-pink-D47DFF font-bold text-14 md:text-16'>How to participate?</p>
-                <p><a href="https://docs.millionsy.io/milligo/how-to-participate" className='text-10 md:text-12 text-blue-ADFAFF underline hover:no-underline'>Read full article</a></p>
+              <li className='col-span-1 py-3 md:py-0 md:px-4 border-b md:border-b-0 border-solid border-gray-boxline-50'>
+                <p className='text-pink-secondary font-bold text-h3-sp md:text-h3-pc'>How to participate?</p>
+                <p><a href="https://docs.millionsy.io/milligo/how-to-participate" target={`_blank`} className='text-bodybox-sp md:text-bodybox-pc text-blue-secondary underline transition-all hover:opacity-70'>Read full article</a></p>
               </li>
-              <li className='col-span-1 py-3 md:py-0 md:px-4 border-b md:border-b-0 md:border-l md:border-r border-solid border-gray-575757-50'>
-                <p className='text-pink-D47DFF font-bold text-14 md:text-16'>How to use NFT for more slots?</p>
-                <p><a href="https://docs.millionsy.io/nft-tickets/introduction" className='text-10 md:text-12 text-blue-ADFAFF underline hover:no-underline'>Read full article</a></p>
+              <li className='col-span-1 py-3 md:py-0 md:px-4 border-b md:border-b-0 md:border-l md:border-r border-solid border-gray-boxline-50'>
+                <p className='text-pink-secondary font-bold text-h3-sp md:text-h3-pc'>How to use NFT for more slots?</p>
+                <p><a href="https://docs.millionsy.io/nft-tickets/introduction" target={`_blank`} className='text-bodybox-sp md:text-bodybox-pc text-blue-secondary underline transition-all hover:opacity-70'>Read full article</a></p>
               </li>
               <li className='col-span-1 pt-3 md:pt-0 md:px-4'>
-                <p className='text-pink-D47DFF font-bold text-14 md:text-16'>FAQ</p>
-                <p><a href="https://docs.millionsy.io/milligo/faq" className='text-10 md:text-12 text-blue-ADFAFF underline hover:no-underline'>Read full article</a></p>
+                <p className='text-pink-secondary font-bold text-h3-sp md:text-h3-pc'>FAQ</p>
+                <p><a href="https://docs.millionsy.io/milligo/faq" target={`_blank`} className='text-bodybox-sp md:text-bodybox-pc text-blue-secondary underline transition-all hover:opacity-70'>Read full article</a></p>
               </li>
             </ul>
           </div>

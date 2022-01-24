@@ -19,19 +19,19 @@ const PartySection: React.FC<Props> = ({playerData, partyData, sendDataPartyToLo
         {
           Math.round(partyData.gameBalanceUSDT) !== 0 ? (
             <h3>
-              <span className='text-16 md:text-20 leading-none text-center block font-bold'>Pump the party</span>
-              <span className='font-bungee text-40 md:text-52 text-blue-17F0FF text-center leading-none block mt-9 md:mt-7 mb-8 md:mb-10'>
+              <span className='text-h2-sp md:text-h2-pc leading-none text-center block font-bold text-gray-primary'>Pump the party</span>
+              <span className='font-bungee text-banner-sp md:text-banner-pc text-blue-primary text-center leading-none block mt-9 md:mt-7 mb-8 md:mb-10'>
                 $<CountUp separator="," duration={1.5} start={0} end={partyData.gameBalanceUSDT} />
               </span>
-              <span className='text-16 md:text-20 leading-none text-center block font-bold'>~<CountUp separator="," decimals={2} decimal="." duration={1.5} start={0} end={partyData.gameBalanceSol} /> MILLI</span>
+              <span className='text-h2-sp md:text-h2-pc leading-none text-center block font-bold text-gray-primary'>~<CountUp separator="," decimals={2} decimal="." duration={1.5} start={0} end={partyData.gameBalanceSol} /> MILLI</span>
             </h3>
           ) : (
             <h3>
-              <span className='text-16 md:text-20 leading-none text-center block font-bold'>Pump the party</span>
+              <span className='text-h2-sp md:text-h2-pc leading-none text-center block font-bold text-gray-primary'>Pump the party</span>
               <ContentLoader
                 viewBox="0 0 700 90"
-                backgroundColor="#fff"
-                foregroundColor="#dcdcdc"
+                backgroundColor="#293333"
+                foregroundColor="#575757"
               >
                 <rect x="260" y="20" rx="4" ry="4" width="180" height="35" />
                 <rect x="300" y="75" rx="4" ry="4" width="100" height="15" />
@@ -61,7 +61,7 @@ const PartySection: React.FC<Props> = ({playerData, partyData, sendDataPartyToLo
               <img src="/assets/lottery/buyticket_sp.png" alt=""/>
             </picture>
           </div>
-          { showTooltipConnect && <p className='absolute top-full left-1/4 screen475:left-1/2 transform -translate-x-1/2 translate-y-2 z-100 border border-solid border-pink-A819FA bg-gray-151515 rounded-5 text-center text-14 md:text-16 py-1 w-44 text-pink-A819FA font-medium'>Connect wallet first</p> }
+          { showTooltipConnect && <p className='absolute top-full left-1/4 screen475:left-1/2 transform -translate-x-1/2 translate-y-2 z-100 border border-solid border-pink-primary bg-gray-box rounded-5 text-center py-1 w-32 md:w-36 text-pink-primary font-medium'>Connect wallet first</p> }
         </div>
       </div>
     </div>

@@ -29,8 +29,8 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
   return (
     <>
       <div className='p-3.5 md:px-8 md:pt-3 md:pb-5'>
-        <p className='text-14 md:text-16 font-bold mb-2 md:mb-2.5 flex items-center'>
-          <span className='inline-block mr-2 w-3 md:w-3.5' onClick={() => dataGiveDetail({
+        <p className='text-gray-primary text-h3-sp md:text-h3-pc font-bold mb-2 md:mb-2.5 flex items-center'>
+          <span className='inline-block mr-2 w-3 md:w-3.5 cursor-pointer transition-all hover:opacity-70' onClick={() => dataGiveDetail({
                 back_your: true,
               })}
             >
@@ -40,24 +40,24 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
           </span>
           Round
         </p>
-        <p className='bg-gray-F9F9F9-20 text-right rounded-5 flex justify-between items-center text-gray-A9A9A9 pr-2.5'>
-          <span className='text-14 md:text-16 font-bold text-pink-F4E0FF p-2 md:px-8 text-center bg-pink-8C24BF rounded-5 inline-block'>{`#${dataSendToDetail.game_no}`}</span>
+        <p className='bg-gray-lightbox text-right rounded-5 flex justify-between items-center pr-2.5'>
+          <span className='text-h3-sp md:text-h3-pc font-bold text-pink-F4E0FF p-2 md:px-8 text-center bg-pink-primary rounded-5 inline-block'>{`#${dataSendToDetail.game_no}`}</span>
           {`${monthName[new Date(dataSendToDetail.updatedAt).getMonth()]} 
           ${new Date(dataSendToDetail.updatedAt).getDate()}, 
           ${new Date(dataSendToDetail.updatedAt).getFullYear()}, 11:00 AM`}
         </p>
       </div>
       <div className=''>
-        <div className={`p-3.5 md:px-8 md:py-5 border-t border-solid border-gray-575757-50 ${slide ? 'border-b' : ''}`}>
+        <div className={`p-3.5 md:px-8 md:py-5 border-t border-solid border-gray-boxline-50`}>
           <div className='md:flex md:items-center justify-between'>
-            <p className='text-14 md:text-16 font-bold mb-2 md:mb-0'>Winning Number</p>
+            <p className='text-gray-primary text-h3-sp md:text-h3-pc font-bold mb-2 md:mb-0'>Winning Number</p>
             {
               dataSendToDetail.roll_nums.length > 0 ? (
                 <ul className='flex justify-between screen475:block'>
                 {
                   dataSendToDetail.roll_nums.map((element, index) => (
-                      <li key={index} className={`w-10 h-10 md:w-50 md:h-50 bg-blue-17F0FF p-px inline-block rounded-full ${index < 5 ? 'screen475:mr-5' : ''}`}>
-                        <p className='flex justify-center items-center w-full h-full text-18 font-bungee bg-gray-151515 rounded-full'><span className='text-17F0FFbg-blue-17F0FF'>{element < 10 ? `0${element}` : element}</span></p>
+                      <li key={index} className={`w-10 h-10 md:w-50 md:h-50 bg-blue-primary p-px inline-block rounded-full ${index < 5 ? 'screen475:mr-5' : ''}`}>
+                        <p className='flex justify-center items-center w-full h-full text-h2-sp md:text-h2-pc font-bungee bg-gray-box rounded-full'><span className='text-blue-primary'>{element < 10 ? `0${element}` : element}</span></p>
                       </li>
                     )
                   )
@@ -66,75 +66,72 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
               ) : ''
             }
           </div>
-          <div className='md:flex mt-3.5 md:mt-8'>
-            <p className='text-14 md:text-16 font-bold mb-1 md:mb-0 md:pr-2'>Your Ticket</p>
-            <div className='md:pl-36'>
-              <p>You have <span className='text-blue-ADFAFF font-bold underline'>{dataSendToDetail.player_tickets.length} ticket</span> to enter this party.</p>
-              <p onClick={handleViewTicket} className='text-blue-17F0FF cursor-pointer hover:underline font-bold inline-block'>View your tickets</p>
-            </div>
+        </div>
+        <div className={`p-3.5 md:px-8 flex items-center md:py-5 border-t border-solid border-gray-boxline-50  ${slide ? 'border-b' : ''}`}>
+          <p className='text-gray-primary text-h3-sp md:text-h3-pc font-bold mb-1 md:mb-0 md:pr-2'>Your Ticket</p>
+          <div className='md:pl-32'>
+            <p className='md:pl-2'>You have <span className='text-blue-secondary font-bold underline hover:opacity-70 cursor-pointer' onClick={handleViewTicket}>{dataSendToDetail.player_tickets.length} ticket</span> to enter this party.</p>
           </div>
         </div>
-        
-
         <div className={`slideToggle ${slide ? 'hidden' : 'block'}`}>
-          <div className='bg-gray-EBEBEB-10 p-3.5 md:px-8 md:pt-6 md:pb-4'>
+          <div className='bg-gray-lightbox p-3.5 md:px-8 md:pt-6 md:pb-4'>
             <div className='md:flex justify-between md:items-end mb-4'>
-              <p className='text-14 md:text-16 font-bold mb-2 md:mb-0'>Prize pot</p>
+              <p className='text-gray-primary text-h3-sp md:text-h3-pc font-bold mb-2 md:mb-0'>Prize pot</p>
               <div className='flex justify-between md:w-3/5'>
-                <p className='text-28 md:text-32 font-bungee text-blue-17F0FF leading-none'>{`~$${numberWithCommas(dataSendToDetail.total_pool_usdt)}`}</p>
-                <p className='text-20 font-bungee text-blue-17F0FF relative top-0.5'>{Math.round(dataSendToDetail.total_pool_sol)} MILLI</p>
+                <p className='text-28 md:text-h1-pc font-bungee text-blue-primary leading-none'>{`~$${numberWithCommas(dataSendToDetail.total_pool_usdt)}`}</p>
+                <p className='text-h2-pc font-bungee text-blue-primary relative top-0.5'>{Math.round(dataSendToDetail.total_pool_sol)} MILLI</p>
               </div>
             </div>
             <p className='h-px opacity-50 bg-gray-575757 block md:hidden mb-4'></p>
             <ul className='flex flex-wrap justify-between'>
               <li className='text-center w-1/3 md:w-auto mb-4 md:mb-0'>
                 <p className='w-fit md:w-auto'>
-                  <span className='text-14 md:text-16 font-bold'>Match 3</span>
-                  <span className='text-14 md:text-16 font-bold text-blue-17F0FF block leading-none md:mt-1.5 md:mb-0.5'>{dataSendToDetail.total_pool_sol/100*8} MILLI</span>
-                  <span className='text-white text-10 md:text-12'>{dataSendToDetail.match_pool3_count} Winners</span>
+                  <span className='text-gray-primary text-h3-sp md:text-h3-pc font-bold'>Match 3</span>
+                  <span className='text-h3-sp md:text-h3-pc font-bold text-blue-primary block leading-none md:mt-1.5 md:mb-0.5'>{dataSendToDetail.total_pool_sol/100*8} MILLI</span>
+                  <span className='text-gray-primary text-bodybox-sp md:text-bodybox-pc'>{dataSendToDetail.match_pool3_count} Winners</span>
                 </p>
               </li>
               <li className='text-center w-1/3 md:w-auto mb-4 md:mb-0'>
                 <p className='w-fit md:w-auto mx-auto md:mx-0'>
-                  <span className='text-14 md:text-16 font-bold'>Match 4</span>
-                  <span className='text-14 md:text-16 font-bold text-blue-17F0FF block leading-none md:mt-1.5 md:mb-0.5'>{dataSendToDetail.total_pool_sol/100*12} MILLI</span>
-                  <span className='text-white text-10 md:text-12'>{dataSendToDetail.match_pool4_count} Winners</span>
+                  <span className='text-gray-primary text-h3-sp md:text-h3-pc font-bold'>Match 4</span>
+                  <span className='text-h3-sp md:text-h3-pc font-bold text-blue-primary block leading-none md:mt-1.5 md:mb-0.5'>{dataSendToDetail.total_pool_sol/100*12} MILLI</span>
+                  <span className='text-gray-primary text-bodybox-sp md:text-bodybox-pc'>{dataSendToDetail.match_pool4_count} Winners</span>
                 </p>
               </li>
               <li className='text-center w-1/3 md:w-auto mb-4 md:mb-0'>
                 <p className='w-fit md:w-auto ml-auto md:ml-0'>
-                  <span className='text-14 md:text-16 font-bold'>Match 5</span>
-                  <span className='text-14 md:text-16 font-bold text-blue-17F0FF block leading-none md:mt-1.5 md:mb-0.5'>{dataSendToDetail.total_pool_sol/100*16} MILLI</span>
-                  <span className='text-white text-10 md:text-12'>{dataSendToDetail.match_pool5_count} Winners</span>
+                  <span className='text-gray-primary text-h3-sp md:text-h3-pc font-bold'>Match 5</span>
+                  <span className='text-h3-sp md:text-h3-pc font-bold text-blue-primary block leading-none md:mt-1.5 md:mb-0.5'>{dataSendToDetail.total_pool_sol/100*16} MILLI</span>
+                  <span className='text-gray-primary text-bodybox-sp md:text-bodybox-pc'>{dataSendToDetail.match_pool5_count} Winners</span>
                 </p>
               </li>
               <li className='text-center w-1/3 md:w-auto'>
                 <p className='w-fit md:w-auto'>
-                  <span className='text-14 md:text-16 font-bold'>Match 6</span>
-                  <span className='text-14 md:text-16 font-bold text-blue-17F0FF block leading-none md:mt-1.5 md:mb-0.5'>{dataSendToDetail.total_pool_sol/100*40} MILLI</span>
-                  <span className='text-white text-10 md:text-12'>{dataSendToDetail.match_pool6_count} Winners</span>
+                  <span className='text-gray-primary text-h3-sp md:text-h3-pc font-bold'>Match 6</span>
+                  <span className='text-h3-sp md:text-h3-pc font-bold text-blue-primary block leading-none md:mt-1.5 md:mb-0.5'>{dataSendToDetail.total_pool_sol/100*40} MILLI</span>
+                  <span className='text-gray-primary text-bodybox-sp md:text-bodybox-pc'>{dataSendToDetail.match_pool6_count} Winners</span>
                 </p>
               </li>
               <li className='text-center w-1/3 md:w-auto'>
-                <span className='text-14 md:text-16 font-bold'>Burn</span>
-                <span className='text-14 md:text-16 font-bold text-blue-17F0FF block leading-none md:mt-1.5 md:mb-0.5'>{dataSendToDetail.total_pool_sol/100*24} MILLI</span>
-                <span className='text-white text-10 md:text-12'><br/></span>
+                <span className='text-gray-primary text-h3-sp md:text-h3-pc font-bold'>Burn</span>
+                <span className='text-h3-sp md:text-h3-pc font-bold text-blue-primary block leading-none md:mt-1.5 md:mb-0.5'>{dataSendToDetail.total_pool_sol/100*24} MILLI</span>
+                <span className='text-gray-primary text-bodybox-sp md:text-bodybox-pc'><br/></span>
               </li>
               <li className='w-1/3 flex items-center justify-end md:hidden'>
-                <p className='text-white text-10 text-right leading-tight'>Total players <br />this round<span className='text-14 font-bold block'>{dataSendToDetail.total_player}</span></p>
+                <p className='text-white text-bodybox-sp text-right leading-tight'>Total players <br />this round<span className='text-h3-sp font-bold block'>{dataSendToDetail.total_player}</span></p>
               </li>
             </ul>
-            <p className='text-white text-12 text-right mt-2 hidden md:block'>Total players this round: <span className='text-16 font-bold'>{dataSendToDetail.total_player}</span></p>
+            <p className='text-white text-bodybox-pc text-right mt-2 hidden md:block'>Total players this round: <span className='text-h3-pc font-bold'>{dataSendToDetail.total_player}</span></p>
           </div>
         </div>
       </div>
-      <p className='text-14 font-semibold flex justify-center items-center cursor-pointer py-3.5 transition-all hover:opacity-70' onClick={() => setSlide(!slide)}>
+      <p className='text-gray-primary text-button-sp md:text-button-sp font-semibold flex justify-center items-center cursor-pointer py-3.5 transition-all hover:opacity-70' onClick={() => setSlide(!slide)}>
         {slide ? (
           <>
             Detail
-            <span className='relative top-0.5 inline-block ml-1.5'>
-              <svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 6L0.535899 -6.52533e-07L7.4641 -4.68497e-08L4 6Z" fill="#F9F9F9" />
+            <span className='inline-block ml-1.5'>
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.0166 1.16669L4.4416 4.59169C4.59774 4.7469 4.80895 4.83401 5.0291 4.83401C5.24926 4.83401 5.46047 4.7469 5.6166 4.59169L8.94994 1.25835" stroke="white" stroke-linecap="round" stroke-linejoin="bevel"/>
               </svg>
             </span>
           </>
@@ -142,8 +139,8 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
           <>
             Hide
             <span className='inline-block ml-1.5'>
-              <svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 0L7.4641 6L0.535898 6L4 0Z" fill="#F9F9F9" />
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8.9834 4.83331L5.5584 1.40831C5.40226 1.2531 5.19105 1.16599 4.9709 1.16599C4.75074 1.16599 4.53953 1.2531 4.3834 1.40831L1.05006 4.74165" stroke="white" stroke-linecap="round" stroke-linejoin="bevel"/>
               </svg>
             </span>
           </>

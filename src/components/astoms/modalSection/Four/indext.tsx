@@ -84,25 +84,25 @@ const Four: React.FC<Props> = ({dataSendFour, dataGiveFour}) => {
         <ul className={`${classes.chooseNumber}`}>
           {
             Array(45).fill(1).map((el, index) => (
-              <li key={index} className={`${index + 1 == dataChoose.value ? 'active' : ''}`} onClick={handleOnClickChooseNumber}>{!handleCheck(index+1)?(index < 9 ? `0${index + 1}` : index + 1): '_'}</li>
+              <li key={index} className={`text-gray-primary text-body-sp md:text-body-pc hover:text-blue-secondary ${index + 1 == dataChoose.value ? 'active' : ''}`} onClick={handleOnClickChooseNumber}>{!handleCheck(index+1)?(index < 9 ? `0${index + 1}` : index + 1): '_'}</li>
             ))
           }
         </ul>
         <ul className='flex justify-between mt-3'>
           {
             data.data.ticketChanges.numberChange.map((el: number, index: number) => (
-              <li key={index} className={`w-35 h-35 bg-blue-17F0FF p-px inline-block rounded-full cursor-pointer`}
+              <li key={index} className={`w-35 h-35 md:w-10 md:h-10 bg-blue-primary p-px inline-block rounded-full cursor-pointer`}
                 onClick={(event) => handleOnClickTicket(event, index)}
               >
-                <p className={`flex justify-center items-center w-full h-full text-16 font-bungee rounded-full ${index === dataChoose.idx ? 'bg-blue-0B7880 box-shadow-0440-inset' : 'bg-gray-151515'}`}><span className='text-blue-17F0FF'>{el < 10 ? `0${el}` : el}</span></p>
+                <p className={`flex justify-center items-center w-full h-full text-h3-pc md:text-18 font-bungee rounded-full ${index === dataChoose.idx ? 'bg-gray-boxline box-shadow-0440-inset' : 'bg-gray-lightbox'}`}><span className='text-blue-primary'>{el < 10 ? `0${el}` : el}</span></p>
               </li>
             ))
           }
         </ul>
       </div>
       
-      <div className={`p-4 bg-gray-575757-30`}>
-        <p onClick={handleSendData} className='transition-all hover:opacity-70 text-center font-semibold text-12 cursor-pointer rounded-3 border border-solid text-blue-0B7880 bg-blue-17F0FF w-28 h-32px flex justify-center items-center mx-auto'>Submit</p>
+      <div className={`p-4 bg-gray-lightbox`}>
+        <p onClick={handleSendData} className='transition-all hover:opacity-70 text-center font-semibold text-body-sp md:text-body-pc cursor-pointer rounded-3 border border-solid text-gray-box bg-blue-primary w-28 h-32px flex justify-center items-center mx-auto'>Submit</p>
       </div>
     </>
   )

@@ -78,7 +78,7 @@ export class SolletWalletAdapter extends BaseMessageSignerWalletAdapter {
 
             const provider = this._provider || (typeof window !== 'undefined' && window.sollet);
             if (!provider) throw new WalletNotFoundError();
-            debugger
+            // debugger
             let wallet: Wallet;
             try {
                 wallet = new Wallet(provider, this._network);
@@ -131,7 +131,7 @@ export class SolletWalletAdapter extends BaseMessageSignerWalletAdapter {
                     if (interval) clearInterval(interval);
                 }
             } catch (error: any) {
-                debugger
+                // debugger
                 if (error instanceof WalletError) throw error;
                 throw new WalletConnectionError(error?.message, error);
             }

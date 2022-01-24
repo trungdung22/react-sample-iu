@@ -36,16 +36,6 @@ const Second: React.FC<Props> = ({dataGiveSecond, dataSendSecond, playerData}) =
    }, [])
 
   const classes = useStyles();
-  // const [data, setData] = useState({
-  //   data: {
-  //     ticketCount: data.data.ticketCount,
-  //     price: data.data.price,
-  //     unit: data.data.unit,
-  //     tickets: data.data.tickets,
-  //     third: false,
-  //     five: false,
-  //   }
-  // });
   const handleRandomTicket = () => {
     const result = [];
     while(result.length < 6){
@@ -54,35 +44,6 @@ const Second: React.FC<Props> = ({dataGiveSecond, dataSendSecond, playerData}) =
     }
     return result;
   }
-  const handleInputMax = (event: React.MouseEvent) => {
-    setData({
-      data: {
-        ...data.data,
-        tickets: Array(5).fill(0).map(() => handleRandomTicket()),
-        ticketCount: 5,
-        price: data.data.unit * 5,
-      }
-    })
-  }
-  
-  const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // if (parseInt(event.target.value) > 5) {
-    //   event.target.value = "5";
-    // }
-    // if (parseInt(event.target.value) < 1 || event.target.value === '') {
-    //   event.target.value = "1";
-    // }
-    // const total = event.target.value !== '' ? data.data.unit * parseFloat(event.target.value) : 0;
-    // setData({
-    //   data: {
-    //     ...data.data,
-    //     ticketCount: event.target.value !== '' ? parseInt(event.target.value) : 0,
-    //     price: total,
-    //     tickets: event.target.value !== '' ? Array(parseInt(event.target.value)).fill(0).map(() => handleRandomTicket()) : [Array()]
-    //   }
-    // })
-    // setValueTickets(event.target.value);
-  };
   const handleEditNumber = (event: React.MouseEvent) => {
     if(data.data.price > 0) {
       setData({
@@ -126,51 +87,42 @@ const Second: React.FC<Props> = ({dataGiveSecond, dataSendSecond, playerData}) =
     <>
       <div className='p-4 pb-2'>
         <div className='flex justify-between items-center'>
-          <p className='text-12 font-medium text-pink-D47DFF'>Max is 5 tickets</p>
-          <div className='flex justify-center items-center rounded-5 overflow-hidden border border-solid border-blue-ADFAFF w-fit'>
-            <p className='inline-block w-30 h-30 bg-blue-0B7880 cursor-pointer relative'
+          <p className='text-body-sp md:text-body-pc font-medium text-pink-secondary'>Max is 5 tickets</p>
+          <div className='flex justify-center items-center rounded-5 overflow-hidden border border-solid border-blue-secondary w-fit'>
+            <p className='inline-block w-30 h-30 bg-gray-lightbox cursor-pointer relative'
               onClick={() => {
                 if (parseInt(valueTickets) > 1) {
                   setValueTickets((parseInt(valueTickets) - 1).toString());
                 }
               }}
             >
-              <span className={`w-2.5 h-px bg-gray-F9F9F9 absolute top-1/2 left-2.5 ${parseInt(valueTickets) === 1 ? 'opacity-50' : ''}`}></span>
+              <span className={`w-2.5 h-px bg-gray-primary absolute top-1/2 left-2.5 ${parseInt(valueTickets) === 1 ? 'opacity-50' : ''}`}></span>
             </p>
-            {/* <input
-              autoFocus
-              value=
-              // onChange={handleChangeInput}
-              onKeyPress={(e) => {
-                e.preventDefault();
-              }}
-              className=''
-            /> */}
-            <p className='w-30 h-30 flex justify-center items-center text-14 text-blue-17F0FF font-semibold outline-none bg-transparent text-center'>{valueTickets}</p>
-            <p className='inline-block w-30 h-30 bg-blue-0B7880 cursor-pointer relative'
+            <p className='w-30 h-30 flex justify-center items-center text-h3-sp md:text-h3-pc text-blue-primary font-semibold outline-none bg-transparent text-center'>{valueTickets}</p>
+            <p className='inline-block w-30 h-30 bg-gray-lightbox cursor-pointer relative'
               onClick={() => {
                 if (parseInt(valueTickets) < 5) {
                   setValueTickets((parseInt(valueTickets) + 1).toString());
                 }
               }}
             >
-              <span className={`w-2.5 h-px bg-gray-F9F9F9 absolute top-1/2 left-2.5 ${parseInt(valueTickets) === 5 ? 'opacity-50' : ''}`}></span>
-              <span className={`h-2.5 w-px bg-gray-F9F9F9 absolute top-2.5 left-1/2 ${parseInt(valueTickets) === 5 ? 'opacity-50' : ''}`}></span>
+              <span className={`w-2.5 h-px bg-gray-primary absolute top-1/2 left-2.5 ${parseInt(valueTickets) === 5 ? 'opacity-50' : ''}`}></span>
+              <span className={`h-2.5 w-px bg-gray-primary absolute top-2.5 left-1/2 ${parseInt(valueTickets) === 5 ? 'opacity-50' : ''}`}></span>
             </p>
           </div>
         </div>
-        <p className='text-10 font-semibold text-right mt-1.5 mb-1.5'>MILLI Balance: {playerData.balanceSOL}</p>
+        <p className='text-bodybox-sp md:text-bodybox-pc font-semibold text-right mt-1.5 mb-1.5'>MILLI Balance: {playerData.balanceSOL}</p>
         <div className='flex justify-between items-center mb-2'>
-          <p className="text-12 font-semibold">You pay</p>
-          <p className="text-14 font-bold text-pink-D47DFF">~ {data.data.price === 0 ? 0 : data.data.price.toFixed(8)} MILLI</p>
+          <p className="text-body-sp md:text-body-pc font-semibold text-gray-primary">You pay</p>
+          <p className="text-h3-sp md:text-h3-pc font-bold text-pink-secondary">~ {data.data.price === 0 ? 0 : data.data.price.toFixed(8)} MILLI</p>
         </div>
       </div>
-      <div className='p-4 bg-gray-575757-30'>
+      <div className='p-4 bg-gray-lightbox'>
         <ul className='grid grid-cols-2 gap-2.5 mb-2.5'>
-          <li className='transition-all hover:opacity-70 text-center col-span-1 font-semibold text-12 cursor-pointer rounded-3 border border-solid border-blue-17F0FF flex justify-center items-center h-32px text-blue-17F0FF' onClick={handleEditNumber}>Edit numbers</li>
-          <li className='transition-all hover:opacity-70 text-center col-span-1 font-semibold text-12 cursor-pointer rounded-3 border border-solid border-blue-17F0FF flex justify-center items-center h-32px text-blue-0B7880 bg-blue-17F0FF' onClick={handleComfirm}>Buy instantly</li>
+          <li className='transition-all hover:opacity-70 text-center col-span-1 font-semibold text-button-sp md:text-button-pc cursor-pointer rounded-3 border border-solid border-blue-17F0FF flex justify-center items-center h-32px text-blue-primary' onClick={handleEditNumber}>Edit numbers</li>
+          <li className='transition-all hover:opacity-70 text-center col-span-1 font-semibold text-button-sp md:text-button-pc cursor-pointer rounded-3 border border-solid border-blue-17F0FF flex justify-center items-center h-32px text-gray-box bg-blue-primary' onClick={handleComfirm}>Buy instantly</li>
         </ul>
-        <p className='text-10 text-gray-EBEBEB'>"Buy instanly" allows you to pick no-duplicate random numbers to your tickets. By the time each round begins, prices will be set, evaluated to $2. Purchases are final.</p>
+        <p className='text-bodybox-sp md:text-bodybox-pc'>"Buy instanly" allows you to pick no-duplicate random numbers to your tickets. By the time each round begins, prices will be set, evaluated to $2. Purchases are final.</p>
       </div>
     </>
   )

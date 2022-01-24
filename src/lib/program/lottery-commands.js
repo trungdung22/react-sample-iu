@@ -74,7 +74,7 @@ export const buyBulkTicket = async (programIdStr, ticketSetNumbers, gamePubkeySt
         TOKEN_PROGRAM_ID,
         playerWallet.publicKey
     );
-    debugger
+    // debugger
     const playerTokenAccount = await minToken_token.getOrCreateAssociatedAccountInfo(playerWallet.publicKey);
     const ownerTokenAccount = await minToken_token.getOrCreateAssociatedAccountInfo(gameOwnerPubkey);
     let ticketKeyArr = [];

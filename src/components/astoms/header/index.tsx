@@ -140,17 +140,17 @@ const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
       <div className={`fixed w-full h-full bg-blue-0 z-100 opacity-0 ${menuConnectedCollapsed ? 'block' : 'hidden'}`}
         onClick={() => setMenuConnectedCollapsed(false)}
       ></div>
-      <header className={`bg-gray-151515 px-3/100 ${classes.root} ${offset && (size.width < 769) ? 'active' : ''}`}>
+      <header className={`bg-gray-box px-3/100 border-b border-solid border-gray-boxline-50 ${classes.root} ${offset && (size.width < 769) ? 'active' : ''}`}>
         <div className={`flex items-center justify-between w-full transition-all max-w-1680 mx-auto`}>
-          <a href="/" className={`${classes.headerLeft}`}><img src="/assets/common/logo.png" alt="Millionsy" className='rounded-3' /><span className='inline-block ml-1.5'>Millionsy</span></a>
+          <a href="/" className={`${classes.headerLeft} text-gray-primary`}><img src="/assets/common/logo.png" alt="Millionsy" className='rounded-3' /><span className='inline-block ml-1.5'>Millionsy</span></a>
           <div className={`${classes.headerRight} relative`}>
             <ul className={`listRouter mr-24`}>
-              <li className='mr-8'><a href="/lottery" className={location === '/lottery' ? 'active ': '' }>Lottery</a></li>
-              <li className='mr-8'><a href="/milligo" className={location === '/milligo' ? 'active ': ''}>MILLIGO</a></li>
-              <li><a href="/nft-ticket" className={location === '/nft-ticket' ? 'active ': ''}>NFT Ticket</a></li>
+              <li className='mr-8'><a href="/lottery" className={location === '/lottery' ? 'active text-blue-primary': 'hover:bg-gray-lightbox text-gray-primary' }>Lottery</a></li>
+              <li className='mr-8'><a href="/milligo" className={location === '/milligo' ? 'active text-blue-primary': 'hover:bg-gray-lightbox text-gray-primary'}>MILLIGO</a></li>
+              <li><a href="/nft-ticket" className={location === '/nft-ticket' ? 'active text-blue-primary': 'hover:bg-gray-lightbox text-gray-primary'}>NFT Ticket</a></li>
             </ul>
             <div className='py-1 md:py-2'>
-              <p className={`font-semibold flex justify-center items-center text-center rounded-2 md:rounded-3 px-2 h-32px md:h-34px md:px-2.5 transition-all cursor-pointer hover:opacity-70 ${ playerData.is_connect ? 'text-white bg-pink-150' : window.sessionStorage.getItem('show_connect') === 'true' && !playerData.is_connect ? 'text-gray-A9A9A9 bg-gray-F9F9F9': 'text-blue-50 bg-blue-0'}`}
+              <p className={`font-semibold flex justify-center items-center text-center rounded-2 md:rounded-3 px-2 h-32px md:h-34px md:px-2.5 transition-all cursor-pointer hover:opacity-70 ${ playerData.is_connect ? 'text-white bg-pink-primary' : window.sessionStorage.getItem('show_connect') === 'true' && !playerData.is_connect ? 'text-gray-boxline bg-gray-primary': 'text-gray-box bg-blue-primary'}`}
                 onClick={handleClickConnect}
               >
                 <span className='inline-block mr-1'>
@@ -162,27 +162,27 @@ const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
                   window.sessionStorage.getItem('show_connect') === 'true' && !playerData.is_connect
                   ? 
                   <span>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M8 10.5V13.625" stroke="#A9A9A9" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M8 2.375V5.5" stroke="#A9A9A9" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M5.5 8H2.375" stroke="#A9A9A9" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M13.625 8H10.5" stroke="#A9A9A9" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M6.23115 6.23127L4.0249 4.02502" stroke="#A9A9A9" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M11.975 11.975L9.7688 9.7688" stroke="#A9A9A9" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M6.23115 9.7688L4.0249 11.975" stroke="#A9A9A9" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M11.975 4.02502L9.7688 6.23127" stroke="#A9A9A9" strokeLinecap="round" strokeLinejoin="round"/>
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M6 8V10.5" stroke="#575757" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M6 1.5V4" stroke="#575757" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M4 6H1.5" stroke="#575757" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M10.5 6H8" stroke="#575757" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M4.58482 4.58507L2.81982 2.82007" stroke="#575757" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M9.18004 9.18004L7.41504 7.41504" stroke="#575757" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M4.58482 7.41504L2.81982 9.18004" stroke="#575757" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M9.18004 2.82007L7.41504 4.58507" stroke="#575757" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </span>
                   :
                   <span>
                     <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M4.51245 6.625L7.0812 9.19375C7.1983 9.31016 7.35671 9.3755 7.52183 9.3755C7.68694 9.3755 7.84535 9.31016 7.96245 9.19375L10.4625 6.69375" stroke={`${playerData.is_connect ? '#F4E0FF' : '#0B7880'}`} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="bevel"/>
+                      <path d="M4.51245 6.625L7.0812 9.19375C7.1983 9.31016 7.35671 9.3755 7.52183 9.3755C7.68694 9.3755 7.84535 9.31016 7.96245 9.19375L10.4625 6.69375" stroke={`${playerData.is_connect ? '#ffffff' : '#1A2222'}`} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="bevel"/>
                     </svg>
                   </span>
                 }
               </p>
-              <div className={`border border-solid border-gray-575757-50 transform absolute right-0 top-full w-240 rounded-5 box-shadow-0440 transition-all bg-gray-151515 overflow-hidden ${menuConnectedCollapsed ? 'visible opacity-100 pointer-events-auto' : ' invisible opacity-0 pointer-events-none'}`}>
-                <p className='text-14 font-medium py-1.5 px-4'>
+              <div className={`border border-solid border-gray-boxline-50 transform absolute right-0 top-full w-240 rounded-5 box-shadow-0440 transition-all bg-gray-box overflow-hidden ${menuConnectedCollapsed ? 'visible opacity-100 pointer-events-auto' : ' invisible opacity-0 pointer-events-none'}`}>
+                <p className='text-body-pc font-medium py-1.5 px-4'>
                   Solana
                   <span className='inline-block pb-0.5 ml-2'>
                     <svg width="6" height="3" viewBox="0 0 6 3" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -190,8 +190,8 @@ const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
                     </svg>
                   </span>
                 </p>
-                <ul className='bg-gray-575757-40'>
-                  <li className={`py-1 px-8 text-14 flex items-center cursor-pointer transition-all ${playerData.is_connect ? 'cursor-not-allowed hover:bg-pink-8C24BF' : 'hover:bg-blue-0B7880'}`}
+                <ul className='bg-gray-lightbox'>
+                  <li className={`py-1 px-8 text-body-pc flex items-center transition-all relative ${playerData.is_connect ? window.sessionStorage.getItem('adapter_type') === 'sollet' ? '' : 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:bg-gray-boxline'}`}
                     onClick={connectSollet}
                   >
                     <span className='w-4 h-4 inline-block mr-3'>
@@ -201,29 +201,45 @@ const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
                       </svg>
                     </span>
                     Sollet
+                    {
+                      playerData.is_connect && window.sessionStorage.getItem('adapter_type') === 'sollet' &&
+                      <span className='absolute top-3 right-3'>
+                        <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M1 4.57L3.295 6.865L9.16 1" stroke="#00FFFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      </span>
+                    }
                   </li>
-                  <li className={`py-1 px-8 text-14 flex items-center cursor-pointer transition-all ${playerData.is_connect ? 'cursor-not-allowed hover:bg-pink-8C24BF' : 'hover:bg-blue-0B7880'}`}
+                  <li className={`py-1 px-8 text-body-pc flex items-center transition-all relative ${playerData.is_connect ? window.sessionStorage.getItem('adapter_type') === 'phantom' ? '' : 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:bg-gray-boxline'}`}
                     onClick={connectPhantom}
                   >
                     <span className='w-4 h-4 inline-block mr-3'>
                       <IconPhantom></IconPhantom>
                     </span>
                     Phantom
+                    {
+                      playerData.is_connect && window.sessionStorage.getItem('adapter_type') === 'phantom' &&
+                      <span className='absolute top-3 right-3'>
+                        <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M1 4.57L3.295 6.865L9.16 1" stroke="#00FFFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      </span>
+                    }
                   </li>
-                  <li className='py-1 px-8 text-14 flex items-center cursor-not-allowed text-gray-787878'>
+                  <li className='py-1 px-8 text-body-pc flex items-center cursor-not-allowed opacity-50'>
                     <span className='w-4 h-4 inline-block mr-3'>
                       <IconCoin98></IconCoin98>
                     </span>
                     Coin98
                   </li>
-                  <li className='py-1 px-8 text-14 flex items-center cursor-not-allowed text-gray-787878'>
+                  <li className='py-1 px-8 text-body-pc flex items-center cursor-not-allowed opacity-50'>
                     <span className='w-4 h-4 inline-block mr-3'>
                       <IconSlope></IconSlope>
                     </span>
                     Slope
                   </li>
                 </ul>
-                <p className='text-14 font-medium py-1.5 px-4'>
+                <p className='text-body-pc font-medium py-1.5 px-4'>
                   Binance Smart Chain
                   <span className='inline-block pb-0.5 ml-2'>
                     <svg width="6" height="3" viewBox="0 0 6 3" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -231,21 +247,21 @@ const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
                     </svg>
                   </span>
                 </p>
-                <ul className='bg-gray-575757-40'>
-                  <li className='py-1 px-8 text-14 flex items-center cursor-not-allowed text-gray-787878'>
+                <ul className='bg-gray-lightbox'>
+                  <li className='py-1 px-8 text-body-pc flex items-center cursor-not-allowed opacity-50'>
                     <span className='w-4 h-4 inline-block mr-3'>
                       <IconMetamark></IconMetamark>
                     </span>
                     Metamask
                   </li>
-                  <li className='py-1 px-8 text-14 flex items-center cursor-not-allowed text-gray-787878'>
+                  <li className='py-1 px-8 text-body-pc flex items-center cursor-not-allowed opacity-50'>
                     <span className='w-4 h-4 inline-block mr-3'>
                       <IconCoin98></IconCoin98>
                     </span>
                     Coin98
                   </li>
                 </ul>
-                <p className={`flex justify-end items-center text-14 cursor-pointer bg-gray-151515 py-1.5 px-2 ${playerData.is_connect ? 'text-white' : 'cursor-not-allowed text-gray-8A8A8A'}`} onClick={handleDisconnect}>
+                <p className={`flex justify-end items-center text-body-pc cursor-pointer py-1.5 px-2 ${playerData.is_connect ? 'text-gray-primary' : 'cursor-not-allowed opacity-50'}`} onClick={handleDisconnect}>
                   Disconnect
                   <span className={`inline-block ml-2 ${playerData.is_connect ? '' : 'opacity-50'}`}>
                     <svg width="15" height="10" viewBox="0 0 15 10" fill="none" xmlns="http://www.w3.org/2000/svg">

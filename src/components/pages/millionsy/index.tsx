@@ -334,6 +334,15 @@ const Millionsy: React.FC = () => {
       }, 0);
     }
   }, [countDown])
+
+  useEffect(() => {
+    if(showModalTicket || isShowNotification) {
+      document.body.style.overflowY = 'hidden';
+    } else {
+      document.body.style.overflowY = 'scroll';
+    }
+  }, [showModalTicket, isShowNotification])
+
   return (
     <>
       <Header playerData={playerData.data} dataGiveFromHeader={dataGiveFromHeader}></Header>
@@ -342,7 +351,7 @@ const Millionsy: React.FC = () => {
           <p className='absolute top-2 xl:top-0 left-2 xl:-left-20 w-5 md:w-8 xl:w-50 transition-all hover:opacity-70'>
             <a href="/milligo">
               <svg className='w-full h-full' width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="50" height="50" rx="25" fill="#F9F9F9" fillOpacity="0.2"/>
+                <rect width="50" height="50" rx="25" fill="#1A2222"/>
                 <path d="M35.0879 25H15.4629" stroke="#F9F9F9" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="bevel"/>
                 <path d="M20.4131 19.025L15.2756 24.1625C15.0428 24.3967 14.9121 24.7135 14.9121 25.0437C14.9121 25.3739 15.0428 25.6908 15.2756 25.925L20.2756 30.925" stroke="#F9F9F9" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="bevel"/>
               </svg>
@@ -350,38 +359,38 @@ const Millionsy: React.FC = () => {
           </p>
           <div className='flex'>
             <div className='flex-shrink-0 mr-3 md:mr-6 xl:mr-8'>
-              <p className='w-36 md:w-auto rounded-3 md:rounded-10 p-0.5 bg-gray-151515'><img src="/assets/millipad/under_millionsy.png" alt="" className='rounded-3 md:rounded-10 max-w-full'/></p>
+              <p className='w-36 md:w-auto rounded-3 md:rounded-10 p-0.5 bg-gray-box'><img src="/assets/millipad/under_millionsy.png" alt="" className='rounded-3 md:rounded-10 max-w-full'/></p>
             </div>
             <div className='md:pt-4'>
-              <h3 className='text-32 text-blue-17F0FF uppercase font-bungee mb-2.5 md:mb-4 leading-8 md:leading-normal'>{nameProject}</h3>
+              <h3 className='text-h1-sp md:text-h1-pc text-blue-primary uppercase font-bungee mb-2.5 md:mb-4 leading-8 md:leading-normal'>{nameProject}</h3>
               <p>MILLIONSY is the first Solana- based cross-chain platform, which has 3 main products: The Lottery platform; the NFT ticket and the IGO platform for new games - NFT projects called MILLIGO.</p>
-              {/* <p className='text-10 md:text-14 text-gray-151515 rounded-3 md:rounded-5 bg-white px-4 py-0.5 font-bold inline-block'>Solana</p> */}
+              {/* <p className='text-bodybox-sp md:text-button-pc text-gray-151515 rounded-3 md:rounded-5 bg-white px-4 py-0.5 font-bold inline-block'>Solana</p> */}
             </div>
           </div>
         </div>
       </section>
       <section className='px-3/100 mb-5 md:mb-8'>
         <div className='max-w-900 mx-auto'>
-          <div className='p-3/100 md:p-0 flex flex-col md:flex-row bg-gray-151515 rounded-10'>
+          <div className='p-3/100 md:p-0 flex flex-col md:flex-row bg-gray-box rounded-10'>
             <div className='md:w-240 flex-shrink-0'>
-              <p className='flex items-center justify-between md:block leading-6 text-blue-17F0FF md:pl-6 tablet992:pl-8 tablet992:pr-12 md:py-2'>
+              <p className='flex items-center justify-between md:block leading-6 text-blue-primary md:pl-6 tablet992:pl-8 tablet992:pr-12 md:py-2'>
                 Followers
-                <span className='text-20 block font-bungee'>
+                <span className='text-h2-sp block font-bungee'>
                   {
                     getFlowers !== 0 ? <CountUp delay={1.5} duration={1.5} separator="," start={0} end={getFlowers} /> : 0
                   }
                 </span>
               </p>
-              <p className='h-px bg-gray-575757 opacity-50 md:hidden mt-2 mb-3'></p>
+              <p className='h-px bg-gray-boxline opacity-50 md:hidden mt-2 mb-3'></p>
               <ul className='flex justify-between md:block md:px-6 tablet992:px-12 md:py-7'>
-                <li className='md:mb-4'><a href="https://www.millionsy.io/" target='_blank' className='flex items-center text-blue-ADFAFF hover:opacity-70'><span className='inline-block mr-3 md:mr-4'><img src="/assets/millipad/icon_website.svg" alt="icon_website" /></span>Website</a></li>
-                <li className='md:mb-4'><a href="https://t.me/millionsyio" target='_blank' className='flex items-center text-blue-ADFAFF hover:opacity-70'><span className='inline-block mr-3 md:mr-4'><img src="/assets/millipad/icon_telegram.svg" alt="icon_telegram" /></span>Telegram</a></li>
-                <li><a href="https://twitter.com/millionsyio" target='_blank' className='flex items-center text-blue-ADFAFF hover:opacity-70'><span className='inline-block mr-3 md:mr-4'><img src="/assets/millipad/icon_twitter.svg" alt="icon_twitter" /></span>Twitter</a></li>
+                <li className='md:mb-4'><a href="https://www.millionsy.io/" target='_blank' className='flex items-center text-blue-secondary hover:opacity-70'><span className='inline-block mr-3 md:mr-4'><img src="/assets/millipad/icon_website.svg" alt="icon_website" /></span>Website</a></li>
+                <li className='md:mb-4'><a href="https://t.me/millionsyio" target='_blank' className='flex items-center text-blue-secondary hover:opacity-70'><span className='inline-block mr-3 md:mr-4'><img src="/assets/millipad/icon_telegram.svg" alt="icon_telegram" /></span>Telegram</a></li>
+                <li><a href="https://twitter.com/millionsyio" target='_blank' className='flex items-center text-blue-secondary hover:opacity-70'><span className='inline-block mr-3 md:mr-4'><img src="/assets/millipad/icon_twitter.svg" alt="icon_twitter" /></span>Twitter</a></li>
               </ul>
-              <p className='h-px bg-gray-575757 opacity-50 md:hidden mt-3 mb-2'></p>
+              <p className='h-px bg-gray-boxline opacity-50 md:hidden mt-3 mb-2'></p>
               <p className='flex items-center justify-between md:block leading-5 md:px-6 tablet992:pl-8 tablet992:pr-6 md:pt-2 md:pb-8'>
-                <span className='text-gray-EBEBEB'>Total raise:</span>
-                <span className='text-16 md:text-20 flex justify-between items-center font-bungee'>
+                <span className=''>Total raise:</span>
+                <span className='text-h2-sp md:text-h2-pc flex justify-between items-center font-bungee text-gray-primary'>
                   <span>{ getFlowers !== 0 ? <CountUp delay={1.5} duration={1.5} separator="," start={0} end={480000} /> : 0} USDT</span>
                   <span className='inline-block ml-2 w-3.5 md:w-18px relative bottom-px md:static'>
                     <svg className='w-full'width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -411,36 +420,36 @@ const Millionsy: React.FC = () => {
               {/* <span className='relative bottom-1.5'>Will start in</span> */}
               {
                 playerData.data.is_connect && dataPlayerMilli !== null && !dataPlayerMilli.is_winner && getDataMillipads !== null && getDataMillipads.status === 'distribution'
-                ? <h4 className='font-bungee text-blue-17F0FF text-16 md:text-20 md:pr-6 md:pt-3.5 md:pb-6 text-right mt-2 md:mt-0'>0 days : 00h : 00m : 00s</h4>
-                : <h4 className='font-bungee text-blue-17F0FF text-16 md:text-20 md:pr-6 md:pt-3.5 md:pb-6 text-right mt-2 md:mt-0'>{timeCountDown.days} days : {timeCountDown.hours}h : {timeCountDown.minutes}m : {timeCountDown.seconds}s</h4>
+                ? <h4 className='font-bungee text-blue-primary text-h2-sp md:text-h2-pc md:pr-6 md:pt-3.5 md:pb-6 text-right mt-2 md:mt-0'>0 days : 00h : 00m : 00s</h4>
+                : <h4 className='font-bungee text-blue-primary text-h2-sp md:text-h2-pc md:pr-6 md:pt-3.5 md:pb-6 text-right mt-2 md:mt-0'>{timeCountDown.days} days : {timeCountDown.hours}h : {timeCountDown.minutes}m : {timeCountDown.seconds}s</h4>
               }
               <div className='md:pr-6'>
-                <ul className='bg-gray-393939-50 rounded-5 md:rounded-10 overflow-hidden'>
-                  <li className={`px-3/100 md:px-9 py-2 md:py-3.5 text-10 md:text-14 ${getDataMillipads !== null && getDataMillipads.status === 'whileList' ? 'bg-pink-A819FA-30' : ''}`}><span className='font-bold'>Whitelist:</span> Register for the sale round and do tasks to claim slots.</li>
-                  <li className={`px-3/100 md:px-9 py-2 md:py-3.5 text-10 md:text-14 ${getDataMillipads !== null && getDataMillipads.status === 'lottery' ? 'bg-pink-A819FA-30' : ''}`}><span className='font-bold'>Bingo:</span> Choosing randomly the winners among participants.</li>
+                <ul className='bg-gray-lightbox rounded-5 md:rounded-10 overflow-hidden'>
+                  <li className={`px-3/100 md:px-9 py-2 md:py-3.5 text-bodybox-sp md:text-button-pc ${getDataMillipads !== null && getDataMillipads.status === 'whileList' ? 'bg-pink-primary-30' : ''}`}><span className='font-bold text-gray-primary'>Whitelist:</span> Register for the sale round and do tasks to claim slots.</li>
+                  <li className={`px-3/100 md:px-9 py-2 md:py-3.5 text-bodybox-sp md:text-button-pc ${getDataMillipads !== null && getDataMillipads.status === 'lottery' ? 'bg-pink-primary-30' : ''}`}><span className='font-bold text-gray-primary'>Bingo:</span> Choosing randomly the winners among participants.</li>
                   
                   {
                     playerData.data.is_connect ?
                       dataPlayerMilli === null ?
                       <>
-                        <li className={`px-3/100 md:px-9 py-2 md:py-3.5 text-10 md:text-14`}><span className='font-bold'>Sale round:</span> Only winners can participate in this round.</li>
-                        <li className={`px-3/100 md:px-9 py-2 md:py-3.5 text-10 md:text-14`}><span className='font-bold'>Distribution:</span> The tokens will be automatically sent to wallets.</li>
+                        <li className={`px-3/100 md:px-9 py-2 md:py-3.5 text-bodybox-sp md:text-button-pc`}><span className='font-bold text-gray-primary'>Sale round:</span> Only winners can participate in this round.</li>
+                        <li className={`px-3/100 md:px-9 py-2 md:py-3.5 text-bodybox-sp md:text-button-pc`}><span className='font-bold text-gray-primary'>Distribution:</span> The tokens will be automatically sent to wallets.</li>
                       </>
                       :
                       dataPlayerMilli.is_winner ?
                       <>
-                        <li className={`px-3/100 md:px-9 py-2 md:py-3.5 text-10 md:text-14 ${getDataMillipads !== null && getDataMillipads.status === 'saleRound' ? 'bg-pink-A819FA-30' : ''}`}><span className='font-bold'>Sale round:</span> Only winners can participate in this round.</li>
-                        <li className={`px-3/100 md:px-9 py-2 md:py-3.5 text-10 md:text-14 ${getDataMillipads !== null && getDataMillipads.status === 'distribution' ? 'bg-pink-A819FA-30' : ''}`}><span className='font-bold'>Distribution:</span> The tokens will be automatically sent to wallets.</li>
+                        <li className={`px-3/100 md:px-9 py-2 md:py-3.5 text-bodybox-sp md:text-button-pc ${getDataMillipads !== null && getDataMillipads.status === 'saleRound' ? 'bg-pink-primary-30' : ''}`}><span className='font-bold text-gray-primary'>Sale round:</span> Only winners can participate in this round.</li>
+                        <li className={`px-3/100 md:px-9 py-2 md:py-3.5 text-bodybox-sp md:text-button-pc ${getDataMillipads !== null && getDataMillipads.status === 'distribution' ? 'bg-pink-primary-30' : ''}`}><span className='font-bold text-gray-primary'>Distribution:</span> The tokens will be automatically sent to wallets.</li>
                       </>
                       :
                       <>
-                        <li className={`px-3/100 md:px-9 py-2 md:py-3.5 text-10 md:text-14 ${getDataMillipads !== null && (getDataMillipads.status === 'distribution' ||  getDataMillipads.status === 'saleRound') ? 'bg-pink-A819FA-30' : ''}`}><span className='font-bold'>Sale round:</span> Only winners can participate in this round.</li>
-                        <li className={`px-3/100 md:px-9 py-2 md:py-3.5 text-10 md:text-14`}><span className='font-bold'>Distribution:</span> The tokens will be automatically sent to wallets.</li>
+                        <li className={`px-3/100 md:px-9 py-2 md:py-3.5 text-bodybox-sp md:text-button-pc ${getDataMillipads !== null && (getDataMillipads.status === 'distribution' ||  getDataMillipads.status === 'saleRound') ? 'bg-pink-primary-30' : ''}`}><span className='font-bold text-gray-primary'>Sale round:</span> Only winners can participate in this round.</li>
+                        <li className={`px-3/100 md:px-9 py-2 md:py-3.5 text-bodybox-sp md:text-button-pc`}><span className='font-bold text-gray-primary'>Distribution:</span> The tokens will be automatically sent to wallets.</li>
                       </>
                     :
                     <>
-                      <li className={`px-3/100 md:px-9 py-2 md:py-3.5 text-10 md:text-14 ${getDataMillipads !== null && getDataMillipads.status === 'saleRound' ? 'bg-pink-A819FA-30' : ''}`}><span className='font-bold'>Sale round:</span> Only winners can participate in this round.</li>
-                      <li className={`px-3/100 md:px-9 py-2 md:py-3.5 text-10 md:text-14 ${getDataMillipads !== null && getDataMillipads.status === 'distribution' ? 'bg-pink-A819FA-30' : ''}`}><span className='font-bold'>Distribution:</span> The tokens will be automatically sent to wallets.</li>
+                      <li className={`px-3/100 md:px-9 py-2 md:py-3.5 text-bodybox-sp md:text-button-pc ${getDataMillipads !== null && getDataMillipads.status === 'saleRound' ? 'bg-pink-primary-30' : ''}`}><span className='font-bold text-gray-primary'>Sale round:</span> Only winners can participate in this round.</li>
+                      <li className={`px-3/100 md:px-9 py-2 md:py-3.5 text-bodybox-sp md:text-button-pc ${getDataMillipads !== null && getDataMillipads.status === 'distribution' ? 'bg-pink-primary-30' : ''}`}><span className='font-bold text-gray-primary'>Distribution:</span> The tokens will be automatically sent to wallets.</li>
                     </>
                   }
                 </ul>
@@ -454,41 +463,61 @@ const Millionsy: React.FC = () => {
         playerData.data.is_connect &&
         <>
           <section className={`px-3/100 mb-5 md:mb-8 ${getDataMillipads !== null && getDataMillipads.status === 'whileList' ? 'block' : 'hidden'}`}>
-            <div className='max-w-900 mx-auto bg-gray-151515 rounded-10 py-3 md:pt-8 md:pb-12'>
+            <div className='max-w-900 mx-auto bg-gray-box rounded-10 py-3 md:pt-8 md:pb-12'>
               <div className='px-4 md:px-8'>
                 <div className='mb-2 md:mb-3 flex justify-between items-center md:block'>
-                  <h4 className='text-14 md:text-16 text-pink-D47DFF font-bold'>NFT ticket pool</h4>
-                  <p className='flex md:hidden text-blue-ADFAFF justify-center items-center text-12 cursor-pointer transition-all font-semibold'
+                  <h4 className='text-h3-sp md:text-h3-pc text-pink-secondary font-bold'>NFT ticket pool</h4>
+                  <p className='flex md:hidden text-blue-secondary justify-center items-center text-bodybox-pc cursor-pointer transition-all font-semibold'
                     onClick={() => {
                       // updateJoinWhiteListUser(window.sessionStorage.getItem('publicKey')).then(res => console.log(res));
                       setIsJoinWhiteList(!isJoinWhiteList);
                     }}
-                  ><span className={`w-4 h-4 rounded-3 inline-block border border-blue-ADFAFF border-solid transition-all mr-2 ${isJoinWhiteList ? 'bg-blue-ADFAFF' : ''}`}></span>Join this whitelist</p>
+                  >
+                    <span className={`w-4 h-4 rounded-3 inline-block border border-blue-secondary border-solid transition-all mr-2 relative ${isJoinWhiteList ? 'bg-blue-secondary' : ''}`}>
+                      {
+                        isJoinWhiteList &&
+                        <svg width="10" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg" className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
+                          <path d="M0.919678 5.13763L3.21468 7.43263L9.07968 1.56763" stroke="#293333" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      }
+                    </span>
+                    Join this whitelist
+                  </p>
                 </div>
                 <p className='text-justify md:text-left mb-2'>Each NFT you own will be added a certain number of slots. These slots are calculated independently in different projects.</p>
                 <p className='text-justify md:text-left mb-2'>For example, when you have 10 slots from NFT, then you all have 10 slots in all different pools whether used or not, when you use one pool, other pools will not be deducted. The NFT tickets you own will stay there and receive benefits for life until you sell them. We do not limit the number of NFTs, the more you buy, the more slots you will have.</p>
                 <p className='text-justify md:text-left mb-2 md:mb-8 hidden md:block'>Tick "Join this whitelist" means that you want to join this pool.</p>
                 <div className='md:flex items-center'>
-                  <p className='flex justify-between items-end md:block md:mr-8'><span className='font-semibold'>You have</span><span><span className='text-pink-D47DFF font-bold inline-block ml-8 mr-2'>0 slots</span>from your NFT tickets</span></p>
-                  <p className='hidden md:flex text-blue-ADFAFF justify-center items-center text-12 cursor-pointer transition-all font-semibold'
+                  <p className='flex justify-between items-end md:block md:mr-8'><span className='font-semibold text-gray-primary'>You have</span><span><span className='text-pink-secondary font-bold inline-block ml-8 mr-2'>0 slots</span>from your NFT tickets</span></p>
+                  <p className='hidden md:flex text-blue-secondary justify-center items-center text-bodybox-pc cursor-pointer transition-all font-semibold'
                     onClick={() => {
                       // updateJoinWhiteListUser(window.sessionStorage.getItem('publicKey')).then(res => console.log(res));
                       setIsJoinWhiteList(!isJoinWhiteList);
                     }}
-                  ><span className={`w-5 h-5 rounded-5 inline-block border border-blue-ADFAFF border-solid transition-all mr-2 ${isJoinWhiteList ? 'bg-blue-ADFAFF' : ''}`}></span>Join this whitelist</p>
+                  >
+                    <span className={`w-5 h-5 rounded-5 inline-block border border-blue-secondary border-solid transition-all mr-2 relative ${isJoinWhiteList ? 'bg-blue-secondary' : ''}`}>
+                      {
+                        isJoinWhiteList &&
+                        <svg width="10" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg" className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
+                          <path d="M0.919678 5.13763L3.21468 7.43263L9.07968 1.56763" stroke="#293333" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      }
+                    </span>
+                    Join this whitelist
+                  </p>
                 </div>
               </div>
-              <p className='h-px bg-gray-424344 my-2 md:mt-8 md:mb-9'></p>
+              <p className='h-px bg-gray-boxline my-2 md:mt-8 md:mb-9'></p>
               <div className='px-4 md:px-8'>
-                <h4 className='text-14 md:text-16 mb-2 text-pink-D47DFF font-bold'>Social Pool</h4>
+                <h4 className='text-h3-sp md:text-h3-pc mb-2 text-pink-secondary font-bold'>Social Pool</h4>
                 <p className='text-justify md:text-left mb-2 md:mb-4'>The more slots you have, the more chance for you to win the whitelist (not the chance to purchase the whitelist). Each wallet address can only have a maximum of 1 ticket to buy whitelist in each pool/ project.</p>
-                <p className='mb-4 md:mb-6 flex justify-between items-end md:block'><span className='font-semibold'>You have</span><span><span className='text-pink-D47DFF font-bold inline-block ml-8 mr-2'>
+                <p className='mb-4 md:mb-6 flex justify-between items-end md:block'><span className='font-semibold text-gray-primary'>You have</span><span><span className='text-pink-secondary font-bold inline-block ml-8 mr-2'>
                   {flagSlots.telegram.waggle + flagSlots.telegram.millionsy + flagSlots.twitter.waggle + flagSlots.twitter.millionsy} slots</span>from Social tasks</span></p>
               </div>
-              <div className='bg-gray-575757-20 p-4 md:px-8'>
-                <h5 className='mb-2 text-pink-D47DFF font-bold text-14 md:text-16'>Social Tasks</h5>
+              <div className='bg-gray-lightbox p-4 md:px-8'>
+                <h5 className='mb-2 text-pink-secondary font-bold text-h3-sp md:text-h3-pc'>Social Tasks</h5>
                 <ul className='flex flex-col md:flex-row'>
-                  <li className={`flex items-center rounded-5 border border-solid border-blue-0B7880 cursor-pointer transition-all px-2 h-32px md:h-34px hover:bg-blue-0B7880 mb-3 md:mr-12 md:mb-0`}
+                  <li className={`flex items-center rounded-5 border border-solid border-blue-primary cursor-pointer transition-all px-2 h-32px md:h-34px hover:opacity-70 mb-3 md:mr-3 lg:mr-12 md:mb-0`}
                     onClick={() => {
                       setSelectedTickets('telegram');
                       setIsShowNotification(true);
@@ -496,10 +525,10 @@ const Millionsy: React.FC = () => {
                     }}
                   >
                     <span className='mr-2 md:mr-5 w-4 md:w-auto'><img src="/assets/millipad/icon_telegram.svg" alt="icon_telegram" /></span>
-                    <span className='font-bold w-40 text-blue-ADFAFF'>Telegram Tasks</span>
-                    <span className='text-blue-B2FAFF text-10 md:text-12 ml-auto md:ml-0'>{flagSlots.telegram.waggle + flagSlots.telegram.millionsy}/1 slots collected</span>
+                    <span className='font-bold w-40 text-blue-secondary'>Telegram Tasks</span>
+                    <span className='text-blue-secondary text-bodybox-sp md:text-body-pc ml-auto md:ml-0'>{flagSlots.telegram.waggle + flagSlots.telegram.millionsy}/1 slots collected</span>
                   </li> 
-                  <li className={`flex items-center rounded-5 border border-solid border-blue-0B7880 cursor-pointer transition-all px-2 h-32px md:h-34px hover:bg-blue-0B7880`}
+                  <li className={`flex items-center rounded-5 border border-solid border-blue-primary cursor-pointer transition-all px-2 h-32px md:h-34px hover:opacity-70`}
                     onClick={() => {
                       setSelectedTickets('twitter');
                       setIsShowNotification(true);
@@ -507,94 +536,94 @@ const Millionsy: React.FC = () => {
                     }}
                   >
                     <span className='mr-2 md:mr-5 w-4 md:w-auto'><img src="/assets/millipad/icon_twitter.svg" alt="icon_twitter" /></span>
-                    <span className='font-bold w-40 text-blue-ADFAFF'>Twitter Tasks</span>
-                    <span className='text-blue-B2FAFF text-10 md:text-12 ml-auto md:ml-0'>{flagSlots.twitter.waggle + flagSlots.twitter.millionsy}/3 slots collected</span>
+                    <span className='font-bold w-40 text-blue-secondary'>Twitter Tasks</span>
+                    <span className='text-blue-secondary text-bodybox-sp md:text-body-pc ml-auto md:ml-0'>{flagSlots.twitter.waggle + flagSlots.twitter.millionsy}/3 slots collected</span>
                   </li>
                 </ul>
               </div>
             </div>
           </section>
           <section className={`px-3/100 mb-5 md:mb-8 ${getDataMillipads !== null && getDataMillipads.status === 'lottery' ? 'block' : 'hidden'}`}>
-            <div className='max-w-900 mx-auto bg-gray-151515 rounded-10 py-3 md:py-5'>
+            <div className='max-w-900 mx-auto bg-gray-box rounded-10 py-3 md:py-5'>
               <div className='px-4 md:px-8'>
-                <h4 className='text-14 md:text-16 mb-2 text-pink-D47DFF font-bold'>Lottery</h4>
-                <p className='text-10 md:text-14 text-justify text-gray-EBEBEB md:text-left'>The platform is choosing random winning slots. Once you have the winning slot, you can participate in the sale round.</p>
+                <h4 className='text-h3-sp md:text-h3-pc mb-2 text-pink-secondary font-bold'>Lottery</h4>
+                <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left'>The platform is choosing random winning slots. Once you have the winning slot, you can participate in the sale round.</p>
               </div>
             </div>
           </section>
           <section className={`${(getDataMillipads !== null && getDataMillipads.status === 'saleRound') || (getDataMillipads.status === 'distribution' && dataPlayerMilli !== null && !dataPlayerMilli.is_winner) ? 'block' : 'hidden'}`}>
             <div className={`px-3/100 mb-5 md:mb-8 ${dataPlayerMilli !== null && !dataPlayerMilli.is_winner ? 'block' : 'hidden'}`}>
-              <div className='max-w-900 mx-auto bg-gray-151515 rounded-10 py-3 md:py-5'>
+              <div className='max-w-900 mx-auto bg-gray-box rounded-10 py-3 md:py-5'>
                 <div className='px-4 md:px-8'>
-                  <h4 className='text-14 md:text-16 mb-2 text-pink-D47DFF font-bold'>Sale round</h4>
-                  <p className='text-10 md:text-14 text-justify text-gray-EBEBEB md:text-left'>You don’t have any winning slot in this pool. Best luck next time!</p>
+                  <h4 className='text-h3-sp md:text-h3-pc mb-2 text-pink-secondary font-bold'>Sale round</h4>
+                  <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left'>You don’t have any winning slot in this pool. Best luck next time!</p>
                 </div>
               </div>
             </div>
             <div className={`px-3/100 mb-5 md:mb-8 ${dataPlayerMilli !== null && dataPlayerMilli.is_winner && !isFinishSaleRound ? 'block' : 'hidden'}`}>
-              <div className='max-w-900 mx-auto bg-gray-151515 rounded-10 py-3 md:py-5'>
+              <div className='max-w-900 mx-auto bg-gray-box rounded-10 py-3 md:py-5'>
                 <div className='px-4 md:px-8'>
-                  <h4 className='text-14 md:text-16 mb-2 text-pink-D47DFF font-bold'>Sale round</h4>
+                  <h4 className='text-h3-sp md:text-h3-pc mb-2 text-pink-secondary font-bold'>Sale round</h4>
                   <div className='flex flex-col md:flex-row justify-between md:items-center gap-4'>
-                    <p className='text-10 md:text-14 text-justify text-gray-EBEBEB md:text-left'>Congratulations! You have 1 winning slot.<br />Choose the amount USD of SOL you want to buy the tokens.</p>
+                    <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left'>Congratulations! You have 1 winning slot.<br />Choose the amount USD of SOL you want to buy the tokens.</p>
                     <div className='flex justify-between sm:justify-start md:justify-center items-end'>
-                      <div className={`bg-gray-3C3C3C w-100 relative mr-12 lg:mr-20 ${isActiveSelect ? 'rounded-tl-5 rounded-tr-5' : 'rounded-5'}`}>
+                      <div className={`bg-gray-box w-100 relative mr-12 lg:mr-20 ${isActiveSelect ? 'rounded-tl-5 rounded-tr-5' : 'rounded-5'}`}>
                         <p className={`absolute right-2 top-2.5 cursor-pointer transition-all ${isActiveSelect ? 'transform rotate-180' : ''}`} onClick={() => setIsActiveSelect(!isActiveSelect)}>
                           <svg width="6" height="5" viewBox="0 0 6 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M3.86603 4.5C3.48112 5.16667 2.51887 5.16667 2.13397 4.5L0.401924 1.5C0.0170235 0.833332 0.498149 -5.6841e-07 1.26795 -5.01112e-07L4.73205 -1.9827e-07C5.50185 -1.30972e-07 5.98298 0.833333 5.59808 1.5L3.86603 4.5Z" fill="white"/>
                           </svg>
                         </p>
-                        <p className='px-3 text-10 md:text-14 font-bold py-1 md:py-0.5 cursor-pointer' onClick={() => setIsActiveSelect(!isActiveSelect)}>{valueOption != '' ? valueOption : (<>&nbsp;</>)}</p>
-                        <ul className={`overflow-hidden border-t border-solid border-gray-650 absolute top-full left-0 bg-gray-3C3C3C w-full rounded-bl-5 rounded-br-5 ${isActiveSelect ? '' : 'hidden'}`}>
-                          <li className='px-3 py-1 md:py-0.5 text-10 md:text-14 font-bold hover:bg-gray-700 cursor-pointer'
+                        <p className='px-3 text-bodybox-sp md:text-button-pc font-bold py-1 md:py-0.5 cursor-pointer' onClick={() => setIsActiveSelect(!isActiveSelect)}>{valueOption != '' ? valueOption : (<>&nbsp;</>)}</p>
+                        <ul className={`overflow-hidden border-t border-solid border-gray-boxline-50 absolute top-full left-0 bg-gray-box w-full rounded-bl-5 rounded-br-5 ${isActiveSelect ? '' : 'hidden'}`}>
+                          <li className='px-3 py-1 md:py-0.5 text-bodybox-sp md:text-button-pc font-bold hover:bg-pink-primary cursor-pointer'
                             onClick={(event: React.MouseEvent) => {
                               setValueOption(event.currentTarget.innerHTML);
                               setIsActiveSelect(false);
                             }}
                           >200</li>
-                          <li className='px-3 py-1 md:py-0.5 text-10 md:text-14 font-bold hover:bg-gray-700 cursor-pointer'
+                          <li className='px-3 py-1 md:py-0.5 text-bodybox-sp md:text-button-pc font-bold hover:bg-pink-primary cursor-pointer'
                             onClick={(event: React.MouseEvent) => {
                               setValueOption(event.currentTarget.innerHTML);
                               setIsActiveSelect(false);
                             }}
                           >300</li>
-                          <li className='px-3 py-1 md:py-0.5 text-10 md:text-14 font-bold hover:bg-gray-700 cursor-pointer'
+                          <li className='px-3 py-1 md:py-0.5 text-bodybox-sp md:text-button-pc font-bold hover:bg-pink-primary cursor-pointer'
                             onClick={(event: React.MouseEvent) => {
                               setValueOption(event.currentTarget.innerHTML);
                               setIsActiveSelect(false);
                             }}
                           >400</li>
-                          <li className='px-3 py-1 md:py-0.5 text-10 md:text-14 font-bold hover:bg-gray-700 cursor-pointer'
+                          <li className='px-3 py-1 md:py-0.5 text-bodybox-sp md:text-button-pc font-bold hover:bg-pink-primary cursor-pointer'
                             onClick={(event: React.MouseEvent) => {
                               setValueOption(event.currentTarget.innerHTML);
                               setIsActiveSelect(false);
                             }}
                           >500</li>
-                          <li className='px-3 py-1 md:py-0.5 text-10 md:text-14 font-bold hover:bg-gray-700 cursor-pointer'
+                          <li className='px-3 py-1 md:py-0.5 text-bodybox-sp md:text-button-pc font-bold hover:bg-pink-primary cursor-pointer'
                             onClick={(event: React.MouseEvent) => {
                               setValueOption(event.currentTarget.innerHTML);
                               setIsActiveSelect(false);
                             }}
                           >600</li>
-                          <li className='px-3 py-1 md:py-0.5 text-10 md:text-14 font-bold hover:bg-gray-700 cursor-pointer'
+                          <li className='px-3 py-1 md:py-0.5 text-bodybox-sp md:text-button-pc font-bold hover:bg-pink-primary cursor-pointer'
                             onClick={(event: React.MouseEvent) => {
                               setValueOption(event.currentTarget.innerHTML);
                               setIsActiveSelect(false);
                             }}
                           >700</li>
-                          <li className='px-3 py-1 md:py-0.5 text-10 md:text-14 font-bold hover:bg-gray-700 cursor-pointer'
+                          <li className='px-3 py-1 md:py-0.5 text-bodybox-sp md:text-button-pc font-bold hover:bg-pink-primary cursor-pointer'
                             onClick={(event: React.MouseEvent) => {
                               setValueOption(event.currentTarget.innerHTML);
                               setIsActiveSelect(false);
                             }}
                           >800</li>
-                          <li className='px-3 py-1 md:py-0.5 text-10 md:text-14 font-bold hover:bg-gray-700 cursor-pointer'
+                          <li className='px-3 py-1 md:py-0.5 text-bodybox-sp md:text-button-pc font-bold hover:bg-pink-primary cursor-pointer'
                             onClick={(event: React.MouseEvent) => {
                               setValueOption(event.currentTarget.innerHTML);
                               setIsActiveSelect(false);
                             }}
                           >900</li>
-                          <li className='px-3 py-1 md:py-0.5 text-10 md:text-14 font-bold hover:bg-gray-700 cursor-pointer'
+                          <li className='px-3 py-1 md:py-0.5 text-bodybox-sp md:text-button-pc font-bold hover:bg-pink-primary cursor-pointer'
                             onClick={(event: React.MouseEvent) => {
                               setValueOption(event.currentTarget.innerHTML);
                               setIsActiveSelect(false);
@@ -602,7 +631,7 @@ const Millionsy: React.FC = () => {
                           >1000</li>
                         </ul>
                       </div>
-                      <p className='text-12 md:text-16 px-10 md:px-6 cursor-pointer transition-all hover:opacity-70 py-1.5 md:pt-2 md:pb-2.5 rounded-5 font-bold bg-blue-17F0FF text-blue-50 inline-block'
+                      <p className='text-h3-sp md:text-h3-pc px-10 md:px-6 cursor-pointer transition-all hover:opacity-70 py-1.5 md:pt-2 md:pb-2.5 rounded-5 font-bold bg-blue-primary text-blue-50 inline-block'
                         onClick={() => {
                           if (valueOption !== '') {
                             buyMilliPad(
@@ -630,19 +659,19 @@ const Millionsy: React.FC = () => {
               </div>
             </div>
             <div className={`px-3/100 mb-5 md:mb-8 ${dataPlayerMilli !== null && dataPlayerMilli.is_winner && isFinishSaleRound ? 'block' : 'hidden'}`}>
-              <div className='max-w-900 mx-auto bg-gray-151515 rounded-10 py-3 md:py-5'>
+              <div className='max-w-900 mx-auto bg-gray-box rounded-10 py-3 md:py-5'>
                 <div className='px-4 md:px-8'>
-                  <h4 className='text-14 md:text-18 mb-2 text-pink-D47DFF font-bold'>Sale round</h4>
-                  <p className='text-10 md:text-14 text-justify text-gray-EBEBEB md:text-left'>You purchased successfully. Please wait for the Distribution.</p>
+                  <h4 className='text-h3-sp md:text-h3-pc mb-2 text-pink-secondary font-bold'>Sale round</h4>
+                  <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left'>You purchased successfully. Please wait for the Distribution.</p>
                 </div>
               </div>
             </div>
           </section>
           <section className={`px-3/100 mb-5 md:mb-8 ${getDataMillipads !== null && getDataMillipads.status === 'distribution' && dataPlayerMilli !== null && dataPlayerMilli.is_winner ? 'block' : 'hidden'}`}>
-            <div className='max-w-900 mx-auto bg-gray-151515 rounded-10 py-3 md:py-5'>
+            <div className='max-w-900 mx-auto bg-gray-box rounded-10 py-3 md:py-5'>
                 <div className='px-4 md:px-8'>
-                  <h4 className='text-14 md:text-16 mb-2 text-pink-D47DFF font-bold'>Distribution</h4>
-                  <p className='text-10 md:text-14 text-justify text-gray-EBEBEB md:text-left'>The tokens will be automatically sent to your wallet. Best of luck to you.</p>
+                  <h4 className='text-h3-sp md:text-h3-pc mb-2 text-pink-secondary font-bold'>Distribution</h4>
+                  <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left'>The tokens will be automatically sent to your wallet. Best of luck to you.</p>
                 </div>
               </div>
           </section>
@@ -650,38 +679,38 @@ const Millionsy: React.FC = () => {
       }
       {/* End Component Detect */}
       <section className='px-3/100 mb-12 md:mb-16'>
-        <div className='max-w-900 mx-auto rounded-10 bg-gray-151515 py-3/100 md:pt-8 md:pb-14'>
+        <div className='max-w-900 mx-auto rounded-10 bg-gray-box py-3/100 md:pt-8 md:pb-14'>
           <div className='px-4 md:px-6 tablet992:px-12'>
-            <h4 className='text-pink-D47DFF text-16 md:text-20 font-bold mb-3 md:mb-10'>Project Detail</h4>
+            <h4 className='text-pink-secondary text-h2-sp md:text-h2-pc font-bold mb-3 md:mb-10'>Project Detail</h4>
             <div>
-              <h5 className='text-pink-D47DFF text-14 md:text-16 font-bold md:mb-1'>Features</h5>
-              <p className='text-10 md:text-14 text-justify text-gray-EBEBEB md:text-left mb-2'>MILLIONSY is the first Solana-based cross-chain platform, which has 3 main products: The Lottery platform; the NFT ticket and the IDO platform for new games - NFT projects called MILLIPAD.</p>
-              <p className='text-10 md:text-14 text-justify text-gray-EBEBEB md:text-left mb-2'>By transferring the Lottery to the blockchain platform, we  want to reach international participants and give them the opportunity to establish the largest PRIZE POOL in history and really win it. More to that, when the cross-chain platform begins, MILLIONSY will allow you to own  essential tickets for the specific chain you want. </p>
-              <p className='text-10 md:text-14 text-justify text-gray-EBEBEB md:text-left mb-2'>Not only do its creators aim for it to be the largest lottery platform in history in the blockchain system, MILLIONSY also want to launch MILLIPAD. The platform that leverages a lottery PRIZE POOL to become an IDO model and collaborate with future projects is their significant goal. </p>
-              <p className='text-10 md:text-14 text-justify text-gray-EBEBEB md:text-left mb-2'>There is no need to say that Lottery has really become a part of mankind's culture. Many people think of it as a gaming product, but it is actually a high-volume industry that may also be referred to as a commodity.</p>
-              <p className='text-10 md:text-14 text-justify text-gray-EBEBEB md:text-left mb-2'>The psychology of the lottery is that people will be happy to spend $2 for a hope and for the pleasure of thinking about what might happen if they win millions of dollars. The need for buying Lottery is so huge that this industry has never died in real life.</p>
-              <p className='text-10 md:text-14 text-justify text-gray-EBEBEB md:text-left mb-2'>Now with Blockchain technology every transaction, whether a ticket sale, a jackpot win, commissions, or investment, passes via the blockchain. Because each block in the chain has a record of the transactions, a hacker would have to modify every single block in order to manipulate or compromise the lottery number, which is impossible.</p>
-              <p className='text-10 md:text-14 text-justify text-gray-EBEBEB md:text-left mb-2'>As a result, a blockchain lottery platform assures that there are no foul plays or lottery scandals in the ecosystem. This is a guarantee for an ever-expanding lottery industry.</p>
-              <p className='text-10 md:text-14 text-justify text-gray-EBEBEB md:text-left mb-2'>You are more than welcome to participate in the greatest blockchain celebration, as long as you have a wallet and at the price of just 2$ per ticket, you now have a chance to join the millionaire-club. Tickets will be available on their website and can be purchased by SOL and  MILLI. In the near future, you will be able to buy lottery tickets via Visa, PayPal, and other payment methods.  </p>
+              <h5 className='text-pink-secondary text-h3-sp md:text-h3-pc font-bold md:mb-1'>Features</h5>
+              <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-2'>MILLIONSY is the first Solana-based cross-chain platform, which has 3 main products: The Lottery platform; the NFT ticket and the IDO platform for new games - NFT projects called MILLIPAD.</p>
+              <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-2'>By transferring the Lottery to the blockchain platform, we  want to reach international participants and give them the opportunity to establish the largest PRIZE POOL in history and really win it. More to that, when the cross-chain platform begins, MILLIONSY will allow you to own  essential tickets for the specific chain you want. </p>
+              <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-2'>Not only do its creators aim for it to be the largest lottery platform in history in the blockchain system, MILLIONSY also want to launch MILLIPAD. The platform that leverages a lottery PRIZE POOL to become an IDO model and collaborate with future projects is their significant goal. </p>
+              <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-2'>There is no need to say that Lottery has really become a part of mankind's culture. Many people think of it as a gaming product, but it is actually a high-volume industry that may also be referred to as a commodity.</p>
+              <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-2'>The psychology of the lottery is that people will be happy to spend $2 for a hope and for the pleasure of thinking about what might happen if they win millions of dollars. The need for buying Lottery is so huge that this industry has never died in real life.</p>
+              <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-2'>Now with Blockchain technology every transaction, whether a ticket sale, a jackpot win, commissions, or investment, passes via the blockchain. Because each block in the chain has a record of the transactions, a hacker would have to modify every single block in order to manipulate or compromise the lottery number, which is impossible.</p>
+              <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-2'>As a result, a blockchain lottery platform assures that there are no foul plays or lottery scandals in the ecosystem. This is a guarantee for an ever-expanding lottery industry.</p>
+              <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-2'>You are more than welcome to participate in the greatest blockchain celebration, as long as you have a wallet and at the price of just 2$ per ticket, you now have a chance to join the millionaire-club. Tickets will be available on their website and can be purchased by SOL and  MILLI. In the near future, you will be able to buy lottery tickets via Visa, PayPal, and other payment methods.  </p>
             </div>
-            <h5 className='text-pink-D47DFF text-14 md:text-16 font-bold mb-3 md:mb-4 pt-3 md:pt-8'>Tokenomic</h5>
+            <h5 className='text-pink-secondary text-h3-sp md:text-h3-pc font-bold mb-3 md:mb-4 pt-3 md:pt-8'>Tokenomic</h5>
           </div>
           <p className='px-3/100 md:px-0 mb-4'><img src="/assets/millipad/chart.png" alt="chart"/></p>
           <div className='px-4 md:px-6 tablet992:px-12'>
-            <p className='text-10 md:text-14 text-justify text-gray-EBEBEB md:text-left mb-1.5'>Total max supply: 300,000,000</p>
-            <p className='text-10 md:text-14 text-justify text-gray-EBEBEB md:text-left mb-1.5'>Team: Lock 12 months.</p>
-            <p className='text-10 md:text-14 text-justify text-gray-EBEBEB md:text-left mb-1.5'>Advisor: Unlock from the 6th month.</p>
-            <p className='text-10 md:text-14 text-justify text-gray-EBEBEB md:text-left mb-1.5'>Dev &amp; marketing: Unlock 1% per month after launching.</p>
-            <p className='text-10 md:text-14 text-justify text-gray-EBEBEB md:text-left mb-1.5'>All unused tokens will be transferred to the BURN POOL</p>
+            <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-1.5'>Total max supply: 300,000,000</p>
+            <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-1.5'>Team: Lock 12 months.</p>
+            <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-1.5'>Advisor: Unlock from the 6th month.</p>
+            <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-1.5'>Dev &amp; marketing: Unlock 1% per month after launching.</p>
+            <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-1.5'>All unused tokens will be transferred to the BURN POOL</p>
           </div>
           <div className='px-4 md:px-6 tablet992:px-12'>
-            <h5 className='text-pink-D47DFF text-14 md:text-16 font-bold md:mb-1 pt-3 md:pt-8'>Roadmap</h5>
-            <p className='text-10 md:text-14 text-justify text-gray-EBEBEB md:text-left mb-2'>Between September and October: Conducting Sale Rounds to fuel the initial development and growth. We appreciate the strong support from the community as well as  many funds that reached out to us.</p>
-            <p className='text-10 md:text-14 text-justify text-gray-EBEBEB md:text-left mb-2'>Especially, in October, Lottery platform and contract will be audited.</p>
-            <p className='text-10 md:text-14 text-justify text-gray-EBEBEB md:text-left mb-2'>Next, MILLIPAD and NFTs Ticket will be launched in November. Then in December, promoting social activities to keep building a community that shares our long term vision, also opening Live Drawing at this stage.</p>
-            <p className='text-10 md:text-14 text-justify text-gray-EBEBEB md:text-left mb-2'>From January to March 2020, cross-chain will be availabe in Millionsy platform. Users will be enable to buy ticket from other blockchains seamlessly.</p>
-            <p className='text-10 md:text-14 text-justify text-gray-EBEBEB md:text-left mb-2'>From April to the end of 2022, completing Fiat Ticket Purchase feature. MILLIONSY will definately lead the next chapter of lottery industry with those unique and promising features.</p>
-            <h5 className='text-pink-D47DFF text-14 md:text-16 font-bold mb-3 md:mb-4 pt-3 md:pt-8'>Team</h5>
+            <h5 className='text-pink-secondary text-h3-sp md:text-h3-pc font-bold md:mb-1 pt-3 md:pt-8'>Roadmap</h5>
+            <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-2'>Between September and October: Conducting Sale Rounds to fuel the initial development and growth. We appreciate the strong support from the community as well as  many funds that reached out to us.</p>
+            <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-2'>Especially, in October, Lottery platform and contract will be audited.</p>
+            <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-2'>Next, MILLIPAD and NFTs Ticket will be launched in November. Then in December, promoting social activities to keep building a community that shares our long term vision, also opening Live Drawing at this stage.</p>
+            <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-2'>From January to March 2020, cross-chain will be availabe in Millionsy platform. Users will be enable to buy ticket from other blockchains seamlessly.</p>
+            <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-2'>From April to the end of 2022, completing Fiat Ticket Purchase feature. MILLIONSY will definately lead the next chapter of lottery industry with those unique and promising features.</p>
+            <h5 className='text-pink-secondary text-h3-sp md:text-h3-pc font-bold mb-3 md:mb-4 pt-3 md:pt-8'>Team</h5>
           </div>
           <p className='px-3/100 md:px-0'><img src="/assets/millipad/teams.png" alt="face"/></p>
         </div>
@@ -690,19 +719,19 @@ const Millionsy: React.FC = () => {
         showModalTicket &&
         <section className='fixed h-100vh w-full top-0 left-0 z-100'>
           <div className='h-full absolute w-full top-0 left-0 bg-black opacity-50' onClick={() => setShowModalTicket(false)}></div>
-          {/* <div className={`${selectedTickets === 'twitter' ? 'block' : 'hidden'} bg-gray-151515 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 max-h-full z-1000 overflow-hidden border border-solid border-blue-17F0FF rounded-10 max-w-280 w-full`}>
-            <div className='flex justify-between items-center px-5 py-2 bg-gray-575757-30'>
-              <p className='text-14 font-semibold'>Twitter tasks</p>
+          {/* <div className={`${selectedTickets === 'twitter' ? 'block' : 'hidden'} bg-gray-box absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 max-h-full z-1000 overflow-hidden border border-solid border-blue-17F0FF rounded-10 max-w-280 w-full`}>
+            <div className='flex justify-between items-center px-5 py-2 bg-gray-lightbox'>
+              <p className='text-gray-primary text-body-pc font-semibold'>Twitter tasks</p>
               <p className='cursor-pointer transition-all hover:opacity-70 py-1.5 pl-4' onClick={() => setShowModalTicket(false)}>
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fillRule="evenodd" clipRule="evenodd" d="M9.75592 1.42259C10.0814 1.09715 10.0814 0.569515 9.75592 0.244078C9.43049 -0.0813592 8.90285 -0.0813592 8.57741 0.244078L5 3.82149L1.42259 0.244078C1.09715 -0.0813584 0.569515 -0.0813584 0.244078 0.244079C-0.0813592 0.569515 -0.0813592 1.09715 0.244078 1.42259L3.82149 5L0.244078 8.57741C-0.0813592 8.90285 -0.0813592 9.43048 0.244078 9.75592C0.569515 10.0814 1.09715 10.0814 1.42259 9.75592L5 6.17851L8.57741 9.75592C8.90285 10.0814 9.43049 10.0814 9.75592 9.75592C10.0814 9.43049 10.0814 8.90285 9.75592 8.57741L6.17851 5L9.75592 1.42259Z" fill="#fff"/>
+                  <path fillRule="evenodd" clipRule="evenodd" d="M9.75592 1.42259C10.0814 1.09715 10.0814 0.569515 9.75592 0.244078C9.43049 -0.0813592 8.90285 -0.0813592 8.57741 0.244078L5 3.82149L1.42259 0.244078C1.09715 -0.0813584 0.569515 -0.0813584 0.244078 0.244079C-0.0813592 0.569515 -0.0813592 1.09715 0.244078 1.42259L3.82149 5L0.244078 8.57741C-0.0813592 8.90285 -0.0813592 9.43048 0.244078 9.75592C0.569515 10.0814 1.09715 10.0814 1.42259 9.75592L5 6.17851L8.57741 9.75592C8.90285 10.0814 9.43049 10.0814 9.75592 9.75592C10.0814 9.43049 10.0814 8.90285 9.75592 8.57741L6.17851 5L9.75592 1.42259Z" fill="#f9f9f9"/>
                 </svg>
               </p>
             </div>
             <div className='px-5 pt-1 pb-5'>
               <ul>
                 <li>
-                  <a href='https://twitter.com/millionsyio' target='_blank' className={`flex justify-between items-center py-1 border-b border-solid border-gray-550 ${flagOnclick.twitter.waggle ? '' : 'cursor-default'}`}
+                  <a href='https://twitter.com/millionsyio' target='_blank' className={`flex justify-between items-center py-1 border-b border-solid border-gray-boxline-50 ${flagOnclick.twitter.waggle ? '' : 'cursor-default'}`}
                     onClick={(event) => {
                       if(!flagOnclick.twitter.waggle) {
                         event.preventDefault()
@@ -720,8 +749,8 @@ const Millionsy: React.FC = () => {
                     }}
                   >
                     <p className={`leading-4 ${flagOnclick.twitter.waggle ? '' : 'opacity-50'}`}>
-                      <span className='text-14 text-pink-D47DFF font-bold'><span className='mr-2'>1.</span>Project_name</span>
-                      <span className='text-12 text-pink-F4E0FF block pl-6'>Follow</span>
+                      <span className='text-body-pc text-gray-primary font-bold'><span className='mr-2'>1.</span>Project_name</span>
+                      <span className='text-body-sp text-pink-F4E0FF block pl-6'>Follow</span>
                     </p>
                     <p className='leading-4 flex items-center flex-col'>
                       <span>
@@ -729,12 +758,12 @@ const Millionsy: React.FC = () => {
                           <path d="M10.8457 0.230774C8.769 0.230774 6.73893 0.846588 5.01222 2.00034C3.2855 3.1541 1.93969 4.79397 1.14497 6.7126C0.350253 8.63122 0.142318 10.7424 0.547462 12.7792C0.952607 14.816 1.95263 16.6869 3.42109 18.1554C4.88954 19.6238 6.76046 20.6239 8.79726 21.029C10.8341 21.4342 12.9453 21.2262 14.8639 20.4315C16.7825 19.6368 18.4224 18.291 19.5761 16.5643C20.7299 14.8375 21.3457 12.8075 21.3457 10.7308C21.3457 7.946 20.2395 5.27528 18.2703 3.30615C16.3012 1.33702 13.6305 0.230774 10.8457 0.230774ZM16.1346 8.58982L16.1419 8.91112C16.1419 12.1924 13.5684 15.9776 8.86121 15.9776C7.4749 15.9801 6.11574 15.5934 4.93841 14.8615C5.14128 14.8847 5.34531 14.8963 5.54951 14.8961C6.69691 14.8996 7.81366 14.5259 8.72786 13.8325C8.1999 13.8279 7.68638 13.6596 7.25814 13.3508C6.8299 13.042 6.50805 12.6079 6.33701 12.1084C6.49558 12.1381 6.65658 12.1528 6.81791 12.1525C7.04542 12.1526 7.272 12.1233 7.49201 12.0653C6.9205 11.9606 6.40319 11.6604 6.0287 11.2162C5.6542 10.772 5.44582 10.2114 5.43926 9.63037V9.59887C5.79441 9.79255 6.18995 9.90042 6.59426 9.91387C6.24686 9.69142 5.96094 9.38522 5.76279 9.02341C5.56464 8.6616 5.46061 8.25579 5.46026 7.84327C5.45957 7.40343 5.57902 6.97175 5.80571 6.59482C6.45851 7.36747 7.26401 7.9968 8.17163 8.44329C9.07925 8.88978 10.0694 9.14379 11.0799 9.18937C11.0353 9.00403 11.0131 8.81403 11.0137 8.62342C11.0137 7.25212 12.1593 6.14122 13.5715 6.14122C13.9195 6.13991 14.2641 6.20858 14.585 6.34314C14.9059 6.4777 15.1965 6.67542 15.4395 6.92452C16.0116 6.81582 16.5614 6.61172 17.0659 6.32077C16.8717 6.90157 16.4712 7.39097 15.9403 7.69627C16.4468 7.63796 16.942 7.50602 17.4103 7.30462C17.0648 7.80547 16.6328 8.24068 16.1346 8.58982Z" fill={`${flagOnclick.twitter.waggle ? '#ADFAFF' : '#878787'}`}/>
                         </svg>
                       </span>
-                      <span className={`text-10 ${flagOnclick.twitter.waggle ? 'text-blue-200' : 'text-gray-500'}`}>1 slot</span>
+                      <span className={`text-bodybox-sp ${flagOnclick.twitter.waggle ? 'text-blue-200' : 'text-gray-500'}`}>1 slot</span>
                     </p>
                   </a>
                 </li>
                 <li>
-                  <a href='https://twitter.com/MILLIONSYio/status/1452649686402101251?s=20' target='_blank' className={`flex justify-between items-center py-1 border-b border-solid border-gray-550 ${flagOnclick.twitter.millionsy ? '' : 'cursor-default'}`}
+                  <a href='https://twitter.com/MILLIONSYio/status/1452649686402101251?s=20' target='_blank' className={`flex justify-between items-center py-1 border-b border-solid border-gray-boxline-50 ${flagOnclick.twitter.millionsy ? '' : 'cursor-default'}`}
                     onClick={(event) => {
                       if(!flagOnclick.twitter.millionsy) {
                         event.preventDefault()
@@ -752,8 +781,8 @@ const Millionsy: React.FC = () => {
                     }}
                   >
                     <p className={`leading-4 ${flagOnclick.twitter.millionsy ? '' : 'opacity-50'}`}>
-                      <span className='text-14 text-pink-D47DFF font-bold'><span className='mr-2'>2.</span>MILLIONSY</span>
-                      <span className='text-12 text-pink-F4E0FF block pl-6'>Follow</span>
+                      <span className='text-body-pc text-gray-primary font-bold'><span className='mr-2'>2.</span>MILLIONSY</span>
+                      <span className='text-body-sp text-pink-F4E0FF block pl-6'>Follow</span>
                     </p>
                     <p className='leading-4 flex items-center flex-col'>
                       <span>
@@ -761,12 +790,12 @@ const Millionsy: React.FC = () => {
                           <path d="M10.8457 0.230774C8.769 0.230774 6.73893 0.846588 5.01222 2.00034C3.2855 3.1541 1.93969 4.79397 1.14497 6.7126C0.350253 8.63122 0.142318 10.7424 0.547462 12.7792C0.952607 14.816 1.95263 16.6869 3.42109 18.1554C4.88954 19.6238 6.76046 20.6239 8.79726 21.029C10.8341 21.4342 12.9453 21.2262 14.8639 20.4315C16.7825 19.6368 18.4224 18.291 19.5761 16.5643C20.7299 14.8375 21.3457 12.8075 21.3457 10.7308C21.3457 7.946 20.2395 5.27528 18.2703 3.30615C16.3012 1.33702 13.6305 0.230774 10.8457 0.230774ZM16.1346 8.58982L16.1419 8.91112C16.1419 12.1924 13.5684 15.9776 8.86121 15.9776C7.4749 15.9801 6.11574 15.5934 4.93841 14.8615C5.14128 14.8847 5.34531 14.8963 5.54951 14.8961C6.69691 14.8996 7.81366 14.5259 8.72786 13.8325C8.1999 13.8279 7.68638 13.6596 7.25814 13.3508C6.8299 13.042 6.50805 12.6079 6.33701 12.1084C6.49558 12.1381 6.65658 12.1528 6.81791 12.1525C7.04542 12.1526 7.272 12.1233 7.49201 12.0653C6.9205 11.9606 6.40319 11.6604 6.0287 11.2162C5.6542 10.772 5.44582 10.2114 5.43926 9.63037V9.59887C5.79441 9.79255 6.18995 9.90042 6.59426 9.91387C6.24686 9.69142 5.96094 9.38522 5.76279 9.02341C5.56464 8.6616 5.46061 8.25579 5.46026 7.84327C5.45957 7.40343 5.57902 6.97175 5.80571 6.59482C6.45851 7.36747 7.26401 7.9968 8.17163 8.44329C9.07925 8.88978 10.0694 9.14379 11.0799 9.18937C11.0353 9.00403 11.0131 8.81403 11.0137 8.62342C11.0137 7.25212 12.1593 6.14122 13.5715 6.14122C13.9195 6.13991 14.2641 6.20858 14.585 6.34314C14.9059 6.4777 15.1965 6.67542 15.4395 6.92452C16.0116 6.81582 16.5614 6.61172 17.0659 6.32077C16.8717 6.90157 16.4712 7.39097 15.9403 7.69627C16.4468 7.63796 16.942 7.50602 17.4103 7.30462C17.0648 7.80547 16.6328 8.24068 16.1346 8.58982Z" fill={`${flagOnclick.twitter.millionsy ? '#17F0FF' : '#878787'}`}/>
                         </svg>
                       </span>
-                      <span className={`text-10 ${flagOnclick.twitter.millionsy ? 'text-blue-200' : 'text-gray-500'}`}>1 slot</span>
+                      <span className={`text-bodybox-sp ${flagOnclick.twitter.millionsy ? 'text-blue-200' : 'text-gray-500'}`}>1 slot</span>
                     </p>
                   </a>
                 </li>
                 <li>
-                  <a href='https://twitter.com/MILLIONSYio/status/1452649686402101251?s=20' target='_blank' className={`flex justify-between items-center py-1 border-b border-solid border-gray-550 ${flagOnclick.twitter.millionsy ? '' : 'cursor-default'}`}
+                  <a href='https://twitter.com/MILLIONSYio/status/1452649686402101251?s=20' target='_blank' className={`flex justify-between items-center py-1 border-b border-solid border-gray-boxline-50 ${flagOnclick.twitter.millionsy ? '' : 'cursor-default'}`}
                     onClick={(event) => {
                       if(!flagOnclick.twitter.millionsy) {
                         event.preventDefault()
@@ -784,8 +813,8 @@ const Millionsy: React.FC = () => {
                     }}
                   >
                     <p className={`leading-4 ${flagOnclick.twitter.millionsy ? '' : 'opacity-50'}`}>
-                      <span className='text-14 text-pink-D47DFF font-bold'><span className='mr-2'>3.</span>MILLIONSY</span>
-                      <span className='text-12 text-pink-F4E0FF block pl-6'>Like, retweet and comment</span>
+                      <span className='text-body-pc text-gray-primary font-bold'><span className='mr-2'>3.</span>MILLIONSY</span>
+                      <span className='text-body-sp text-pink-F4E0FF block pl-6'>Like, retweet and comment</span>
                     </p>
                     <p className='leading-4 flex items-center flex-col'>
                       <span>
@@ -793,19 +822,19 @@ const Millionsy: React.FC = () => {
                           <path d="M10.8457 0.230774C8.769 0.230774 6.73893 0.846588 5.01222 2.00034C3.2855 3.1541 1.93969 4.79397 1.14497 6.7126C0.350253 8.63122 0.142318 10.7424 0.547462 12.7792C0.952607 14.816 1.95263 16.6869 3.42109 18.1554C4.88954 19.6238 6.76046 20.6239 8.79726 21.029C10.8341 21.4342 12.9453 21.2262 14.8639 20.4315C16.7825 19.6368 18.4224 18.291 19.5761 16.5643C20.7299 14.8375 21.3457 12.8075 21.3457 10.7308C21.3457 7.946 20.2395 5.27528 18.2703 3.30615C16.3012 1.33702 13.6305 0.230774 10.8457 0.230774ZM16.1346 8.58982L16.1419 8.91112C16.1419 12.1924 13.5684 15.9776 8.86121 15.9776C7.4749 15.9801 6.11574 15.5934 4.93841 14.8615C5.14128 14.8847 5.34531 14.8963 5.54951 14.8961C6.69691 14.8996 7.81366 14.5259 8.72786 13.8325C8.1999 13.8279 7.68638 13.6596 7.25814 13.3508C6.8299 13.042 6.50805 12.6079 6.33701 12.1084C6.49558 12.1381 6.65658 12.1528 6.81791 12.1525C7.04542 12.1526 7.272 12.1233 7.49201 12.0653C6.9205 11.9606 6.40319 11.6604 6.0287 11.2162C5.6542 10.772 5.44582 10.2114 5.43926 9.63037V9.59887C5.79441 9.79255 6.18995 9.90042 6.59426 9.91387C6.24686 9.69142 5.96094 9.38522 5.76279 9.02341C5.56464 8.6616 5.46061 8.25579 5.46026 7.84327C5.45957 7.40343 5.57902 6.97175 5.80571 6.59482C6.45851 7.36747 7.26401 7.9968 8.17163 8.44329C9.07925 8.88978 10.0694 9.14379 11.0799 9.18937C11.0353 9.00403 11.0131 8.81403 11.0137 8.62342C11.0137 7.25212 12.1593 6.14122 13.5715 6.14122C13.9195 6.13991 14.2641 6.20858 14.585 6.34314C14.9059 6.4777 15.1965 6.67542 15.4395 6.92452C16.0116 6.81582 16.5614 6.61172 17.0659 6.32077C16.8717 6.90157 16.4712 7.39097 15.9403 7.69627C16.4468 7.63796 16.942 7.50602 17.4103 7.30462C17.0648 7.80547 16.6328 8.24068 16.1346 8.58982Z" fill={`${flagOnclick.twitter.millionsy ? '#17F0FF' : '#878787'}`}/>
                         </svg>
                       </span>
-                      <span className={`text-10 ${flagOnclick.twitter.millionsy ? 'text-blue-200' : 'text-gray-500'}`}>1 slot</span>
+                      <span className={`text-bodybox-sp ${flagOnclick.twitter.millionsy ? 'text-blue-200' : 'text-gray-500'}`}>1 slot</span>
                     </p>
                   </a>
                 </li>
-                <li className='flex justify-between items-center py-1 border-b border-solid border-gray-550'>
+                <li className='flex justify-between items-center py-1 border-b border-solid border-gray-boxline-50'>
                   <p className={`leading-4 ${flagOnclick.twitter.retweet ? '' : 'opacity-50'}`}>
-                    <span className='text-14 text-pink-D47DFF font-bold'><span className='mr-2'>5.</span>Claim 1 slot</span>
-                    <span className='text-12 text-pink-F4E0FF block pl-6'>We will check your actions</span>
+                    <span className='text-body-pc text-gray-primary font-bold'><span className='mr-2'>5.</span>Claim 1 slot</span>
+                    <span className='text-body-sp text-pink-F4E0FF block pl-6'>We will check your actions</span>
                   </p>
                 </li>
               </ul>
               <p className={`mt-3 w-140 mx-auto text-center text-16 py-2 font-bold rounded-5 transition-all  ${
-                flagOnclick.twitter.retweet ? 'bg-blue-17F0FF text-blue-50 hover:opacity-70 cursor-pointer' : 
+                flagOnclick.twitter.retweet ? 'bg-blue-primary text-blue-50 hover:opacity-70 cursor-pointer' : 
                 isNextStepTwitter ? 'bg-pink-150 text-pink-F4E0FF hover:opacity-70 cursor-pointer' : 'bg-gray-550 text-gray-50 pointer-events-none'
               }`}
                 onClick={() => {
@@ -837,22 +866,22 @@ const Millionsy: React.FC = () => {
               >{flagOnclick.twitter.retweet ? (<>Claim slots</>) : (<>Next step</>)}</p>
             </div>
           </div> */}
-          <div className={`${selectedTickets === 'twitter' ? 'block' : 'hidden'} bg-gray-151515 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 max-h-full z-1000 overflow-hidden border border-solid border-gray-575757-50 rounded-10 max-w-280 w-full`}>
-            <div className='flex justify-between items-center px-4 py-2 bg-gray-575757-30'>
-              <p className='text-14 font-semibold'>Twitter tasks</p>
+          <div className={`${selectedTickets === 'twitter' ? 'block' : 'hidden'} bg-gray-box absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 max-h-full z-1000 overflow-hidden border border-solid border-gray-boxline-50 rounded-10 max-w-280 w-full`}>
+            <div className='flex justify-between items-center px-4 py-2 bg-gray-lightbox'>
+              <p className='text-gray-primary text-body-pc font-semibold'>Twitter tasks</p>
               <p className='cursor-pointer transition-all hover:opacity-70 py-1.5 pl-4' onClick={() => setShowModalTicket(false)}>
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fillRule="evenodd" clipRule="evenodd" d="M9.75592 1.42259C10.0814 1.09715 10.0814 0.569515 9.75592 0.244078C9.43049 -0.0813592 8.90285 -0.0813592 8.57741 0.244078L5 3.82149L1.42259 0.244078C1.09715 -0.0813584 0.569515 -0.0813584 0.244078 0.244079C-0.0813592 0.569515 -0.0813592 1.09715 0.244078 1.42259L3.82149 5L0.244078 8.57741C-0.0813592 8.90285 -0.0813592 9.43048 0.244078 9.75592C0.569515 10.0814 1.09715 10.0814 1.42259 9.75592L5 6.17851L8.57741 9.75592C8.90285 10.0814 9.43049 10.0814 9.75592 9.75592C10.0814 9.43049 10.0814 8.90285 9.75592 8.57741L6.17851 5L9.75592 1.42259Z" fill="#fff"/>
+                  <path fillRule="evenodd" clipRule="evenodd" d="M9.75592 1.42259C10.0814 1.09715 10.0814 0.569515 9.75592 0.244078C9.43049 -0.0813592 8.90285 -0.0813592 8.57741 0.244078L5 3.82149L1.42259 0.244078C1.09715 -0.0813584 0.569515 -0.0813584 0.244078 0.244079C-0.0813592 0.569515 -0.0813592 1.09715 0.244078 1.42259L3.82149 5L0.244078 8.57741C-0.0813592 8.90285 -0.0813592 9.43048 0.244078 9.75592C0.569515 10.0814 1.09715 10.0814 1.42259 9.75592L5 6.17851L8.57741 9.75592C8.90285 10.0814 9.43049 10.0814 9.75592 9.75592C10.0814 9.43049 10.0814 8.90285 9.75592 8.57741L6.17851 5L9.75592 1.42259Z" fill="#f9f9f9"/>
                 </svg>
               </p>
             </div>
             <div className='px-4'>
               <ul>
-                <li className='flex justify-between items-center py-1.5 border-b border-solid border-gray-550 relative'>
+                <li className='flex justify-between items-center py-1.5 border-b border-solid border-gray-boxline-50 relative'>
                   <a href='https://t.me/MILLIONSYio' target='_blank' className='absolute w-full h-full'></a>
                   <p className={`leading-4`}>
-                    <span className='text-14 text-pink-D47DFF font-bold'><span className='mr-1'>1.</span>Project_name</span>
-                    <span className='text-12 text-gray-EBEBEB block pl-4'>Follow</span>
+                    <span className='text-body-pc text-gray-primary font-bold'><span className='mr-1'>1.</span>Project_name</span>
+                    <span className='text-body-sp block pl-4'>Follow</span>
                   </p>
                   <p>
                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -861,11 +890,11 @@ const Millionsy: React.FC = () => {
                   </p>
                 </li>
 
-                <li className='flex justify-between items-center py-1.5 border-b border-solid border-gray-550 relative'>
+                <li className='flex justify-between items-center py-1.5 border-b border-solid border-gray-boxline-50 relative'>
                   <a href='https://t.me/MILLIONSYio' target='_blank' className='absolute w-full h-full'></a>
                   <p className={`leading-4`}>
-                    <span className='text-14 text-pink-D47DFF font-bold'><span className='mr-1'>2.</span>MILLIONSY</span>
-                    <span className='text-12 text-gray-EBEBEB block pl-4'>Follow</span>
+                    <span className='text-body-pc text-gray-primary font-bold'><span className='mr-1'>2.</span>MILLIONSY</span>
+                    <span className='text-body-sp block pl-4'>Follow</span>
                   </p>
                   <p>
                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -874,11 +903,11 @@ const Millionsy: React.FC = () => {
                   </p>
                 </li>
 
-                <li className='flex justify-between items-center py-1.5 border-b border-solid border-gray-550 relative'>
+                <li className='flex justify-between items-center py-1.5 border-b border-solid border-gray-boxline-50 relative'>
                   <a href='https://t.me/MILLIONSYio' target='_blank' className='absolute w-full h-full'></a>
                   <p className={`leading-4`}>
-                    <span className='text-14 text-pink-D47DFF font-bold'><span className='mr-1'>3.</span>MILLIONSY</span>
-                    <span className='text-12 text-gray-EBEBEB block pl-4'>Like, retweet and comment</span>
+                    <span className='text-body-pc text-gray-primary font-bold'><span className='mr-1'>3.</span>MILLIONSY</span>
+                    <span className='text-body-sp block pl-4'>Like, retweet and comment</span>
                   </p>
                   <p>
                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -887,19 +916,19 @@ const Millionsy: React.FC = () => {
                   </p>
                 </li>
 
-                <li className='flex justify-between items-center py-1.5 border-b border-solid border-gray-550 relative'>
+                <li className='flex justify-between items-center py-1.5 border-b border-solid border-gray-boxline-50 relative'>
                   <p className={`leading-4`}>
-                    <span className='text-14 text-pink-D47DFF font-bold'><span className='mr-1'>4.</span>Your Username</span>
-                    <span className='my-1.5 block'><input type="text" placeholder='@your_username' className='text-12 rounded-3 border border-solid border-blue-ADFAFF focus:border-blue-17F0FF focus:outline-none bg-transparent w-full pt-1.5 pb-2 px-2 placeholder-gray-A9A9A9' /></span>
-                    <span className='text-10 text-gray-EBEBEB block'>We need to verify you, please give your exact account and make sure you don’t change it while this round is happening.</span>
+                    <span className='text-body-pc text-gray-primary font-bold'><span className='mr-1'>4.</span>Your Username</span>
+                    <span className='my-1.5 block'><input type="text" placeholder='@your_username' className='text-body-sp rounded-3 border border-solid border-transparent focus:border-blue-primary focus:outline-none bg-gray-lightbox focus:bg-transparent w-full pt-1.5 pb-2 px-2 placeholder-gray-body-50' /></span>
+                    <span className='text-bodybox-sp block'>We need to verify you, please give your exact account and make sure you don’t change it while this round is happening.</span>
                   </p>
                 </li>
 
                 <li className='flex justify-between items-center py-1.5 relative'>
                   <a href='https://t.me/MILLIONSYio' target='_blank' className='absolute w-full h-full'></a>
                   <p className={`leading-4`}>
-                    <span className='text-14 text-pink-D47DFF font-bold'><span className='mr-1'>5.</span>Claim 1 slot</span>
-                    <span className='text-12 text-gray-EBEBEB block pl-4'>We will check your actions</span>
+                    <span className='text-body-pc text-gray-primary font-bold'><span className='mr-1'>5.</span>Claim 1 slot</span>
+                    <span className='text-body-sp block pl-4'>We will check your actions</span>
                   </p>
                   <p>
                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -909,27 +938,27 @@ const Millionsy: React.FC = () => {
                 </li>
               </ul>
             </div>
-            <div className='p-4 bg-gray-575757-30'>
-              <p className={`mx-auto p-2 font-semibold rounded-5 transition-all bg-pink-150 text-white hover:opacity-70 cursor-pointer text-center w-24`}>Next step</p>
+            <div className='p-4 bg-gray-lightbox'>
+              <p className={`mx-auto p-2 font-semibold rounded-5 transition-all bg-blue-primary text-gray-box hover:opacity-70 cursor-pointer text-center w-24`}>Next step</p>
             </div>
           </div>
 
-          <div className={`${selectedTickets === 'telegram' ? 'block' : 'hidden'} bg-gray-151515 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 max-h-full z-1000 overflow-hidden border border-solid border-gray-575757-50 rounded-10 max-w-280 w-full`}>
-            <div className='flex justify-between items-center px-4 py-2 bg-gray-575757-30'>
-              <p className='text-14 font-semibold'>Telegram tasks</p>
+          <div className={`${selectedTickets === 'telegram' ? 'block' : 'hidden'} bg-gray-box absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 max-h-full z-1000 overflow-hidden border border-solid border-gray-boxline-50 rounded-10 max-w-280 w-full`}>
+            <div className='flex justify-between items-center px-4 py-2 bg-gray-lightbox'>
+              <p className='text-gray-primary text-body-pc font-semibold'>Telegram tasks</p>
               <p className='cursor-pointer transition-all hover:opacity-70 py-1.5 pl-4' onClick={() => setShowModalTicket(false)}>
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fillRule="evenodd" clipRule="evenodd" d="M9.75592 1.42259C10.0814 1.09715 10.0814 0.569515 9.75592 0.244078C9.43049 -0.0813592 8.90285 -0.0813592 8.57741 0.244078L5 3.82149L1.42259 0.244078C1.09715 -0.0813584 0.569515 -0.0813584 0.244078 0.244079C-0.0813592 0.569515 -0.0813592 1.09715 0.244078 1.42259L3.82149 5L0.244078 8.57741C-0.0813592 8.90285 -0.0813592 9.43048 0.244078 9.75592C0.569515 10.0814 1.09715 10.0814 1.42259 9.75592L5 6.17851L8.57741 9.75592C8.90285 10.0814 9.43049 10.0814 9.75592 9.75592C10.0814 9.43049 10.0814 8.90285 9.75592 8.57741L6.17851 5L9.75592 1.42259Z" fill="#fff"/>
+                  <path fillRule="evenodd" clipRule="evenodd" d="M9.75592 1.42259C10.0814 1.09715 10.0814 0.569515 9.75592 0.244078C9.43049 -0.0813592 8.90285 -0.0813592 8.57741 0.244078L5 3.82149L1.42259 0.244078C1.09715 -0.0813584 0.569515 -0.0813584 0.244078 0.244079C-0.0813592 0.569515 -0.0813592 1.09715 0.244078 1.42259L3.82149 5L0.244078 8.57741C-0.0813592 8.90285 -0.0813592 9.43048 0.244078 9.75592C0.569515 10.0814 1.09715 10.0814 1.42259 9.75592L5 6.17851L8.57741 9.75592C8.90285 10.0814 9.43049 10.0814 9.75592 9.75592C10.0814 9.43049 10.0814 8.90285 9.75592 8.57741L6.17851 5L9.75592 1.42259Z" fill="#f9f9f9"/>
                 </svg>
               </p>
             </div>
             <div className='px-4'>
               <ul>
-                <li className='flex justify-between items-center py-1.5 border-b border-solid border-gray-550 relative'>
+                <li className='flex justify-between items-center py-1.5 border-b border-solid border-gray-boxline-50 relative'>
                   <a href='https://t.me/MILLIONSYio' target='_blank' className='absolute w-full h-full'></a>
                   <p className={`leading-4`}>
-                    <span className='text-14 text-pink-D47DFF font-bold'><span className='mr-1'>1.</span>Project_name</span>
-                    <span className='text-12 text-gray-EBEBEB block pl-4'>Join group</span>
+                    <span className='text-body-pc text-gray-primary font-bold'><span className='mr-1'>1.</span>Project_name</span>
+                    <span className='text-body-sp block pl-4'>Join group</span>
                   </p>
                   <p>
                     <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -938,11 +967,11 @@ const Millionsy: React.FC = () => {
                   </p>
                 </li>
 
-                <li className='flex justify-between items-center py-1.5 border-b border-solid border-gray-550 relative'>
+                <li className='flex justify-between items-center py-1.5 border-b border-solid border-gray-boxline-50 relative'>
                   <a href='https://t.me/MILLIONSYio' target='_blank' className='absolute w-full h-full'></a>
                   <p className={`leading-4`}>
-                    <span className='text-14 text-pink-D47DFF font-bold'><span className='mr-1'>2.</span>Project_name</span>
-                    <span className='text-12 text-gray-EBEBEB block pl-4'>Join channel</span>
+                    <span className='text-body-pc text-gray-primary font-bold'><span className='mr-1'>2.</span>Project_name</span>
+                    <span className='text-body-sp block pl-4'>Join channel</span>
                   </p>
                   <p>
                     <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -951,11 +980,11 @@ const Millionsy: React.FC = () => {
                   </p>
                 </li>
 
-                <li className='flex justify-between items-center py-1.5 border-b border-solid border-gray-550 relative'>
+                <li className='flex justify-between items-center py-1.5 border-b border-solid border-gray-boxline-50 relative'>
                   <a href='https://t.me/MILLIONSYio' target='_blank' className='absolute w-full h-full'></a>
                   <p className={`leading-4`}>
-                    <span className='text-14 text-pink-D47DFF font-bold'><span className='mr-1'>3.</span>MILLIONSY</span>
-                    <span className='text-12 text-gray-EBEBEB block pl-4'>Join group</span>
+                    <span className='text-body-pc text-gray-primary font-bold'><span className='mr-1'>3.</span>MILLIONSY</span>
+                    <span className='text-body-sp block pl-4'>Join group</span>
                   </p>
                   <p>
                     <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -964,19 +993,19 @@ const Millionsy: React.FC = () => {
                   </p>
                 </li>
 
-                <li className='flex justify-between items-center py-1.5 border-b border-solid border-gray-550 relative'>
+                <li className='flex justify-between items-center py-1.5 border-b border-solid border-gray-boxline-50 relative'>
                   <p className={`leading-4`}>
-                    <span className='text-14 text-pink-D47DFF font-bold'><span className='mr-1'>4.</span>Your Username</span>
-                    <span className='my-1.5 block'><input type="text" placeholder='@your_username' className='text-12 rounded-3 border border-solid border-blue-ADFAFF focus:border-blue-17F0FF focus:outline-none bg-transparent w-full pt-1.5 pb-2 px-2 placeholder-gray-A9A9A9' /></span>
-                    <span className='text-10 text-gray-EBEBEB block'>We need to verify you, please give your exact account and make sure you don’t change it while this round is happening.</span>
+                    <span className='text-body-pc text-gray-primary font-bold'><span className='mr-1'>4.</span>Your Username</span>
+                    <span className='my-1.5 block'><input type="text" placeholder='@your_username' className='text-body-sp rounded-3 border border-solid border-transparent focus:border-blue-primary focus:outline-none bg-gray-lightbox focus:bg-transparent w-full pt-1.5 pb-2 px-2 placeholder-gray-body-50' /></span>
+                    <span className='text-bodybox-sp block'>We need to verify you, please give your exact account and make sure you don’t change it while this round is happening.</span>
                   </p>
                 </li>
 
                 <li className='flex justify-between items-center py-1.5 relative'>
                   <a href='https://t.me/MILLIONSYio' target='_blank' className='absolute w-full h-full'></a>
                   <p className={`leading-4`}>
-                    <span className='text-14 text-pink-D47DFF font-bold'><span className='mr-1'>5.</span>Claim 1 slot</span>
-                    <span className='text-12 text-gray-EBEBEB block pl-4'>We will check your actions</span>
+                    <span className='text-body-pc text-gray-primary font-bold'><span className='mr-1'>5.</span>Claim 1 slot</span>
+                    <span className='text-body-sp block pl-4'>We will check your actions</span>
                   </p>
                   <p>
                     <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -986,8 +1015,8 @@ const Millionsy: React.FC = () => {
                 </li>
               </ul>
             </div>
-            <div className='p-4 bg-gray-575757-30'>
-              <p className={`mx-auto p-2 font-semibold rounded-5 transition-all bg-pink-150 text-white hover:opacity-70 cursor-pointer text-center w-24`}>Next step</p>
+            <div className='p-4 bg-gray-lightbox'>
+              <p className={`mx-auto p-2 font-semibold rounded-5 transition-all bg-blue-primary text-gray-box hover:opacity-70 cursor-pointer text-center w-24`}>Next step</p>
             </div>
           </div>
         </section>
@@ -996,30 +1025,37 @@ const Millionsy: React.FC = () => {
         <div className='h-full absolute w-full top-0 left-0 bg-black opacity-50'
           onClick={() => setIsShowNotification(false)}
         ></div>
-        <div className='absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-280 md:max-w-700 w-full bg-gray-151515 rounded-5 border-gray-575757-50 border border-solid'>
-          <div className='bg-gray-575757-30 px-4 md:px-6 flex justify-end items-center'>
+        <div className='absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-280 md:max-w-700 w-full bg-gray-box rounded-5 border-gray-boxline-50 border border-solid'>
+          <div className='bg-gray-lightbox px-4 md:px-6 flex justify-end items-center'>
             <p className='inline-block cursor-pointer pl-6 py-4'
               onClick={() => setIsShowNotification(false)}
             >
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fillRule="evenodd" clipRule="evenodd" d="M9.75592 1.42259C10.0814 1.09715 10.0814 0.569515 9.75592 0.244078C9.43049 -0.0813592 8.90285 -0.0813592 8.57741 0.244078L5 3.82149L1.42259 0.244078C1.09715 -0.0813584 0.569515 -0.0813584 0.244078 0.244079C-0.0813592 0.569515 -0.0813592 1.09715 0.244078 1.42259L3.82149 5L0.244078 8.57741C-0.0813592 8.90285 -0.0813592 9.43048 0.244078 9.75592C0.569515 10.0814 1.09715 10.0814 1.42259 9.75592L5 6.17851L8.57741 9.75592C8.90285 10.0814 9.43049 10.0814 9.75592 9.75592C10.0814 9.43049 10.0814 8.90285 9.75592 8.57741L6.17851 5L9.75592 1.42259Z" fill="white"/>
+                <path fillRule="evenodd" clipRule="evenodd" d="M9.75592 1.42259C10.0814 1.09715 10.0814 0.569515 9.75592 0.244078C9.43049 -0.0813592 8.90285 -0.0813592 8.57741 0.244078L5 3.82149L1.42259 0.244078C1.09715 -0.0813584 0.569515 -0.0813584 0.244078 0.244079C-0.0813592 0.569515 -0.0813592 1.09715 0.244078 1.42259L3.82149 5L0.244078 8.57741C-0.0813592 8.90285 -0.0813592 9.43048 0.244078 9.75592C0.569515 10.0814 1.09715 10.0814 1.42259 9.75592L5 6.17851L8.57741 9.75592C8.90285 10.0814 9.43049 10.0814 9.75592 9.75592C10.0814 9.43049 10.0814 8.90285 9.75592 8.57741L6.17851 5L9.75592 1.42259Z" fill="#f9f9f9"/>
               </svg>
             </p>
           </div>
           <div className='px-4 py-3 md:px-6 md:py-5'>
-            <p className='text-10 md:text-14 text-justify text-gray-EBEBEB'>Persons that are citizens of, resident in or have IP addresses in any of the below countries are not allowed to participate in the IGO: Citizens of Afghanistan, Angola, Belarus, Bosnia & Herzegovina, Burkina Faso, Burundi, Cayman Island, Central African Republic, People’s Republic of China, Congo (DRC), Côte d’Ivoire (Ivory Coast), Cuba, Columbia, Ecuador, Egypt, Eritrea, Ethiopia, Guinea, Guinea-Bissau, Guyana, Haiti, Iran, Iraq, Kosovo, Laos, Lebanon, Liberia, Libya, Macedonia, Maldives, Mali, Marokko; Myanmar, Nigeria, North-Korea, Panama, Pakistan, Papua NG, Philippines, Republic of Crimea, Serbia, Somalia, Sri Lanka, Senegal, Sudan, South Sudan, Syria, Trinidad and Tobago, Tunisia, Turkmenistan, United States of America, Uganda, Ukraine, Uzbekistan, Vanuatu, Venezuela, Yemen, Zimbabwe or any other jurisdiction in which it is prohibited from using the MILLIGO</p>
+            <p className='text-bodybox-sp md:text-button-pc text-justify'>Persons that are citizens of, resident in or have IP addresses in any of the below countries are not allowed to participate in the IGO: Citizens of Afghanistan, Angola, Belarus, Bosnia & Herzegovina, Burkina Faso, Burundi, Cayman Island, Central African Republic, People’s Republic of China, Congo (DRC), Côte d’Ivoire (Ivory Coast), Cuba, Columbia, Ecuador, Egypt, Eritrea, Ethiopia, Guinea, Guinea-Bissau, Guyana, Haiti, Iran, Iraq, Kosovo, Laos, Lebanon, Liberia, Libya, Macedonia, Maldives, Mali, Marokko; Myanmar, Nigeria, North-Korea, Panama, Pakistan, Papua NG, Philippines, Republic of Crimea, Serbia, Somalia, Sri Lanka, Senegal, Sudan, South Sudan, Syria, Trinidad and Tobago, Tunisia, Turkmenistan, United States of America, Uganda, Ukraine, Uzbekistan, Vanuatu, Venezuela, Yemen, Zimbabwe or any other jurisdiction in which it is prohibited from using the MILLIGO</p>
           </div>
-          <div className='pt-2 pb-3 md:pt-4 md:pb-6 bg-gray-575757-30'>
+          <div className='pt-2 pb-3 md:pt-4 md:pb-6 bg-gray-lightbox'>
             <div className='flex justify-center items-center w-fit mx-auto cursor-pointer'
               onClick={() => {
                 setIsHadread(!isHadread);
               }}
             >
-              <span className={`w-3.5 h-3.5 border border-solid border-blue-ADFAFF inline-block rounded-3 ${isHadread ? 'bg-blue-ADFAFF' : ''}`}></span>
-              <p className='ml-3 text-blue-ADFAFF'>I have read and accept the conditions</p>
+              <span className={`w-3.5 h-3.5 border border-solid border-blue-secondary inline-block rounded-3 relative ${isHadread ? 'bg-blue-secondary' : ''}`}>
+                {
+                  isHadread &&
+                  <svg width="10" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg" className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
+                    <path d="M0.919678 5.13763L3.21468 7.43263L9.07968 1.56763" stroke="#293333" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                }
+              </span>
+              <p className='ml-3 text-blue-secondary'>I have read and accept the conditions</p>
             </div>
             <p className='text-center mt-4'>
-              <span className='inline-block cursor-pointer transition-all hover:opacity-70 text-blue-0B7880 bg-blue-17F0FF rounded-3 md:rounded-5 py-1.5 px-2.5 font-semibold'
+              <span className='inline-block cursor-pointer transition-all hover:opacity-70 text-gray-box bg-blue-primary rounded-3 md:rounded-5 py-1.5 px-2.5 font-semibold'
                 onClick={() => {
                   if(isHadread) {
                     setShowModalTicket(true);

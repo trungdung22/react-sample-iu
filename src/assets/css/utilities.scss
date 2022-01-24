@@ -61,24 +61,8 @@
   -webkit-text-fill-color: transparent;
 }
 
-.christmas-santa {
-  top: -5%;
-  right: calc(50% - 160px);
-}
-
-.christmas-star_yellow01 {
-  bottom: 30%;
-  right: calc(50% - 200px);
-}
-
-.christmas-star_yellow02 {
-  top: 0;
-  left: calc(50% - 195px);
-}
-
-.christmas-hook {
-  bottom: -17%;
-  left: calc(50% - 180px);
+.input-body::placeholder {
+  color: #EBEBEB;
 }
 
 @media screen and (min-width: 1024px) {

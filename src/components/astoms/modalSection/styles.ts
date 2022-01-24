@@ -8,7 +8,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     width: '100%',
     zIndex: 100,
     fontSize: 18,
-    color: '#F9F9F9',
   },
   backgroundModal: {
     background: 'rgba(0, 0, 0, 0.5)',
@@ -24,37 +23,34 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     transform: 'translate(-50%, -50%)',
     maxHeight: '95%',
     zIndex: 1000,
-    background: '#151515',
     borderRadius: 10,
-    border: '1px solid rgba(87, 87, 87, 0.5)',
     fontSize: 16,
     width: '100%',
-    maxWidth: 280,
+    maxWidth: 335,
     overflow: 'hidden',
-    '&.error': {
-      background: '#1D1D45',
-      border: '1px solid #A819FA',
+    '@media screen and (max-width: 767px)': {
+      maxWidth: 280,
     },
-    '&.success': {
-      background: '#1D1D45',
-    },
+    
   },
   header: {
     padding: '0 1.25rem',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    background: 'rgba(87, 87, 87, 0.3)',
 
     '&.hasID': {
       '& span': {
-        background: 'rgba(140, 36, 191, 0.8)',
+        background: '#FF00FF',
         display: 'inline-block',
         cursor: 'default',
         margin: '0 0 0 0.5rem',
         padding: '2px 10px',
-        fontSize: 12,
+        fontSize: 14,
         borderRadius: 5,
+        '@media screen and (max-width: 767px)': {
+          fontSize: 12,
+        },
         '&:hover': {
           opacity: 1
         },
@@ -62,7 +58,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     },
 
     '& .title': {
-      fontSize: 14,
       fontWeight: 600,
       display: 'flex',
       alignItems: 'center',
@@ -89,7 +84,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     top: 0,
     cursor: 'pointer',
     transition: 'all 0.2s ease',
-    padding: '1rem',
+    lineHeight: '0',
     '&:hover': {
       opacity: 0.6
     }

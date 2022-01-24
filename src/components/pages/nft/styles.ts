@@ -16,23 +16,28 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
       },
       '& button': {
         fontSize: 14,
-        color: 'rgba(255, 255, 255, 0.5)',
+        color: '#575757',
         fontFamily: '"Lexend", sans-serif',
         fontWeight: '600',
         '&:hover': {
-          color: '#B2FAFF',
+          color: '#AAFFFF',
         },
         '&.Mui-selected': {
-          color: ' #0B7880',
-          background: '#17F0FF',
+          color: ' #1A2222',
+          background: '#00FFFF',
           borderRadius: '5px',
         }
       },
       '& .MuiPaginationItem-ellipsis': {
-        color: 'rgba(255, 255, 255, 0.5)',
+        color: '#575757',
       }
     }
   },
+  placeholder: {
+    '&::placeholder': {
+      color: '#575757',
+    }
+  }
 }));
 
 export default useStyles;

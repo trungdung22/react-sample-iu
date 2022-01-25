@@ -693,9 +693,9 @@ const Millionsy: React.FC = () => {
               <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-2'>As a result, a blockchain lottery platform assures that there are no foul plays or lottery scandals in the ecosystem. This is a guarantee for an ever-expanding lottery industry.</p>
               <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-2'>You are more than welcome to participate in the greatest blockchain celebration, as long as you have a wallet and at the price of just 2$ per ticket, you now have a chance to join the millionaire-club. Tickets will be available on their website and can be purchased by SOL and  MILLI. In the near future, you will be able to buy lottery tickets via Visa, PayPal, and other payment methods.  </p>
             </div>
-            <h5 className='text-pink-secondary text-h3-sp md:text-h3-pc font-bold mb-3 md:mb-4 pt-3 md:pt-8'>Tokenomic</h5>
+            {/* <h5 className='text-pink-secondary text-h3-sp md:text-h3-pc font-bold mb-3 md:mb-4 pt-3 md:pt-8'>Tokenomic</h5> */}
           </div>
-          <p className='px-3/100 md:px-0 mb-4'><img src="/assets/millipad/chart.png" alt="chart"/></p>
+          {/* <p className='px-3/100 md:px-0 mb-4'><img src="/assets/millipad/chart.png" alt="chart"/></p>
           <div className='px-4 md:px-6 tablet992:px-12'>
             <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-1.5'>Total max supply: 300,000,000</p>
             <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-1.5'>Team: Lock 12 months.</p>
@@ -712,7 +712,7 @@ const Millionsy: React.FC = () => {
             <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-2'>From April to the end of 2022, completing Fiat Ticket Purchase feature. MILLIONSY will definately lead the next chapter of lottery industry with those unique and promising features.</p>
             <h5 className='text-pink-secondary text-h3-sp md:text-h3-pc font-bold mb-3 md:mb-4 pt-3 md:pt-8'>Team</h5>
           </div>
-          <p className='px-3/100 md:px-0'><img src="/assets/millipad/teams.png" alt="face"/></p>
+          <p className='px-3/100 md:px-0'><img src="/assets/millipad/teams.png" alt="face"/></p> */}
         </div>
       </section>
       {
@@ -1022,19 +1022,9 @@ const Millionsy: React.FC = () => {
         </section>
       }
       <section className={`fixed h-100vh w-full top-0 left-0 z-100 ${isShowNotification ? 'block' : ' hidden'}`}>
-        <div className='h-full absolute w-full top-0 left-0 bg-black opacity-50'
-          onClick={() => setIsShowNotification(false)}
-        ></div>
+        <div className='h-full absolute w-full top-0 left-0 bg-black opacity-50'></div>
         <div className='absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-280 md:max-w-700 w-full bg-gray-box rounded-5 border-gray-boxline-50 border border-solid'>
-          <div className='bg-gray-lightbox px-4 md:px-6 flex justify-end items-center'>
-            <p className='inline-block cursor-pointer pl-6 py-4'
-              onClick={() => setIsShowNotification(false)}
-            >
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fillRule="evenodd" clipRule="evenodd" d="M9.75592 1.42259C10.0814 1.09715 10.0814 0.569515 9.75592 0.244078C9.43049 -0.0813592 8.90285 -0.0813592 8.57741 0.244078L5 3.82149L1.42259 0.244078C1.09715 -0.0813584 0.569515 -0.0813584 0.244078 0.244079C-0.0813592 0.569515 -0.0813592 1.09715 0.244078 1.42259L3.82149 5L0.244078 8.57741C-0.0813592 8.90285 -0.0813592 9.43048 0.244078 9.75592C0.569515 10.0814 1.09715 10.0814 1.42259 9.75592L5 6.17851L8.57741 9.75592C8.90285 10.0814 9.43049 10.0814 9.75592 9.75592C10.0814 9.43049 10.0814 8.90285 9.75592 8.57741L6.17851 5L9.75592 1.42259Z" fill="#f9f9f9"/>
-              </svg>
-            </p>
-          </div>
+          <div className='bg-gray-lightbox px-4 md:px-6 py-5 flex justify-end items-center'></div>
           <div className='px-4 py-3 md:px-6 md:py-5'>
             <p className='text-bodybox-sp md:text-button-pc text-justify'>Persons that are citizens of, resident in or have IP addresses in any of the below countries are not allowed to participate in the IGO: Citizens of Afghanistan, Angola, Belarus, Bosnia & Herzegovina, Burkina Faso, Burundi, Cayman Island, Central African Republic, People’s Republic of China, Congo (DRC), Côte d’Ivoire (Ivory Coast), Cuba, Columbia, Ecuador, Egypt, Eritrea, Ethiopia, Guinea, Guinea-Bissau, Guyana, Haiti, Iran, Iraq, Kosovo, Laos, Lebanon, Liberia, Libya, Macedonia, Maldives, Mali, Marokko; Myanmar, Nigeria, North-Korea, Panama, Pakistan, Papua NG, Philippines, Republic of Crimea, Serbia, Somalia, Sri Lanka, Senegal, Sudan, South Sudan, Syria, Trinidad and Tobago, Tunisia, Turkmenistan, United States of America, Uganda, Ukraine, Uzbekistan, Vanuatu, Venezuela, Yemen, Zimbabwe or any other jurisdiction in which it is prohibited from using the MILLIGO</p>
           </div>

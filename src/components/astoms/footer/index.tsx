@@ -58,7 +58,7 @@ const Footer: React.FC = () => {
                   <li className='mb-2.5 md:mb-3.5'><a href="https://forms.gle/ERJc45o4btDsoerT6" className='text-blue-primary transition-all hover:opacity-70' target={`_blank`}>Apply for IGO</a></li>
                   <li className='mb-2.5 md:mb-3.5'><a href="https://docs.millionsy.io/lottery/how-to-play " className='transition-all hover:opacity-70' target={`_blank`}>How to buy ticket</a></li>
                   <li className='mb-2.5 md:mb-3.5'><a href="https://docs.millionsy.io" className='transition-all hover:opacity-70' target={`_blank`}>Documents</a></li>
-                  <li><a href="https://www.millionsy.io/whitepaper/" className='transition-all hover:opacity-70' target={`_blank`}>Whitepaper</a></li>
+                  <li><a href="/whitepaper/" className='transition-all hover:opacity-70' target={`_blank`}>Whitepaper</a></li>
                 </ul>
               </div>
               <div className='col-span-1 mb-5 md:mb-0'>

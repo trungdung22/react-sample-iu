@@ -26,6 +26,9 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
           color: ' #1A2222',
           background: '#00FFFF',
           borderRadius: '5px',
+        },
+        '@media screen and (max-width: 767px)' : {
+          fontSize: 12,
         }
       },
       '& .MuiPaginationItem-ellipsis': {

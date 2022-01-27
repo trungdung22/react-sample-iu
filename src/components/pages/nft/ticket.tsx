@@ -34,10 +34,11 @@ export interface MilliNFTAccountDataLayout {
 
 type Props = {
   nftAccountPubkey: string,
-  metadataURL: string
+  metadataURL: string,
   swipableView: (value: any) => void,
   isShowPopupDesktop: (isShown: boolean) => void,
   emitTicketData: (ticketNumber: any) => void,
+  tab: string,
 }
 
 const Ticket: React.FC<Props> = ({
@@ -46,6 +47,7 @@ const Ticket: React.FC<Props> = ({
   swipableView,
   isShowPopupDesktop,
   emitTicketData,
+  tab,
 }) => {
   const [isLoaded, settIsLoaded] = useState(false);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
@@ -188,8 +190,17 @@ const Ticket: React.FC<Props> = ({
               <div>
                 {nftData.description}
               </div>
-              <p className='w-full h-px bg-gray-boxline opacity-50 mt-2'></p>
-              <p className='flex justify-between items-center font-bold text-h2-sp md:text-h2-pc text-blue-primary pt-1 md:pt-2'><span className='text-body-sp md:text-body-pc font-light text-gray-primary'>~({nftData.priceDollar})$</span><span>{nftData.priceMilli} MILLI</span></p>
+              {
+                tab !== 'your-nfts' ?
+                  <>
+                    <p className='w-full h-px bg-gray-boxline opacity-50 mt-2'></p>
+                    <p className='flex justify-between items-center font-bold text-h2-sp md:text-h2-pc text-blue-primary pt-1 md:pt-2'><span className='text-body-sp md:text-body-pc font-light text-gray-primary'>~({nftData.priceDollar})$</span><span>{nftData.priceMilli} MILLI</span></p>
+                  </>
+                  :
+                  <>
+                    <p className='p-1'></p>
+                  </>
+              }
             </div>
           </>
         }

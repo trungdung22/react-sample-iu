@@ -7,8 +7,8 @@ const ViewSubmit: React.FC<Props> = ({dataSendViewSubmit}) => {
   const classes = useStyles();
   return (
     <>
-      <div className={`flex items-center`}>
-        <div className={`px-3 md:px-3`}>
+      <div className='flex items-center'>
+        <div className='px-3'>
           <span className='inline-block w-5 md:w-30'>
             {dataSendViewSubmit ? (
               <svg className='max-w-full' width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">

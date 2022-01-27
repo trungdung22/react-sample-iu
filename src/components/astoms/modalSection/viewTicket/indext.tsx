@@ -98,7 +98,7 @@ const ViewTicket: React.FC<Props> = ({ dataSendViewTicket, dataGiveViewTicket })
       </div>
       <div className='p-4 bg-gray-lightbox'>
         <div className='relative'>
-          <p className='transition-all hover:opacity-70 text-center col-span-1 font-semibold text-button-sp md:text-button-pc cursor-pointer rounded-3 border border-solid text-gray-box bg-blue-primary w-28 h-32px flex justify-center items-center mx-auto'
+          <p className={`transition-all hover:opacity-70 text-center col-span-1 font-semibold text-button-sp md:text-button-pc rounded-3 border border-solid text-gray-box bg-blue-primary w-28 h-32px flex justify-center items-center mx-auto ${window.sessionStorage.getItem('data_connect') === 'true' ? 'cursor-pointer hover:opacity-75' : 'cursor-not-allowed'}`}
             onClick={() => {
               if (window.sessionStorage.getItem('data_connect') === 'true') {
                 dataGiveViewTicket(true)
@@ -113,7 +113,7 @@ const ViewTicket: React.FC<Props> = ({ dataSendViewTicket, dataGiveViewTicket })
               }
             }}
           >Buy ticket</p>
-          {showTooltipConnect && <p className='absolute bottom-full left-1/2 transform -translate-x-1/2 -translate-y-2 z-100 border border-solid border-pink-primary bg-gray-box rounded-5 text-center py-1 w-32 md:w-36 text-pink-primary font-medium'>Connect wallet first</p>}
+          {showTooltipConnect && <p className='absolute bottom-full left-1/2 transform -translate-x-1/2 -translate-y-2 z-100 border border-solid border-pink-primary bg-gray-box rounded-5 text-center py-1 w-32 md:w-36 text-pink-primary font-medium text-body-sp md:text-body-pc'>Connect wallet first</p>}
         </div>
       </div>
     </>

@@ -261,7 +261,7 @@ const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
                     Coin98
                   </li>
                 </ul>
-                <p className={`flex justify-end items-center text-body-pc cursor-pointer py-1.5 px-2 ${playerData.is_connect ? 'text-gray-primary' : 'cursor-not-allowed opacity-50'}`} onClick={handleDisconnect}>
+                <p className={`flex justify-end items-center text-body-pc cursor-pointer py-1.5 px-2 ${playerData.is_connect ? 'transition-all text-gray-primary hover:opacity-70' : 'cursor-not-allowed opacity-50'}`} onClick={handleDisconnect}>
                   Disconnect
                   <span className={`inline-block ml-2 ${playerData.is_connect ? '' : 'opacity-50'}`}>
                     <svg width="15" height="10" viewBox="0 0 15 10" fill="none" xmlns="http://www.w3.org/2000/svg">

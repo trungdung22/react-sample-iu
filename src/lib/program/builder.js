@@ -16,7 +16,8 @@ const Command = {
   IntegrateNFT: 11, 
   ExchangeNFT: 12,
   RevokeNFTTokenAuthority: 13,
-  ClaimRewardNFT: 14
+  ClaimRewardNFT: 14,
+  TransferNFTOnwership: 15
 };
 
 export function buyTicket(ticketNumbers) {
@@ -43,5 +44,10 @@ export function buyNFTTicket(price) {
   const data = Buffer.from(Uint8Array.of(Command.ExchangeNFT,
     ...new BN(price).toArray("le", 8))
   )
+  return data;
+}
+
+export function transferNFTOwnerShip() {
+  const data = Buffer.from(Uint8Array.of(Command.TransferNFTOnwership));
   return data;
 }

@@ -139,8 +139,6 @@ export const buyNFTTicket = async (reqProgramId, milli_nft_account, owner_pubkey
     const milliNftAccount = new PublicKey(milli_nft_account);
 
     const programId = new PublicKey(reqProgramId);
-    // const programId = new PublicKey('8pKHJxuSqkUHRx4vS1H3jaDXzBF4hdC2YL1Hic4ejwep');
-
 
     const playerWallet = await UseWallet(adapter_type);
     const mintPubkey = new PublicKey(mint_pubkey);
@@ -172,7 +170,6 @@ export const buyNFTTicket = async (reqProgramId, milli_nft_account, owner_pubkey
         [Buffer.from("milli-auction")],
         programId
     );
-
     const buyIx = new TransactionInstruction({
         programId: programId,
         keys: [
@@ -192,6 +189,30 @@ export const buyNFTTicket = async (reqProgramId, milli_nft_account, owner_pubkey
     instructions.push(buyIx);
     const tx = await sendTxUsingExternalSignature(connection, instructions, null, null, playerWallet);
     return buyer_tokenAccount.toBase58();
+}
+
+export const transferNFTOwnerShip = async (reqProgramId, milli_nft_account, token_account_pubkey, new_owner_pubkey, adapter_type) => {
+    const playerWallet = await UseWallet(adapter_type);
+
+    const milliNftAccount = new PublicKey(milli_nft_account);
+    const programId = new PublicKey(reqProgramId);
+
+    const owner_tokenAccount = new PublicKey(token_account_pubkey);
+    const new_onwer_account = new PublicKey(new_owner_pubkey);
+    let instructions = [];
+    const buyIx = new TransactionInstruction({
+        programId: programId,
+        keys: [
+            { pubkey: TOKEN_PROGRAM_ID, isSigner: false, isWritable: false },
+            { pubkey: milliNftAccount, isSigner: false, isWritable: true },
+            { pubkey: playerWallet.publicKey, isSigner: false, isWritable: false },
+            { pubkey: owner_tokenAccount, isSigner: false, isWritable: true },
+            { pubkey: new_onwer_account, isSigner: false, isWritable: false },
+        ],
+        data: ProgramCommand.transferNFTOwnerShip()
+    });
+    instructions.push(buyIx);
+    const tx = await sendTxUsingExternalSignature(connection, instructions, null, null, playerWallet);
 }
 
 const handleConnectionError = (error) => {

@@ -4,7 +4,7 @@ import Footer from 'components/astoms/footer';
 import Header from 'components/astoms/header';
 import ModalContent from 'components/astoms/modalSection';
 import Star from 'components/astoms/star';
-import { fetchPlayerAccount, getGameBoardInfo, insertNFTTransaction } from 'lib/utilities/utils';
+import { fetchPlayerAccount, getGameBoardInfo, insertNFTTransaction, transferNFTOnwerShip } from 'lib/utilities/utils';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 import useStyles from './styles';
@@ -13,7 +13,7 @@ import { useWindowSize } from 'data/constants';
 import Ticket from './ticket';
 import { HOST_NAME } from 'data/constants';
 import { sendTxUsingExternalSignature, UseWallet } from '../../../lib/program/wallet-provider';
-import { buyNFTTicket } from '../../../lib/program/lottery-commands';
+import { buyNFTTicket, transferNFTOwnerShip } from '../../../lib/program/lottery-commands';
 import { buildParamRequest, splitArrayIntoChunksOfLen } from 'lib/utilities/format';
 import debounce from 'lodash.debounce';
 import { NFTTypes } from 'lib/program/state';
@@ -382,6 +382,29 @@ const NFT: React.FC = () => {
   const handleTransferNFT = () => {
     if(isConfirmTransfer && valueInputAddress) {
       console.log('true');
+      transferNFTOwnerShip(programInfo.programId,
+        selectedTicketData.milli_nft_pubkey,
+        selectedTicketData.token_account_pubkey,
+        valueInputAddress,
+        playerData.data.adapter_type
+      ).then(async () => {
+        await transferNFTOnwerShip(
+          selectedTicketData.mint_pubkey,
+          valueInputAddress
+        );
+        setIsShowPopupDesktop(false);
+        setIsBuyingNFT(false);
+        setSwipeableViewsIndex(0);
+        setIsShowPopupResults('success');
+        fetchTicketsEntries();
+        console.log('transfer success');
+      }).catch(async err => {
+        setIsShowPopupDesktop(false);
+        setIsShowPopupResults('error');
+        setIsBuyingNFT(false);
+        console.log(err);
+        console.log('transfer fail');
+      });
     }
   }
 
@@ -543,9 +566,7 @@ const NFT: React.FC = () => {
                   <p className='text-h2-pc font-bungee text-blue-primary leading-8 mb-1'>{selectedTicketData.ticketNumber}</p>
                   <div>
                     {/* <div dangerouslySetInnerHTML={{ __html: selectedTicketData.description }} ></div> */}
-
-                    <p className='leading-4'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
-                    <p className='leading-4'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
+                    {selectedTicketData.description}
                   </div>
                   
                   {
@@ -701,8 +722,7 @@ const NFT: React.FC = () => {
                 <p className='text-h2-pc font-bungee text-blue-primary mb-1'>{selectedTicketData.ticketNumber}</p>
                 <div>
                   {/* <div dangerouslySetInnerHTML={{ __html: selectedTicketData.description }} ></div> */}
-                  <p className='leading-4'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
-                  <p className='leading-4'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
+                  {selectedTicketData.description}
                 </div>
               </div>
               {

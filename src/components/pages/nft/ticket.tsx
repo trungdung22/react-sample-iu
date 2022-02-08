@@ -7,6 +7,7 @@ import { CLUSTERS, getConnection } from '../../../lib/program/connection';
 import { Commitment, Connection, clusterApiUrl, PublicKey } from '@solana/web3.js';
 import { format2digitNumber } from 'lib/utilities/format';
 import { off } from 'process';
+import './style.scss';
 
 export interface MilliNFTAccountDataLayout {
   ticketNumber: String;
@@ -49,6 +50,7 @@ const Ticket: React.FC<Props> = ({
   tab,
 }) => {
   const [isLoaded, settIsLoaded] = useState(false);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   const [nftData, setNftData] = useState<MilliNFTAccountDataLayout>();
   const [imageURL, setImageURL] = useState(`${metadataURL}/image.png`);
@@ -148,34 +150,61 @@ const Ticket: React.FC<Props> = ({
     emitTicketData(nftData);
   }
 
+  useEffect(() => {
+
+  }, [])
+
   return (
     <>
-      {isLoaded &&
-        <div className='col-span-1 bg-gray-box text-gray-primary rounded-5 md:rounded-10 border border-solid border-gray-boxline-50 p-1 md:p-2 cursor-pointer transition-all hover:opacity-70'
-          onClick={cardOnClickHandler}
-        >
-          <p className='bg-no-repeat bg-center bg-cover h-24 sm:h-36 lg:h-48 rounded-5 md:rounded-10' style={{ 'backgroundImage': `url(${nftData.imageURL}` }}></p>
-          <div className='mt-1 md:mt-2.5'>
-            <p className='text-h2-sp md:text-h2-pc text-blue-primary font-bungee leading-6 md:mb-1'>{nftData.ticketNumber}</p>
-            {/* <div dangerouslySetInnerHTML={{ __html: nftData.description }} ></div> */}
-            <div>
-              <p className='leading-4'><span className='font-bold inline-block mr-1'>Lottery:</span>Lifetime drawing with match 3.</p>
-              <p className='leading-4'><span className='font-bold uppercase inline-block mr-1'>MILLIGO:</span>1 slot for every IGO round.</p>
-            </div>
-            {
-              tab !== 'your-nfts' ?
-              <>
-                <p className='w-full h-px bg-gray-boxline opacity-50 mt-2'></p>
-                <p className='flex justify-between items-center font-bold text-h2-sp md:text-h2-pc text-blue-primary pt-1 md:pt-2'><span className='text-body-sp md:text-body-pc font-light text-gray-primary'>~({nftData.priceDollar})$</span><span>{nftData.priceMilli} MILLI</span></p>
-              </>
-              :
-              <>
-                <p className='p-1'></p>
-              </>
-            }
+      <div className='col-span-1 bg-gray-box text-gray-primary rounded-5 md:rounded-10 border border-solid border-gray-boxline-50 p-1 md:p-2 cursor-pointer transition-all hover:opacity-70'
+        onClick={cardOnClickHandler}>
+        {
+          !isImageLoaded &&
+          <div
+            className='loading-container-img skeleton-box'
+          >
           </div>
-        </div>
-      }
+        }
+        {
+          !isLoaded &&
+          <div
+            className='skeleton-box'
+            style={{
+              display: 'block',
+              width: '100%',
+              height: '100px'
+            }}>
+          </div>
+        }
+        {
+          isLoaded &&
+          <>
+            <img
+              width='100%'
+              style={isImageLoaded ? {} : { display: 'none' }}
+              src={nftData.imageURL}
+              onLoad={() => { setIsImageLoaded(true) }} />
+            <div className='mt-1 md:mt-2.5'>
+              <p className='text-h2-sp md:text-h2-pc text-blue-primary font-bungee leading-6 md:mb-1'>{nftData.ticketNumber}</p>
+              {/* <div dangerouslySetInnerHTML={{ __html: nftData.description }} ></div> */}
+              <div>
+                {nftData.description}
+              </div>
+              {
+                tab !== 'your-nfts' ?
+                  <>
+                    <p className='w-full h-px bg-gray-boxline opacity-50 mt-2'></p>
+                    <p className='flex justify-between items-center font-bold text-h2-sp md:text-h2-pc text-blue-primary pt-1 md:pt-2'><span className='text-body-sp md:text-body-pc font-light text-gray-primary'>~({nftData.priceDollar})$</span><span>{nftData.priceMilli} MILLI</span></p>
+                  </>
+                  :
+                  <>
+                    <p className='p-1'></p>
+                  </>
+              }
+            </div>
+          </>
+        }
+      </div>
     </>
   )
 }

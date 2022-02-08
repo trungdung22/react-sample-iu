@@ -149,7 +149,7 @@ const GetSection: React.FC = () => {
               <p>You can view your tickets in the "Next party” board after buying at any time you want when you've already connected your wallet to the website. See your history in "Yours'' in MILLIONSY AIRBOARD.</p>
             </div>
           </div>
-          <p className='py-2 md:py-4'>More question? <a href="https://docs.millionsy.io/lottery/how-to-play " className='text-blue-secondary transition-all hover:opacity-70 underline'>Read this article.</a></p>
+          <p className='py-2 md:py-4'>More question? <a href="https://docs.millionsy.io/lottery/how-to-play " className='text-blue-secondary transition-all hover:opacity-70 underline' target={`_blank`}>Read this article.</a></p>
         </div>
       </div>
     </div>

@@ -27,6 +27,7 @@ const NFT: React.FC = () => {
   const searchInputEl = useRef(null);
   const [showTooltipConnectDesktop, setShowTooltipConnectDesktop] = useState(false);
   const [showTooltipConnectMobile, setShowTooltipConnectMobile] = useState(false);
+  const [isLoadedNFT, setIsLoadedNFT] = useState(false);
   // avoid first update when access page
   const firstUpdate = useRef(true);
   const [isHadread, setIsHadread] = useState(false);
@@ -110,6 +111,7 @@ const NFT: React.FC = () => {
 
   const fetchTicketsEntries = () => {
     const queryParams = buildParamRequest(queryParam);
+    setIsLoadedNFT(false);
     fetch(`${HOST_NAME}/api/nft-ticket?${queryParams}`, {
       headers: {
         'Content-Type': 'application/json',
@@ -133,6 +135,7 @@ const NFT: React.FC = () => {
         tickets: response_data.items
       });
       setFilteredNftTickets(response_data.items);
+      setIsLoadedNFT(true);
     }).catch(err => {
       console.log(err);
     })
@@ -484,13 +487,14 @@ const NFT: React.FC = () => {
                 </div>
               </div>
               <div className='max-w-1060 mx-auto'>
+                { !isLoadedNFT && <p className='max-w-60 md:max-w-100 mx-auto mt-8'><img src="/assets/common/loading.gif" alt="loading" /></p> }
                 {
-                  !filteredNftTickets.length &&
+                  !filteredNftTickets.length && isLoadedNFT &&
                   <p className='mt-5 md:mt-10'>There is nothing here. Try something else!</p>
                 }
                 {
-                  !!filteredNftTickets.length &&
-                  <div>
+                  !!filteredNftTickets.length && isLoadedNFT &&
+                  <>
                     <div className='grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3 lg:gap-5 mt-5 md:mt-12'>
                       {
                         filteredNftTickets.map((ticket) => {
@@ -504,11 +508,11 @@ const NFT: React.FC = () => {
                         })
                       }
                     </div>
-                  </div>
+                    <div className='mt-6 md:mt-10 pb-6 md:pb-0'>
+                      <Pagination count={ticketEntries.totalPages} showFirstButton showLastButton className={classes.root} siblingCount={1} onChange={onChangePagination} />
+                    </div>
+                  </>
                 }
-                <div className='mt-6 md:mt-10 pb-6 md:pb-0'>
-                  <Pagination count={ticketEntries.totalPages} showFirstButton showLastButton className={classes.root} siblingCount={1} onChange={onChangePagination} />
-                </div>
               </div>
             </div>
           </div>

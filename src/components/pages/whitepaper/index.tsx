@@ -14,8 +14,6 @@ const WhitePaper: React.FC = () => {
       <p><img src="/assets/whitepaper/8.png" alt="8" /></p>
       <p><img src="/assets/whitepaper/9.png" alt="9" /></p>
       <p><img src="/assets/whitepaper/10.png" alt="10" /></p>
-      <p><img src="/assets/whitepaper/11.png" alt="11" /></p>
-      <p><img src="/assets/whitepaper/12.png" alt="12" /></p>
     </>
   )
 }

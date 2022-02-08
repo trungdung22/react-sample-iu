@@ -138,6 +138,23 @@ export const insertNFTTransaction = async (
     return response;
 }
 
+export const transferNFTOnwerShip = async (mint_pubkey,new_user_pubkey) => {
+    const token = `Bearer ${sessionStorage.getItem('token')}` ;
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': token
+        },
+        body: JSON.stringify({
+            new_user_pubkey : new_user_pubkey,
+            mint_pubkey : mint_pubkey,
+        })
+    };
+    const response = await fetch(`${HOST_NAME}/api/nft-transfer-ownership`, requestOptions);
+    return response;
+}
+
 export const getGameBoardInfo = async () => {
     const requestOptions = {
         method: 'GET',

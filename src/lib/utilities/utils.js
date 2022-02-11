@@ -50,7 +50,7 @@ export const priceTicket = async () => {
     return { lamports: data["lamports"], usdt: data["usdt"], sol: data["sol"] };
 }
 
-export const registerMilipadPlayer = async (playerPubkey, missions, code) => {
+export const registerMilipadPlayer = async (playerPubkey, missions, code, userName) => {
     const requestOptions = {
         method: 'POST',
         headers: {
@@ -59,7 +59,8 @@ export const registerMilipadPlayer = async (playerPubkey, missions, code) => {
         body: JSON.stringify({
             playerPubkey: playerPubkey,
             missions: missions,
-            code: code
+            code: code,
+            user_name: userName
         })
     };
     const response = await fetch(`${HOST_NAME}/api/milli-pads/register`, requestOptions);

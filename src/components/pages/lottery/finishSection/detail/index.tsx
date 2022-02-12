@@ -44,7 +44,7 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
           <span className='text-h3-sp md:text-h3-pc font-bold text-pink-F4E0FF p-2 md:px-8 text-center bg-pink-primary rounded-5 inline-block'>{`#${dataSendToDetail.game_no}`}</span>
           {`${monthName[new Date(dataSendToDetail.updatedAt).getMonth()]} 
           ${new Date(dataSendToDetail.updatedAt).getDate()}, 
-          ${new Date(dataSendToDetail.updatedAt).getFullYear()}, 11:00 AM`}
+          ${new Date(dataSendToDetail.updatedAt).getFullYear()}, 2:00 PM UTC`}
         </p>
       </div>
       <div className=''>

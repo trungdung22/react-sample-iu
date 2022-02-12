@@ -50,7 +50,7 @@ const FinishedSection: React.FC<Props> = ({playerData, dataGiveFromFinished}) =>
   return (
     <div className='px-3/100 py-16 md:pb-20 md:pt-10'>
       <div className='max-w-700 mx-auto'>
-        <h3 className='font-bungee text-center text-h1-sp md:text-h1-pc text-blue-primary mb-6 md:mb-12 uppercase'>Millionsy airboard</h3>
+        <h3 className='font-bungee text-center text-h1-sp md:text-h1-pc text-blue-primary mb-6 md:mb-12 uppercase'>take the lead</h3>
         <div className='rounded-10 bg-gray-box overflow-hidden border border-solid border-gray-boxline-50'>
           <ul className='flex justify-center font-semibold text-gray-primary bg-gray-lightbox py-3 md:py-4'>
             <li className={`rounded-5 cursor-pointer w-20 flex justify-center items-center h-32px md:h-34px md:w-92 text-center transition-all ${component === 'jackpots' ? 'bg-pink-primary' : 'hover:bg-gray-boxline'}`} onClick={() =>{

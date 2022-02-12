@@ -145,7 +145,7 @@ const All: React.FC<Props> = ({ dataSendToAll, dataGiveAll }) => {
                 <span className='text-h3-sp md:text-h3-pc font-bold text-gray-primary p-2 md:px-8 text-center bg-pink-primary rounded-5 inline-block'>{`#${data['info'][data.id]['game_no']}`}</span>
                 {`${monthName[new Date(data['info'][data.id]['updatedAt']).getMonth()]} 
                 ${new Date(data['info'][data.id]['updatedAt']).getDate()}, 
-                ${new Date(data['info'][data.id]['updatedAt']).getFullYear()}, 11:00 AM`}
+                ${new Date(data['info'][data.id]['updatedAt']).getFullYear()}, 2:00 PM UTC`}
               </p>
             </div>
             <div className={`md:flex md:items-center justify-between p-3.5 md:px-8 md:py-5 border-t border-solid border-gray-boxline-50 ${slide ? 'border-b' : ''}`}>

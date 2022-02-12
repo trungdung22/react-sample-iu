@@ -8,6 +8,7 @@ import { Commitment, Connection, clusterApiUrl, PublicKey } from '@solana/web3.j
 import { format2digitNumber } from 'lib/utilities/format';
 import { off } from 'process';
 import './style.scss';
+import { CONNECTION_ULR } from 'lib/program/config';
 
 export interface MilliNFTAccountDataLayout {
   ticketNumber: String;
@@ -58,7 +59,7 @@ const Ticket: React.FC<Props> = ({
   const size = useWindowSize();
   const COMMITMENT: Commitment = "singleGossip";
 
-  const connection = new Connection('https://api.devnet.solana.com',
+  const connection = new Connection(CONNECTION_ULR,
     COMMITMENT
   );
 

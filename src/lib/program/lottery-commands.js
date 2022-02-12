@@ -1,12 +1,12 @@
 import * as ProgramCommand from './builder'
-import { Account, Connection, PublicKey, SystemProgram, Transaction, TransactionInstruction, sendAndConfirmTransaction, SYSVAR_RENT_PUBKEY } from "@solana/web3.js";
-import { TICKET_ACCOUNT_DATA_LAYOUT, MILLI_USER_ACCOUNT_DATA_LAYOUT } from './state';
-import { sendTxUsingExternalSignature, UseWallet, sendTxUsingExternalSignatureV2 } from './wallet-provider';
+import { Account, Connection, PublicKey, SystemProgram, TransactionInstruction } from "@solana/web3.js";
+import { TICKET_ACCOUNT_DATA_LAYOUT } from './state';
+import { sendTxUsingExternalSignature, UseWallet } from './wallet-provider';
 import { CONNECTION_ULR } from './config';
 import { convertUSDT } from 'lib/utilities/utils';
 import { TOKEN_PROGRAM_ID, Token} from '@solana/spl-token';
 import { getOrCreateTokenAccountInstruction } from 'lib/utilities/utils';
-import { USDC_REP_MINT_TOKEN, MILLI_MINT_KEY, SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID } from 'lib/utilities/id';
+import { USDC_REP_MINT_TOKEN, MILLI_MINT_KEY} from 'lib/utilities/id';
 const axios = require('axios');
 //const connection = new Connection("http://localhost:8899", 'singleGossip');
 const connection = new Connection("https://api.devnet.solana.com", 'singleGossip');

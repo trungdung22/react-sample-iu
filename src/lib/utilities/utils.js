@@ -50,7 +50,7 @@ export const priceTicket = async () => {
     return { lamports: data["lamports"], usdt: data["usdt"], sol: data["sol"] };
 }
 
-export const registerMilipadPlayer = async (playerPubkey, missions, code) => {
+export const registerMilipadPlayer = async (playerPubkey, missions, code, userName) => {
     const requestOptions = {
         method: 'POST',
         headers: {
@@ -59,7 +59,8 @@ export const registerMilipadPlayer = async (playerPubkey, missions, code) => {
         body: JSON.stringify({
             playerPubkey: playerPubkey,
             missions: missions,
-            code: code
+            code: code,
+            user_name: userName
         })
     };
     const response = await fetch(`${HOST_NAME}/api/milli-pads/register`, requestOptions);
@@ -135,6 +136,23 @@ export const insertNFTTransaction = async (
 
     };
     const response = await fetch(`${HOST_NAME}/api/nft-buy-ticket`, requestOptions);
+    return response;
+}
+
+export const transferNFTOnwerShip = async (mint_pubkey,new_user_pubkey) => {
+    const token = `Bearer ${sessionStorage.getItem('token')}` ;
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': token
+        },
+        body: JSON.stringify({
+            new_user_pubkey : new_user_pubkey,
+            mint_pubkey : mint_pubkey,
+        })
+    };
+    const response = await fetch(`${HOST_NAME}/api/nft-transfer-ownership`, requestOptions);
     return response;
 }
 

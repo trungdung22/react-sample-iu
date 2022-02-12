@@ -9,6 +9,7 @@ import { Coin98WalletAdapter } from "lib/wallets/coin98";
 import { SOLLET_ADAPTER_NETWORD } from './config';
 import { PROVIDER_URL } from "data/constants";
 import { HOST_NAME } from 'data/constants';
+import { SlopeWalletAdapter } from "lib/wallets/slope";
 
 // const WALLET_LIST = ["sollet", "phantom"];
 
@@ -51,6 +52,7 @@ export const sendTxUsingExternalSignature = async (
 let sollet = new SolletWalletAdapter({ provider: PROVIDER_URL, network: SOLLET_ADAPTER_NETWORD });
 let phantom = new PhantomWalletAdapter();
 let coin98 = new Coin98WalletAdapter();
+let slope = new SlopeWalletAdapter();
 
 const connectToSolletWallet = () => {
 
@@ -77,6 +79,14 @@ const connectToCoin98Wallet = () => {
   }
 };
 
+const connectToSlopeWallet = () => {
+  if (!slope.connected) {
+    return slope.connect() as Promise<void>;
+  } else {
+    return Promise.resolve();
+  }
+};
+
 export const UseWallet = async (adapterType: string): Promise<BaseMessageSignerWalletAdapter> => {
   let wallet: BaseMessageSignerWalletAdapter;
   switch(adapterType){
@@ -92,8 +102,12 @@ export const UseWallet = async (adapterType: string): Promise<BaseMessageSignerW
       await connectToPhantomWallet();
       wallet = phantom;
       break;
+    case("slope"):
+      await connectToSlopeWallet();
+      wallet = slope;
+      break;
     }
-    authenticate(wallet.publicKey.toString());
+    // authenticate(wallet.publicKey.toString());
     return wallet;
 };
 

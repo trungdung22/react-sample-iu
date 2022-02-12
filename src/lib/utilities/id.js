@@ -15,7 +15,7 @@ const pubkeyToString = (key) => {
 };
 
 const MILLI_MINT_KEY = new PublicKey(
-  "fEFJedUYxGpQhW9P4QLv7zPaFpenzUYGhQicPzFiPzc"
+  "HDLRMKW1FDz2q5Zg778CZx26UgrtnqpUDkNNJHhmVUFr"
 );
 
 const WRAPPED_SOL_MINT = new PublicKey(

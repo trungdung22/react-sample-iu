@@ -18,7 +18,7 @@ const GetSection: React.FC = () => {
             </li>
             <li className='col-span-1 px-1 md:px-4 py-2 md:py-0'>
               <h6 className='text-h3-sp md:text-h3-pc text-pink-secondary font-bold md:mb-0.5'>Wait for the party</h6>
-              <p>There is 1 draw every day, ends at 11am UTC and starts 35 minutes after that. The prize is automatically sent to the winner's wallet.</p>
+              <p>There is 1 draw every day, ends at 2PM UTC and starts 35 minutes after that. The prize is automatically sent to the winner's wallet.</p>
             </li>
           </ul>
           <h5 className='text-h3-sp md:text-h3-pc text-pink-secondary font-bold pl-4 mb-4'>Lottery Winning Conditions</h5>
@@ -149,7 +149,7 @@ const GetSection: React.FC = () => {
               <p>You can view your tickets in the "Next party” board after buying at any time you want when you've already connected your wallet to the website. See your history in "Yours'' in MILLIONSY AIRBOARD.</p>
             </div>
           </div>
-          <p className='py-2 md:py-4'>More question? <a href="https://docs.millionsy.io/lottery/how-to-play " className='text-blue-secondary transition-all hover:opacity-70 underline'>Read this article.</a></p>
+          <p className='py-2 md:py-4'>More question? <a href="https://docs.millionsy.io/lottery/how-to-play " className='text-blue-secondary transition-all hover:opacity-70 underline' target={`_blank`}>Read this article.</a></p>
         </div>
       </div>
     </div>

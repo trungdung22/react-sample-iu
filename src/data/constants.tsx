@@ -25,8 +25,8 @@ export const useWindowSize = () => {
   }, []); // Empty array ensures that effect is only run on mount
   return windowSize;
 }
-// export const ENV = "mainnet";
-// export const HOST_NAME = "";
-
-export const ENV = "devnet";
+export const ENV = "mainnet";
 export const HOST_NAME = "";
+
+// export const ENV = "devnet";
+// export const HOST_NAME = "https://millionsy-exa.herokuapp.com";

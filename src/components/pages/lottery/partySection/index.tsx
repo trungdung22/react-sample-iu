@@ -19,7 +19,7 @@ const PartySection: React.FC<Props> = ({playerData, partyData, sendDataPartyToLo
         {
           Math.round(partyData.gameBalanceUSDT) !== 0 ? (
             <h3>
-              <span className='text-h2-sp md:text-h2-pc leading-none text-center block font-bold text-gray-primary'>Pump the party</span>
+              <span className='text-h2-sp md:text-h2-pc leading-none text-center block font-bold text-gray-primary'>Pump up the party</span>
               <span className='font-bungee text-banner-sp md:text-banner-pc text-blue-primary text-center leading-none block mt-9 md:mt-7 mb-8 md:mb-10'>
                 $<CountUp separator="," duration={1.5} start={0} end={partyData.gameBalanceUSDT} />
               </span>
@@ -27,7 +27,7 @@ const PartySection: React.FC<Props> = ({playerData, partyData, sendDataPartyToLo
             </h3>
           ) : (
             <h3>
-              <span className='text-h2-sp md:text-h2-pc leading-none text-center block font-bold text-gray-primary'>Pump the party</span>
+              <span className='text-h2-sp md:text-h2-pc leading-none text-center block font-bold text-gray-primary'>Pump up the party</span>
               <ContentLoader
                 viewBox="0 0 700 90"
                 backgroundColor="#293333"

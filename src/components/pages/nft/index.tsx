@@ -27,6 +27,7 @@ const NFT: React.FC = () => {
   const searchInputEl = useRef(null);
   const [showTooltipConnectDesktop, setShowTooltipConnectDesktop] = useState(false);
   const [showTooltipConnectMobile, setShowTooltipConnectMobile] = useState(false);
+  const [isLoadedNFT, setIsLoadedNFT] = useState(false);
   // avoid first update when access page
   const firstUpdate = useRef(true);
   const [isHadread, setIsHadread] = useState(false);
@@ -47,7 +48,7 @@ const NFT: React.FC = () => {
   const [queryParam, setQueryParam] = useState({
     isSole: false,
     page: 1,
-    perPage: 10
+    perPage: 9
   });
   const [programInfo, setProgramInfo] = useState({
     programId: '',
@@ -110,6 +111,7 @@ const NFT: React.FC = () => {
 
   const fetchTicketsEntries = () => {
     const queryParams = buildParamRequest(queryParam);
+    setIsLoadedNFT(false);
     fetch(`${HOST_NAME}/api/nft-ticket?${queryParams}`, {
       headers: {
         'Content-Type': 'application/json',
@@ -133,6 +135,7 @@ const NFT: React.FC = () => {
         tickets: response_data.items
       });
       setFilteredNftTickets(response_data.items);
+      setIsLoadedNFT(true);
     }).catch(err => {
       console.log(err);
     })
@@ -507,13 +510,14 @@ const NFT: React.FC = () => {
                 </div>
               </div>
               <div className='max-w-1060 mx-auto'>
+                { !isLoadedNFT && <p className='max-w-60 md:max-w-100 mx-auto mt-8'><img src="/assets/common/loading.gif" alt="loading" /></p> }
                 {
-                  !filteredNftTickets.length &&
+                  !filteredNftTickets.length && isLoadedNFT &&
                   <p className='mt-5 md:mt-10'>There is nothing here. Try something else!</p>
                 }
                 {
-                  !!filteredNftTickets.length &&
-                  <div>
+                  !!filteredNftTickets.length && isLoadedNFT &&
+                  <>
                     <div className='grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3 lg:gap-5 mt-5 md:mt-12'>
                       {
                         filteredNftTickets.map((ticket) => {
@@ -527,11 +531,11 @@ const NFT: React.FC = () => {
                         })
                       }
                     </div>
-                  </div>
+                    <div className='mt-6 md:mt-10 pb-6 md:pb-0'>
+                      <Pagination count={ticketEntries.totalPages} showFirstButton showLastButton className={classes.root} siblingCount={1} onChange={onChangePagination} page={ticketEntries.currentPage} />
+                    </div>
+                  </>
                 }
-                <div className='mt-6 md:mt-10 pb-6 md:pb-0'>
-                  <Pagination count={ticketEntries.totalPages} showFirstButton showLastButton className={classes.root} siblingCount={1} onChange={onChangePagination} />
-                </div>
               </div>
             </div>
           </div>
@@ -857,7 +861,8 @@ const NFT: React.FC = () => {
         <div className='absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-280 md:max-w-700 w-full bg-gray-box md:rounded-5 rounded-10 border-gray-boxline-50 border border-solid'>
           <div className='bg-gray-lightbox px-4 md:px-6 py-5 flex justify-end items-center'></div>
           <div className='px-4 py-3 md:px-6 md:py-5'>
-            <p className='text-bodybox-sp md:text-button-pc text-justify mb-2'>Please use the NFT transfer feature on our website to send your NFT ticket to others. If you transfer the NFT from wallet to wallet (for example, on Phantom, Sollet, Coin98, Slope,...), the new owner could not be recorded on our website. By this, the old owner still receives benefits from the MILLIONSY ecosystem while the new owner does not. If you find yourself in this situation, please fill out the form below to get it resolved. This process could take up to 30 days.</p>
+            <p className='text-bodybox-sp md:text-button-pc text-justify mb-2'>Please use the NFT transfer feature on our website to send your NFT ticket to others. If you transfer the NFT from wallet to wallet (for example, on Phantom, Sollet, Coin98, Slope,...), the new owner could not be recorded on our website. By this, the old owner still receives benefits from the MILLIONSY ecosystem while the new owner does not.</p>
+            <p className='text-bodybox-sp md:text-button-pc text-justify mb-2'>If you accidentally transferred NFT Ticket without using MILLIONSY website, please fill out the form below to get it resolved. This process could take up to 30 days.</p>
             <p className='text-bodybox-sp md:text-button-pc text-blue-secondary'><a href="https://forms.gle/BrGkH3mXNQH1ir7MA" className='underline hover:opacity-70' target={`_blank`}>https://forms.gle/BrGkH3mXNQH1ir7MA</a></p>
           </div>
           <div className='pt-2 pb-3 md:pt-4 md:pb-6 bg-gray-lightbox'>
@@ -877,7 +882,7 @@ const NFT: React.FC = () => {
               <p className='ml-3 text-blue-secondary'>I have read and agree.</p>
             </div>
             <p className='text-center mt-4'>
-              <span className='inline-block cursor-pointer transition-all hover:opacity-70 text-gray-box bg-blue-primary rounded-3 md:rounded-5 py-1.5 px-2.5 font-semibold'
+              <span className={`inline-block text-gray-box bg-blue-primary rounded-3 md:rounded-5 py-1.5 px-2.5 font-semibold ${isHadread ? 'cursor-pointer transition-all hover:opacity-70' : 'cursor-not-allowed'}`}
                 onClick={() => {
                   if(isHadread) {
                     setIsShowNotification(false);

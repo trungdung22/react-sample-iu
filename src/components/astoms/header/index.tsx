@@ -128,12 +128,26 @@ const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
     }
   }
 
-  // // const connectCoin69 = () => {
-  // //   UseWallet("coin98").then(response => {
-  // //     console.log(response);
-  // //     dataGiveWallet({ publicKey: response.publicKey.toBase58(), is_connect: true, adapter_type: "phantom" });
-  // //   }).catch(error => console.log(error));
-  // // }
+  const connectCoin98 = () => {
+    if (!playerData.is_connect) {
+      UseWallet("coin98").then(response => {
+        window.sessionStorage.setItem('show_connect', 'true');
+        setDataWalletSendLottery({ 
+          data: {
+            ...dataWalletSendLottery.data,
+            publicKey: response.publicKey.toBase58(),
+            is_connect: true,
+            adapter_type: "coin98"
+          },
+          disconnect: false,
+        });
+        window.sessionStorage.setItem('data_connect', 'true')
+        window.sessionStorage.setItem('publicKey', response.publicKey.toBase58());
+        window.sessionStorage.setItem('adapter_type', 'coin98');
+        setMenuConnectedCollapsed(false);
+      }).catch(error => console.log(error));
+    }
+  }
 
   const connectSollet = () => {
     if (!playerData.is_connect) {
@@ -247,11 +261,21 @@ const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
                       </span>
                     }
                   </li>
-                  <li className='py-1 px-8 text-body-pc flex items-center cursor-not-allowed opacity-50'>
+                  <li className={`py-1 px-8 text-body-pc flex items-center transition-all relative ${playerData.is_connect ? window.sessionStorage.getItem('adapter_type') === 'slope' ? '' : 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:bg-gray-boxline'}`}
+                    onClick={connectCoin98}
+                  >
                     <span className='w-4 h-4 inline-block mr-3'>
                       <IconCoin98></IconCoin98>
                     </span>
                     Coin98
+                    {
+                      playerData.is_connect && window.sessionStorage.getItem('adapter_type') === 'coin98' &&
+                      <span className='absolute top-3 right-3'>
+                        <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M1 4.57L3.295 6.865L9.16 1" stroke="#00FFFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      </span>
+                    }
                   </li>
                   <li className={`py-1 px-8 text-body-pc flex items-center transition-all relative ${playerData.is_connect ? window.sessionStorage.getItem('adapter_type') === 'slope' ? '' : 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:bg-gray-boxline'}`}
                     onClick={connectSlope}

@@ -74,7 +74,8 @@ const Ticket: React.FC<Props> = ({
       nftInfo.milli_nft_pubkey = nftAccountPubkey;
       nftInfo.price = nftDecodedInfo.price;
       nftInfo.priceMilli = nftDecodedInfo.price / 1000000;
-      nftInfo.priceDollar = nftDecodedInfo.price / 1000000 * 2; // 1 milli  = 2 $
+      nftInfo.priceDollar = nftDecodedInfo.price / 1000000 * 1; 
+      
       nftInfo.status = nftDecodedInfo.status;
 
       nftInfo.token_account_pubkey = nftDecodedInfo.token_account_pubkey;

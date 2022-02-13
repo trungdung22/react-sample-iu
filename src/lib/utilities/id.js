@@ -22,9 +22,13 @@ const WRAPPED_SOL_MINT = new PublicKey(
   'So11111111111111111111111111111111111111112',
 );
 
-const USDC_REP_MINT_TOKEN = new PublicKey(
-  'Au17nLtNZt1uhQtyWFZBaou8v3ViCVbuKRG9zoQXgXVY',
+const USDC_MINT_TOKEN = new PublicKey(
+  'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
 );
+
+// const USDC_REP_MINT_TOKEN = new PublicKey(
+//   'Au17nLtNZt1uhQtyWFZBaou8v3ViCVbuKRG9zoQXgXVY',
+// );
 
 const TOKEN_PROGRAM_ID = new PublicKey(
   'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA',
@@ -80,7 +84,7 @@ module.exports = {
   programIds, 
   toPublicKey,
   pubkeyToString,
-  USDC_REP_MINT_TOKEN,
+  USDC_MINT_TOKEN,
   TOKEN_PROGRAM_ID,
   SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID,
   AR_SOL_HOLDER_ID,

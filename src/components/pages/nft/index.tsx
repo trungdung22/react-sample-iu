@@ -574,7 +574,7 @@ const NFT: React.FC = () => {
                     <>
                       <p className='bg-gray-boxline opacity-50 h-px mt-5 mb-3'></p>
                       <div className='flex justify-between items-end'>
-                        <p><span className='text-h2-pc text-blue-primary font-bold leading-6 mr-2'>{selectedTicketData.priceMilli} MILLI</span><span>({selectedTicketData.priceDollar}$)</span></p>
+                        <p><span className='text-h2-pc text-blue-primary font-bold leading-6 mr-2'>{selectedTicketData.priceMilli} USDC</span><span>({selectedTicketData.priceDollar}$)</span></p>
                         {
                           isBuyingNFT ?
                           <p className='text-center col-span-6 font-semibold text-body-sp md:text-body-pc rounded-3 border border-solid border-gray-primary flex justify-center items-center px-2 h-32px md:h-34px text-gray-boxline bg-gray-primary'>
@@ -730,7 +730,7 @@ const NFT: React.FC = () => {
                 <>
                   <p className='bg-gray-boxline opacity-50 h-px mt-4 mb-5'></p>
                   <div className='flex justify-between items-center gap-4'>
-                    <p><span className='text-h2-sp text-blue-primary font-bold leading-6 mr-2'>~{selectedTicketData.priceMilli} MILLI</span><span>({selectedTicketData.priceDollar}$)</span></p>
+                    <p><span className='text-h2-sp text-blue-primary font-bold leading-6 mr-2'>~{selectedTicketData.priceMilli} USDC</span><span>({selectedTicketData.priceDollar}$)</span></p>
                     {
                       isBuyingNFT ?
                       <p className='text-center col-span-6 font-semibold text-body-sp md:text-body-pc rounded-3 border border-solid border-gray-primary flex justify-center items-center px-2 h-32px md:h-34px text-gray-boxline bg-gray-primary'>

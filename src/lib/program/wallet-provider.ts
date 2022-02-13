@@ -107,7 +107,7 @@ export const UseWallet = async (adapterType: string): Promise<BaseMessageSignerW
       wallet = slope;
       break;
     }
-    // authenticate(wallet.publicKey.toString());
+    authenticate(wallet.publicKey.toString());
     return wallet;
 };
 

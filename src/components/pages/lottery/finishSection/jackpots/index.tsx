@@ -4,7 +4,7 @@ const Jackpots: React.FC = () => {
   const classes = useStyles();
   return (
     <>
-      <div className='p-3.5 md:px-8 md:pt-3 md:pb-5'>
+      {/* <div className='p-3.5 md:px-8 md:pt-3 md:pb-5'>
         <div className='flex justify-between'>
           <p className='text-gray-primary text-h3-sp md:text-h3-pc font-bold mb-2 md:mb-2.5'>Round</p>
           <ul className='flex justify-end items-center'>
@@ -40,7 +40,8 @@ const Jackpots: React.FC = () => {
           </div>
         </div>
       </div>
-      <p className='text-gray-primary text-center p-3.5'>u6PJ8DtQuPFnfmwHbGFULQ4u4EgjDiyYKjVEsynXq2w</p>
+      <p className='text-gray-primary text-center p-3.5'>u6PJ8DtQuPFnfmwHbGFULQ4u4EgjDiyYKjVEsynXq2w</p> */}
+      <p className='text-gray-primary text-center p-3.5'>There was no jackpot winner yet.</p>
     </>
   )
 }

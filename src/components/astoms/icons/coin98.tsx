@@ -2,7 +2,7 @@ import React, { SVGProps } from 'react';
 
 const IconCoin98: React.FC<SVGProps<SVGSVGElement>> = props => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path opacity="0.5" d="M0 0H16V16H0V0Z" fill="url(#coin98)"/>
+    <path d="M0 0H16V16H0V0Z" fill="url(#coin98)"/>
     <defs>
     <pattern id="coin98" patternContentUnits="objectBoundingBox" width="1" height="1">
     <use href="#image0_1152_3181" transform="scale(0.00341297)"/>

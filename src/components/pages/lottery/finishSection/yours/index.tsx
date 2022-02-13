@@ -85,53 +85,61 @@ const Yours: React.FC<Props> = ({playerData, dataGiveFromYours}) => {
   }
   
   return (
-    <div className='p-3.5 md:px-8 md:py-4'>
+    <>
       {
-        data.items.length > 0 ? (
-          <div className=''>
-            <ul className='flex items-center'>
-              <li className='text-14 md:text-16 text-pink-secondary font-bold uppercase leading-none md:leading-normal w-12 md:w-14 mr-4 sm:mr-12 md:mr-16'>Round</li>
-              <li className='text-14 md:text-16 text-pink-secondary font-bold uppercase leading-none md:leading-normal w-28 md:w-52 mr-8 md:mr-16'>Date</li>
-              <li className='text-14 md:text-16 text-pink-secondary font-bold uppercase leading-none md:leading-normal text-center md:text-left'>Your<br className='block md:hidden'/> tickets</li>
-            </ul>
-            {
-              stateItem > 0 ? 
-              <ul className='h-64 md:h-72 overflow-y-auto overflow-x-hidden'>
-                <InfiniteScroll
-                  throttle={100}
-                  threshold={30}
-                  isLoading={data.isLoading}
-                  hasMore={!data.loadAll}
-                  onLoadMore={loadMore}
-                >
-                  {data.items.map(item => (handleRenderRoundItems(item)))}
-                </InfiniteScroll>
-              </ul>
-              : <p className='mt-4'>You don't have any ticket.</p>
-            }
-            
-          </div>
-        ) : (
-          <ContentLoader
-            viewBox="0 0 700 312"
-            backgroundColor="#293333"
-            foregroundColor="#575757"
-          >
-            <rect x="0" y="32" rx="4" ry="4" width="180" height="20" />
-            <rect x="265" y="32" rx="4" ry="4" width="180" height="20" />
-            <rect x="520" y="32" rx="4" ry="4" width="180" height="20" />
-            <rect x="0" y="72" rx="4" ry="4" width="700" height="20" />
-            <rect x="0" y="112" rx="4" ry="4" width="700" height="20" />
-            <rect x="0" y="152" rx="4" ry="4" width="700" height="20" />
-            <rect x="0" y="192" rx="4" ry="4" width="700" height="20" />
-            <rect x="0" y="232" rx="4" ry="4" width="700" height="20" />
-            <rect x="0" y="272" rx="4" ry="4" width="700" height="20" />
-            <rect x="0" y="312" rx="4" ry="4" width="700" height="20" />
-          </ContentLoader>
-        )
+        playerData.is_connect ? 
+        <div className='p-3.5 md:px-8 md:py-4'>
+          {
+            data.items.length > 0 ? (
+              <div className=''>
+                <ul className='flex items-center'>
+                  <li className='text-14 md:text-16 text-pink-secondary font-bold uppercase leading-none md:leading-normal w-12 md:w-14 mr-4 sm:mr-12 md:mr-16'>Round</li>
+                  <li className='text-14 md:text-16 text-pink-secondary font-bold uppercase leading-none md:leading-normal w-28 md:w-52 mr-8 md:mr-16'>Date</li>
+                  <li className='text-14 md:text-16 text-pink-secondary font-bold uppercase leading-none md:leading-normal text-center md:text-left'>Your<br className='block md:hidden'/> tickets</li>
+                </ul>
+                {
+                  stateItem > 0 ? 
+                  <ul className='h-64 md:h-72 overflow-y-auto overflow-x-hidden'>
+                    <InfiniteScroll
+                      throttle={100}
+                      threshold={30}
+                      isLoading={data.isLoading}
+                      hasMore={!data.loadAll}
+                      onLoadMore={loadMore}
+                    >
+                      {data.items.map(item => (handleRenderRoundItems(item)))}
+                    </InfiniteScroll>
+                  </ul>
+                  : <p className='text-gray-primary text-center p-3.5'>You have no recorded history.</p>
+                }
+                
+              </div>
+            ) : (
+              <ContentLoader
+                viewBox="0 0 700 312"
+                backgroundColor="#293333"
+                foregroundColor="#575757"
+              >
+                <rect x="0" y="32" rx="4" ry="4" width="180" height="20" />
+                <rect x="265" y="32" rx="4" ry="4" width="180" height="20" />
+                <rect x="520" y="32" rx="4" ry="4" width="180" height="20" />
+                <rect x="0" y="72" rx="4" ry="4" width="700" height="20" />
+                <rect x="0" y="112" rx="4" ry="4" width="700" height="20" />
+                <rect x="0" y="152" rx="4" ry="4" width="700" height="20" />
+                <rect x="0" y="192" rx="4" ry="4" width="700" height="20" />
+                <rect x="0" y="232" rx="4" ry="4" width="700" height="20" />
+                <rect x="0" y="272" rx="4" ry="4" width="700" height="20" />
+                <rect x="0" y="312" rx="4" ry="4" width="700" height="20" />
+              </ContentLoader>
+            )
+          }
+          
+        </div>
+        :
+        <p className='text-gray-primary text-center p-3.5'>Connect wallet first.</p>
       }
-      
-    </div>
+    </>
+    
   )
 }
 

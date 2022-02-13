@@ -81,7 +81,7 @@ const Third: React.FC<Props> = ({dataSendThird, dataGiveThird}) => {
       <div className='p-4 pt-2'>
         <div className='flex justify-between items-center'>
           <p className='text-body-sp md:text-body-pc font-medium text-pink-secondary'>Total cost</p>
-          <p className='text-h3-sp md:text-h3-pc font-bold text-pink-secondary'>~ {dataSendThird.data.price.toFixed(8)} MILLI</p>
+          <p className='text-h3-sp md:text-h3-pc font-bold text-pink-secondary'>~ {dataSendThird.data.price.toFixed(2)} MILLI</p>
         </div>
         <div className={`${classes.listTickets}`}>
           { 

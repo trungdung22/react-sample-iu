@@ -84,6 +84,7 @@ const All: React.FC<Props> = ({ dataSendToAll, dataGiveAll }) => {
   // }
 
   useEffect(() => {
+    console.log(`${HOST_NAME}`);
     
     fetch(`${HOST_NAME}/api/game-history-all`, {
       headers : { 

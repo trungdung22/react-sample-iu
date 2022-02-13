@@ -79,13 +79,13 @@ const ViewTicket: React.FC<Props> = ({ dataSendViewTicket, dataGiveViewTicket })
     <>
       <div className='p-4 pt-2'>
         <ul className='mb-2'>
-          <li className={`cursor-pointer transition-all text-h3-sp md:text-h3-pc font-semibold rounded-5 w-115 md:w-32 inline-flex justify-center text-gray-primary items-center h-32px mr-4 ${activeLabel === 'lottery' ? 'bg-pink-primary' : 'hover:bg-gray-boxline hover:text-gray-body'}`}
+          <li className={`cursor-pointer transition-all text-button-sp md:text-button-pc font-semibold rounded-5 w-115 md:w-32 inline-flex justify-center text-gray-primary items-center h-32px mr-4 ${activeLabel === 'lottery' ? 'bg-pink-primary' : 'hover:bg-gray-boxline hover:text-gray-body'}`}
             onClick={() => {
               setDataRender(tickets);
               setActiveLabel('lottery');
             }}
           >Lottery tickets</li>
-          <li className={`cursor-pointer transition-all text-h3-sp md:text-h3-pc font-semibold rounded-5 w-90 md:w-100 inline-flex justify-center text-gray-primary items-center h-32px ${activeLabel === 'nft' ? 'bg-pink-primary' : 'hover:bg-gray-boxline hover:text-gray-body'}`}
+          <li className={`cursor-pointer transition-all text-button-sp md:text-button-pc font-semibold rounded-5 w-90 md:w-100 inline-flex justify-center text-gray-primary items-center h-32px ${activeLabel === 'nft' ? 'bg-pink-primary' : 'hover:bg-gray-boxline hover:text-gray-body'}`}
             onClick={() => {
               setDataRender(nftTickets);
               setActiveLabel('nft');

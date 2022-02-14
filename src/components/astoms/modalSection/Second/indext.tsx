@@ -111,7 +111,7 @@ const Second: React.FC<Props> = ({dataGiveSecond, dataSendSecond, playerData}) =
             </p>
           </div>
         </div>
-        <p className='text-bodybox-sp md:text-bodybox-pc font-semibold text-right mt-1.5 mb-1.5'>MILLI Balance: {playerData.balanceSOL.toFixed(2)}</p>
+        <p className='text-bodybox-sp md:text-bodybox-pc font-semibold text-right mt-1.5 mb-1.5'>MILLI Balance: {Number(playerData.balanceSOL).toFixed(2)}</p>
         <div className='flex justify-between items-center mb-2'>
           <p className="text-body-sp md:text-body-pc font-semibold text-gray-primary">You pay</p>
           <p className="text-h3-sp md:text-h3-pc font-bold text-pink-secondary">~ {data.data.price === 0 ? 0 : data.data.price.toFixed(2)} MILLI</p>

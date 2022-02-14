@@ -261,7 +261,7 @@ const Header: React.FC<Props> = ({playerData, dataGiveFromHeader}) => {
                       </span>
                     }
                   </li>
-                  <li className={`py-1 px-8 text-body-pc flex items-center transition-all relative ${playerData.is_connect ? window.sessionStorage.getItem('adapter_type') === 'slope' ? '' : 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:bg-gray-boxline'}`}
+                  <li className={`py-1 px-8 text-body-pc flex items-center transition-all relative ${playerData.is_connect ? window.sessionStorage.getItem('adapter_type') === 'coin98' ? '' : 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:bg-gray-boxline'}`}
                     onClick={connectCoin98}
                   >
                     <span className='w-4 h-4 inline-block mr-3'>

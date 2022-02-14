@@ -84,9 +84,8 @@ const All: React.FC<Props> = ({ dataSendToAll, dataGiveAll }) => {
   // }
 
   useEffect(() => {
-    console.log(`${HOST_NAME}`);
     
-    fetch(`${HOST_NAME}/api/game-history-all`, {
+    fetch(`${HOST_NAME}/api/game-history-all/`, {
       headers : { 
         'Content-Type': 'application/json',
         'Accept': 'application/json'
@@ -171,7 +170,7 @@ const All: React.FC<Props> = ({ dataSendToAll, dataGiveAll }) => {
                 <div className='md:flex justify-between md:items-end mb-4'>
                   <p className='text-gray-primary text-h3-sp md:text-h3-pc font-bold mb-2 md:mb-0'>Prize pot</p>
                   <div className='flex justify-between md:w-3/5'>
-                    <p className='text-28 md:text-h1-pc font-bungee text-blue-primary leading-none'>{`~$${numberWithCommas(data['info'][data.id]['total_pool_usdt'])}`}</p>
+                    <p className='text-28 md:text-h1-pc font-bungee text-blue-primary leading-none'>~${Number(data['info'][data.id]['total_pool_usdt']).toFixed(2)}</p>
                     <p className='text-h2-pc font-bungee text-blue-primary relative top-0.5'>{Math.round(data['info'][data.id]['total_pool_sol'])} MILLI</p>
                   </div>
                 </div>
@@ -180,34 +179,34 @@ const All: React.FC<Props> = ({ dataSendToAll, dataGiveAll }) => {
                   <li className='text-center w-1/3 md:w-auto mb-4 md:mb-0'>
                     <p className='w-fit md:w-auto'>
                       <span className='text-gray-primary text-h3-sp md:text-h3-pc font-bold'>Match 3</span>
-                      <span className='text-h3-sp md:text-h3-pc font-bold text-blue-primary block leading-none md:mt-1.5 md:mb-0.5'>{data['info'][data.id]['total_pool_sol']/100*8} MILLI</span>
+                      <span className='text-h3-sp md:text-h3-pc font-bold text-blue-primary block leading-none md:mt-1.5 md:mb-0.5'>{(data['info'][data.id]['total_pool_sol']/100*8).toFixed(2)} MILLI</span>
                       <span className='text-gray-primary text-bodybox-sp md:text-bodybox-pc'>{data['info'][data.id]['match_pool3_count']} Winners</span>
                     </p>
                   </li>
                   <li className='text-center w-1/3 md:w-auto mb-4 md:mb-0'>
                     <p className='w-fit md:w-auto mx-auto md:mx-0'>
                       <span className='text-gray-primary text-h3-sp md:text-h3-pc font-bold'>Match 4</span>
-                      <span className='text-h3-sp md:text-h3-pc font-bold text-blue-primary block leading-none md:mt-1.5 md:mb-0.5'>{data['info'][data.id]['total_pool_sol']/100*12} MILLI</span>
+                      <span className='text-h3-sp md:text-h3-pc font-bold text-blue-primary block leading-none md:mt-1.5 md:mb-0.5'>{(data['info'][data.id]['total_pool_sol']/100*12).toFixed(2)} MILLI</span>
                       <span className='text-gray-primary text-bodybox-sp md:text-bodybox-pc'>{data['info'][data.id]['match_pool4_count']} Winners</span>
                     </p>
                   </li>
                   <li className='text-center w-1/3 md:w-auto mb-4 md:mb-0'>
                     <p className='w-fit md:w-auto ml-auto md:ml-0'>
                       <span className='text-gray-primary text-h3-sp md:text-h3-pc font-bold'>Match 5</span>
-                      <span className='text-h3-sp md:text-h3-pc font-bold text-blue-primary block leading-none md:mt-1.5 md:mb-0.5'>{data['info'][data.id]['total_pool_sol']/100*16} MILLI</span>
+                      <span className='text-h3-sp md:text-h3-pc font-bold text-blue-primary block leading-none md:mt-1.5 md:mb-0.5'>{(data['info'][data.id]['total_pool_sol']/100*16).toFixed(2)} MILLI</span>
                       <span className='text-gray-primary text-bodybox-sp md:text-bodybox-pc'>{data['info'][data.id]['match_pool5_count']} Winners</span>
                     </p>
                   </li>
                   <li className='text-center w-1/3 md:w-auto'>
                     <p className='w-fit md:w-auto'>
                       <span className='text-gray-primary text-h3-sp md:text-h3-pc font-bold'>Match 6</span>
-                      <span className='text-h3-sp md:text-h3-pc font-bold text-blue-primary block leading-none md:mt-1.5 md:mb-0.5'>{data['info'][data.id]['total_pool_sol']/100*40} MILLI</span>
+                      <span className='text-h3-sp md:text-h3-pc font-bold text-blue-primary block leading-none md:mt-1.5 md:mb-0.5'>{(data['info'][data.id]['total_pool_sol']/100*40).toFixed(2)} MILLI</span>
                       <span className='text-gray-primary text-bodybox-sp md:text-bodybox-pc'>{data['info'][data.id]['match_pool6_count']} Winners</span>
                     </p>
                   </li>
                   <li className='text-center w-1/3 md:w-auto'>
                     <span className='text-gray-primary text-h3-sp md:text-h3-pc font-bold'>Burn</span>
-                    <span className='text-h3-sp md:text-h3-pc font-bold text-blue-primary block leading-none md:mt-1.5 md:mb-0.5'>{data['info'][data.id]['total_pool_sol']/100*24} MILLI</span>
+                    <span className='text-h3-sp md:text-h3-pc font-bold text-blue-primary block leading-none md:mt-1.5 md:mb-0.5'>{(data['info'][data.id]['total_pool_sol']/100*24).toFixed(2)} MILLI</span>
                     <span className='text-gray-primary text-bodybox-sp md:text-bodybox-pc'><br/></span>
                   </li>
                   <li className='w-1/3 flex items-center justify-end md:hidden'>

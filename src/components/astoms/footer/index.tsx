@@ -75,8 +75,8 @@ const Footer: React.FC = () => {
                 <ul>
                   <li className='mb-2.5 md:mb-3.5'><a href="https://twitter.com/MILLIONSYio" className='transition-all hover:opacity-70' target={`_blank`}>Twitter</a></li>
                   <li className='mb-2.5 md:mb-3.5'><a href="https://t.me/MILLIONSYio" className='transition-all hover:opacity-70' target={`_blank`}>Telegram</a></li>
-                  <li className='mb-2.5 md:mb-3.5'><a href="https://t.me/MILLIONSYchannel" className='transition-all hover:opacity-70' target={`_blank`}>Medium</a></li>
-                  <li><a href="http://millionsyio.medium.com" className='transition-all hover:opacity-70' target={`_blank`}>Telegram Channel</a></li>
+                  <li className='mb-2.5 md:mb-3.5'><a href="http://millionsyio.medium.com" className='transition-all hover:opacity-70' target={`_blank`}>Medium</a></li>
+                  <li><a href="https://t.me/MILLIONSYchannel" className='transition-all hover:opacity-70' target={`_blank`}>Telegram Channel</a></li>
                 </ul>
               </div>
               <div className='col-span-1'>

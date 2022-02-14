@@ -87,18 +87,18 @@ const Yours: React.FC<Props> = ({playerData, dataGiveFromYours}) => {
   return (
     <>
       {
-        playerData.is_connect ? 
+        playerData.is_connect ?
         <div className='p-3.5 md:px-8 md:py-4'>
           {
             data.items.length > 0 ? (
+              stateItem > 0 ? 
               <div className=''>
                 <ul className='flex items-center'>
                   <li className='text-14 md:text-16 text-pink-secondary font-bold uppercase leading-none md:leading-normal w-12 md:w-14 mr-4 sm:mr-12 md:mr-16'>Round</li>
                   <li className='text-14 md:text-16 text-pink-secondary font-bold uppercase leading-none md:leading-normal w-28 md:w-52 mr-8 md:mr-16'>Date</li>
                   <li className='text-14 md:text-16 text-pink-secondary font-bold uppercase leading-none md:leading-normal text-center md:text-left'>Your<br className='block md:hidden'/> tickets</li>
                 </ul>
-                {
-                  stateItem > 0 ? 
+                
                   <ul className='h-64 md:h-72 overflow-y-auto overflow-x-hidden'>
                     <InfiniteScroll
                       throttle={100}
@@ -110,10 +110,8 @@ const Yours: React.FC<Props> = ({playerData, dataGiveFromYours}) => {
                       {data.items.map(item => (handleRenderRoundItems(item)))}
                     </InfiniteScroll>
                   </ul>
-                  : <p className='text-gray-primary text-center p-3.5'>You have no recorded history.</p>
-                }
-                
               </div>
+              : <p className='text-gray-primary text-center'>You have no recorded history.</p>
             ) : (
               <ContentLoader
                 viewBox="0 0 700 312"
@@ -133,7 +131,6 @@ const Yours: React.FC<Props> = ({playerData, dataGiveFromYours}) => {
               </ContentLoader>
             )
           }
-          
         </div>
         :
         <p className='text-gray-primary text-center p-3.5'>Connect wallet first.</p>

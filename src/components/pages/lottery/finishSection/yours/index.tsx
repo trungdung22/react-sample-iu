@@ -58,7 +58,7 @@ const Yours: React.FC<Props> = ({playerData, dataGiveFromYours}) => {
   
 
   const handleRenderRoundItems = (el: any) => {
-    // if (el.player_tickets.length > 0) {
+    if (el.player_tickets.length > 0) {
       const date = new Date(el.updatedAt);
       const formatTime = (time: number) => {
         return time < 10 ?  '0' + time : time;
@@ -80,7 +80,7 @@ const Yours: React.FC<Props> = ({playerData, dataGiveFromYours}) => {
           </p>
         </li>
       )
-    // }
+    }
   }
   
   return (
@@ -90,7 +90,7 @@ const Yours: React.FC<Props> = ({playerData, dataGiveFromYours}) => {
         <div className='p-3.5 md:px-8 md:py-4'>
           {
             data.items.length > 0 ? (
-              // stateItem > 0 ? 
+              stateItem > 0 ? 
               <div className=''>
                 <ul className='flex items-center'>
                   <li className='text-14 md:text-16 text-pink-secondary font-bold uppercase leading-none md:leading-normal w-12 md:w-14 mr-4 sm:mr-12 md:mr-16'>Round</li>
@@ -110,7 +110,7 @@ const Yours: React.FC<Props> = ({playerData, dataGiveFromYours}) => {
                     </InfiniteScroll>
                   </ul>
               </div>
-              // : <p className='text-gray-primary text-center'>You have no recorded history.</p>
+              : <p className='text-gray-primary text-center'>You have no recorded history.</p>
             ) : (
               <ContentLoader
                 viewBox="0 0 700 312"

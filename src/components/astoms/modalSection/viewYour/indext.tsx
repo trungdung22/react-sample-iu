@@ -1,7 +1,8 @@
 import IconNFTS from 'components/astoms/icons/nfts';
 import IconStar from 'components/astoms/icons/star';
 import IconTicket from 'components/astoms/icons/ticket';
-import React, { useState } from 'react';
+import { HOST_NAME } from 'data/constants';
+import React, { useEffect, useState } from 'react';
 import useStyles from './styles';
 type Props = {
   dataSendViewYour: any,
@@ -22,24 +23,33 @@ const ViewYour: React.FC<Props> = ({dataSendViewYour}) => {
     return result;
   }
 
+  const [tickets, setTickets] = useState(dataSendViewYour.next_round.your_ticket)
+
+  const [nftTickets, setNftTickets] = useState([])
+
   const [activeLabel, setActiveLabel] = useState('lottery');
 
-  const ticketsLottery = [
-    [1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1],
-  ];
+  useEffect(() => {
+    if (!dataSendViewYour.is_connect)
+      return;
 
-  const ticketsNFT = [
-    // [2, 2, 2],
-    // [2, 2, 2, 2],
-    // [2, 2, 2, 2, 2],
-    // [2, 2, 2, 2, 2, 2],
-  ];
+    const userPubkey = window.sessionStorage.getItem('publicKey');
+    fetch(`${HOST_NAME}/api/nft-ticket?isSole=true&user_pubkey=${userPubkey}`)
+      .then(async res => {
+        let data = await res.json();
+        if (!res.ok) {
+          const error = (data && data.message) || res.statusText;
+          return Promise.reject(error);
+        }
+        let nfts = data.items.map(el => el.roll_nums);
+        setNftTickets(nfts)
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }, [])
 
-  const [dataRender, setDataRender] = useState(ticketsLottery);
-  
+  const [dataRender, setDataRender] = useState(tickets);
   const handleRenderTicket = (data: any) => {
     if (data.length > 0 && window.sessionStorage.getItem('data_connect') === 'true') {
       return(
@@ -86,13 +96,13 @@ const ViewYour: React.FC<Props> = ({dataSendViewYour}) => {
         <ul>
           <li className={`cursor-pointer transition-all text-button-sp md:text-button-pc font-semibold rounded-5 w-115 md:w-32 inline-flex justify-center text-gray-primary items-center h-32px mr-4 ${activeLabel === 'lottery' ? 'bg-pink-primary' : 'hover:bg-gray-boxline hover:text-gray-body'}`}
             onClick={() => {
-              setDataRender(ticketsLottery);
+              setDataRender(tickets);
               setActiveLabel('lottery');
             }}
           >Lottery tickets</li>
           <li className={`cursor-pointer transition-all text-button-sp md:text-button-pc font-semibold rounded-5 w-90 md:w-100 inline-flex justify-center text-gray-primary items-center h-32px ${activeLabel === 'nft' ? 'bg-pink-primary' : 'hover:bg-gray-boxline hover:text-gray-body'}`}
             onClick={() => {
-              setDataRender(ticketsNFT);
+              setDataRender(nftTickets);
               setActiveLabel('nft');
             }}
           >NFT tickets</li>

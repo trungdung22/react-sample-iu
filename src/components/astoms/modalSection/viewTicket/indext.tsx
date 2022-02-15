@@ -4,8 +4,9 @@ import useStyles from './styles';
 type Props = {
   dataSendViewTicket: any,
   dataGiveViewTicket: (getDataViewTicket: boolean) => void,
+  playerData: any
 }
-const ViewTicket: React.FC<Props> = ({ dataSendViewTicket, dataGiveViewTicket }) => {
+const ViewTicket: React.FC<Props> = ({ dataSendViewTicket, dataGiveViewTicket, playerData }) => {
   const classes = useStyles();
   const [showTooltipConnect, setShowTooltipConnect] = useState(false);
   const [tickets, setTickets] = useState(dataSendViewTicket.next_round.your_ticket)
@@ -29,8 +30,11 @@ const ViewTicket: React.FC<Props> = ({ dataSendViewTicket, dataGiveViewTicket })
   const [activeLabel, setActiveLabel] = useState('lottery');
 
   useEffect(() => {
-    if (!dataSendViewTicket.is_connect)
+    console.log(playerData);
+    
+    if (!playerData.is_connect) {
       return;
+    }
 
     const userPubkey = window.sessionStorage.getItem('publicKey');
     fetch(`${HOST_NAME}/api/nft-ticket?isSole=true&user_pubkey=${userPubkey}`)

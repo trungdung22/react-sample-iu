@@ -69,7 +69,7 @@ const ViewYour: React.FC<Props> = ({dataSendViewYour}) => {
   return (
     <>
       <div className='px-3 py-4'>
-        <p className='text-h3-sp md:text-h3-pc font-semibold'>Winning Number</p>
+        <p className='text-button-sp md:text-button-pc font-semibold'>Winning Number</p>
         <ul className='flex justify-between my-3'>
           { 
             dataSendViewYour.your_ticket.roll_nums.map((el: number, index: number) => (
@@ -79,29 +79,24 @@ const ViewYour: React.FC<Props> = ({dataSendViewYour}) => {
             ))
           }
         </ul>
-        <p className='text-h3-sp md:text-h3-pc font-semibold'>Your tickets</p>
-        <ul className='grid grid-cols-2 gap-4 mt-1'>
-          <li className={`col-span-1 px-2 pt-1.5 pb-1 rounded-5 cursor-pointer ${activeLabel === 'nft' ? 'bg-gray-boxline' : 'bg-gray-lightbox hover:bg-gray-boxline'}`}
-            onClick={() => {
-              setDataRender(ticketsNFT);
-              setActiveLabel('nft');
-            }}
-          >
-            <span className='text-bodybox-sp md:text-bodybox-pc block text-gray-EBEBEB leading-none md:mb-0.5'>NFT Tickets</span>
-            <span className='text-h3-pc md:text-18 font-bold text-pink-secondary leading-none'>{ticketsNFT.length}</span>
-          </li>  
-          <li className={`col-span-1 px-2 pt-1.5 pb-1 rounded-5 cursor-pointer ${activeLabel === 'lottery' ? 'bg-gray-boxline' : 'bg-gray-lightbox hover:bg-gray-boxline'}`}
+        <p className='text-button-sp md:text-button-pc font-semibold'>Your tickets</p>
+        
+      </div>
+      <div className='p-4 bg-gray-lightbox'>
+        <ul>
+          <li className={`cursor-pointer transition-all text-button-sp md:text-button-pc font-semibold rounded-5 w-115 md:w-32 inline-flex justify-center text-gray-primary items-center h-32px mr-4 ${activeLabel === 'lottery' ? 'bg-pink-primary' : 'hover:bg-gray-boxline hover:text-gray-body'}`}
             onClick={() => {
               setDataRender(ticketsLottery);
               setActiveLabel('lottery');
             }}
-          >
-            <span className='text-bodybox-sp md:text-bodybox-pc block text-gray-EBEBEB leading-none md:mb-0.5'>Lottery Tickets</span>
-            <span className='text-h3-pc md:text-18 font-bold text-pink-secondary leading-none'>{ticketsLottery.length}</span>
-          </li>
+          >Lottery tickets</li>
+          <li className={`cursor-pointer transition-all text-button-sp md:text-button-pc font-semibold rounded-5 w-90 md:w-100 inline-flex justify-center text-gray-primary items-center h-32px ${activeLabel === 'nft' ? 'bg-pink-primary' : 'hover:bg-gray-boxline hover:text-gray-body'}`}
+            onClick={() => {
+              setDataRender(ticketsNFT);
+              setActiveLabel('nft');
+            }}
+          >NFT tickets</li>
         </ul>
-      </div>
-      <div className='p-4 bg-gray-lightbox'>
         <div className={`${classes.listTickets}`} data-tickes='nft'>
           {handleRenderTicket(dataRender)}
         </div>

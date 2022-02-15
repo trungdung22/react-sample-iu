@@ -3,7 +3,7 @@ import useStyles from './styles';
 import { dataTest } from 'data/db';
 import {prettyPrintTime, numberWithCommas} from '../../../../../lib/utilities/format'
 type Props = {
-    dataSendToDetail: any,
+  dataSendToDetail: any,
   dataGiveDetail: (getDataDetail: any) => void
 }
 const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
@@ -12,6 +12,7 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
     id: 0,
     info: []
   });
+  
   const classes = useStyles();
   const monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   const formatTime = (time: number) => {
@@ -44,7 +45,7 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
           <span className='text-h3-sp md:text-h3-pc font-bold text-pink-F4E0FF p-2 md:px-8 text-center bg-pink-primary rounded-5 inline-block'>{`#${dataSendToDetail.game_no}`}</span>
           {`${monthName[new Date(dataSendToDetail.updatedAt).getMonth()]} 
           ${new Date(dataSendToDetail.updatedAt).getDate()}, 
-          ${new Date(dataSendToDetail.updatedAt).getFullYear()}, 2:00 PM UTC`}
+          ${new Date(dataSendToDetail.updatedAt).getFullYear()}, 2:00 AM UTC`}
         </p>
       </div>
       <div className=''>
@@ -78,7 +79,7 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
             <div className='md:flex justify-between md:items-end mb-4'>
               <p className='text-gray-primary text-h3-sp md:text-h3-pc font-bold mb-2 md:mb-0'>Prize pot</p>
               <div className='flex justify-between md:w-3/5'>
-                <p className='text-28 md:text-h1-pc font-bungee text-blue-primary leading-none'>~${Number(dataSendToDetail.total_pool_usdt).toFixed(2)}</p>
+                <p className='text-28 md:text-h1-pc font-bungee text-blue-primary leading-none'>~${Math.round(dataSendToDetail.total_pool_sol)}</p>
                 <p className='text-h2-pc font-bungee text-blue-primary relative top-0.5'>{Math.round(dataSendToDetail.total_pool_sol)} MILLI</p>
               </div>
             </div>
@@ -87,34 +88,34 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
               <li className='text-center w-1/3 md:w-auto mb-4 md:mb-0'>
                 <p className='w-fit md:w-auto'>
                   <span className='text-gray-primary text-h3-sp md:text-h3-pc font-bold'>Match 3</span>
-                  <span className='text-h3-sp md:text-h3-pc font-bold text-blue-primary block leading-none md:mt-1.5 md:mb-0.5'>{(dataSendToDetail.total_pool_sol/100*8).toFixed(2)} MILLI</span>
+                  <span className='text-h3-sp md:text-h3-pc font-bold text-blue-primary block leading-none md:mt-1.5 md:mb-0.5'>{Math.round(dataSendToDetail.total_pool_sol/100*8)} MILLI</span>
                   <span className='text-gray-primary text-bodybox-sp md:text-bodybox-pc'>{dataSendToDetail.match_pool3_count} Winners</span>
                 </p>
               </li>
               <li className='text-center w-1/3 md:w-auto mb-4 md:mb-0'>
                 <p className='w-fit md:w-auto mx-auto md:mx-0'>
                   <span className='text-gray-primary text-h3-sp md:text-h3-pc font-bold'>Match 4</span>
-                  <span className='text-h3-sp md:text-h3-pc font-bold text-blue-primary block leading-none md:mt-1.5 md:mb-0.5'>{(dataSendToDetail.total_pool_sol/100*12).toFixed(2)} MILLI</span>
+                  <span className='text-h3-sp md:text-h3-pc font-bold text-blue-primary block leading-none md:mt-1.5 md:mb-0.5'>{Math.round(dataSendToDetail.total_pool_sol/100*12)} MILLI</span>
                   <span className='text-gray-primary text-bodybox-sp md:text-bodybox-pc'>{dataSendToDetail.match_pool4_count} Winners</span>
                 </p>
               </li>
               <li className='text-center w-1/3 md:w-auto mb-4 md:mb-0'>
                 <p className='w-fit md:w-auto ml-auto md:ml-0'>
                   <span className='text-gray-primary text-h3-sp md:text-h3-pc font-bold'>Match 5</span>
-                  <span className='text-h3-sp md:text-h3-pc font-bold text-blue-primary block leading-none md:mt-1.5 md:mb-0.5'>{(dataSendToDetail.total_pool_sol/100*16).toFixed(2)} MILLI</span>
+                  <span className='text-h3-sp md:text-h3-pc font-bold text-blue-primary block leading-none md:mt-1.5 md:mb-0.5'>{Math.round(dataSendToDetail.total_pool_sol/100*16)} MILLI</span>
                   <span className='text-gray-primary text-bodybox-sp md:text-bodybox-pc'>{dataSendToDetail.match_pool5_count} Winners</span>
                 </p>
               </li>
               <li className='text-center w-1/3 md:w-auto'>
                 <p className='w-fit md:w-auto'>
                   <span className='text-gray-primary text-h3-sp md:text-h3-pc font-bold'>Match 6</span>
-                  <span className='text-h3-sp md:text-h3-pc font-bold text-blue-primary block leading-none md:mt-1.5 md:mb-0.5'>{(dataSendToDetail.total_pool_sol/100*40).toFixed(2)} MILLI</span>
+                  <span className='text-h3-sp md:text-h3-pc font-bold text-blue-primary block leading-none md:mt-1.5 md:mb-0.5'>{Math.round(dataSendToDetail.total_pool_sol/100*40)} MILLI</span>
                   <span className='text-gray-primary text-bodybox-sp md:text-bodybox-pc'>{dataSendToDetail.match_pool6_count} Winners</span>
                 </p>
               </li>
               <li className='text-center w-1/3 md:w-auto'>
                 <span className='text-gray-primary text-h3-sp md:text-h3-pc font-bold'>Burn</span>
-                <span className='text-h3-sp md:text-h3-pc font-bold text-blue-primary block leading-none md:mt-1.5 md:mb-0.5'>{(dataSendToDetail.total_pool_sol/100*24).toFixed(2)} MILLI</span>
+                <span className='text-h3-sp md:text-h3-pc font-bold text-blue-primary block leading-none md:mt-1.5 md:mb-0.5'>{Math.round(dataSendToDetail.total_pool_sol/100*24)} MILLI</span>
                 <span className='text-gray-primary text-bodybox-sp md:text-bodybox-pc'><br/></span>
               </li>
               <li className='w-1/3 flex items-center justify-end md:hidden'>

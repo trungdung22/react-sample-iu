@@ -18,7 +18,7 @@ const GetSection: React.FC = () => {
             </li>
             <li className='col-span-1 px-1 md:px-4 py-2 md:py-0'>
               <h6 className='text-h3-sp md:text-h3-pc text-pink-secondary font-bold md:mb-0.5'>Wait for the party</h6>
-              <p>There is 1 draw every day, ends at 2PM UTC and starts 35 minutes after that. The prize is automatically sent to the winner's wallet.</p>
+              <p>There is 1 draw every day, ends at 2AM UTC and starts 35 minutes after that. The prize is automatically sent to the winner's wallet.</p>
             </li>
           </ul>
           <h5 className='text-h3-sp md:text-h3-pc text-pink-secondary font-bold pl-4 mb-4'>Lottery Winning Conditions</h5>

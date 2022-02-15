@@ -33,6 +33,8 @@ const NFT: React.FC = () => {
   const [isHadread, setIsHadread] = useState(false);
   const [isBuyingNFT, setIsBuyingNFT] = useState(false);
   const [isConfirmTransfer, setIsConfirmTransfer] = useState(false);
+  const [isFirstClick, setIsFirstClick] = useState(true);
+  const [isFirstTicks, setIsFirstTicks] = useState(true);
   const [tab, setTab] = useState(null);
   const [valueInputSearch, setValueInputSearch] = React.useState('');
   const [valueInputAddress, setValueInputAddress] = React.useState('');
@@ -48,7 +50,7 @@ const NFT: React.FC = () => {
   const [queryParam, setQueryParam] = useState({
     isSole: false,
     page: 1,
-    perPage: 9
+    perPage: 18
   });
   const [programInfo, setProgramInfo] = useState({
     programId: '',
@@ -72,7 +74,7 @@ const NFT: React.FC = () => {
     filter = {
       isSole: false,
       page: 1,
-      perPage: 10
+      perPage: 18
     }
     if (valueInputSearch) {
       let filterRollNums = [];
@@ -348,7 +350,11 @@ const NFT: React.FC = () => {
   }, [])
 
   const handleResetDataPopupTicket = () => {
+    setValueInputAddress('');
+    setIsConfirmTransfer(false);
     setIsShowPopupDesktop(false);
+    setIsFirstClick(true);
+    setIsFirstTicks(true);
   }
 
   window.addEventListener('resize', function () {
@@ -380,8 +386,10 @@ const NFT: React.FC = () => {
   }
 
   const handleTransferNFT = () => {
-    if(isConfirmTransfer && valueInputAddress) {
-      console.log('true');
+    setIsFirstClick(false);
+    setIsFirstTicks(false);
+    if(isConfirmTransfer && valueInputAddress.length === 44) {
+      setIsBuyingNFT(true);
       transferNFTOwnerShip(programInfo.programId,
         selectedTicketData.milli_nft_pubkey,
         selectedTicketData.token_account_pubkey,
@@ -551,6 +559,10 @@ const NFT: React.FC = () => {
                   <p className='cursor-pointer inline-block absolute top-2 left-2'
                     onClick={() => {
                       setSwipeableViewsIndex(0);
+                      setValueInputAddress('');
+                      setIsConfirmTransfer(false);
+                      setIsFirstClick(true);
+                      setIsFirstTicks(true);
                     }}
                   >
                     <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -620,8 +632,9 @@ const NFT: React.FC = () => {
                             value={valueInputAddress}
                             onChange={(e) => {
                               setValueInputAddress(e.currentTarget.value);
+                              setIsFirstClick(false);
                             }}
-                            className={`${classes.placeholder} bg-transparent font-light outline-none h-32px md:h-34px leading-normal w-full border border-solid rounded-3 ${valueInputAddress !== '' ? 'border-pink-primary pl-2' : 'border-gray-boxline pl-7 lg:pr-4'}`}
+                            className={`${classes.placeholder} bg-transparent font-light outline-none h-32px md:h-34px leading-normal w-full border border-solid rounded-3 ${valueInputAddress !== ''  ? 'pl-2' : 'pl-7 lg:pr-4'} ${isFirstClick ? 'border-gray-boxline' : valueInputAddress.length !== 44  ? 'border-pink-primary' : 'border-blue-secondary pl-2'}`}
                           />
                         </p>
                         {
@@ -654,16 +667,15 @@ const NFT: React.FC = () => {
                       </div>
                       <div className='flex items-center w-fit cursor-pointer mb-2'
                         onClick={() => {
+                          setIsFirstTicks(false);
                           setIsConfirmTransfer(!isConfirmTransfer);
                         }}
                       >
                         <span className={`w-3.5 h-3.5 border border-solid  inline-block rounded-3 relative
                           ${
-                            isConfirmTransfer 
-                            ?
-                            valueInputAddress !== '' ? 'border-blue-secondary bg-blue-secondary' : 'border-pink-primary bg-pink-primary' 
-                            :
-                            valueInputAddress !== '' ? 'border-blue-secondary' : 'border-pink-primary'
+                            isFirstTicks
+                            ? 'border-blue-secondary' 
+                            : isConfirmTransfer ? 'bg-blue-secondary' : 'border-pink-primary'
                           }
                         `}>
                           {
@@ -673,26 +685,53 @@ const NFT: React.FC = () => {
                             </svg>
                           }
                         </span>
-                        <p className={`ml-1 font-semibold text-button-sp md:text-button-pc ${isConfirmTransfer && valueInputAddress !== '' ? 'text-blue-secondary' : 'text-pink-primary' }`}>This action can not be undone</p>
+                        <p className={`ml-1 font-semibold text-button-sp md:text-button-pc 
+                          ${
+                            isFirstTicks || isConfirmTransfer ? 'text-blue-secondary' : 'text-pink-primary'
+                          }
+                        `}>This action can not be undone</p>
                       </div>
-                      <p className='ml-auto text-gray-box font-semibold bg-blue-primary w-87px md:w-24 h-32px md:h-34px rounded-3 md:rounded-4 flex justify-center items-center transition-all cursor-pointer hover:opacity-70 pt-0.5'
-                        onClick={handleTransferNFT}
-                      >
-                        Transfer
-                        <span className='inline-block ml-1'>
-                          <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_1563_1716)">
-                              <path d="M10.8573 8.81375L10.1197 8.07483L11.3566 9.31175C11.3658 9.32101 11.3747 9.33059 11.3831 9.34047L10.8573 8.81375ZM8.49732 9.26603C9.13238 9.53199 9.81419 9.66831 10.5027 9.667L10.501 9.66701C9.82132 9.67232 9.14742 9.54139 8.51914 9.28194C7.90925 9.03009 7.35435 8.66211 6.88521 8.19865C7.35037 8.65249 7.89725 9.01473 8.49732 9.26603Z" fill="#1A2222" stroke="#1A2222"/>
-                              <path d="M10.5034 4.16618L9.35844 5.31118C9.3487 5.32434 9.33968 5.33803 9.33144 5.35218C9.25076 5.45055 9.21096 5.57617 9.22028 5.70306C9.22961 5.82995 9.28733 5.94841 9.38153 6.03394C9.47573 6.11946 9.59919 6.16552 9.72639 6.16259C9.85358 6.15966 9.97479 6.10796 10.0649 6.01818L10.9179 5.16618L11.7109 4.37368C11.845 4.23856 11.9377 4.06798 11.9782 3.88198C12.0187 3.69598 12.0052 3.5023 11.9394 3.32368C11.8909 3.18695 11.8127 3.06265 11.7104 2.95968L10.0649 1.31618C10.0193 1.26658 9.96409 1.22673 9.90265 1.19901C9.84121 1.1713 9.7748 1.15629 9.70741 1.15489C9.64002 1.1535 9.57304 1.16574 9.5105 1.19089C9.44797 1.21604 9.39116 1.25357 9.3435 1.30123C9.29583 1.34889 9.2583 1.4057 9.23315 1.46824C9.20801 1.53078 9.19576 1.59775 9.19716 1.66514C9.19855 1.73253 9.21356 1.79894 9.24128 1.86039C9.26899 1.92183 9.30885 1.97703 9.35844 2.02268L10.5049 3.16868C8.03844 3.17468 6.68644 4.50568 5.46044 5.90568C4.33444 4.63468 2.99993 3.36618 0.743431 3.18918L0.50293 3.16618C0.370322 3.16618 0.243145 3.21886 0.149377 3.31263C0.0556082 3.40639 0.00292969 3.53357 0.00292969 3.66618C0.00548976 3.79799 0.0589901 3.92368 0.152209 4.0169C0.245428 4.11012 0.371124 4.16362 0.50293 4.16618C0.538931 4.16618 0.646431 4.18268 0.646431 4.18268C2.59443 4.33018 3.71244 5.42718 4.79994 6.66618C3.71894 7.89918 2.60843 9.01618 0.676431 9.14618L0.47643 9.15668C0.344817 9.1649 0.221859 9.22507 0.134608 9.32395C0.0473564 9.42283 0.00295798 9.55231 0.0111797 9.68393C0.0194014 9.81554 0.0795698 9.9385 0.178449 10.0258C0.277327 10.113 0.406817 10.1574 0.538431 10.1492C0.616431 10.1457 0.743431 10.1427 0.805931 10.1377C3.31593 9.94418 4.67744 8.33768 5.89144 6.93318C7.11744 5.51618 8.27544 4.17518 10.5034 4.16618Z" fill="#1A2222"/>
-                            </g>
-                            <defs>
-                              <clipPath id="clip0_1563_1716">
-                                <rect width="12" height="12" fill="white" transform="translate(0 0.666504)"/>
-                              </clipPath>
-                            </defs>
-                          </svg>
-                        </span>
-                      </p>
+                      {
+                        isBuyingNFT
+                        ?
+                        <div className='text-right'>
+                          <p className='text-center col-span-6 font-semibold text-body-sp md:text-body-pc rounded-3 border border-solid border-gray-primary inline-flex justify-center items-center px-2 h-32px md:h-34px text-gray-boxline bg-gray-primary'>
+                            Confirming
+                            <span className='inline-block ml-2'>
+                              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6 8V10.5" stroke="#575757" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M6 1.5V4" stroke="#575757" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M4 6H1.5" stroke="#575757" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M10.5 6H8" stroke="#575757" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M4.58482 4.58507L2.81982 2.82007" stroke="#575757" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M9.18004 9.18004L7.41504 7.41504" stroke="#575757" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M4.58482 7.41504L2.81982 9.18004" stroke="#575757" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M9.18004 2.82007L7.41504 4.58507" stroke="#575757" strokeLinecap="round" strokeLinejoin="round"/>
+                              </svg>
+                            </span>
+                          </p>
+                        </div>
+                        :
+                        <p className='ml-auto text-gray-box font-semibold bg-blue-primary w-87px md:w-24 h-32px md:h-34px rounded-3 md:rounded-4 flex justify-center items-center transition-all cursor-pointer hover:opacity-70 pt-0.5'
+                          onClick={handleTransferNFT}
+                        >
+                          Transfer
+                          <span className='inline-block ml-1'>
+                            <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g clip-path="url(#clip0_1563_1716)">
+                                <path d="M10.8573 8.81375L10.1197 8.07483L11.3566 9.31175C11.3658 9.32101 11.3747 9.33059 11.3831 9.34047L10.8573 8.81375ZM8.49732 9.26603C9.13238 9.53199 9.81419 9.66831 10.5027 9.667L10.501 9.66701C9.82132 9.67232 9.14742 9.54139 8.51914 9.28194C7.90925 9.03009 7.35435 8.66211 6.88521 8.19865C7.35037 8.65249 7.89725 9.01473 8.49732 9.26603Z" fill="#1A2222" stroke="#1A2222"/>
+                                <path d="M10.5034 4.16618L9.35844 5.31118C9.3487 5.32434 9.33968 5.33803 9.33144 5.35218C9.25076 5.45055 9.21096 5.57617 9.22028 5.70306C9.22961 5.82995 9.28733 5.94841 9.38153 6.03394C9.47573 6.11946 9.59919 6.16552 9.72639 6.16259C9.85358 6.15966 9.97479 6.10796 10.0649 6.01818L10.9179 5.16618L11.7109 4.37368C11.845 4.23856 11.9377 4.06798 11.9782 3.88198C12.0187 3.69598 12.0052 3.5023 11.9394 3.32368C11.8909 3.18695 11.8127 3.06265 11.7104 2.95968L10.0649 1.31618C10.0193 1.26658 9.96409 1.22673 9.90265 1.19901C9.84121 1.1713 9.7748 1.15629 9.70741 1.15489C9.64002 1.1535 9.57304 1.16574 9.5105 1.19089C9.44797 1.21604 9.39116 1.25357 9.3435 1.30123C9.29583 1.34889 9.2583 1.4057 9.23315 1.46824C9.20801 1.53078 9.19576 1.59775 9.19716 1.66514C9.19855 1.73253 9.21356 1.79894 9.24128 1.86039C9.26899 1.92183 9.30885 1.97703 9.35844 2.02268L10.5049 3.16868C8.03844 3.17468 6.68644 4.50568 5.46044 5.90568C4.33444 4.63468 2.99993 3.36618 0.743431 3.18918L0.50293 3.16618C0.370322 3.16618 0.243145 3.21886 0.149377 3.31263C0.0556082 3.40639 0.00292969 3.53357 0.00292969 3.66618C0.00548976 3.79799 0.0589901 3.92368 0.152209 4.0169C0.245428 4.11012 0.371124 4.16362 0.50293 4.16618C0.538931 4.16618 0.646431 4.18268 0.646431 4.18268C2.59443 4.33018 3.71244 5.42718 4.79994 6.66618C3.71894 7.89918 2.60843 9.01618 0.676431 9.14618L0.47643 9.15668C0.344817 9.1649 0.221859 9.22507 0.134608 9.32395C0.0473564 9.42283 0.00295798 9.55231 0.0111797 9.68393C0.0194014 9.81554 0.0795698 9.9385 0.178449 10.0258C0.277327 10.113 0.406817 10.1574 0.538431 10.1492C0.616431 10.1457 0.743431 10.1427 0.805931 10.1377C3.31593 9.94418 4.67744 8.33768 5.89144 6.93318C7.11744 5.51618 8.27544 4.17518 10.5034 4.16618Z" fill="#1A2222"/>
+                              </g>
+                              <defs>
+                                <clipPath id="clip0_1563_1716">
+                                  <rect width="12" height="12" fill="white" transform="translate(0 0.666504)"/>
+                                </clipPath>
+                              </defs>
+                            </svg>
+                          </span>
+                        </p>
+                      }
+                      
                     </>
                   }
                 </div>
@@ -776,8 +815,9 @@ const NFT: React.FC = () => {
                         value={valueInputAddress}
                         onChange={(e) => {
                           setValueInputAddress(e.currentTarget.value);
+                          setIsFirstClick(false);
                         }}
-                        className={`${classes.placeholder} bg-transparent font-light outline-none h-32px md:h-34px leading-normal w-full border border-solid rounded-3 ${valueInputAddress !== '' ? 'border-pink-primary pl-2' : 'border-gray-boxline pl-7 lg:pr-4'}`}
+                        className={`${classes.placeholder} bg-transparent font-light outline-none h-32px md:h-34px leading-normal w-full border border-solid rounded-3 ${valueInputAddress !== ''  ? 'pl-2' : 'pl-7 lg:pr-4'} ${isFirstClick ? 'border-gray-boxline' : valueInputAddress.length !== 44  ? 'border-pink-primary' : 'border-blue-secondary pl-2'}`}
                       />
                     </p>
                     {
@@ -810,16 +850,15 @@ const NFT: React.FC = () => {
                   </div>
                   <div className='flex items-center w-fit cursor-pointer mb-2'
                     onClick={() => {
+                      setIsFirstTicks(false);
                       setIsConfirmTransfer(!isConfirmTransfer);
                     }}
                   >
                     <span className={`w-3.5 h-3.5 border border-solid  inline-block rounded-3 relative
                       ${
-                        isConfirmTransfer 
-                        ?
-                        valueInputAddress !== '' ? 'border-blue-secondary bg-blue-secondary' : 'border-pink-primary bg-pink-primary' 
-                        :
-                        valueInputAddress !== '' ? 'border-blue-secondary' : 'border-pink-primary'
+                        isFirstTicks
+                        ? 'border-blue-secondary' 
+                        : isConfirmTransfer ? 'bg-blue-secondary' : 'border-pink-primary'
                       }
                     `}>
                       {
@@ -829,26 +868,54 @@ const NFT: React.FC = () => {
                         </svg>
                       }
                     </span>
-                    <p className={`ml-1 font-semibold text-button-sp md:text-button-pc ${isConfirmTransfer && valueInputAddress !== '' ? 'text-blue-secondary' : 'text-pink-primary' }`}>This action can not be undone</p>
+                    <p className={`ml-1 font-semibold text-button-sp md:text-button-pc
+                      ${
+                        isFirstTicks || isConfirmTransfer ? 'text-blue-secondary' : 'text-pink-primary'
+                      }
+                    `}>This action can not be undone</p>
                   </div>
-                  <p className='ml-auto text-gray-box font-semibold bg-blue-primary w-87px md:w-24 h-32px md:h-34px rounded-3 md:rounded-4 flex justify-center items-center transition-all cursor-pointer hover:opacity-70 pt-0.5'
-                    onClick={handleTransferNFT}
-                  >
-                    Transfer
-                    <span className='inline-block ml-1'>
-                      <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_1563_1716)">
-                          <path d="M10.8573 8.81375L10.1197 8.07483L11.3566 9.31175C11.3658 9.32101 11.3747 9.33059 11.3831 9.34047L10.8573 8.81375ZM8.49732 9.26603C9.13238 9.53199 9.81419 9.66831 10.5027 9.667L10.501 9.66701C9.82132 9.67232 9.14742 9.54139 8.51914 9.28194C7.90925 9.03009 7.35435 8.66211 6.88521 8.19865C7.35037 8.65249 7.89725 9.01473 8.49732 9.26603Z" fill="#1A2222" stroke="#1A2222"/>
-                          <path d="M10.5034 4.16618L9.35844 5.31118C9.3487 5.32434 9.33968 5.33803 9.33144 5.35218C9.25076 5.45055 9.21096 5.57617 9.22028 5.70306C9.22961 5.82995 9.28733 5.94841 9.38153 6.03394C9.47573 6.11946 9.59919 6.16552 9.72639 6.16259C9.85358 6.15966 9.97479 6.10796 10.0649 6.01818L10.9179 5.16618L11.7109 4.37368C11.845 4.23856 11.9377 4.06798 11.9782 3.88198C12.0187 3.69598 12.0052 3.5023 11.9394 3.32368C11.8909 3.18695 11.8127 3.06265 11.7104 2.95968L10.0649 1.31618C10.0193 1.26658 9.96409 1.22673 9.90265 1.19901C9.84121 1.1713 9.7748 1.15629 9.70741 1.15489C9.64002 1.1535 9.57304 1.16574 9.5105 1.19089C9.44797 1.21604 9.39116 1.25357 9.3435 1.30123C9.29583 1.34889 9.2583 1.4057 9.23315 1.46824C9.20801 1.53078 9.19576 1.59775 9.19716 1.66514C9.19855 1.73253 9.21356 1.79894 9.24128 1.86039C9.26899 1.92183 9.30885 1.97703 9.35844 2.02268L10.5049 3.16868C8.03844 3.17468 6.68644 4.50568 5.46044 5.90568C4.33444 4.63468 2.99993 3.36618 0.743431 3.18918L0.50293 3.16618C0.370322 3.16618 0.243145 3.21886 0.149377 3.31263C0.0556082 3.40639 0.00292969 3.53357 0.00292969 3.66618C0.00548976 3.79799 0.0589901 3.92368 0.152209 4.0169C0.245428 4.11012 0.371124 4.16362 0.50293 4.16618C0.538931 4.16618 0.646431 4.18268 0.646431 4.18268C2.59443 4.33018 3.71244 5.42718 4.79994 6.66618C3.71894 7.89918 2.60843 9.01618 0.676431 9.14618L0.47643 9.15668C0.344817 9.1649 0.221859 9.22507 0.134608 9.32395C0.0473564 9.42283 0.00295798 9.55231 0.0111797 9.68393C0.0194014 9.81554 0.0795698 9.9385 0.178449 10.0258C0.277327 10.113 0.406817 10.1574 0.538431 10.1492C0.616431 10.1457 0.743431 10.1427 0.805931 10.1377C3.31593 9.94418 4.67744 8.33768 5.89144 6.93318C7.11744 5.51618 8.27544 4.17518 10.5034 4.16618Z" fill="#1A2222"/>
-                        </g>
-                        <defs>
-                          <clipPath id="clip0_1563_1716">
-                            <rect width="12" height="12" fill="white" transform="translate(0 0.666504)"/>
-                          </clipPath>
-                        </defs>
-                      </svg>
-                    </span>
-                  </p>
+                  
+                  {
+                    isBuyingNFT
+                    ?
+                    <div className='text-right'>
+                      <p className='text-center col-span-6 font-semibold text-body-sp md:text-body-pc rounded-3 border border-solid border-gray-primary inline-flex justify-center items-center px-2 h-32px md:h-34px text-gray-boxline bg-gray-primary'>
+                        Confirming
+                        <span className='inline-block ml-2'>
+                          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 8V10.5" stroke="#575757" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M6 1.5V4" stroke="#575757" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M4 6H1.5" stroke="#575757" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M10.5 6H8" stroke="#575757" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M4.58482 4.58507L2.81982 2.82007" stroke="#575757" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M9.18004 9.18004L7.41504 7.41504" stroke="#575757" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M4.58482 7.41504L2.81982 9.18004" stroke="#575757" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M9.18004 2.82007L7.41504 4.58507" stroke="#575757" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </span>
+                      </p>
+                    </div>
+                    :
+                    <p className='ml-auto text-gray-box font-semibold bg-blue-primary w-87px md:w-24 h-32px md:h-34px rounded-3 md:rounded-4 flex justify-center items-center transition-all cursor-pointer hover:opacity-70 pt-0.5'
+                      onClick={handleTransferNFT}
+                    >
+                      Transfer
+                      <span className='inline-block ml-1'>
+                        <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <g clip-path="url(#clip0_1563_1716)">
+                            <path d="M10.8573 8.81375L10.1197 8.07483L11.3566 9.31175C11.3658 9.32101 11.3747 9.33059 11.3831 9.34047L10.8573 8.81375ZM8.49732 9.26603C9.13238 9.53199 9.81419 9.66831 10.5027 9.667L10.501 9.66701C9.82132 9.67232 9.14742 9.54139 8.51914 9.28194C7.90925 9.03009 7.35435 8.66211 6.88521 8.19865C7.35037 8.65249 7.89725 9.01473 8.49732 9.26603Z" fill="#1A2222" stroke="#1A2222"/>
+                            <path d="M10.5034 4.16618L9.35844 5.31118C9.3487 5.32434 9.33968 5.33803 9.33144 5.35218C9.25076 5.45055 9.21096 5.57617 9.22028 5.70306C9.22961 5.82995 9.28733 5.94841 9.38153 6.03394C9.47573 6.11946 9.59919 6.16552 9.72639 6.16259C9.85358 6.15966 9.97479 6.10796 10.0649 6.01818L10.9179 5.16618L11.7109 4.37368C11.845 4.23856 11.9377 4.06798 11.9782 3.88198C12.0187 3.69598 12.0052 3.5023 11.9394 3.32368C11.8909 3.18695 11.8127 3.06265 11.7104 2.95968L10.0649 1.31618C10.0193 1.26658 9.96409 1.22673 9.90265 1.19901C9.84121 1.1713 9.7748 1.15629 9.70741 1.15489C9.64002 1.1535 9.57304 1.16574 9.5105 1.19089C9.44797 1.21604 9.39116 1.25357 9.3435 1.30123C9.29583 1.34889 9.2583 1.4057 9.23315 1.46824C9.20801 1.53078 9.19576 1.59775 9.19716 1.66514C9.19855 1.73253 9.21356 1.79894 9.24128 1.86039C9.26899 1.92183 9.30885 1.97703 9.35844 2.02268L10.5049 3.16868C8.03844 3.17468 6.68644 4.50568 5.46044 5.90568C4.33444 4.63468 2.99993 3.36618 0.743431 3.18918L0.50293 3.16618C0.370322 3.16618 0.243145 3.21886 0.149377 3.31263C0.0556082 3.40639 0.00292969 3.53357 0.00292969 3.66618C0.00548976 3.79799 0.0589901 3.92368 0.152209 4.0169C0.245428 4.11012 0.371124 4.16362 0.50293 4.16618C0.538931 4.16618 0.646431 4.18268 0.646431 4.18268C2.59443 4.33018 3.71244 5.42718 4.79994 6.66618C3.71894 7.89918 2.60843 9.01618 0.676431 9.14618L0.47643 9.15668C0.344817 9.1649 0.221859 9.22507 0.134608 9.32395C0.0473564 9.42283 0.00295798 9.55231 0.0111797 9.68393C0.0194014 9.81554 0.0795698 9.9385 0.178449 10.0258C0.277327 10.113 0.406817 10.1574 0.538431 10.1492C0.616431 10.1457 0.743431 10.1427 0.805931 10.1377C3.31593 9.94418 4.67744 8.33768 5.89144 6.93318C7.11744 5.51618 8.27544 4.17518 10.5034 4.16618Z" fill="#1A2222"/>
+                          </g>
+                          <defs>
+                            <clipPath id="clip0_1563_1716">
+                              <rect width="12" height="12" fill="white" transform="translate(0 0.666504)"/>
+                            </clipPath>
+                          </defs>
+                        </svg>
+                      </span>
+                    </p>
+                  }
+                  
                 </>
               }
             </div>
@@ -899,6 +966,10 @@ const NFT: React.FC = () => {
         <div className='h-full absolute w-full top-0 left-0 bg-black opacity-50'
           onClick={() => {
             setIsShowPopupResults('');
+            setValueInputAddress('');
+            setIsConfirmTransfer(false);
+            setIsFirstClick(true);
+            setIsFirstTicks(true);
           }}
         ></div>
         {
@@ -908,6 +979,10 @@ const NFT: React.FC = () => {
               <p className='inline-block absolute top-0 right-0 p-2 md:p-4 cursor-pointer transition-all hover:opacity-70 z-1'
                 onClick={() => {
                   setIsShowPopupResults('');
+                  setValueInputAddress('');
+                  setIsConfirmTransfer(false);
+                  setIsFirstClick(true);
+                  setIsFirstTicks(true);
                 }}
               >
                 <span className='w-2 md:w-3 h-2 md:h-3 inline-block'>
@@ -937,6 +1012,10 @@ const NFT: React.FC = () => {
               <p className='inline-block absolute top-0 right-0 p-2 md:p-4 cursor-pointer transition-all hover:opacity-70 z-1'
                 onClick={() => {
                   setIsShowPopupResults('');
+                  setValueInputAddress('');
+                  setIsConfirmTransfer(false);
+                  setIsFirstClick(true);
+                  setIsFirstTicks(true);
                 }}
               >
                 <span className='w-2 md:w-3 h-2 md:h-3 inline-block'>

@@ -93,7 +93,7 @@ const Lottery: React.FC = () => {
           return Promise.reject(error);
         }
         const created_time_response = new Date(response_data.result.created_time);
-        const created_time_response_custom = `${monthName[created_time_response.getMonth()]} ${created_time_response.getDate()}, ${created_time_response.getFullYear()} 21:00:00`;
+        const created_time_response_custom = `${monthName[created_time_response.getMonth()]} ${created_time_response.getDate()}, ${created_time_response.getFullYear()} 09:00:00`;
         const round_no = response_data.result.round_no; 
         const your_tickets = response_data.result.your_tickets;
         const created_time = new Date(created_time_response_custom);

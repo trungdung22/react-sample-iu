@@ -31,7 +31,7 @@ const Jackpots: React.FC = () => {
           </div>
           <p className='bg-gray-lightbox text-right rounded-5 flex justify-between items-center pr-2.5'>
             <span className='text-h3-sp md:text-h3-pc font-bold text-gray-primary p-2 md:px-8 text-center bg-pink-primary rounded-5 inline-block'>#0</span>
-            Otc 26, 2021, 2:00 PM UTC
+            Otc 26, 2021, 2:00 AM UTC
           </p>
         </div>
         <div className='bg-gray-lightbox p-3.5 md:px-8 md:pt-6 md:pb-4'>

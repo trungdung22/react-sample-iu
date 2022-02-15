@@ -116,7 +116,7 @@ const NextSection: React.FC<Props> = ({nextData, playerData, sendDataNextToLotte
                     <span className='text-h3-sp md:text-h3-pc font-semibold text-gray-primary p-2 md:px-8 text-center bg-pink-primary rounded-5 inline-block'>#{nextData.next_id}</span>
                     {`${monthName[nextData.closed_time.getUTCMonth()]} ${nextData.closed_time.getUTCDate()}, 
                       ${nextData.closed_time.getFullYear()}, 
-                      2:00 PM UTC`}
+                      2:00 AM UTC`}
                   </p>
                 </div>
                 <p className='bg-gray-boxline opacity-50 h-px'></p>

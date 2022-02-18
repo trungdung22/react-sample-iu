@@ -170,7 +170,7 @@ const All: React.FC<Props> = ({ dataSendToAll, dataGiveAll }) => {
                 <div className='md:flex justify-between md:items-end mb-4'>
                   <p className='text-gray-primary text-h3-sp md:text-h3-pc font-bold mb-2 md:mb-0'>Prize pot</p>
                   <div className='flex justify-between md:w-3/5'>
-                    <p className='text-28 md:text-h1-pc font-bungee text-blue-primary leading-none'>~${Math.round(data['info'][data.id]['total_pool_sol'])}</p>
+                    <p className='text-28 md:text-h1-pc font-bungee text-blue-primary leading-none'>~${Math.round(data['info'][data.id]['total_pool_usdt'])}</p>
                     <p className='text-h2-pc font-bungee text-blue-primary relative top-0.5'>{Math.round(data['info'][data.id]['total_pool_sol'])} MILLI</p>
                   </div>
                 </div>

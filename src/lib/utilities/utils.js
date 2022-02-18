@@ -55,6 +55,7 @@ export const registerMilipadPlayer = async (playerPubkey, missions, code, userNa
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${window.sessionStorage.token}`
         },
         body: JSON.stringify({
             playerPubkey: playerPubkey,
@@ -64,6 +65,23 @@ export const registerMilipadPlayer = async (playerPubkey, missions, code, userNa
         })
     };
     const response = await fetch(`${HOST_NAME}/api/milli-pads/register`, requestOptions);
+    return response;
+}
+
+export const updateMillipadsUsername = async (playerPubkey, code, userName) => {
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${window.sessionStorage.token}`
+        },
+        body: JSON.stringify({
+            playerPubkey: playerPubkey,
+            code: code,
+            user_name: userName
+        })
+    };
+    const response = await fetch(`${HOST_NAME}/api/milli-pads/update-username`, requestOptions);
     return response;
 }
 

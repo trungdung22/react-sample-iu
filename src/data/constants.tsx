@@ -30,5 +30,7 @@ export const ENV = "mainnet";
 
 // export const ENV = "devnet";
 // export const HOST_NAME = "https://millionsy-exa.herokuapp.com";
+// export const HOST_NAME = "http://localhost";
 export const HOST_NAME = "https://milli-lottery.herokuapp.com";
+// export const HOST_NAME = "https://millionsy.herokuapp.com";
 

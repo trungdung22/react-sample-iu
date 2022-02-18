@@ -2,7 +2,7 @@ import Footer from 'components/astoms/footer';
 import Header from 'components/astoms/header';
 import ModalContent from 'components/astoms/modalSection';
 import React, { useEffect, useState } from 'react';
-import { fetchPlayerAccount, getGameBoardInfo, registerMilipadPlayer, updateJoinWhiteListUser, updateMiliPadPlayer, updateMissionPlayer } from 'lib/utilities/utils';
+import { fetchPlayerAccount, getGameBoardInfo, registerMilipadPlayer, updateJoinWhiteListUser, updateMiliPadPlayer, updateMillipadsUsername, updateMissionPlayer } from 'lib/utilities/utils';
 import { SolletWalletAdapter } from 'lib/wallets/sollet';
 import { SOLLET_ADAPTER_NETWORD } from 'lib/program/config'; 
 import { HOST_NAME, PROVIDER_URL, useWindowSize } from 'data/constants';
@@ -15,7 +15,7 @@ type urlParams = {
   nameProject: string,
 };
 const Millionsy: React.FC = () => {
-  const [isNextStepTelegram, setIsNextStepTelegram] = useState(false);
+  const [isFinishMission, setIsFinishMission] = useState(false);
   const [isNextStepTwitter, setIsNextStepTwitter] = useState(false);
   const [isHadread, setIsHadread] = useState(false);
   const [isShowNotification, setIsShowNotification] = useState(false);
@@ -37,6 +37,8 @@ const Millionsy: React.FC = () => {
   const [getFlowers, setGetFlowers] = useState(0);
   const {nameProject} = useParams<urlParams>();
   const history = useHistory();
+  const [userName, setUserName] = useState('');
+  const [getUserName, setGetUserName] = useState('');
   
   
   const [flagSlots, setFlagSlots] = useState({
@@ -279,7 +281,7 @@ const Millionsy: React.FC = () => {
             setDataPlayerMilli(data)
           })
         } else {
-          registerMilipadPlayer(playerData.data.publicKey, [], getDataMillipads !== null ? getDataMillipads.code : '');
+          registerMilipadPlayer(playerData.data.publicKey, [], getDataMillipads !== null ? getDataMillipads.code : '', '');
         }
       })
     }
@@ -289,26 +291,14 @@ const Millionsy: React.FC = () => {
       const session = dataPlayerMilli.sessions.join('');
       setFlagSlots({
         twitter: {
-          waggle: session.indexOf('goal1') > -1 ? 1 : 0,
-          millionsy: session.indexOf('goal2') > -1 ? 1 : 0,
-          retweet: 0,
+          waggle: session.indexOf('twitterMission1') > -1 ? 1 : 0,
+          millionsy: session.indexOf('twitterMission2') > -1 ? 1 : 0,
+          retweet: session.indexOf('twitterMission3') > -1 ? 1 : 0,
         },
         telegram: {
-          waggle: session.indexOf('goal3') > -1 ? 1 : 0,
-          millionsy: session.indexOf('goal4') > -1 ? 1 : 0,
-          retweet: 0,
-        }
-      })
-      setFlagOnclick({
-        twitter: {
-          waggle: true,
-          millionsy: session.indexOf('goal1') > -1 ? true : false,
-          retweet: session.indexOf('goal2') > -1 ? true : false,
-        },
-        telegram: {
-          waggle: true,
-          millionsy: session.indexOf('goal3') > -1 ? true : false,
-          retweet: session.indexOf('goal4') > -1 ? true : false,
+          waggle: session.indexOf('telegramMission1') > -1 ? 1 : 0,
+          millionsy: session.indexOf('telegramMission2') > -1 ? 1 : 0,
+          retweet: session.indexOf('telegramMission3') > -1 ? 1 : 0,
         }
       })
       setIsFinishSaleRound(typeof dataPlayerMilli.sale_amount !== 'undefined' && dataPlayerMilli.sale_amount > 0 ? true : false);
@@ -342,6 +332,67 @@ const Millionsy: React.FC = () => {
       document.body.style.overflowY = 'scroll';
     }
   }, [showModalTicket, isShowNotification])
+  
+
+  const handleUpdateMillionsy = (category) => {
+    if (isFinishMission && userName !== '') {
+      if (category === 'telegram') {
+        updateMissionPlayer(playerData.data.publicKey, ['telegramMission1', 'telegramMission2', 'telegramMission3'], getDataMillipads !== null ? getDataMillipads.code : '')
+      } 
+      if (category === 'twitter') {
+        updateMissionPlayer(playerData.data.publicKey, ['twitterMission1', 'twitterMission2', 'twitterMission3'], getDataMillipads !== null ? getDataMillipads.code : '')
+      }
+      updateMillipadsUsername(playerData.data.publicKey, getDataMillipads !== null ? getDataMillipads.code : '', userName).then(res => handleCloseModalFinish());
+    }
+  }
+
+  const handleCloseModal = () => {
+    setShowModalTicket(false);
+    setUserName('');
+    setFlagOnclick({
+      twitter: {
+        waggle: true,
+        millionsy: false,
+        retweet: false,
+      },
+      telegram: {
+        waggle: true,
+        millionsy: false,
+        retweet: false,
+      }
+    })
+    setIsFinishMission(false);
+    setFlagSlots({
+      twitter: {
+        waggle: 0,
+        millionsy: 0,
+        retweet: 0,
+      },
+      telegram: {
+        waggle: 0,
+        millionsy: 0,
+        retweet: 0,
+      }
+    })
+  }
+
+  const handleCloseModalFinish = () => {
+    setShowModalTicket(false);
+    setUserName('');
+    setFlagOnclick({
+      twitter: {
+        waggle: true,
+        millionsy: false,
+        retweet: false,
+      },
+      telegram: {
+        waggle: true,
+        millionsy: false,
+        retweet: false,
+      }
+    })
+    setIsFinishMission(false);
+  }
 
   return (
     <>
@@ -512,32 +563,36 @@ const Millionsy: React.FC = () => {
                 <h4 className='text-h3-sp md:text-h3-pc mb-2 text-pink-secondary font-bold'>Social Pool</h4>
                 <p className='text-justify md:text-left mb-2 md:mb-4'>The more slots you have, the more chance for you to win the whitelist (not the chance to purchase the whitelist). Each wallet address can only have a maximum of 1 ticket to buy whitelist in each pool/ project.</p>
                 <p className='mb-4 md:mb-6 flex justify-between items-end md:block'><span className='font-semibold text-gray-primary'>You have</span><span><span className='text-pink-secondary font-bold inline-block ml-8 mr-2'>
-                  {flagSlots.telegram.waggle + flagSlots.telegram.millionsy + flagSlots.twitter.waggle + flagSlots.twitter.millionsy} slots</span>from Social tasks</span></p>
+                  {flagSlots.telegram.waggle + flagSlots.telegram.millionsy + flagSlots.telegram.retweet + flagSlots.twitter.waggle + flagSlots.twitter.millionsy + flagSlots.twitter.retweet} slots</span>from Social tasks</span></p>
               </div>
               <div className='bg-gray-lightbox p-4 md:px-8'>
                 <h5 className='mb-2 text-pink-secondary font-bold text-h3-sp md:text-h3-pc'>Social Tasks</h5>
                 <ul className='flex flex-col md:flex-row'>
-                  <li className={`flex items-center rounded-5 border border-solid border-blue-primary cursor-pointer transition-all px-2 h-32px md:h-34px hover:opacity-70 mb-3 md:mr-3 lg:mr-12 md:mb-0`}
+                  <li className={`flex items-center rounded-5 border border-solid border-blue-primary transition-all px-2 h-32px md:h-34px mb-3 md:mr-3 lg:mr-12 md:mb-0 ${flagSlots.telegram.waggle + flagSlots.telegram.millionsy + flagSlots.telegram.retweet === 3 ? 'cursor-not-allowed' : 'cursor-pointer hover:opacity-70'}`}
                     onClick={() => {
-                      setSelectedTickets('telegram');
-                      setIsShowNotification(true);
-                      setIsHadread(false);
+                      if (flagSlots.telegram.waggle + flagSlots.telegram.millionsy + flagSlots.telegram.retweet !== 3) {
+                        setSelectedTickets('telegram');
+                        setIsShowNotification(true);
+                        setIsHadread(false);
+                      }
                     }}
                   >
                     <span className='mr-2 md:mr-5 w-4 md:w-auto'><img src="/assets/millipad/icon_telegram.svg" alt="icon_telegram" /></span>
                     <span className='font-bold w-40 text-blue-secondary'>Telegram Tasks</span>
-                    <span className='text-blue-secondary text-bodybox-sp md:text-body-pc ml-auto md:ml-0'>{flagSlots.telegram.waggle + flagSlots.telegram.millionsy}/1 slots collected</span>
+                    <span className='text-blue-secondary text-bodybox-sp md:text-body-pc ml-auto md:ml-0'>{flagSlots.telegram.waggle + flagSlots.telegram.millionsy + flagSlots.telegram.retweet}/3 slots collected</span>
                   </li> 
-                  <li className={`flex items-center rounded-5 border border-solid border-blue-primary cursor-pointer transition-all px-2 h-32px md:h-34px hover:opacity-70`}
+                  <li className={`flex items-center rounded-5 border border-solid border-blue-primary transition-all px-2 h-32px md:h-34px mb-3 md:mr-3 lg:mr-12 md:mb-0 ${flagSlots.twitter.waggle + flagSlots.twitter.millionsy + flagSlots.twitter.retweet === 3 ? 'cursor-not-allowed' : 'cursor-pointer hover:opacity-70'}`}
                     onClick={() => {
-                      setSelectedTickets('twitter');
-                      setIsShowNotification(true);
-                      setIsHadread(false);
+                      if (flagSlots.twitter.waggle + flagSlots.twitter.millionsy + flagSlots.twitter.retweet !== 3) {
+                        setSelectedTickets('twitter');
+                        setIsShowNotification(true);
+                        setIsHadread(false);
+                      }
                     }}
                   >
                     <span className='mr-2 md:mr-5 w-4 md:w-auto'><img src="/assets/millipad/icon_twitter.svg" alt="icon_twitter" /></span>
                     <span className='font-bold w-40 text-blue-secondary'>Twitter Tasks</span>
-                    <span className='text-blue-secondary text-bodybox-sp md:text-body-pc ml-auto md:ml-0'>{flagSlots.twitter.waggle + flagSlots.twitter.millionsy}/3 slots collected</span>
+                    <span className='text-blue-secondary text-bodybox-sp md:text-body-pc ml-auto md:ml-0'>{flagSlots.twitter.waggle + flagSlots.twitter.millionsy + flagSlots.twitter.retweet}/3 slots collected</span>
                   </li>
                 </ul>
               </div>
@@ -693,260 +748,18 @@ const Millionsy: React.FC = () => {
               <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-2'>As a result, a blockchain lottery platform assures that there are no foul plays or lottery scandals in the ecosystem. This is a guarantee for an ever-expanding lottery industry.</p>
               <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-2'>You are more than welcome to participate in the greatest blockchain celebration, as long as you have a wallet and at the price of just 2$ per ticket, you now have a chance to join the millionaire-club. Tickets will be available on their website and can be purchased by SOL and  MILLI. In the near future, you will be able to buy lottery tickets via Visa, PayPal, and other payment methods.  </p>
             </div>
-            {/* <h5 className='text-pink-secondary text-h3-sp md:text-h3-pc font-bold mb-3 md:mb-4 pt-3 md:pt-8'>Tokenomic</h5> */}
           </div>
-          {/* <p className='px-3/100 md:px-0 mb-4'><img src="/assets/millipad/chart.png" alt="chart"/></p>
-          <div className='px-4 md:px-6 tablet992:px-12'>
-            <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-1.5'>Total max supply: 300,000,000</p>
-            <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-1.5'>Team: Lock 12 months.</p>
-            <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-1.5'>Advisor: Unlock from the 6th month.</p>
-            <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-1.5'>Dev &amp; marketing: Unlock 1% per month after launching.</p>
-            <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-1.5'>All unused tokens will be transferred to the BURN POOL</p>
-          </div>
-          <div className='px-4 md:px-6 tablet992:px-12'>
-            <h5 className='text-pink-secondary text-h3-sp md:text-h3-pc font-bold md:mb-1 pt-3 md:pt-8'>Roadmap</h5>
-            <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-2'>Between September and October: Conducting Sale Rounds to fuel the initial development and growth. We appreciate the strong support from the community as well as  many funds that reached out to us.</p>
-            <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-2'>Especially, in October, Lottery platform and contract will be audited.</p>
-            <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-2'>Next, MILLIPAD and NFTs Ticket will be launched in November. Then in December, promoting social activities to keep building a community that shares our long term vision, also opening Live Drawing at this stage.</p>
-            <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-2'>From January to March 2020, cross-chain will be availabe in Millionsy platform. Users will be enable to buy ticket from other blockchains seamlessly.</p>
-            <p className='text-bodybox-sp md:text-button-pc text-justify md:text-left mb-2'>From April to the end of 2022, completing Fiat Ticket Purchase feature. MILLIONSY will definately lead the next chapter of lottery industry with those unique and promising features.</p>
-            <h5 className='text-pink-secondary text-h3-sp md:text-h3-pc font-bold mb-3 md:mb-4 pt-3 md:pt-8'>Team</h5>
-          </div>
-          <p className='px-3/100 md:px-0'><img src="/assets/millipad/teams.png" alt="face"/></p> */}
         </div>
       </section>
       {
         showModalTicket &&
         <section className='fixed h-100vh w-full top-0 left-0 z-100'>
-          <div className='h-full absolute w-full top-0 left-0 bg-black opacity-50' onClick={() => setShowModalTicket(false)}></div>
-          {/* <div className={`${selectedTickets === 'twitter' ? 'block' : 'hidden'} bg-gray-box absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 max-h-full z-1000 overflow-hidden border border-solid border-blue-17F0FF rounded-10 max-w-280 w-full`}>
-            <div className='flex justify-between items-center px-5 py-2 bg-gray-lightbox'>
-              <p className='text-gray-primary text-body-pc font-semibold'>Twitter tasks</p>
-              <p className='cursor-pointer transition-all hover:opacity-70 py-1.5 pl-4' onClick={() => setShowModalTicket(false)}>
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fillRule="evenodd" clipRule="evenodd" d="M9.75592 1.42259C10.0814 1.09715 10.0814 0.569515 9.75592 0.244078C9.43049 -0.0813592 8.90285 -0.0813592 8.57741 0.244078L5 3.82149L1.42259 0.244078C1.09715 -0.0813584 0.569515 -0.0813584 0.244078 0.244079C-0.0813592 0.569515 -0.0813592 1.09715 0.244078 1.42259L3.82149 5L0.244078 8.57741C-0.0813592 8.90285 -0.0813592 9.43048 0.244078 9.75592C0.569515 10.0814 1.09715 10.0814 1.42259 9.75592L5 6.17851L8.57741 9.75592C8.90285 10.0814 9.43049 10.0814 9.75592 9.75592C10.0814 9.43049 10.0814 8.90285 9.75592 8.57741L6.17851 5L9.75592 1.42259Z" fill="#f9f9f9"/>
-                </svg>
-              </p>
-            </div>
-            <div className='px-5 pt-1 pb-5'>
-              <ul>
-                <li>
-                  <a href='https://twitter.com/millionsyio' target='_blank' className={`flex justify-between items-center py-1 border-b border-solid border-gray-boxline-50 ${flagOnclick.twitter.waggle ? '' : 'cursor-default'}`}
-                    onClick={(event) => {
-                      if(!flagOnclick.twitter.waggle) {
-                        event.preventDefault()
-                      } else {
-                        setIsNextStepTwitter(true);
-                        setFlagSlots({
-                          ...flagSlots,
-                          twitter: {
-                            ...flagSlots.twitter,
-                            waggle: 1,
-                          }
-                        })
-                        updateMissionPlayer(playerData.data.publicKey, 'goal1', getDataMillipads !== null ? getDataMillipads.code : '')
-                      }
-                    }}
-                  >
-                    <p className={`leading-4 ${flagOnclick.twitter.waggle ? '' : 'opacity-50'}`}>
-                      <span className='text-body-pc text-gray-primary font-bold'><span className='mr-2'>1.</span>Project_name</span>
-                      <span className='text-body-sp text-pink-F4E0FF block pl-6'>Follow</span>
-                    </p>
-                    <p className='leading-4 flex items-center flex-col'>
-                      <span>
-                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10.8457 0.230774C8.769 0.230774 6.73893 0.846588 5.01222 2.00034C3.2855 3.1541 1.93969 4.79397 1.14497 6.7126C0.350253 8.63122 0.142318 10.7424 0.547462 12.7792C0.952607 14.816 1.95263 16.6869 3.42109 18.1554C4.88954 19.6238 6.76046 20.6239 8.79726 21.029C10.8341 21.4342 12.9453 21.2262 14.8639 20.4315C16.7825 19.6368 18.4224 18.291 19.5761 16.5643C20.7299 14.8375 21.3457 12.8075 21.3457 10.7308C21.3457 7.946 20.2395 5.27528 18.2703 3.30615C16.3012 1.33702 13.6305 0.230774 10.8457 0.230774ZM16.1346 8.58982L16.1419 8.91112C16.1419 12.1924 13.5684 15.9776 8.86121 15.9776C7.4749 15.9801 6.11574 15.5934 4.93841 14.8615C5.14128 14.8847 5.34531 14.8963 5.54951 14.8961C6.69691 14.8996 7.81366 14.5259 8.72786 13.8325C8.1999 13.8279 7.68638 13.6596 7.25814 13.3508C6.8299 13.042 6.50805 12.6079 6.33701 12.1084C6.49558 12.1381 6.65658 12.1528 6.81791 12.1525C7.04542 12.1526 7.272 12.1233 7.49201 12.0653C6.9205 11.9606 6.40319 11.6604 6.0287 11.2162C5.6542 10.772 5.44582 10.2114 5.43926 9.63037V9.59887C5.79441 9.79255 6.18995 9.90042 6.59426 9.91387C6.24686 9.69142 5.96094 9.38522 5.76279 9.02341C5.56464 8.6616 5.46061 8.25579 5.46026 7.84327C5.45957 7.40343 5.57902 6.97175 5.80571 6.59482C6.45851 7.36747 7.26401 7.9968 8.17163 8.44329C9.07925 8.88978 10.0694 9.14379 11.0799 9.18937C11.0353 9.00403 11.0131 8.81403 11.0137 8.62342C11.0137 7.25212 12.1593 6.14122 13.5715 6.14122C13.9195 6.13991 14.2641 6.20858 14.585 6.34314C14.9059 6.4777 15.1965 6.67542 15.4395 6.92452C16.0116 6.81582 16.5614 6.61172 17.0659 6.32077C16.8717 6.90157 16.4712 7.39097 15.9403 7.69627C16.4468 7.63796 16.942 7.50602 17.4103 7.30462C17.0648 7.80547 16.6328 8.24068 16.1346 8.58982Z" fill={`${flagOnclick.twitter.waggle ? '#ADFAFF' : '#878787'}`}/>
-                        </svg>
-                      </span>
-                      <span className={`text-bodybox-sp ${flagOnclick.twitter.waggle ? 'text-blue-200' : 'text-gray-500'}`}>1 slot</span>
-                    </p>
-                  </a>
-                </li>
-                <li>
-                  <a href='https://twitter.com/MILLIONSYio/status/1452649686402101251?s=20' target='_blank' className={`flex justify-between items-center py-1 border-b border-solid border-gray-boxline-50 ${flagOnclick.twitter.millionsy ? '' : 'cursor-default'}`}
-                    onClick={(event) => {
-                      if(!flagOnclick.twitter.millionsy) {
-                        event.preventDefault()
-                      } else {
-                        setIsNextStepTwitter(true);
-                        setFlagSlots({
-                          ...flagSlots,
-                          twitter: {
-                            ...flagSlots.twitter,
-                            millionsy: 1,
-                          }
-                        })
-                        updateMissionPlayer(playerData.data.publicKey, 'goal2', getDataMillipads !== null ? getDataMillipads.code : '')
-                      }
-                    }}
-                  >
-                    <p className={`leading-4 ${flagOnclick.twitter.millionsy ? '' : 'opacity-50'}`}>
-                      <span className='text-body-pc text-gray-primary font-bold'><span className='mr-2'>2.</span>MILLIONSY</span>
-                      <span className='text-body-sp text-pink-F4E0FF block pl-6'>Follow</span>
-                    </p>
-                    <p className='leading-4 flex items-center flex-col'>
-                      <span>
-                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10.8457 0.230774C8.769 0.230774 6.73893 0.846588 5.01222 2.00034C3.2855 3.1541 1.93969 4.79397 1.14497 6.7126C0.350253 8.63122 0.142318 10.7424 0.547462 12.7792C0.952607 14.816 1.95263 16.6869 3.42109 18.1554C4.88954 19.6238 6.76046 20.6239 8.79726 21.029C10.8341 21.4342 12.9453 21.2262 14.8639 20.4315C16.7825 19.6368 18.4224 18.291 19.5761 16.5643C20.7299 14.8375 21.3457 12.8075 21.3457 10.7308C21.3457 7.946 20.2395 5.27528 18.2703 3.30615C16.3012 1.33702 13.6305 0.230774 10.8457 0.230774ZM16.1346 8.58982L16.1419 8.91112C16.1419 12.1924 13.5684 15.9776 8.86121 15.9776C7.4749 15.9801 6.11574 15.5934 4.93841 14.8615C5.14128 14.8847 5.34531 14.8963 5.54951 14.8961C6.69691 14.8996 7.81366 14.5259 8.72786 13.8325C8.1999 13.8279 7.68638 13.6596 7.25814 13.3508C6.8299 13.042 6.50805 12.6079 6.33701 12.1084C6.49558 12.1381 6.65658 12.1528 6.81791 12.1525C7.04542 12.1526 7.272 12.1233 7.49201 12.0653C6.9205 11.9606 6.40319 11.6604 6.0287 11.2162C5.6542 10.772 5.44582 10.2114 5.43926 9.63037V9.59887C5.79441 9.79255 6.18995 9.90042 6.59426 9.91387C6.24686 9.69142 5.96094 9.38522 5.76279 9.02341C5.56464 8.6616 5.46061 8.25579 5.46026 7.84327C5.45957 7.40343 5.57902 6.97175 5.80571 6.59482C6.45851 7.36747 7.26401 7.9968 8.17163 8.44329C9.07925 8.88978 10.0694 9.14379 11.0799 9.18937C11.0353 9.00403 11.0131 8.81403 11.0137 8.62342C11.0137 7.25212 12.1593 6.14122 13.5715 6.14122C13.9195 6.13991 14.2641 6.20858 14.585 6.34314C14.9059 6.4777 15.1965 6.67542 15.4395 6.92452C16.0116 6.81582 16.5614 6.61172 17.0659 6.32077C16.8717 6.90157 16.4712 7.39097 15.9403 7.69627C16.4468 7.63796 16.942 7.50602 17.4103 7.30462C17.0648 7.80547 16.6328 8.24068 16.1346 8.58982Z" fill={`${flagOnclick.twitter.millionsy ? '#17F0FF' : '#878787'}`}/>
-                        </svg>
-                      </span>
-                      <span className={`text-bodybox-sp ${flagOnclick.twitter.millionsy ? 'text-blue-200' : 'text-gray-500'}`}>1 slot</span>
-                    </p>
-                  </a>
-                </li>
-                <li>
-                  <a href='https://twitter.com/MILLIONSYio/status/1452649686402101251?s=20' target='_blank' className={`flex justify-between items-center py-1 border-b border-solid border-gray-boxline-50 ${flagOnclick.twitter.millionsy ? '' : 'cursor-default'}`}
-                    onClick={(event) => {
-                      if(!flagOnclick.twitter.millionsy) {
-                        event.preventDefault()
-                      } else {
-                        setIsNextStepTwitter(true);
-                        setFlagSlots({
-                          ...flagSlots,
-                          twitter: {
-                            ...flagSlots.twitter,
-                            millionsy: 1,
-                          }
-                        })
-                        updateMissionPlayer(playerData.data.publicKey, 'goal2', getDataMillipads !== null ? getDataMillipads.code : '')
-                      }
-                    }}
-                  >
-                    <p className={`leading-4 ${flagOnclick.twitter.millionsy ? '' : 'opacity-50'}`}>
-                      <span className='text-body-pc text-gray-primary font-bold'><span className='mr-2'>3.</span>MILLIONSY</span>
-                      <span className='text-body-sp text-pink-F4E0FF block pl-6'>Like, retweet and comment</span>
-                    </p>
-                    <p className='leading-4 flex items-center flex-col'>
-                      <span>
-                        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M10.8457 0.230774C8.769 0.230774 6.73893 0.846588 5.01222 2.00034C3.2855 3.1541 1.93969 4.79397 1.14497 6.7126C0.350253 8.63122 0.142318 10.7424 0.547462 12.7792C0.952607 14.816 1.95263 16.6869 3.42109 18.1554C4.88954 19.6238 6.76046 20.6239 8.79726 21.029C10.8341 21.4342 12.9453 21.2262 14.8639 20.4315C16.7825 19.6368 18.4224 18.291 19.5761 16.5643C20.7299 14.8375 21.3457 12.8075 21.3457 10.7308C21.3457 7.946 20.2395 5.27528 18.2703 3.30615C16.3012 1.33702 13.6305 0.230774 10.8457 0.230774ZM16.1346 8.58982L16.1419 8.91112C16.1419 12.1924 13.5684 15.9776 8.86121 15.9776C7.4749 15.9801 6.11574 15.5934 4.93841 14.8615C5.14128 14.8847 5.34531 14.8963 5.54951 14.8961C6.69691 14.8996 7.81366 14.5259 8.72786 13.8325C8.1999 13.8279 7.68638 13.6596 7.25814 13.3508C6.8299 13.042 6.50805 12.6079 6.33701 12.1084C6.49558 12.1381 6.65658 12.1528 6.81791 12.1525C7.04542 12.1526 7.272 12.1233 7.49201 12.0653C6.9205 11.9606 6.40319 11.6604 6.0287 11.2162C5.6542 10.772 5.44582 10.2114 5.43926 9.63037V9.59887C5.79441 9.79255 6.18995 9.90042 6.59426 9.91387C6.24686 9.69142 5.96094 9.38522 5.76279 9.02341C5.56464 8.6616 5.46061 8.25579 5.46026 7.84327C5.45957 7.40343 5.57902 6.97175 5.80571 6.59482C6.45851 7.36747 7.26401 7.9968 8.17163 8.44329C9.07925 8.88978 10.0694 9.14379 11.0799 9.18937C11.0353 9.00403 11.0131 8.81403 11.0137 8.62342C11.0137 7.25212 12.1593 6.14122 13.5715 6.14122C13.9195 6.13991 14.2641 6.20858 14.585 6.34314C14.9059 6.4777 15.1965 6.67542 15.4395 6.92452C16.0116 6.81582 16.5614 6.61172 17.0659 6.32077C16.8717 6.90157 16.4712 7.39097 15.9403 7.69627C16.4468 7.63796 16.942 7.50602 17.4103 7.30462C17.0648 7.80547 16.6328 8.24068 16.1346 8.58982Z" fill={`${flagOnclick.twitter.millionsy ? '#17F0FF' : '#878787'}`}/>
-                        </svg>
-                      </span>
-                      <span className={`text-bodybox-sp ${flagOnclick.twitter.millionsy ? 'text-blue-200' : 'text-gray-500'}`}>1 slot</span>
-                    </p>
-                  </a>
-                </li>
-                <li className='flex justify-between items-center py-1 border-b border-solid border-gray-boxline-50'>
-                  <p className={`leading-4 ${flagOnclick.twitter.retweet ? '' : 'opacity-50'}`}>
-                    <span className='text-body-pc text-gray-primary font-bold'><span className='mr-2'>5.</span>Claim 1 slot</span>
-                    <span className='text-body-sp text-pink-F4E0FF block pl-6'>We will check your actions</span>
-                  </p>
-                </li>
-              </ul>
-              <p className={`mt-3 w-140 mx-auto text-center text-16 py-2 font-bold rounded-5 transition-all  ${
-                flagOnclick.twitter.retweet ? 'bg-blue-primary text-blue-50 hover:opacity-70 cursor-pointer' : 
-                isNextStepTwitter ? 'bg-pink-150 text-pink-F4E0FF hover:opacity-70 cursor-pointer' : 'bg-gray-550 text-gray-50 pointer-events-none'
-              }`}
-                onClick={() => {
-                  setIsNextStepTwitter(false);
-                  if(isNextStepTwitter) {
-                    if(flagOnclick.twitter.waggle) {
-                      setFlagOnclick({
-                        ...flagOnclick,
-                        twitter: {
-                          ...flagOnclick.twitter,
-                          millionsy: true,
-                        }
-                      })
-                    }
-                    if (flagOnclick.twitter.millionsy) {
-                      setFlagOnclick({
-                        ...flagOnclick,
-                        twitter: {
-                          ...flagOnclick.twitter,
-                          retweet: true,
-                        }
-                      })
-                    }
-                  }
-                  if (flagOnclick.twitter.retweet) {
-                    setShowModalTicket(false);
-                  }
-                }}
-              >{flagOnclick.twitter.retweet ? (<>Claim slots</>) : (<>Next step</>)}</p>
-            </div>
-          </div> */}
-          <div className={`${selectedTickets === 'twitter' ? 'block' : 'hidden'} bg-gray-box absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 max-h-full z-1000 overflow-hidden border border-solid border-gray-boxline-50 rounded-10 max-w-280 w-full`}>
-            <div className='flex justify-between items-center px-4 py-2 bg-gray-lightbox'>
-              <p className='text-gray-primary text-body-pc font-semibold'>Twitter tasks</p>
-              <p className='cursor-pointer transition-all hover:opacity-70 py-1.5 pl-4' onClick={() => setShowModalTicket(false)}>
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fillRule="evenodd" clipRule="evenodd" d="M9.75592 1.42259C10.0814 1.09715 10.0814 0.569515 9.75592 0.244078C9.43049 -0.0813592 8.90285 -0.0813592 8.57741 0.244078L5 3.82149L1.42259 0.244078C1.09715 -0.0813584 0.569515 -0.0813584 0.244078 0.244079C-0.0813592 0.569515 -0.0813592 1.09715 0.244078 1.42259L3.82149 5L0.244078 8.57741C-0.0813592 8.90285 -0.0813592 9.43048 0.244078 9.75592C0.569515 10.0814 1.09715 10.0814 1.42259 9.75592L5 6.17851L8.57741 9.75592C8.90285 10.0814 9.43049 10.0814 9.75592 9.75592C10.0814 9.43049 10.0814 8.90285 9.75592 8.57741L6.17851 5L9.75592 1.42259Z" fill="#f9f9f9"/>
-                </svg>
-              </p>
-            </div>
-            <div className='px-4'>
-              <ul>
-                <li className='flex justify-between items-center py-1.5 border-b border-solid border-gray-boxline-50 relative'>
-                  <a href='https://t.me/MILLIONSYio' target='_blank' className='absolute w-full h-full'></a>
-                  <p className={`leading-4`}>
-                    <span className='text-body-pc text-gray-primary font-bold'><span className='mr-1'>1.</span>Project_name</span>
-                    <span className='text-body-sp block pl-4'>Follow</span>
-                  </p>
-                  <p>
-                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M10.8457 0.230774C8.769 0.230774 6.73893 0.846588 5.01222 2.00034C3.2855 3.1541 1.93969 4.79397 1.14497 6.7126C0.350253 8.63122 0.142318 10.7424 0.547462 12.7792C0.952607 14.816 1.95263 16.6869 3.42109 18.1554C4.88954 19.6238 6.76046 20.6239 8.79726 21.029C10.8341 21.4342 12.9453 21.2262 14.8639 20.4315C16.7825 19.6368 18.4224 18.291 19.5761 16.5643C20.7299 14.8375 21.3457 12.8075 21.3457 10.7308C21.3457 7.946 20.2395 5.27528 18.2703 3.30615C16.3012 1.33702 13.6305 0.230774 10.8457 0.230774ZM16.1346 8.58982L16.1419 8.91112C16.1419 12.1924 13.5684 15.9776 8.86121 15.9776C7.4749 15.9801 6.11574 15.5934 4.93841 14.8615C5.14128 14.8847 5.34531 14.8963 5.54951 14.8961C6.69691 14.8996 7.81366 14.5259 8.72786 13.8325C8.1999 13.8279 7.68638 13.6596 7.25814 13.3508C6.8299 13.042 6.50805 12.6079 6.33701 12.1084C6.49558 12.1381 6.65658 12.1528 6.81791 12.1525C7.04542 12.1526 7.272 12.1233 7.49201 12.0653C6.9205 11.9606 6.40319 11.6604 6.0287 11.2162C5.6542 10.772 5.44582 10.2114 5.43926 9.63037V9.59887C5.79441 9.79255 6.18995 9.90042 6.59426 9.91387C6.24686 9.69142 5.96094 9.38522 5.76279 9.02341C5.56464 8.6616 5.46061 8.25579 5.46026 7.84327C5.45957 7.40343 5.57902 6.97175 5.80571 6.59482C6.45851 7.36747 7.26401 7.9968 8.17163 8.44329C9.07925 8.88978 10.0694 9.14379 11.0799 9.18937C11.0353 9.00403 11.0131 8.81403 11.0137 8.62342C11.0137 7.25212 12.1593 6.14122 13.5715 6.14122C13.9195 6.13991 14.2641 6.20858 14.585 6.34314C14.9059 6.4777 15.1965 6.67542 15.4395 6.92452C16.0116 6.81582 16.5614 6.61172 17.0659 6.32077C16.8717 6.90157 16.4712 7.39097 15.9403 7.69627C16.4468 7.63796 16.942 7.50602 17.4103 7.30462C17.0648 7.80547 16.6328 8.24068 16.1346 8.58982Z" fill={`${flagOnclick.telegram.waggle ? '#ADFAFF' : '#878787'}`}/>
-                    </svg>
-                  </p>
-                </li>
-
-                <li className='flex justify-between items-center py-1.5 border-b border-solid border-gray-boxline-50 relative'>
-                  <a href='https://t.me/MILLIONSYio' target='_blank' className='absolute w-full h-full'></a>
-                  <p className={`leading-4`}>
-                    <span className='text-body-pc text-gray-primary font-bold'><span className='mr-1'>2.</span>MILLIONSY</span>
-                    <span className='text-body-sp block pl-4'>Follow</span>
-                  </p>
-                  <p>
-                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M10.8457 0.230774C8.769 0.230774 6.73893 0.846588 5.01222 2.00034C3.2855 3.1541 1.93969 4.79397 1.14497 6.7126C0.350253 8.63122 0.142318 10.7424 0.547462 12.7792C0.952607 14.816 1.95263 16.6869 3.42109 18.1554C4.88954 19.6238 6.76046 20.6239 8.79726 21.029C10.8341 21.4342 12.9453 21.2262 14.8639 20.4315C16.7825 19.6368 18.4224 18.291 19.5761 16.5643C20.7299 14.8375 21.3457 12.8075 21.3457 10.7308C21.3457 7.946 20.2395 5.27528 18.2703 3.30615C16.3012 1.33702 13.6305 0.230774 10.8457 0.230774ZM16.1346 8.58982L16.1419 8.91112C16.1419 12.1924 13.5684 15.9776 8.86121 15.9776C7.4749 15.9801 6.11574 15.5934 4.93841 14.8615C5.14128 14.8847 5.34531 14.8963 5.54951 14.8961C6.69691 14.8996 7.81366 14.5259 8.72786 13.8325C8.1999 13.8279 7.68638 13.6596 7.25814 13.3508C6.8299 13.042 6.50805 12.6079 6.33701 12.1084C6.49558 12.1381 6.65658 12.1528 6.81791 12.1525C7.04542 12.1526 7.272 12.1233 7.49201 12.0653C6.9205 11.9606 6.40319 11.6604 6.0287 11.2162C5.6542 10.772 5.44582 10.2114 5.43926 9.63037V9.59887C5.79441 9.79255 6.18995 9.90042 6.59426 9.91387C6.24686 9.69142 5.96094 9.38522 5.76279 9.02341C5.56464 8.6616 5.46061 8.25579 5.46026 7.84327C5.45957 7.40343 5.57902 6.97175 5.80571 6.59482C6.45851 7.36747 7.26401 7.9968 8.17163 8.44329C9.07925 8.88978 10.0694 9.14379 11.0799 9.18937C11.0353 9.00403 11.0131 8.81403 11.0137 8.62342C11.0137 7.25212 12.1593 6.14122 13.5715 6.14122C13.9195 6.13991 14.2641 6.20858 14.585 6.34314C14.9059 6.4777 15.1965 6.67542 15.4395 6.92452C16.0116 6.81582 16.5614 6.61172 17.0659 6.32077C16.8717 6.90157 16.4712 7.39097 15.9403 7.69627C16.4468 7.63796 16.942 7.50602 17.4103 7.30462C17.0648 7.80547 16.6328 8.24068 16.1346 8.58982Z" fill={`${flagOnclick.telegram.waggle ? '#ADFAFF' : '#878787'}`}/>
-                    </svg>
-                  </p>
-                </li>
-
-                <li className='flex justify-between items-center py-1.5 border-b border-solid border-gray-boxline-50 relative'>
-                  <a href='https://t.me/MILLIONSYio' target='_blank' className='absolute w-full h-full'></a>
-                  <p className={`leading-4`}>
-                    <span className='text-body-pc text-gray-primary font-bold'><span className='mr-1'>3.</span>MILLIONSY</span>
-                    <span className='text-body-sp block pl-4'>Like, retweet and comment</span>
-                  </p>
-                  <p>
-                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M10.8457 0.230774C8.769 0.230774 6.73893 0.846588 5.01222 2.00034C3.2855 3.1541 1.93969 4.79397 1.14497 6.7126C0.350253 8.63122 0.142318 10.7424 0.547462 12.7792C0.952607 14.816 1.95263 16.6869 3.42109 18.1554C4.88954 19.6238 6.76046 20.6239 8.79726 21.029C10.8341 21.4342 12.9453 21.2262 14.8639 20.4315C16.7825 19.6368 18.4224 18.291 19.5761 16.5643C20.7299 14.8375 21.3457 12.8075 21.3457 10.7308C21.3457 7.946 20.2395 5.27528 18.2703 3.30615C16.3012 1.33702 13.6305 0.230774 10.8457 0.230774ZM16.1346 8.58982L16.1419 8.91112C16.1419 12.1924 13.5684 15.9776 8.86121 15.9776C7.4749 15.9801 6.11574 15.5934 4.93841 14.8615C5.14128 14.8847 5.34531 14.8963 5.54951 14.8961C6.69691 14.8996 7.81366 14.5259 8.72786 13.8325C8.1999 13.8279 7.68638 13.6596 7.25814 13.3508C6.8299 13.042 6.50805 12.6079 6.33701 12.1084C6.49558 12.1381 6.65658 12.1528 6.81791 12.1525C7.04542 12.1526 7.272 12.1233 7.49201 12.0653C6.9205 11.9606 6.40319 11.6604 6.0287 11.2162C5.6542 10.772 5.44582 10.2114 5.43926 9.63037V9.59887C5.79441 9.79255 6.18995 9.90042 6.59426 9.91387C6.24686 9.69142 5.96094 9.38522 5.76279 9.02341C5.56464 8.6616 5.46061 8.25579 5.46026 7.84327C5.45957 7.40343 5.57902 6.97175 5.80571 6.59482C6.45851 7.36747 7.26401 7.9968 8.17163 8.44329C9.07925 8.88978 10.0694 9.14379 11.0799 9.18937C11.0353 9.00403 11.0131 8.81403 11.0137 8.62342C11.0137 7.25212 12.1593 6.14122 13.5715 6.14122C13.9195 6.13991 14.2641 6.20858 14.585 6.34314C14.9059 6.4777 15.1965 6.67542 15.4395 6.92452C16.0116 6.81582 16.5614 6.61172 17.0659 6.32077C16.8717 6.90157 16.4712 7.39097 15.9403 7.69627C16.4468 7.63796 16.942 7.50602 17.4103 7.30462C17.0648 7.80547 16.6328 8.24068 16.1346 8.58982Z" fill={`${flagOnclick.telegram.waggle ? '#ADFAFF' : '#878787'}`}/>
-                    </svg>
-                  </p>
-                </li>
-
-                <li className='flex justify-between items-center py-1.5 border-b border-solid border-gray-boxline-50 relative'>
-                  <p className={`leading-4`}>
-                    <span className='text-body-pc text-gray-primary font-bold'><span className='mr-1'>4.</span>Your Username</span>
-                    <span className='my-1.5 block'><input type="text" placeholder='@your_username' className='text-body-sp rounded-3 border border-solid border-transparent focus:border-blue-primary focus:outline-none bg-gray-lightbox focus:bg-transparent w-full pt-1.5 pb-2 px-2 placeholder-gray-body-50' /></span>
-                    <span className='text-bodybox-sp block'>We need to verify you, please give your exact account and make sure you don’t change it while this round is happening.</span>
-                  </p>
-                </li>
-
-                <li className='flex justify-between items-center py-1.5 relative'>
-                  <a href='https://t.me/MILLIONSYio' target='_blank' className='absolute w-full h-full'></a>
-                  <p className={`leading-4`}>
-                    <span className='text-body-pc text-gray-primary font-bold'><span className='mr-1'>5.</span>Claim 1 slot</span>
-                    <span className='text-body-sp block pl-4'>We will check your actions</span>
-                  </p>
-                  <p>
-                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M10.8457 0.230774C8.769 0.230774 6.73893 0.846588 5.01222 2.00034C3.2855 3.1541 1.93969 4.79397 1.14497 6.7126C0.350253 8.63122 0.142318 10.7424 0.547462 12.7792C0.952607 14.816 1.95263 16.6869 3.42109 18.1554C4.88954 19.6238 6.76046 20.6239 8.79726 21.029C10.8341 21.4342 12.9453 21.2262 14.8639 20.4315C16.7825 19.6368 18.4224 18.291 19.5761 16.5643C20.7299 14.8375 21.3457 12.8075 21.3457 10.7308C21.3457 7.946 20.2395 5.27528 18.2703 3.30615C16.3012 1.33702 13.6305 0.230774 10.8457 0.230774ZM16.1346 8.58982L16.1419 8.91112C16.1419 12.1924 13.5684 15.9776 8.86121 15.9776C7.4749 15.9801 6.11574 15.5934 4.93841 14.8615C5.14128 14.8847 5.34531 14.8963 5.54951 14.8961C6.69691 14.8996 7.81366 14.5259 8.72786 13.8325C8.1999 13.8279 7.68638 13.6596 7.25814 13.3508C6.8299 13.042 6.50805 12.6079 6.33701 12.1084C6.49558 12.1381 6.65658 12.1528 6.81791 12.1525C7.04542 12.1526 7.272 12.1233 7.49201 12.0653C6.9205 11.9606 6.40319 11.6604 6.0287 11.2162C5.6542 10.772 5.44582 10.2114 5.43926 9.63037V9.59887C5.79441 9.79255 6.18995 9.90042 6.59426 9.91387C6.24686 9.69142 5.96094 9.38522 5.76279 9.02341C5.56464 8.6616 5.46061 8.25579 5.46026 7.84327C5.45957 7.40343 5.57902 6.97175 5.80571 6.59482C6.45851 7.36747 7.26401 7.9968 8.17163 8.44329C9.07925 8.88978 10.0694 9.14379 11.0799 9.18937C11.0353 9.00403 11.0131 8.81403 11.0137 8.62342C11.0137 7.25212 12.1593 6.14122 13.5715 6.14122C13.9195 6.13991 14.2641 6.20858 14.585 6.34314C14.9059 6.4777 15.1965 6.67542 15.4395 6.92452C16.0116 6.81582 16.5614 6.61172 17.0659 6.32077C16.8717 6.90157 16.4712 7.39097 15.9403 7.69627C16.4468 7.63796 16.942 7.50602 17.4103 7.30462C17.0648 7.80547 16.6328 8.24068 16.1346 8.58982Z" fill={`${flagOnclick.telegram.waggle ? '#ADFAFF' : '#878787'}`}/>
-                    </svg>
-                  </p>
-                </li>
-              </ul>
-            </div>
-            <div className='p-4 bg-gray-lightbox'>
-              <p className={`mx-auto p-2 font-semibold rounded-5 transition-all bg-blue-primary text-gray-box hover:opacity-70 cursor-pointer text-center w-24`}>Next step</p>
-            </div>
-          </div>
+          <div className='h-full absolute w-full top-0 left-0 bg-black opacity-50' onClick={handleCloseModal}></div>
 
           <div className={`${selectedTickets === 'telegram' ? 'block' : 'hidden'} bg-gray-box absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 max-h-full z-1000 overflow-hidden border border-solid border-gray-boxline-50 rounded-10 max-w-280 w-full`}>
             <div className='flex justify-between items-center px-4 py-2 bg-gray-lightbox'>
               <p className='text-gray-primary text-body-pc font-semibold'>Telegram tasks</p>
-              <p className='cursor-pointer transition-all hover:opacity-70 py-1.5 pl-4' onClick={() => setShowModalTicket(false)}>
+              <p className='cursor-pointer transition-all hover:opacity-70 py-1.5 pl-4' onClick={handleCloseModal}>
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fillRule="evenodd" clipRule="evenodd" d="M9.75592 1.42259C10.0814 1.09715 10.0814 0.569515 9.75592 0.244078C9.43049 -0.0813592 8.90285 -0.0813592 8.57741 0.244078L5 3.82149L1.42259 0.244078C1.09715 -0.0813584 0.569515 -0.0813584 0.244078 0.244079C-0.0813592 0.569515 -0.0813592 1.09715 0.244078 1.42259L3.82149 5L0.244078 8.57741C-0.0813592 8.90285 -0.0813592 9.43048 0.244078 9.75592C0.569515 10.0814 1.09715 10.0814 1.42259 9.75592L5 6.17851L8.57741 9.75592C8.90285 10.0814 9.43049 10.0814 9.75592 9.75592C10.0814 9.43049 10.0814 8.90285 9.75592 8.57741L6.17851 5L9.75592 1.42259Z" fill="#f9f9f9"/>
                 </svg>
@@ -955,7 +768,24 @@ const Millionsy: React.FC = () => {
             <div className='px-4'>
               <ul>
                 <li className='flex justify-between items-center py-1.5 border-b border-solid border-gray-boxline-50 relative'>
-                  <a href='https://t.me/MILLIONSYio' target='_blank' className='absolute w-full h-full'></a>
+                  <a href='https://t.me/MILLIONSYio' target='_blank' className='absolute w-full h-full'
+                    onClick={() => {
+                      setFlagOnclick({
+                        ...flagOnclick,
+                        telegram: {
+                          ...flagOnclick.telegram,
+                          millionsy: true
+                        }
+                      })
+                      setFlagSlots({
+                        ...flagSlots,
+                        telegram: {
+                          ...flagSlots.telegram,
+                          waggle: 1,
+                        }
+                      })
+                    }}
+                  ></a>
                   <p className={`leading-4`}>
                     <span className='text-body-pc text-gray-primary font-bold'><span className='mr-1'>1.</span>Project_name</span>
                     <span className='text-body-sp block pl-4'>Join group</span>
@@ -967,8 +797,29 @@ const Millionsy: React.FC = () => {
                   </p>
                 </li>
 
-                <li className='flex justify-between items-center py-1.5 border-b border-solid border-gray-boxline-50 relative'>
-                  <a href='https://t.me/MILLIONSYio' target='_blank' className='absolute w-full h-full'></a>
+                <li className={`flex justify-between items-center py-1.5 border-b border-solid border-gray-boxline-50 relative ${flagOnclick.telegram.millionsy ? '' : 'opacity-50'}`}>
+                  <a href='https://t.me/MILLIONSYio' target='_blank' className={`absolute w-full h-full ${flagOnclick.telegram.millionsy ? 'cursor-pointer' : 'opacity-50 cursor-not-allowed'}`}
+                    onClick={(e) => {
+                      if (flagOnclick.telegram.millionsy) {
+                        setFlagOnclick({
+                          ...flagOnclick,
+                          telegram: {
+                            ...flagOnclick.telegram,
+                            retweet: true
+                          }
+                        })
+                        setFlagSlots({
+                          ...flagSlots,
+                          telegram: {
+                            ...flagSlots.telegram,
+                            millionsy: 1,
+                          }
+                        })
+                      } else {
+                        e.preventDefault();
+                      }
+                    }}
+                  ></a>
                   <p className={`leading-4`}>
                     <span className='text-body-pc text-gray-primary font-bold'><span className='mr-1'>2.</span>Project_name</span>
                     <span className='text-body-sp block pl-4'>Join channel</span>
@@ -980,8 +831,23 @@ const Millionsy: React.FC = () => {
                   </p>
                 </li>
 
-                <li className='flex justify-between items-center py-1.5 border-b border-solid border-gray-boxline-50 relative'>
-                  <a href='https://t.me/MILLIONSYio' target='_blank' className='absolute w-full h-full'></a>
+                <li className={`flex justify-between items-center py-1.5 border-b border-solid border-gray-boxline-50 relative ${flagOnclick.telegram.retweet ? '' : 'opacity-50'}`}>
+                  <a href='https://t.me/MILLIONSYio' target='_blank' className={`absolute w-full h-full ${flagOnclick.telegram.retweet ? 'cursor-pointer' : 'opacity-50 cursor-not-allowed'}`}
+                    onClick={(e) => {
+                      if (flagOnclick.telegram.retweet) {
+                        setIsFinishMission(true);
+                        setFlagSlots({
+                          ...flagSlots,
+                          telegram: {
+                            ...flagSlots.telegram,
+                            retweet: 1,
+                          }
+                        })
+                      } else {
+                        e.preventDefault();
+                      }
+                    }}
+                  ></a>
                   <p className={`leading-4`}>
                     <span className='text-body-pc text-gray-primary font-bold'><span className='mr-1'>3.</span>MILLIONSY</span>
                     <span className='text-body-sp block pl-4'>Join group</span>
@@ -993,16 +859,34 @@ const Millionsy: React.FC = () => {
                   </p>
                 </li>
 
-                <li className='flex justify-between items-center py-1.5 border-b border-solid border-gray-boxline-50 relative'>
+                <li className={`flex justify-between items-center py-1.5 border-b border-solid border-gray-boxline-50 relative ${isFinishMission ? '' : 'opacity-50'}`}>
                   <p className={`leading-4`}>
                     <span className='text-body-pc text-gray-primary font-bold'><span className='mr-1'>4.</span>Your Username</span>
-                    <span className='my-1.5 block'><input type="text" placeholder='@your_username' className='text-body-sp rounded-3 border border-solid border-transparent focus:border-blue-primary focus:outline-none bg-gray-lightbox focus:bg-transparent w-full pt-1.5 pb-2 px-2 placeholder-gray-body-50' /></span>
+                    <span className='my-1.5 block relative'>
+                      <input type="text" value={userName}
+                        onChange={(e) => {
+                          setUserName(e.target.value);
+                        }}
+                        placeholder='@your_username' disabled={!isFinishMission} className={`text-body-sp rounded-3 border border-solid border-transparent focus:outline-none bg-gray-lightbox w-full pt-1.5 pb-2 px-2 placeholder-gray-body-50 ${isFinishMission ? 'focus:border-blue-primary focus:bg-transparent' : 'cursor-not-allowed'}`} 
+                      />
+                      {
+                        userName !== '' &&
+                        <span className='absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer inline-block'>
+                          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"
+                            onClick={() => setUserName('')}
+                          >
+                            <path d="M-3.27835e-07 7.5C-5.08894e-07 11.6421 3.35786 15 7.5 15C11.6421 15 15 11.6421 15 7.5C15 3.35786 11.6421 -1.46777e-07 7.5 -3.27835e-07C3.35786 -5.08894e-07 -1.46777e-07 3.35786 -3.27835e-07 7.5Z" fill="#293333" />
+                            <path d="M4.75512 10.2976L10.0576 4.99512" stroke="#f9f9f9" strokeLinecap="round" strokeLinejoin="bevel" />
+                            <path d="M4.75512 4.99512L10.0576 10.2976" stroke="#f9f9f9" strokeLinecap="round" strokeLinejoin="bevel" />
+                          </svg>
+                        </span>
+                      }
+                    </span>
                     <span className='text-bodybox-sp block'>We need to verify you, please give your exact account and make sure you don’t change it while this round is happening.</span>
                   </p>
                 </li>
 
-                <li className='flex justify-between items-center py-1.5 relative'>
-                  <a href='https://t.me/MILLIONSYio' target='_blank' className='absolute w-full h-full'></a>
+                <li className={`flex justify-between items-center py-1.5 relative ${isFinishMission && userName ? '' : 'opacity-50'}`}>
                   <p className={`leading-4`}>
                     <span className='text-body-pc text-gray-primary font-bold'><span className='mr-1'>5.</span>Claim 1 slot</span>
                     <span className='text-body-sp block pl-4'>We will check your actions</span>
@@ -1016,7 +900,163 @@ const Millionsy: React.FC = () => {
               </ul>
             </div>
             <div className='p-4 bg-gray-lightbox'>
-              <p className={`mx-auto p-2 font-semibold rounded-5 transition-all bg-blue-primary text-gray-box hover:opacity-70 cursor-pointer text-center w-24`}>Next step</p>
+              <p className={`mx-auto p-2 font-semibold rounded-5 transition-all bg-blue-primary text-gray-box text-center w-24 ${isFinishMission && userName !== '' ? 'hover:opacity-70 cursor-pointer' : ''}`}
+                onClick={() => handleUpdateMillionsy('telegram')}
+              >
+                {isFinishMission && userName !== '' ? 'Claim slot' : 'Next step'}
+              </p>
+            </div>
+          </div>
+
+          <div className={`${selectedTickets === 'twitter' ? 'block' : 'hidden'} bg-gray-box absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 max-h-full z-1000 overflow-hidden border border-solid border-gray-boxline-50 rounded-10 max-w-280 w-full`}>
+            <div className='flex justify-between items-center px-4 py-2 bg-gray-lightbox'>
+              <p className='text-gray-primary text-body-pc font-semibold'>Twitter tasks</p>
+              <p className='cursor-pointer transition-all hover:opacity-70 py-1.5 pl-4' onClick={handleCloseModal}>
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fillRule="evenodd" clipRule="evenodd" d="M9.75592 1.42259C10.0814 1.09715 10.0814 0.569515 9.75592 0.244078C9.43049 -0.0813592 8.90285 -0.0813592 8.57741 0.244078L5 3.82149L1.42259 0.244078C1.09715 -0.0813584 0.569515 -0.0813584 0.244078 0.244079C-0.0813592 0.569515 -0.0813592 1.09715 0.244078 1.42259L3.82149 5L0.244078 8.57741C-0.0813592 8.90285 -0.0813592 9.43048 0.244078 9.75592C0.569515 10.0814 1.09715 10.0814 1.42259 9.75592L5 6.17851L8.57741 9.75592C8.90285 10.0814 9.43049 10.0814 9.75592 9.75592C10.0814 9.43049 10.0814 8.90285 9.75592 8.57741L6.17851 5L9.75592 1.42259Z" fill="#f9f9f9"/>
+                </svg>
+              </p>
+            </div>
+            <div className='px-4'>
+              <ul>
+                <li className='flex justify-between items-center py-1.5 border-b border-solid border-gray-boxline-50 relative'>
+                  <a href='https://twitter.com/MILLIONSYio' target='_blank' className='absolute w-full h-full'
+                    onClick={() => {
+                      setFlagOnclick({
+                        ...flagOnclick,
+                        twitter: {
+                          ...flagOnclick.twitter,
+                          millionsy: true
+                        }
+                      })
+                      setFlagSlots({
+                        ...flagSlots,
+                        twitter: {
+                          ...flagSlots.twitter,
+                          waggle: 1,
+                        }
+                      })
+                    }}
+                  ></a>
+                  <p className={`leading-4`}>
+                    <span className='text-body-pc text-gray-primary font-bold'><span className='mr-1'>1.</span>Project_name</span>
+                    <span className='text-body-sp block pl-4'>Join group</span>
+                  </p>
+                  <p>
+                    <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M11.334 0C9.25728 0 7.22722 0.615814 5.5005 1.76957C3.77379 2.92332 2.42797 4.5632 1.63325 6.48182C0.838534 8.40045 0.630599 10.5116 1.03574 12.5484C1.44089 14.5852 2.44092 16.4562 3.90937 17.9246C5.37782 19.3931 7.24874 20.3931 9.28554 20.7982C11.3223 21.2034 13.4335 20.9954 15.3522 20.2007C17.2708 19.406 18.9107 18.0602 20.0644 16.3335C21.2182 14.6068 21.834 12.5767 21.834 10.5C21.834 7.71522 20.7277 5.04451 18.7586 3.07538C16.7895 1.10625 14.1188 0 11.334 0V0ZM16.4905 7.19355L14.7675 15.3142C14.6394 15.8896 14.2971 16.0303 13.8225 15.7584L11.1975 13.8243L9.93119 15.0433C9.79154 15.184 9.67394 15.3016 9.40619 15.3016L9.59309 12.6304L14.4493 8.23515C14.6593 8.0493 14.4021 7.9443 14.1228 8.13015L8.11049 11.9154L5.51909 11.1069C4.95629 10.9284 4.94474 10.5451 5.63774 10.2732L15.7618 6.3693C16.2322 6.1992 16.6417 6.48375 16.4895 7.1946L16.4905 7.19355Z" fill={`${flagOnclick.telegram.waggle ? '#ADFAFF' : '#878787'}`}/>
+                    </svg>
+                  </p>
+                </li>
+
+                <li className={`flex justify-between items-center py-1.5 border-b border-solid border-gray-boxline-50 relative ${flagOnclick.twitter.millionsy ? '' : 'opacity-50'}`}>
+                  <a href='https://twitter.com/MILLIONSYio' target='_blank' className={`absolute w-full h-full ${flagOnclick.twitter.millionsy ? 'cursor-pointer' : 'opacity-50 cursor-not-allowed'}`}
+                    onClick={(e) => {
+                      if (flagOnclick.twitter.millionsy) {
+                        setFlagOnclick({
+                          ...flagOnclick,
+                          twitter: {
+                            ...flagOnclick.twitter,
+                            retweet: true
+                          }
+                        })
+                        setFlagSlots({
+                          ...flagSlots,
+                          twitter: {
+                            ...flagSlots.twitter,
+                            millionsy: 1,
+                          }
+                        })
+                      } else {
+                        e.preventDefault();
+                      }
+                    }}
+                  ></a>
+                  <p className={`leading-4`}>
+                    <span className='text-body-pc text-gray-primary font-bold'><span className='mr-1'>2.</span>Project_name</span>
+                    <span className='text-body-sp block pl-4'>Join channel</span>
+                  </p>
+                  <p>
+                    <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M11.334 0C9.25728 0 7.22722 0.615814 5.5005 1.76957C3.77379 2.92332 2.42797 4.5632 1.63325 6.48182C0.838534 8.40045 0.630599 10.5116 1.03574 12.5484C1.44089 14.5852 2.44092 16.4562 3.90937 17.9246C5.37782 19.3931 7.24874 20.3931 9.28554 20.7982C11.3223 21.2034 13.4335 20.9954 15.3522 20.2007C17.2708 19.406 18.9107 18.0602 20.0644 16.3335C21.2182 14.6068 21.834 12.5767 21.834 10.5C21.834 7.71522 20.7277 5.04451 18.7586 3.07538C16.7895 1.10625 14.1188 0 11.334 0V0ZM16.4905 7.19355L14.7675 15.3142C14.6394 15.8896 14.2971 16.0303 13.8225 15.7584L11.1975 13.8243L9.93119 15.0433C9.79154 15.184 9.67394 15.3016 9.40619 15.3016L9.59309 12.6304L14.4493 8.23515C14.6593 8.0493 14.4021 7.9443 14.1228 8.13015L8.11049 11.9154L5.51909 11.1069C4.95629 10.9284 4.94474 10.5451 5.63774 10.2732L15.7618 6.3693C16.2322 6.1992 16.6417 6.48375 16.4895 7.1946L16.4905 7.19355Z" fill={`${flagOnclick.telegram.waggle ? '#ADFAFF' : '#878787'}`}/>
+                    </svg>
+                  </p>
+                </li>
+
+                <li className={`flex justify-between items-center py-1.5 border-b border-solid border-gray-boxline-50 relative ${flagOnclick.twitter.retweet ? '' : 'opacity-50'}`}>
+                  <a href='https://twitter.com/MILLIONSYio' target='_blank' className={`absolute w-full h-full ${flagOnclick.twitter.retweet ? 'cursor-pointer' : 'opacity-50 cursor-not-allowed'}`}
+                    onClick={(e) => {
+                      if (flagOnclick.twitter.retweet) {
+                        setIsFinishMission(true);
+                        setFlagSlots({
+                          ...flagSlots,
+                          twitter: {
+                            ...flagSlots.twitter,
+                            retweet: 1,
+                          }
+                        })
+                      } else {
+                        e.preventDefault();
+                      }
+                    }}
+                  ></a>
+                  <p className={`leading-4`}>
+                    <span className='text-body-pc text-gray-primary font-bold'><span className='mr-1'>3.</span>MILLIONSY</span>
+                    <span className='text-body-sp block pl-4'>Join group</span>
+                  </p>
+                  <p>
+                    <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M11.334 0C9.25728 0 7.22722 0.615814 5.5005 1.76957C3.77379 2.92332 2.42797 4.5632 1.63325 6.48182C0.838534 8.40045 0.630599 10.5116 1.03574 12.5484C1.44089 14.5852 2.44092 16.4562 3.90937 17.9246C5.37782 19.3931 7.24874 20.3931 9.28554 20.7982C11.3223 21.2034 13.4335 20.9954 15.3522 20.2007C17.2708 19.406 18.9107 18.0602 20.0644 16.3335C21.2182 14.6068 21.834 12.5767 21.834 10.5C21.834 7.71522 20.7277 5.04451 18.7586 3.07538C16.7895 1.10625 14.1188 0 11.334 0V0ZM16.4905 7.19355L14.7675 15.3142C14.6394 15.8896 14.2971 16.0303 13.8225 15.7584L11.1975 13.8243L9.93119 15.0433C9.79154 15.184 9.67394 15.3016 9.40619 15.3016L9.59309 12.6304L14.4493 8.23515C14.6593 8.0493 14.4021 7.9443 14.1228 8.13015L8.11049 11.9154L5.51909 11.1069C4.95629 10.9284 4.94474 10.5451 5.63774 10.2732L15.7618 6.3693C16.2322 6.1992 16.6417 6.48375 16.4895 7.1946L16.4905 7.19355Z" fill={`${flagOnclick.telegram.waggle ? '#ADFAFF' : '#878787'}`}/>
+                    </svg>
+                  </p>
+                </li>
+
+                <li className={`flex justify-between items-center py-1.5 border-b border-solid border-gray-boxline-50 relative ${isFinishMission ? '' : 'opacity-50'}`}>
+                  <p className={`leading-4`}>
+                    <span className='text-body-pc text-gray-primary font-bold'><span className='mr-1'>4.</span>Your Username</span>
+                    <span className='my-1.5 block relative'>
+                      <input type="text" value={userName}
+                        onChange={(e) => {
+                          setUserName(e.target.value);
+                        }}
+                        placeholder='@your_username' disabled={!isFinishMission} className={`text-body-sp rounded-3 border border-solid border-transparent focus:outline-none bg-gray-lightbox w-full pt-1.5 pb-2 px-2 placeholder-gray-body-50 ${isFinishMission ? 'focus:border-blue-primary focus:bg-transparent' : 'cursor-not-allowed'}`} 
+                      />
+                      {
+                        userName !== '' &&
+                        <span className='absolute top-1/2 right-2 transform -translate-y-1/2 cursor-pointer inline-block'>
+                          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"
+                            onClick={() => setUserName('')}
+                          >
+                            <path d="M-3.27835e-07 7.5C-5.08894e-07 11.6421 3.35786 15 7.5 15C11.6421 15 15 11.6421 15 7.5C15 3.35786 11.6421 -1.46777e-07 7.5 -3.27835e-07C3.35786 -5.08894e-07 -1.46777e-07 3.35786 -3.27835e-07 7.5Z" fill="#293333" />
+                            <path d="M4.75512 10.2976L10.0576 4.99512" stroke="#f9f9f9" strokeLinecap="round" strokeLinejoin="bevel" />
+                            <path d="M4.75512 4.99512L10.0576 10.2976" stroke="#f9f9f9" strokeLinecap="round" strokeLinejoin="bevel" />
+                          </svg>
+                        </span>
+                      }
+                    </span>
+                    <span className='text-bodybox-sp block'>We need to verify you, please give your exact account and make sure you don’t change it while this round is happening.</span>
+                  </p>
+                </li>
+
+                <li className={`flex justify-between items-center py-1.5 relative ${isFinishMission && userName ? '' : 'opacity-50'}`}>
+                  <p className={`leading-4`}>
+                    <span className='text-body-pc text-gray-primary font-bold'><span className='mr-1'>5.</span>Claim 1 slot</span>
+                    <span className='text-body-sp block pl-4'>We will check your actions</span>
+                  </p>
+                  <p>
+                    <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M11.334 0C9.25728 0 7.22722 0.615814 5.5005 1.76957C3.77379 2.92332 2.42797 4.5632 1.63325 6.48182C0.838534 8.40045 0.630599 10.5116 1.03574 12.5484C1.44089 14.5852 2.44092 16.4562 3.90937 17.9246C5.37782 19.3931 7.24874 20.3931 9.28554 20.7982C11.3223 21.2034 13.4335 20.9954 15.3522 20.2007C17.2708 19.406 18.9107 18.0602 20.0644 16.3335C21.2182 14.6068 21.834 12.5767 21.834 10.5C21.834 7.71522 20.7277 5.04451 18.7586 3.07538C16.7895 1.10625 14.1188 0 11.334 0V0ZM16.4905 7.19355L14.7675 15.3142C14.6394 15.8896 14.2971 16.0303 13.8225 15.7584L11.1975 13.8243L9.93119 15.0433C9.79154 15.184 9.67394 15.3016 9.40619 15.3016L9.59309 12.6304L14.4493 8.23515C14.6593 8.0493 14.4021 7.9443 14.1228 8.13015L8.11049 11.9154L5.51909 11.1069C4.95629 10.9284 4.94474 10.5451 5.63774 10.2732L15.7618 6.3693C16.2322 6.1992 16.6417 6.48375 16.4895 7.1946L16.4905 7.19355Z" fill={`${flagOnclick.telegram.waggle ? '#ADFAFF' : '#878787'}`}/>
+                    </svg>
+                  </p>
+                </li>
+              </ul>
+            </div>
+            <div className='p-4 bg-gray-lightbox'>
+              <p className={`mx-auto p-2 font-semibold rounded-5 transition-all bg-blue-primary text-gray-box text-center w-24 ${isFinishMission && userName !== '' ? 'hover:opacity-70 cursor-pointer' : ''}`}
+                onClick={() => handleUpdateMillionsy('twitter')}
+              >
+                {isFinishMission && userName !== '' ? 'Claim slot' : 'Next step'}
+              </p>
             </div>
           </div>
         </section>

@@ -68,7 +68,7 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
             }
           </div>
         </div>
-        <div className={`p-3.5 md:px-8 flex items-center md:py-5 border-t border-solid border-gray-boxline-50  ${slide ? 'border-b' : ''}`}>
+        <div className={`p-3.5 md:px-8 md:flex items-center md:py-5 border-t border-solid border-gray-boxline-50  ${slide ? 'border-b' : ''}`}>
           <p className='text-gray-primary text-h3-sp md:text-h3-pc font-bold mb-1 md:mb-0 md:pr-2'>Your Ticket</p>
           <div className='md:pl-32'>
             <p className='md:pl-2'>You have <span className='text-blue-secondary font-bold underline hover:opacity-70 cursor-pointer' onClick={handleViewTicket}>{dataSendToDetail.player_tickets.length} ticket</span> to enter this party.</p>
@@ -79,7 +79,7 @@ const Detail: React.FC<Props> = ({dataSendToDetail, dataGiveDetail}) => {
             <div className='md:flex justify-between md:items-end mb-4'>
               <p className='text-gray-primary text-h3-sp md:text-h3-pc font-bold mb-2 md:mb-0'>Prize pot</p>
               <div className='flex justify-between md:w-3/5'>
-                <p className='text-28 md:text-h1-pc font-bungee text-blue-primary leading-none'>~${Math.round(dataSendToDetail.total_pool_sol)}</p>
+                <p className='text-28 md:text-h1-pc font-bungee text-blue-primary leading-none'>~${Math.round(dataSendToDetail.total_pool_usdt)}</p>
                 <p className='text-h2-pc font-bungee text-blue-primary relative top-0.5'>{Math.round(dataSendToDetail.total_pool_sol)} MILLI</p>
               </div>
             </div>

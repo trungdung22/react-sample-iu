@@ -30,8 +30,6 @@ const ViewTicket: React.FC<Props> = ({ dataSendViewTicket, dataGiveViewTicket, p
   const [activeLabel, setActiveLabel] = useState('lottery');
 
   useEffect(() => {
-    console.log(playerData);
-    
     if (!playerData.is_connect) {
       return;
     }

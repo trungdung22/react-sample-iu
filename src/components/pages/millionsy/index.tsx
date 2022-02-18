@@ -281,7 +281,7 @@ const Millionsy: React.FC = () => {
             setDataPlayerMilli(data)
           })
         } else {
-          registerMilipadPlayer(playerData.data.publicKey, [], getDataMillipads !== null ? getDataMillipads.code : '', '');
+          registerMilipadPlayer(playerData.data.publicKey, [], getDataMillipads !== null ? getDataMillipads.code : '');
         }
       })
     }
